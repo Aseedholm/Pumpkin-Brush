@@ -1,6 +1,6 @@
 # Use Cases
 
-Take another look at the Statement of Work. Read through it carefully and start identifying various tasks that you think will complete the deliverable. Note it will also be reasonable to look through all of the other milestones and start gathering tasks you think need to be completed.
+Take another look at the [Statement of Work](./../../sow.md). Read through it carefully and start identifying various tasks that you think will complete the deliverable. Note it will also be reasonable to look through all of the other milestones and start gathering tasks you think need to be completed.
 
 ## Task
 
