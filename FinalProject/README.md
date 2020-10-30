@@ -1,6 +1,6 @@
 # Client
 
-A client has approached with with the following [statement of work](./sow.md) for a 6 week contract. You haven't worked with this client previously, but you want to impress them with your newly assembled team.
+A client has approached with with the following [statement of work](./sow.md) for a 6 week contract. You haven't worked with this client previously, but you want to impress them with your newly assembled team. Review the [statement of work](./sow.md), self-organize, and begin!
 
 # Logistics
 
