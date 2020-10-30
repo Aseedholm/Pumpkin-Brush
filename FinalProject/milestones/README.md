@@ -14,6 +14,5 @@ Click each link to see what you need to do each step along the way. Note--this i
 	- I recommend having at least milestones 0,1,2 completed at this time.
 - [x] **November 27** [Milestone 2 - Check-in #2](./6/README.md) 
 	- I recommend having at least milestones 3 and 5 completed at this time.
-- [x] **December 4** [Extra Feature](extrafeature.md) - (Second Two Weeks)
 - [x] **December 9** Final Deliverable 
 - [x] **December 9** Fill out the [team assessment form here](https://forms.gle/FwujAEQoQnAT4x6K7)
