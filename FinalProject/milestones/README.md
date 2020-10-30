@@ -1,6 +1,6 @@
 # Milestones
 
-Each milestone represents a task or perhaps an entire sprint that you will need to complete for your project. The order can be completed in any order, but note there are a few hard deadlines listed below.
+Each milestone represents a task or perhaps an entire sprint that you will need to complete for your project. The order can be completed in any order, but note there are a few hard deadlines listed below. It is also possible we will learn some things in the next few weeks that you will have to incorporate into the final project.
 
 ## Hard Deadlines 
 
