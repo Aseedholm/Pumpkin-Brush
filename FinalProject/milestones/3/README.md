@@ -14,11 +14,11 @@ Provided below are the requirements which the project managers will ask you. For
 
 **Note** Everyone needs to speak at this meeting.
 
+- [ ] Did you come up with a plan/timeline for features? (Milestone 0)
 - [ ] How is (or how did) the integration of all of the assignments go?
 	- What lessons did you learn? (if any)
 - [ ] Have you implemented any software development methodology?
 - [ ] How has team member communication been thus far?
-- [ ] Did you come up with a plan/timeline for features?
 - [ ] What is each teammate currently working on?
 	- How long do you expect that feature to take? Do you think this feature is a priority and may block others from making progress? If so, would you consider pair programming?
 - [ ] Is there a teammember who feels confident in using Git, such that they can troublshoot version control bugs?
