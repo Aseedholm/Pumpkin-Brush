@@ -1,3 +1,11 @@
+# Client
+
+A client has approached with with the following [statement of work](./sow.md) for a 6 week contract. You haven't worked with this client previously, but you want to impress them with your newly assembled team.
+
+# Logistics
+
+Your project has been divided into several different [milestones](./milestones). It will be up to you and your group to self-organize and complete each milestone. 
+
 ## Timeline
 
 Click each link to see what you need to do each step along the way. Note--this is a rough timeline for when you should be finishing each deliverable.
