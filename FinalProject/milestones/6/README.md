@@ -1,5 +1,7 @@
 # Milestone Check-in #2
 
+<img src="./media/fort-kent-marker.jpg" align="right" width="300px"/>
+
 ## Milestone Check-in with your Project Manager
 
 The final push! You are almost there!
