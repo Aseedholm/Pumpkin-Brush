@@ -30,6 +30,7 @@ Team member Names:
 
 # Rubric
  
+ 
   <table>
   <tbody>
     <tr>
@@ -38,7 +39,7 @@ Team member Names:
     </tr>
     <tr>	  
       <td>10% (Milestone Check-in)</td>
-	<td align="left"><ul><li>Did you complete your check-in #1?</li></ul></td>
+	<td align="left"><ul><li>Did you complete your check-in #1?</li><li>Was a timeline present?</li><li>Were there at least 15 tasks created in the 'Projects' tab</li></ul></td>
      </tr>
   </tbody>
 </table>
