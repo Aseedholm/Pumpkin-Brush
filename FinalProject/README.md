@@ -10,7 +10,7 @@
 
 ## Team
 
-Team Name: *Edit this to your official team name*
+**Team Name**: *Edit this to your official team name*
 
 *TODO*:
 Update your Team member Names here (Up to 4).
