@@ -42,8 +42,8 @@ Our goal is to be able to have multiple clients (at least 3) connect to a server
 		- When a client joins later, they should have the entire history of previous commands available to them.
 		- Clients can undo/redo other clients actions.
 2. Integrate the following labs
-	- From your lab 7 you should have a GUI window where you can change colors that you draw in
-	- From your lab 8, you should have a networked application.
+	- From your lab you should have a GUI window where you can change colors that you draw in
+	- From your lab you should have a networked application.
 
 ### Advice
 
@@ -79,7 +79,7 @@ An optional task(if any) that will reinforce your learning throughout the semest
 # F.A.Q. (Instructor Anticipated Questions)
 
 1. Q: How do we handle undo?
-	- A: Undo should undo the last command a user did and send that action to the server. Note, that if a user paints on top of a pixel that you are undo'ing the operation on, your change will override there change. This is fine behavior.
+	- A: Undo should undo the last command a user did and send that action to the server. Note, that if a user paints on top of a pixel that you are undo'ing the operation on, your change will override their change. This is fine behavior.
 2. Q: Can I change this to be a peer-peer applciation or otherwise change the structure of the networked code?
 	- A: Sure, so long as at least 3 clients can paint at the same time.
 3. Q: Does your instructor enjoy painting?
