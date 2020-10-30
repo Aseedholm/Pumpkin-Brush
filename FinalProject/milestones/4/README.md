@@ -1,40 +1,34 @@
-# Extra Feature
+# Milestone Check-in #1
 
-<img src="./media/features.png" align="right" width="300px"/>
+<img src="./media/fort-kent-marker.jpg" align="right" width="300px"/>
 
-For your paint program, you now get to take some control of the direction of the project. Most teams may opt to implement different features, but the only requirement is that you implement at least one significant feature to impress our client. Why only one? You are certainly welcome to add more, but be careful given the tight project timeline! Adding too many featuers can sometimes lead to something called [feature creep](https://en.wikipedia.org/wiki/Feature_creep), where you add many features to appease your client, but they may not actually need many features, only 1 or 2 that work really well!
+## Milestone Check-in with your Project Manager
 
-## Feature List
+A [software project manager](https://www.wrike.com/project-management-guide/faq/what-is-software-project-management/) (PM) is someone who takes on the role of organizing a software project and managing the day-to-day operations of a project. They are in charge of the project planning (e.g. assigning tasks to engineers and prioritizing the tasks) and making sure the project moves forward as intended.
 
-Below is a prospective list of features which you may choose from to add. Decide as a group which feature you would like to add.
+In this course, our project managers (the course staff) will help guide you to make sure you are on track. You will be required within two weeks(see milestones/README.md for specific deadline) to check-in with your Project Manager. This can/will be a virtual meeting. 
 
-- **Required Featuers**: All previous assignment features 
-- Chat
-- At least 3 different Paint brushes
-- At least 3 different image filters that can be applied
-- At least 3 different tools for manipulating the canvas (e.g. selection, eraser, blur)
-- Real-time Video of each client
-- A file compression algorithm for saving your sketch, and one for loading your sketch when the server starts
-- Implement a client so you can paint on another device (e.g. iOS or Android)
-- Any other features you otherwise would like to propose, which must go through your project manager (See F.A.Q)
+Provided below are the requirements which the project managers will ask you. For items that you have completed, there will be no further discussion. For items that are not completed, you should discuss a game plan of how you will prioritize and complete that task.
 
-### Feature Use Case
+## Milestone ("Sprint") Check list
 
-Your next task is the following.
+**Note** Everyone needs to speak at this meeting.
 
-1. Add the feature to your project timeline
-2. Add the feature to the 'Projects' task list.
-3. Begin implementing the feature.
-	- You must also implement at least 1 test case for your feature to ensure that it works.
+- [ ] Did you come up with a plan/timeline for features? (Milestone 0)
+- [ ] How is (or how did) the integration of all of the assignments go?
+	- What lessons did you learn? (if any)
+- [ ] Have you implemented any software development methodology?
+- [ ] How has team member communication been thus far?
+- [ ] What is each teammate currently working on?
+	- How long do you expect that feature to take? Do you think this feature is a priority and may block others from making progress? If so, would you consider pair programming?
+- [ ] Is there a teammember who feels confident in using Git, such that they can troublshoot version control bugs?
+	- Is everyone working on the master branch, or are you all working on separate branches and merging?
+- [ ] Are you using good abstractions in your code? (i.e. avoiding large chunks of code)
+- [ ] Do you have a CMakeLists.txt file that can generate a Makefile?
+- [ ] What feature is the team thinking about adding to the project?
+- [ ] Are you using tools that we have learned about like Catch2, cppcheck, clang-tidy, and continuous integration?
+	- Have you thought about integrating these tools into your build system?
+- [ ] Any other questions/concerns/things blocking you from making progress?
 
-
-# F.A.Q. (Instructor Anticipated Questions)
-
-1. Q: If I choose a really easy feature will I get less points?
-	- A: Not necessarily, and I think each feature has it's own challenge?
-2. Q: If I implement 2 or more features will I get more points?
-	- A: I would encourage that, maybe! But 1 good feature that works is better than 2 features which almost work.
-3. Q: Can I propose another feautre?
-  	- A: Sure, do so with your project manager and they will approve it based on if they think it can be completed by the project deadline.
 
 

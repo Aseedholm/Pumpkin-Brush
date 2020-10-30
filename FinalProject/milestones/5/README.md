@@ -1,35 +1,40 @@
-# Final Deliverable
+# Extra Feature
 
-The final push! You are almost there!
+<img src="./media/features.png" align="right" width="300px"/>
 
-For your final project, here is a list of items you need to incoporate--many you might have already done, so check them off as completed.
+For your paint program, you now get to take some control of the direction of the project. Most teams may opt to implement different features, but the only requirement is that you implement at least one significant feature to impress our client. Why only one? You are certainly welcome to add more, but be careful given the tight project timeline! Adding too many featuers can sometimes lead to something called [feature creep](https://en.wikipedia.org/wiki/Feature_creep), where you add many features to appease your client, but they may not actually need many features, only 1 or 2 that work really well!
 
-- Build Tasks
-  - [ ] A CMakeLists.txt which generates a makefile to create a:
-    - [ ] Release version of your software
-  - [ ] Run your code with the latest version of cppcheck
-  - [ ] Run your code with the latest version of clang-tidy
-- Project Management Tasks  
-  - [ ] Run doxygen and push your documentation to your repository in a folder called 'docs'
-  - [ ] Create a youtube video of your final project working
-          - This video should be no greater than 5 minutes in length. Consider it a portfolio piece showing off how your software works and what techologies you used. 
-	  - Note: There should be some audio covering an introduction to your project, showing off some code of your extra feature, discussion of how you figured out what to test, and how you would improve upon the project in the future.
-	  - **Put you video link here** : *your youtube/drive/dropbox/whatever link here*
-  - [ ] Instructions on how to build your software should be written here: [build.md](./build.md)
-          - This is especially important if you have added additional dependencies.
-          - Assume someone who has not taken this class (i.e. you on the first day) would have read, build, and run your software from scratch.
-- Testing Tasks
-  - [ ] Make sure there are at least 8 tests written.
-  	- At least one test should be networking
-	- At least one test should be for your extra feature.
-  - [ ] Make sure you have a Github action that runs all of these tests on 'push'
-- Remaining Programming Tasks
-  - [ ] Any remaining feature updates!
-  
+## Feature List
+
+Below is a prospective list of features which you may choose from to add. Decide as a group which feature you would like to add.
+
+- **Required Featuers**: All previous assignment features 
+- Chat
+- At least 3 different Paint brushes
+- At least 3 different image filters that can be applied
+- At least 3 different tools for manipulating the canvas (e.g. selection, eraser, blur)
+- Real-time Video of each client
+- A file compression algorithm for saving your sketch, and one for loading your sketch when the server starts
+- Implement a client so you can paint on another device (e.g. iOS or Android)
+- Any other features you otherwise would like to propose, which must go through your project manager (See F.A.Q)
+
+### Feature Use Case
+
+Your next task is the following.
+
+1. Add the feature to your project timeline
+2. Add the feature to the 'Projects' task list.
+3. Begin implementing the feature.
+	- You must also implement at least 1 test case for your feature to ensure that it works.
 
 
-## Additional notes
+# F.A.Q. (Instructor Anticipated Questions)
 
-- Make sure I can view your video! (i.e. do not make it private)
-  - Hint: You can test to see if I would be able to view it by viewing your video in a private browser or incognito mode.
-- You cannot publicly share this repository of code, but you may share your youtube video on your resume/portfolio as you like!
+1. Q: If I choose a really easy feature will I get less points?
+	- A: Not necessarily, and I think each feature has it's own challenge?
+2. Q: If I implement 2 or more features will I get more points?
+	- A: I would encourage that, maybe! But 1 good feature that works is better than 2 features which almost work.
+3. Q: Can I propose another feautre?
+  	- A: Sure, do so with your project manager and they will approve it based on if they think it can be completed by the project deadline.
+
+
