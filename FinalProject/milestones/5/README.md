@@ -22,8 +22,8 @@ Below is a prospective list of features which you may choose from to add. Decide
 
 Your next task is the following.
 
-1. Add the feature to your project timeline
-2. Add the feature to the 'Projects' task list.
+1. Make sure your extra feature to your project timeline
+2. Add the feature to the 'Projects' task list in Github. You may break it down into further sub tasks as needed.
 3. Begin implementing the feature.
 	- You must also implement at least 1 test case for your feature to ensure that it works.
 
