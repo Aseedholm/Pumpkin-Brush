@@ -1,13 +1,13 @@
 # The Final Project Repository!
 
-Labs and Assignments for the remainder of the term will be completed with your team and pushed to this repository.
+Welcome to the final project repository! Here is where you will complete the rest of your coursework for this term.
+
+Note: Labs for the remainder of the term will be completed with your team and pushed to this repository. There are no more individual assignments.
 
 # Team spread sheet 
 
-Your team members and project manager are listed on the following spreadsheet [here](https://docs.google.com/spreadsheets/d/1-JJy7BlyRtS5MjpYJOXL239rRSrDC3bUbpqqC3azrZI/edit?usp=sharing). Your project manager will be your first point of contact for various project deliverables and questions.
-
-
-# Rubric
+- Your team members and project manager are listed on the following spreadsheet [here](https://docs.google.com/spreadsheets/d/1-JJy7BlyRtS5MjpYJOXL239rRSrDC3bUbpqqC3azrZI/edit?usp=sharing). 
+- Your project manager will be your first point of contact for various project deliverables and questions. Though you may continue to attend office hours with whoever you like, your project manager will be your primary contact.
 
 
 # Rubric
@@ -24,8 +24,6 @@ Your team members and project manager are listed on the following spreadsheet [h
      </tr>
   </tbody>
 </table>
-
-
 
 
 
