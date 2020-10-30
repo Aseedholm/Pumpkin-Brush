@@ -20,12 +20,6 @@ Update your Team member Names here (Up to 4).
 3. *my name is...*
 4. *my name is...*
 
-## Logistics
-
-- Work with your team to ensure everyone has a way to work on this codebase with a common set of tools.
-- Everyone should make code contributions to the repository (i.e. everyone should have some commits in the project log)
-- See the project timeline
-
 ## Timeline
 
 Click each link to see what you need to do each step along the way. Note--this is a rough timeline for when you should be finishing each deliverable.
@@ -36,6 +30,11 @@ Click each link to see what you need to do each step along the way. Note--this i
 - [x] [Final Deliverable](FinalDeliverable.md) - (April 18)
 - [x] Fill out the team assessment form here: TBD 
 
+## Logistics
+
+- Work with your team to ensure everyone has a way to work on this codebase with a common set of tools.
+- Everyone should make code contributions to the repository (i.e. everyone should have some commits in the project log)
+- See the project timeline
 
 ## Notes on working in teams
 
@@ -47,7 +46,7 @@ Click each link to see what you need to do each step along the way. Note--this i
 
 You will be using the following tools in your project. 
 
-* C++11/14/17/20
+* C++11/14/17/20/23
 * [SFML](https://www.sfml-dev.org/index.php)
 * [CMake](https://cmake.org/)
 * [Catch2](https://github.com/catchorg/Catch2)
