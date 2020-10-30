@@ -22,9 +22,9 @@ Below is a prospective list of features which you may choose from to add. Decide
 
 Your next task is the following.
 
-1. Fill out the [feature1usecase.md](./feature1usecase.md)
-    - You may add additional use cases if you think the feature should be split or you add more features
-2. Begin implementing the feature.
+1. Add the feature to your project timeline
+2. Add the feature to the 'Projects' task list.
+3. Begin implementing the feature.
 	- You must also implement at least 1 test case for your feature to ensure that it works.
 
 
