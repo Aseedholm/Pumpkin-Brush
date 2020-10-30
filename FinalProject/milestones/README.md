@@ -12,5 +12,5 @@ Click each link to see what you need to do each step along the way. Note--this i
 - [x] **November 13** [Milestone 1 - Check-in #1](milestones/2/README.md) 
 	- This is completed with your specific project manager.
 - [x] **November 27** [Extra Feature](extrafeature.md) - (Second Two Weeks)
-- [x] [Final Deliverable](FinalDeliverable.md) - (Final Two Weeks)
-- [x] Fill out the [team assessment form here](https://forms.gle/FwujAEQoQnAT4x6K7)
+- [x] **December 9** [Final Deliverable](FinalDeliverable.md) - (Final Two Weeks)
+- [x] **December 9** Fill out the [team assessment form here](https://forms.gle/FwujAEQoQnAT4x6K7)
