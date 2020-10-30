@@ -70,3 +70,24 @@ Team member Names:
     </tr>	     
   </tbody>
 </table>  
+
+
+  <table>
+  <tbody>
+    <tr>
+      <th>Points</th>
+      <th align="center">Description</th>
+    </tr>
+    <tr>	  
+      <td>30% (Task 1 - Polish)</td>
+	<td align="left"><ul><li>Does your CMakeFile generate a makefile/xcodeproject/visualstudio project/etc. that compiles?</li><li>Did you structure your networking code in a reasonable, object-oriented manner?</li></ul></td>
+     </tr>
+     <tr>
+	<td>40% (Task 1 - Integration)</td>
+	<td align="left"><ul><li>Were your previous assignments incorporated into this one successfully? (i.e. if we just launched a server and one client, would the program behave as normal?)</li></ul></td>
+    </tr>	     
+      <td>30% (Task 1 - Networking)</td>
+	<td align="left"><ul><li>Do you have an application that meets the requirements listed above? (3 clients can paint at once, clients can disconnect without crashing the server, etc?)</li></ul></td> 
+    </tr>
+  </tbody>
+</table>
