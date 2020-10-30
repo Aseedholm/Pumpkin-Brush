@@ -9,8 +9,9 @@ The following milestones must be completed before the deadline, otherwise the cl
 
 Click each link to see what you need to do each step along the way. Note--this is a rough timeline for when you should be finishing each deliverable.
 
-- [x] **November 13** [Milestone 1 - Check-in #1](milestones/2/README.md) 
+- [x] **November 13** [Milestone 1 - Check-in #1](./milestones/3/README.md) 
 	- This is completed with your specific project manager.
 - [x] **November 27** [Extra Feature](extrafeature.md) - (Second Two Weeks)
+- [x] **December 4** [Milestone 2 - Check-in #2](./milestones/5_5/README.md) 
 - [x] **December 9** [Final Deliverable](FinalDeliverable.md) - (Final Two Weeks)
 - [x] **December 9** Fill out the [team assessment form here](https://forms.gle/FwujAEQoQnAT4x6K7)
