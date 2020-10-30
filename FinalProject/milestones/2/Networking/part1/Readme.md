@@ -1,20 +1,5 @@
-# Epic 
+# Networking Feature 
 
-# Part 1 - Networking
-
-<img align="right" width="300px" src="./media/thefacebook.jpg">
-
-> "Putting it all together"
-
-*The year is 2004 and your manager's eyes are glued to the computer screen.*
-
-*"Social media. Web 2.0. This, is the future. I like it. I like the Facebook. Clever idea, very clever idea." the manager states. "We need to add some sort of social component to our painting app. We'll call it, 'paint nite - a social collaborative painting applation,'--yes, I very much like the sound of my own ideas*
-
-*"Ahem", you clear your throat, "Maybe we should instead start simple, you know, define some of the requirements? We can incorporate some of the networking code we have written?"*
-
-*The manager blinks his eyes twice and disappears*
-
-*Who is the manager you wonder?*
 
 # Resources to help
 
@@ -31,7 +16,7 @@ Provided below are a list of curated resources to help you complete the task(s) 
 
 <img align="right" width="300px" src="./media/network.png">
 
-In your previous lab you have learned how to create a networked application. Now it is time to combine what we have learned in our previous labs and assignments and build a collaborative painting program.
+In a previous lab you have learned how to create a networked application. Now it is time to combine what we have learned in our previous labs and assignments and build a collaborative painting program.
 
 Our goal is to be able to have multiple clients (at least 3) connect to a server application which will broadcast changes to each user as they paint.
 
@@ -62,7 +47,7 @@ Our goal is to be able to have multiple clients (at least 3) connect to a server
 
 ### Advice
 
-Start small. It is likely you can start from A3 and slowly integrate the lab features into your assignment.
+Start small. It is likely you can start from A4 and slowly integrate the lab features into your assignment.
 
 ## Testing
 
@@ -83,7 +68,7 @@ Start small. It is likely you can start from A3 and slowly integrate the lab fea
 ### Deliverables
 
 - Task 1
-	- A client/server where users can paint. All previous features of A1-A3 should be incorporated.
+	- A client/server where users can paint. All previous features of A1-A4 should be incorporated.
 
 # Going Further
 
