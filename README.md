@@ -43,17 +43,34 @@ Team member Names:
 # Rubric
  
  
-  <table>
-  <tbody>
-    <tr>
-      <th>Points</th>
-      <th align="center">Description</th>
-    </tr>
-    <tr>	  
-      <td>10% (Milestone Check-in)</td>
-	<td align="left"><ul><li>Did you complete your check-in #1?</li><li>Was a timeline present?</li><li>Were there at least 15 tasks created in the 'Projects' tab</li></ul></td>
-     </tr>
-  </tbody>
+<table>
+	<tbody>
+		<tr>
+			<th>Points</th>
+			<th align="center">Description</th>
+			</tr>
+			<tr>	  
+			<td>5% (Milestone Check-in #1)</td>
+				<td align="left">
+					<ul><li>Did you complete your check-in #1?</li><li>Was a timeline present?</li><li>Were there at least 15 tasks created in the 'Projects' tab</li></ul>
+				</td>
+		</tr>
+	</tbody>
+</table>
+
+<table>
+	<tbody>
+		<tr>
+			<th>Points</th>
+			<th align="center">Description</th>
+			</tr>
+			<tr>	  
+			<td>5% (Milestone Check-in #2)</td>
+			<td align="left">
+				<ul><li>Did you complete your check-in #2?</li>
+			</td>
+		</tr>
+	</tbody>
 </table>
 
   <table>
@@ -90,18 +107,7 @@ Team member Names:
   </tbody>
 </table>  
 
-<table>
-  <tbody>
-    <tr>
-      <th>Points</th>
-      <th align="center">Description</th>
-    </tr>
-     <tr>
-	<td>5% (Team Assessment)</td>
-	<td align="left"><ul><li>Completing the assessment earns you 2%, the other 3% is determined by your team members responses</li></ul></td>
-    </tr>	     
-  </tbody>
-</table>  
+
 
   <table>
   <tbody>
@@ -119,4 +125,17 @@ Team member Names:
   </tbody>
 </table>
 
+
+<table>
+  <tbody>
+    <tr>
+      <th>Points</th>
+      <th align="center">Description</th>
+    </tr>
+     <tr>
+	<td>5% (Team Assessment)</td>
+	<td align="left"><ul><li>Completing the assessment earns you 2%, the other 3% is determined by your team members responses</li></ul></td>
+    </tr>	     
+  </tbody>
+</table>  
 
