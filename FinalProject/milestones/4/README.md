@@ -2,13 +2,13 @@
 
 <img src="./media/features.png" align="right" width="300px"/>
 
-For your paint program, you now get to take some control of the direction of the project. Most teams may opt to implement different features, but the only requirement is that you implement at least one feature to the end user. Why only one? You are certainly welcome to add more, but be careful given the tight project timeline! Adding too many featuers can sometimes lead to something called [feature creep](https://en.wikipedia.org/wiki/Feature_creep), where you add many features to appease your client, but they may not actually need many features, only 1 or 2 that work really well!
+For your paint program, you now get to take some control of the direction of the project. Most teams may opt to implement different features, but the only requirement is that you implement at least one significant feature to impress our client. Why only one? You are certainly welcome to add more, but be careful given the tight project timeline! Adding too many featuers can sometimes lead to something called [feature creep](https://en.wikipedia.org/wiki/Feature_creep), where you add many features to appease your client, but they may not actually need many features, only 1 or 2 that work really well!
 
 ## Feature List
 
 Below is a prospective list of features which you may choose from to add. Decide as a group which feature you would like to add.
 
-- **Required**: All previous assignment features (Completed in A4)
+- **Required Featuers**: All previous assignment features 
 - Chat
 - At least 3 different Paint brushes
 - At least 3 different image filters that can be applied
@@ -27,23 +27,6 @@ Your next task is the following.
 2. Begin implementing the feature.
 	- You must also implement at least 1 test case for your feature to ensure that it works.
 
-# Rubric
-
-  <table>
-  <tbody>
-    <tr>
-      <th>Points</th>
-      <th align="center">Description</th>
-    </tr>
-     <tr>
-	<td>5% (Extra Feature Use Case)</td>
-	<td align="left"><ul><li>Did you fill in the use case?</li></ul></td>
-    </tr>	     
-      <td>10% (Extra feature)</td>
-	<td align="left"><ul><li>Does your feature work? Do you have at least 1 test case</li></ul></td> 
-    </tr>
-  </tbody>
-</table>
 
 # F.A.Q. (Instructor Anticipated Questions)
 
