@@ -4,6 +4,8 @@ The first stage we learned in the software development life cycle is planning. T
 
 Your Project manager will look through this when completing the first milestone check-in to ensure you have a plan.
 
+**Fair Warning** Requirements and client needs are subject to change.
+
 <hr>
 
 *TODO Add your estimated project timeline here*
