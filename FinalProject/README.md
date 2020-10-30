@@ -6,7 +6,7 @@
 
 ## Where to do development?
 
-**Note** You should work on your final project in the A4 repository. Any files otherwise(e.g. build.md or feature1usecase.md) should be modified in this folder and stay in this directory.
+**Note** You should work on your final project in the A5 repository. Any files otherwise(e.g. build.md or feature1usecase.md) should be modified in this folder and stay in this directory.
 
 ## Team
 
