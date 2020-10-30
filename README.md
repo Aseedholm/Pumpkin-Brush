@@ -28,13 +28,6 @@ Team member Names:
 - Your team members and project manager are listed on the following spreadsheet [here](https://docs.google.com/spreadsheets/d/1-JJy7BlyRtS5MjpYJOXL239rRSrDC3bUbpqqC3azrZI/edit?usp=sharing). 
 - Your project manager will be your first point of contact for various project deliverables and questions. Though you may continue to attend office hours with whoever you like, your project manager will be your primary contact.
 
-**See Final Project Specifications Below**
-
-## Where to do development?
-
-**Note** You should work on your final project from within this directory. 
-
-
 # Rubric
  
   <table>
