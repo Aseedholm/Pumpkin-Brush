@@ -16,7 +16,7 @@ Provided below are a list of curated resources to help you complete the task(s) 
 
 <img align="right" width="300px" src="./media/network.png">
 
-In a previous lab you have learned how to create a networked application. Now it is time to combine what we have learned in our previous labs and assignments and build a collaborative painting program.
+In the networking lab you have learned how to create a networked application. Now it is time to combine what we have learned in our previous labs and assignments and build a collaborative painting program.
 
 Our goal is to be able to have multiple clients (at least 3) connect to a server application which will broadcast changes to each user as they paint.
 
