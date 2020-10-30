@@ -1,22 +1,12 @@
 # Client
 
-A client has approached with with the following [statement of work](./sow.md) for a 6 week contract. You haven't worked with this client previously, but you want to impress them with your newly assembled team. Review the [statement of work](./sow.md), self-organize, and begin!
+A client has approached with with the following [statement of work](./sow.md) (which is intentionally vague) for a 6 week contract. You haven't worked with this client previously, but you want to impress them with your newly assembled team. Review the [statement of work](./sow.md), self-organize, and begin!
 
 # Logistics
 
-Your project has been divided into several different [milestones](./milestones). It will be up to you and your group to self-organize and complete each milestone. 
+Your project has been divided into several different [milestones](./milestones). It will be up to you and your group to self-organize and complete each milestones. The milestones are somewhat linear, though they need not be completed in order. 
 
-## Timeline
-
-Click each link to see what you need to do each step along the way. Note--this is a rough timeline for when you should be finishing each deliverable.
-
-- [x] [Milestone 1 - Check-in 1](milestones/1/README.md) (First Two Weeks)
-  - This is completed with your specific project manager.
-- [x] [Extra Feature](extrafeature.md) - (Second Two Weeks)
-- [x] [Final Deliverable](FinalDeliverable.md) - (Final Two Weeks)
-- [x] Fill out the [team assessment form here](https://forms.gle/FwujAEQoQnAT4x6K7)
-
-## Logistics
+## Team Logistics
 
 - Work with your team to ensure everyone has a way to work on this codebase with a common set of tools.
 - Everyone should make code contributions to the repository (i.e. everyone should have some commits in the project log)
