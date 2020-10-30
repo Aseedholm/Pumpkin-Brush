@@ -6,11 +6,11 @@
 
 Welcome to the final project repository!  
 
-## Logistics 
+## Repository Organization 
 
-1. [./labs](./labs) for the remainder of the term will be completed with your team and pushed to this repository. They will be completed pushed and completed in the [./labs](./labs) folder.
+1. [./labs](./labs) for the remainder of the term will be completed with your team and pushed to this repository. They will be completed pushed and completed in the [./labs](./labs) folder. These labs should not effect or overlap at all with your Final Project
 2. There are no more individual assignments.
-3. You will complete your [final project](./FinalProject) in the [final project](./FinalProject) directory
+3. You will complete your [final project](./FinalProject) in the [final project](./FinalProject) directory. The organization is partially up to you on the file structure and organization, just make sure you organize it logically and against any requirements.
 
 ## Team
 
