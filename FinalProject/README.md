@@ -1,25 +1,3 @@
-<img src="./media/banner.png" alt="banner" />
-
-# Final Project!
-
-**See Final Project Specifications Below**
-
-## Where to do development?
-
-**Note** You should work on your final project from within this directory. 
-
-## Team
-
-**Team Name**: *Edit this to your official team name*
-
-*TODO*:
-Update your Team member Names here (Up to 4).
-
-1. *my name is...*
-2. *my name is...*
-3. *my name is...*
-4. *my name is...*
-
 ## Timeline
 
 Click each link to see what you need to do each step along the way. Note--this is a rough timeline for when you should be finishing each deliverable.
