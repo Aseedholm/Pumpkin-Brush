@@ -28,6 +28,18 @@ Team member Names:
 - Your team members and project manager are listed on the following spreadsheet [here](https://docs.google.com/spreadsheets/d/1-JJy7BlyRtS5MjpYJOXL239rRSrDC3bUbpqqC3azrZI/edit?usp=sharing). 
 - Your project manager will be your first point of contact for various project deliverables and questions. Though you may continue to attend office hours with whoever you like, your project manager will be your primary contact.
 
+## Team Logistics
+
+- Work with your team to ensure everyone has a way to work on this codebase with a common set of tools.
+- Everyone should make code contributions to the repository (i.e. everyone should have some commits in the project log)
+- See the project timeline
+
+## Notes on working in teams
+
+* [Four Ways to Lead Your Software Team to Success](https://hackernoon.com/four-ways-to-lead-software-team-to-success-43fa156719b4)
+* [The 3 C's of being a captain](https://appliedsportpsych.org/resources/resources-for-athletes/the-3-c-s-of-being-a-captain/)
+* [Etiquette for Pair Programming](https://dzone.com/articles/etiquette-for-pair-programming)
+
 # Rubric
  
  
