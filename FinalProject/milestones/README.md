@@ -12,7 +12,7 @@ Click each link to see what you need to do each step along the way. Note--this i
 - [x] **November 13** [Milestone 1 - Check-in #1](./4/README.md) 
 	- This is completed with your specific project manager.
 	- I recommend having at least milestones 0,1,2 completed at this time.
-- [x] **November 27** [Milestone 2 - Check-in #2](./milestones/6/README.md) 
+- [x] **November 27** [Milestone 2 - Check-in #2](./6/README.md) 
 	- I recommend having at least milestones 3 and 5 completed at this time.
 - [x] **December 4** [Extra Feature](extrafeature.md) - (Second Two Weeks)
 - [x] **December 9** Final Deliverable 
