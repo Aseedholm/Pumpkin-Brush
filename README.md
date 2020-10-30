@@ -2,7 +2,7 @@
 
 # Final Project!
 
-# The Final Project Repository!
+## The Final Project Repository!
 
 Welcome to the final project repository!  
 
