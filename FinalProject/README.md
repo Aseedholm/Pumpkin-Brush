@@ -24,11 +24,11 @@ Update your Team member Names here (Up to 4).
 
 Click each link to see what you need to do each step along the way. Note--this is a rough timeline for when you should be finishing each deliverable.
 
-- [x] [Milestone Check-in 1](milestone1.md) (Week of April 4 - April 9 or before)
+- [x] [Milestone 1 - Check-in 1](milestones/1/README.md) (First Two Weeks)
   - This is completed with your specific project manager.
-- [x] [Extra Feature](extrafeature.md) - (April 10 - 14)
-- [x] [Final Deliverable](FinalDeliverable.md) - (April 18)
-- [x] Fill out the team assessment form here: TBD 
+- [x] [Extra Feature](extrafeature.md) - (Second Two Weeks)
+- [x] [Final Deliverable](FinalDeliverable.md) - (Final Two Weeks)
+- [x] Fill out the [team assessment form here](https://forms.gle/FwujAEQoQnAT4x6K7)
 
 ## Logistics
 
