@@ -4,8 +4,9 @@ Take another look at the [Statement of Work](./../../sow.md). Read through it ca
 
 ## Task
 
-Within this repository on Github.com click on the 'Projects' pane (at the top of the window) and create at least 4 columns: 'Tasks', 'In Progress', 'QA', and 'Completed'
-
-With your team members, add at least **15 tasks** to start that you think you will need to complete. Note, for this project you need to support all of the previous features of the previous assignments.
-
-You can formally add some of the details of each task like a user story, but that is not required. Tasks should be desriptive enough however that they can be understood by other team members who have not written the specific task.
+1. Within this repository on Github.com click on the 'Projects' pane (at the top of the window) and create at least 4 columns: 'Tasks', 'In Progress', 'QA', and 'Completed'
+	- You may add more at your discretion, but I advise these 4.
+2. With your team members, add at least **15 tasks** to that you think you will need to complete. 
+	- Note, for this project you need to support all of the previous features of the previous assignments, so you will likely surpass 15 quite easily!
+	- Note,y ou can formally add some of the details of each task like a user story, but that is not required. 
+		- Tasks should be descriptive enough however that they can be understood by other team members who have not written the specific task.
