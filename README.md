@@ -2,7 +2,10 @@
 
 Welcome to the final project repository! Here is where you will complete the rest of your coursework for this term.
 
-Note: Labs for the remainder of the term will be completed with your team and pushed to this repository. There are no more individual assignments.
+Note: 
+
+1. Labs for the remainder of the term will be completed with your team and pushed to this repository.
+2. There are no more individual assignments.
 
 # Team spread sheet 
 
