@@ -21,7 +21,7 @@ Provided below are the requirements which the project managers will ask you. For
 - [ ] How has team member communication been thus far?
 - [ ] What is each teammate currently working on?
 	- How long do you expect that feature to take? Do you think this feature is a priority and may block others from making progress? If so, would you consider pair programming?
-- [ ] Is there a teammember who feels confident in using Git, such that they can troublshoot version control bugs?
+- [ ] Is there a team member who feels confident in using Git, such that they can troublshoot version control bugs?
 	- Is everyone working on the master branch, or are you all working on separate branches and merging?
 - [ ] Are you using good abstractions in your code? (i.e. avoiding large chunks of code)
 - [ ] Do you have a CMakeLists.txt file that can generate a Makefile?
