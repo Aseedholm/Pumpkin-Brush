@@ -2,7 +2,7 @@
 
 <hr>
 
-# Feature 1 Use Case
+# Feature Use Case
 
 <hr>
 
