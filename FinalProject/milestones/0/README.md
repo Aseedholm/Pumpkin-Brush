@@ -6,4 +6,6 @@ Your Project manager will look through this when completing the first milestone 
 
 <hr>
 
-*TODO Add your timeline here*
+*TODO Add your estimated project timeline here*
+
+*I recommend you use a markdown table or list to stay organized*
