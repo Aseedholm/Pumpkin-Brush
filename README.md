@@ -4,24 +4,24 @@
 
 # The Final Project Repository!
 
-Welcome to the final project repository! Here is where you will complete the rest of your coursework for this term.
+Welcome to the final project repository!  
 
-Note: 
+## Logistics 
 
-1. Labs for the remainder of the term will be completed with your team and pushed to this repository.
+1. [./labs](./labs) for the remainder of the term will be completed with your team and pushed to this repository. They will be completed pushed and completed in the [./labs](./labs) folder.
 2. There are no more individual assignments.
+3. You will complete your [final project](./FinalProject) in the [final project](./FinalProject) directory
 
 ## Team
 
 **Team Name**: *Edit this to your official team name*
 
-*TODO*:
-Update your Team member Names here (Up to 4).
+Team member Names:
 
-1. *my name is...*
-2. *my name is...*
-3. *my name is...*
-4. *my name is...*
+1. *TODO my name is...*
+2. *TODO my name is...*
+3. *TODO my name is...*
+4. *TODO my name is...*
 
 # Team spread sheet 
 
