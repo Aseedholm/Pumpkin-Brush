@@ -134,7 +134,7 @@ Team member Names:
       <th>Points</th>
       <th align="center">Description</th>
     </tr>	     
-      <td>30% (Extra feature)</td>
+      <td>20% (Extra feature)</td>
 	<td align="left"><ul><li>Does your networking work?</li></ul></td> 
     </tr>
   </tbody>
@@ -146,8 +146,8 @@ Team member Names:
       <th>Points</th>
       <th align="center">Description</th>
     </tr>	     
-      <td>30% (Extra feature)</td>
-	<td align="left"><ul><li>Does your networking work?</li></ul></td> 
+      <td>10% (Extra feature)</td>
+	<td align="left"><ul><li>Do you have at least 8 test cases? Are they properly integrated with a Github Action?</li></ul></td> 
     </tr>
   </tbody>
 </table>
