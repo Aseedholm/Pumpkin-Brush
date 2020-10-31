@@ -32,10 +32,11 @@ Our goal is to be able to have multiple clients (at least 3) connect to a server
 ## Requirements Analysis (Your Task)
 
 1. Integrate assignments 1-4 together if you have not previously done so.
-	- A1's main feature was to have a working SFML application.
-	- A2's main feature was the undo/redo system
-	- A3's main feature was to have testing with the Catch2 framework.
-	- A4's main feature is to have a server which multiple clients can connect to collaboratively paint on the same canvas.
+	- A1 was just about learning C++, so there was no real features...
+	- A2's main feature was to have a working SFML application.
+	- A3's main feature was the undo/redo system
+	- A4's main feature was to have testing with the Catch2 framework.
+	- This tasks main feature is to have a server which multiple clients can connect to collaboratively paint on the same canvas.
 		- The IP address and port# should not be hard-coded anywhere in the application. (Prompt the user for input)
 		- Note when a new user joins, they should receive the same canvas that other clients are painting on. Think about where you should store the command history or pixel information for the canvas.
 		- At least 3 users should be able to paint at once.
