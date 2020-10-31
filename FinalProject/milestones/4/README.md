@@ -6,7 +6,7 @@
 
 A [software project manager](https://www.wrike.com/project-management-guide/faq/what-is-software-project-management/) (PM) is someone who takes on the role of organizing a software project and managing the day-to-day operations of a project. They are in charge of the project planning (e.g. assigning tasks to engineers and prioritizing the tasks) and making sure the project moves forward as intended.
 
-In this course, our project managers (the course staff) will help guide you to make sure you are on track. You will be required within two weeks(see milestones/README.md for specific deadline) to check-in with your Project Manager. This can/will be a virtual meeting. 
+In this course, our project managers (the course staff) will help guide you to make sure you are on track. You will be required within two weeks(see [milestones](./../) for specific deadline) to check-in with your Project Manager. This can/will be a virtual meeting. 
 
 Provided below are the requirements which the project managers will ask you. For items that you have completed, there will be no further discussion. For items that are not completed, you should discuss a game plan of how you will prioritize and complete that task.
 
