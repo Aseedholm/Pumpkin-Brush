@@ -81,9 +81,9 @@ Team member Names:
 			<th align="center">Description</th>
 			</tr>
 			<tr>	  
-			<td>5% (Milestone Check-in #2)</td>
+			<td>5% (Youtube Video)</td>
 			<td align="left">
-				<ul><li>Did you complete your check-in #2?</li>
+				<ul><li>Did you upload a Youtube Video and test out opening it incognito mode so we could also access it?</li>
 			</td>
 		</tr>
 	</tbody>
@@ -97,20 +97,7 @@ Team member Names:
     </tr>
      <tr>
 	<td>5% (Team Assessment)</td>
-	<td align="left"><ul><li>Completing the assessment earns you 1%, the other 4% is determined by your team members responses</li></ul></td>
-    </tr>	     
-  </tbody>
-</table>  
-
-<table>
-  <tbody>
-    <tr>
-      <th>Points</th>
-      <th align="center">Description</th>
-    </tr>
-     <tr>
-	<td>5% (Youtube Video)</td>
-	<td align="left"><ul><li>Do you have a Youtube Video?</li></ul></td>
+	<td align="left"><ul><li>Did you complete the assessment form which earns you 1%--the other 4% is determined by your team members responses</li></ul></td>
     </tr>	     
   </tbody>
 </table>  
@@ -123,23 +110,17 @@ Team member Names:
       <th align="center">Description</th>
     </tr>
      <tr>
-	<td>15% (Polish and completion)</td>
-	<td align="left"><ul><li>How polished are your materials? Does your software work? Does it complile? Does it crash?</li></ul></td>
+	<td>25% (Polish and completion)</td>
+	<td align="left"><ul><li>How polished are your materials? Does your software work? Does it complile? Does it crash, segfault?</li></ul></td>
     </tr>	     
   </tbody>
 </table>  
 
-
-
-  <table>
+<table>
   <tbody>
     <tr>
       <th>Points</th>
       <th align="center">Description</th>
-    </tr>
-     <tr>
-	<td>5% (Extra Feature Use Case)</td>
-	<td align="left"><ul><li>Did you fill in the use case?</li></ul></td>
     </tr>	     
       <td>10% (Extra feature)</td>
 	<td align="left"><ul><li>Does your feature work? Do you have at least 1 test case</li></ul></td> 
@@ -147,6 +128,29 @@ Team member Names:
   </tbody>
 </table>
 
+<table>
+  <tbody>
+    <tr>
+      <th>Points</th>
+      <th align="center">Description</th>
+    </tr>	     
+      <td>30% (Extra feature)</td>
+	<td align="left"><ul><li>Does your networking work?</li></ul></td> 
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <th>Points</th>
+      <th align="center">Description</th>
+    </tr>	     
+      <td>30% (Extra feature)</td>
+	<td align="left"><ul><li>Does your networking work?</li></ul></td> 
+    </tr>
+  </tbody>
+</table>
 
 
 
