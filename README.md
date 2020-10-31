@@ -111,7 +111,7 @@ Team member Names:
     </tr>
      <tr>
 	<td>25% (Polish and completion)</td>
-	<td align="left"><ul><li>How polished are your materials? Does your software work? Does it complile? Does it crash, segfault?</li></ul></td>
+	<td align="left"><ul><li>How polished are your materials(timeline, documentation, presentation)? Does your software work? Does it compile? Does it crash, segfault?</li></ul></td>
     </tr>	     
   </tbody>
 </table>  
@@ -152,5 +152,15 @@ Team member Names:
   </tbody>
 </table>
 
-
+<table>
+  <tbody>
+    <tr>
+      <th>Points</th>
+      <th align="center">Description</th>
+    </tr>	     
+      <td>15% (Extra feature)</td>
+	<td align="left"><ul><li>Did you integrate all other features from previous assignments?</li></ul></td> 
+    </tr>
+  </tbody>
+</table>
 
