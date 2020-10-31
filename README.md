@@ -73,25 +73,47 @@ Team member Names:
 	</tbody>
 </table>
 
-  <table>
+
+<table>
+	<tbody>
+		<tr>
+			<th>Points</th>
+			<th align="center">Description</th>
+			</tr>
+			<tr>	  
+			<td>5% (Milestone Check-in #2)</td>
+			<td align="left">
+				<ul><li>Did you complete your check-in #2?</li>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table>
   <tbody>
     <tr>
       <th>Points</th>
       <th align="center">Description</th>
     </tr>
-    <tr>	  
-      <td>30% (Task 1 - Polish)</td>
-	<td align="left"><ul><li>Does your CMakeFile generate a makefile/xcodeproject/visualstudio project/etc. that compiles?</li><li>Did you structure your networking code in a reasonable, object-oriented manner?</li></ul></td>
-     </tr>
      <tr>
-	<td>40% (Task 1 - Integration)</td>
-	<td align="left"><ul><li>Were your previous assignments incorporated into this one successfully? (i.e. if we just launched a server and one client, would the program behave as normal?)</li></ul></td>
+	<td>5% (Team Assessment)</td>
+	<td align="left"><ul><li>Completing the assessment earns you 1%, the other 4% is determined by your team members responses</li></ul></td>
     </tr>	     
-      <td>30% (Task 1 - Networking)</td>
-	<td align="left"><ul><li>Do you have an application that meets the requirements listed above? (3 clients can paint at once, clients can disconnect without crashing the server, etc?)</li></ul></td> 
-    </tr>
   </tbody>
-</table>
+</table>  
+
+<table>
+  <tbody>
+    <tr>
+      <th>Points</th>
+      <th align="center">Description</th>
+    </tr>
+     <tr>
+	<td>5% (Youtube Video)</td>
+	<td align="left"><ul><li>Do you have a Youtube Video?</li></ul></td>
+    </tr>	     
+  </tbody>
+</table>  
 
 
 <table>
@@ -126,16 +148,5 @@ Team member Names:
 </table>
 
 
-<table>
-  <tbody>
-    <tr>
-      <th>Points</th>
-      <th align="center">Description</th>
-    </tr>
-     <tr>
-	<td>5% (Team Assessment)</td>
-	<td align="left"><ul><li>Completing the assessment earns you 2%, the other 3% is determined by your team members responses</li></ul></td>
-    </tr>	     
-  </tbody>
-</table>  
+
 
