@@ -9,8 +9,9 @@ Welcome to the final project repository!
 Here is a welcome video showing the repoisory organization--be sure to read carefully through the instructions (Consuming a large spec and breaking it down is part of engineering!).
 
 <a href="https://youtu.be/O1WwJ0uXl94">
-<img src="./media/FinalProject.png" alt="Click for final project video" width="100" height="132">
+<img src="./media/FinalProject.png" alt="Click for final project video" width="300">
 </a>
+
 https://youtu.be/O1WwJ0uXl94
 
 
