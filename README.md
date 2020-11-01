@@ -6,6 +6,10 @@
 
 Welcome to the final project repository!  
 
+Here is a welcome video showing the repoisory organization--be sure to read carefully through the instructions (Consuming a large spec and breaking it down is part of engineering!).
+
+https://youtu.be/O1WwJ0uXl94
+
 ## Repository Organization 
 
 1. [./labs](./labs) for the remainder of the term will be completed with your team and pushed to this repository. They will be completed pushed and completed in the [./labs](./labs) folder. These labs should not effect or overlap at all with your Final Project
