@@ -43,7 +43,7 @@ Review the above TCP Networking samples in SFML. The videos and documentation pr
 # Submission/Deliverables
 
 - Task 1
-	- Upload a screenshot of the TCP networking example code called 'tcp.jpg' to the repository.
+	- Upload a screenshot of the TCP networking example code called [tcp.jpg](./tcp.jpg) to the repository.
 
 	
 ### Submission
