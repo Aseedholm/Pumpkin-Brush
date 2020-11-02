@@ -25,12 +25,12 @@ https://youtu.be/O1WwJ0uXl94
 
 **Team Name**: *Edit this to your official team name*
 
-Team member Names:
+Team member Names: Pumpkin Brush
 
-1. *TODO my name is...*
-2. *TODO my name is...*
-3. *TODO my name is...*
-4. *TODO my name is...*
+1. *Japher Su*
+2. *Andrew Seedholm*
+3. *Jugal Joshi*
+4. *Hao Zheng*
 
 # Team spread sheet 
 
