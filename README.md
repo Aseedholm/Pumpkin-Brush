@@ -23,9 +23,9 @@ https://youtu.be/O1WwJ0uXl94
 
 ## Team
 
-**Team Name**: *Edit this to your official team name*
+**Team Name**: *Pumpkin Brush*
 
-Team member Names: Pumpkin Brush
+Team member Names: 
 
 1. *Japher Su*
 2. *Andrew Seedholm*
