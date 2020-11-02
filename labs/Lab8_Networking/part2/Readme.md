@@ -23,7 +23,7 @@ Review the above UDP Networking samples in SFML. The videos and documentation pr
 
 ## Your Task
 
-1. Get the UDP Code sample running, and make sure you understand the code Then look at part 2 and make a determination with your teammates, if you should use UDP or TCP protocol for the paint program.
+1. Get the UDP Code sample running, and make sure you understand the code Then compare with part 1 and make a determination with your teammates, if you should use UDP or TCP protocol for the paint program.
 
 ## Testing
 
