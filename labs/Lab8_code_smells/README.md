@@ -1,4 +1,4 @@
-# Lab 6
+# Lab 9
 
 > "C++ Code Smells"
 
