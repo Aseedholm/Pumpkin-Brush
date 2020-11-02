@@ -43,7 +43,7 @@ Review the above UDP Networking samples in SFML. The videos and documentation pr
 # Submission/Deliverables
 
 - Task 1
-	- Upload a screenshot of the UDP networking example code called 'udp.jpg' to the repository.
+	- Upload a screenshot of the UDP networking example code called [udp.jpg](./udb.jpg) to the repository.
 
 	
 ### Submission
