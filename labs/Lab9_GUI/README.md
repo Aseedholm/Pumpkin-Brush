@@ -1,4 +1,4 @@
-# Lab 7 
+# Lab 9 
 
 > "C++ Immediate Mode GUI"
 
@@ -28,8 +28,6 @@ Provided below are a list of curated resources to help you complete the tasks be
 
 **Remember** You are working with your team today in your team repository.
 
-1. Find your teammates here! https://docs.google.com/spreadsheets/d/1f7dGzR-mdv25OnGrV68xKeJw2TQrD-_dpHCnDjbKOus/edit#gid=0
-
 # Task 1 - Nuklear Immediate Mode GUI
 
 The Nuklear Immediate Mode GUI is a relatively lightweight Graphical User Interface(GUI) programmed in C. The nuklear GUI itself is only a single header file(nuklear.h) which makes it relatively easy to import. There is additionally a header file so that we can conveniently work with the GUI in SFML. 
@@ -40,7 +38,9 @@ Provided in todays task is an SFML sample that draws two windows--1 for the pain
 
 ### Your task
 
-0. Modify the build script to compile for your platform. Note: I have provided a linuxbuild.sh which you can modify, though you can also use the sample [./nuklear/demo/sfml_opengl2/Makefile](./nuklear/demo/sfml_opengl2/Makefile) in the nuklear demo directory helpful.
+0. Modify the build script to compile for your platform. 
+	- Note: I have provided a linuxbuild.sh as an example which you can modify, though you can also use the sample [./nuklear/demo/sfml_opengl2/Makefile](./nuklear/demo/sfml_opengl2/Makefile) in the nuklear demo directory helpful.
+	- Eventually you should incorporate this build into your final project in your CMakeLists.txt
 1. Add 1 more color(e.g. Blue) to the GUI to change the color drawn on the SFML window.
 2. Remove the unnecessary "Button" and "Compression" component from the GUI Window
 3. (Optional) Cleanup the code to provide a cleaner abstraction for using the GUI.

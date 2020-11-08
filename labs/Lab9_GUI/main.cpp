@@ -101,7 +101,7 @@ int main(){
     // Setup the context
     sf::ContextSettings settings(24, 8, 4, 2, 2);
         // Create a rendering window where we can draw an image on
-        sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT), "Mini-Paint Lab 7",sf::Style::Default,settings);
+        sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT), "Mini-Paint Lab",sf::Style::Default,settings);
     // Set the sync rate after creating a window
         // Refreshes window at same rate as the monitor
         window.setVerticalSyncEnabled(true);
