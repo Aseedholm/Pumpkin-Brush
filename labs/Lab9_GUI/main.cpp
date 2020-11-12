@@ -47,7 +47,7 @@
 #define WINDOW_HEIGHT 400
 
 // Some globals
-enum {RED, BLACK,GREEN};
+enum {RED, BLACK,GREEN, BLUE};
 static int op = RED;
 
 
@@ -60,9 +60,9 @@ void drawLayout(struct nk_context* ctx, struct nk_colorf& bg){
         NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE))
     {
         static int property = 20;
-        nk_layout_row_static(ctx, 30, 80, 1);
-        if (nk_button_label(ctx, "button"))
-            fprintf(stdout, "button pressed\n");
+        //nk_layout_row_static(ctx, 30, 80, 1);
+        //if (nk_button_label(ctx, "button"))
+        //    fprintf(stdout, "button pressed\n");
 
         nk_layout_row_dynamic(ctx, 30, 2);
         if (nk_option_label(ctx, "red", op == RED)){
@@ -74,9 +74,12 @@ void drawLayout(struct nk_context* ctx, struct nk_colorf& bg){
         if (nk_option_label(ctx, "green", op == GREEN)){
              op = GREEN;
         }
+		if (nk_option_label(ctx, "blue", op == BLUE)) {
+			op = BLUE;
+		}
 
-        nk_layout_row_dynamic(ctx, 25, 1);
-        nk_property_int(ctx, "Compression:", 0, &property, 100, 10, 1);
+        //nk_layout_row_dynamic(ctx, 25, 1);
+        //nk_property_int(ctx, "Compression:", 0, &property, 100, 10, 1);
 
         nk_layout_row_dynamic(ctx, 20, 1);
         nk_label(ctx, "background:", NK_TEXT_LEFT);
@@ -222,6 +225,9 @@ int main(){
                 if(op==GREEN){
                     image.setPixel(coords.x,coords.y,sf::Color::Green);
                 }
+				if(op==BLUE){
+					image.setPixel(coords.x, coords.y,sf::Color::Blue);
+				}
                 // We load into our texture the modified mpixels
                 texture.loadFromImage(image);
             }
