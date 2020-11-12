@@ -6,7 +6,7 @@
 
 **Use Case**: Program initiation by displaying a 1920x1080 canvas
 
-**Primary Actor**: User
+**Primary Actor**: Users
 
 **Goal in Context**: To start the program and greet user with a white drawable canvas of dimensions 1920x1080 
 
