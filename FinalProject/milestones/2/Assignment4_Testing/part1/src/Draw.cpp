@@ -22,7 +22,7 @@
 bool Draw::execute() {
 	// App::mouseX = x;
 	// App::mouseY = y; 
-	m_app->GetImage().setPixel(m_x, m_y, sf::Color::Blue);
+	m_app->GetImage().setPixel(m_coordinate.x, m_coordinate.y, sf::Color::Blue);
 	// std::cout<<x<<" "<<y;
 	return true;
 }
@@ -31,16 +31,15 @@ bool Draw::execute() {
 *
 */
 bool Draw::undo() {
-	m_app->GetImage().setPixel(m_x, m_y, m_originalColor);
+	m_app->GetImage().setPixel(m_coordinate.x, m_coordinate.y, m_originalColor);
 	return true;
 }
 /*! \brief 	Draw Constructor that takes in the x and y co-ordinates of the mouse
 *
 */
-Draw::Draw(unsigned int x, unsigned int y, App* app) {
-	m_x = x;
-	m_y = y;
+Draw::Draw(sf::Vector2i coordinate, App* app) {
+	m_coordinate = coordinate;
 	m_app = app;
-	m_originalColor = app->GetImage().getPixel(x, y);
+	m_originalColor = app->GetImage().getPixel(coordinate.x, coordinate.y);
 
 }

@@ -18,14 +18,14 @@
 // we have to inherit from the command class.
 // This forces us to implement an 'execute' and 'undo' command.
 class Draw : public Command{
-	unsigned int m_x;
-	unsigned int m_y;
+private:
+	sf::Vector2i m_coordinate;
 	sf::Color m_originalColor;
 	App* m_app;
-	public:
+public:
 	bool execute();
 	bool undo();
-	Draw(unsigned int, unsigned int, App*);
+	Draw(sf::Vector2i m_coordinate, App*);
 };
 
 #endif

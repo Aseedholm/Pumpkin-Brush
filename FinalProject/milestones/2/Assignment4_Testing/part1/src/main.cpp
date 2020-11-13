@@ -83,7 +83,7 @@ void update(App& app) {
 			//std::cout << "Hmm, lots of repeats here: " << coordinate.x << "," << coordinate.y << std::endl;
 			if (coordinate.x > 0 && coordinate.x <= app.GetWindow().getSize().x
 			&& coordinate.y > 0 && coordinate.y <= app.GetWindow().getSize().y) {
-				Command* command = new Draw(coordinate.x, coordinate.y, &app);
+				Command* command = new Draw(coordinate, &app);
 				app.AddCommand(command);
 			}
 			// Modify the pixel
