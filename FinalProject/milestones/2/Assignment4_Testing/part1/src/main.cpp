@@ -76,12 +76,18 @@ void update(App& app) {
 //			exit(EXIT_SUCCESS);
 //		}
 	}
-	// if (event.type == sf::Event::MouseButtonReleased) {
+
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			sf::Vector2i coordinate = sf::Mouse::getPosition(app.GetWindow());
-			//relative positioning and resizing the window 
+			//relative positioning and resizing the window
 			//std::cout << "Hmm, lots of repeats here: " << coordinate.x << "," << coordinate.y << std::endl;
-			if (coordinate.x > 0 && coordinate.x <= app.GetWindow().getSize().x
+			// store the mouse position of the current frame
+			app.mouseX = coordinate.x;
+			app.mouseY = coordinate.y;
+			if(app.mouseX == app.pmouseX && app.mouseY == app.pmouseY){
+			    std::cout << "Clicking the same pixel, do not execute commands" << std::endl;
+			}
+			else if (coordinate.x > 0 && coordinate.x <= app.GetWindow().getSize().x
 			&& coordinate.y > 0 && coordinate.y <= app.GetWindow().getSize().y) {
 				Command* command = new Draw(coordinate, &app);
 				app.AddCommand(command);
@@ -102,8 +108,9 @@ void update(App& app) {
         exit(EXIT_SUCCESS);
     }
 
-
-	// }
+    // Stores the previous mouse click position before going to next frame
+    app.pmouseX = app.mouseX;
+    app.pmouseY = app.mouseY;
 }
 
 
