@@ -61,33 +61,48 @@ void update(App& app) {
 	//event.mouseButton.button == sf::Mouse::Left
 
 		
-		if (event.type == sf::Event::KeyPressed) {
-			if (event.key.code == sf::Keyboard::Z) {
-				app.UndoCommand();
-			}
-		}
-		if (event.type == sf::Event::KeyPressed) {
-			if (event.key.code == sf::Keyboard::Y) {
-				app.RedoCommand();
-			}
-		}
-		// Capture any keys that are released
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-			exit(EXIT_SUCCESS);
-		}
+//		if (event.type == sf::Event::KeyPressed) {
+//			if (event.key.code == sf::Keyboard::Z) {
+//				app.UndoCommand();
+//			}
+//		}
+//		if (event.type == sf::Event::KeyPressed) {
+//			if (event.key.code == sf::Keyboard::Y) {
+//				app.RedoCommand();
+//			}
+//		}
+//		// Capture any keys that are released
+//		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+//			exit(EXIT_SUCCESS);
+//		}
 	}
 	// if (event.type == sf::Event::MouseButtonReleased) {
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			sf::Vector2i coordinate = sf::Mouse::getPosition(app.GetWindow());
 			//relative positioning and resizing the window 
-			std::cout << "Hmm, lots of repeats here: " << coordinate.x << "," << coordinate.y << std::endl;
-			if (coordinate.x <= 600 && coordinate.y <= 400) {
+			//std::cout << "Hmm, lots of repeats here: " << coordinate.x << "," << coordinate.y << std::endl;
+			if (coordinate.x > 0 && coordinate.x <= app.GetWindow().getSize().x
+			&& coordinate.y > 0 && coordinate.y <= app.GetWindow().getSize().y) {
 				Command* command = new Draw(coordinate.x, coordinate.y, &app);
 				app.AddCommand(command);
 			}
 			// Modify the pixel
 			// App::GetImage().setPixel(coordinate.x,coordinate.y,sf::Color::Red);
 		}
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+        app.UndoCommand();
+    }
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+        app.RedoCommand();
+    }
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+        exit(EXIT_SUCCESS);
+    }
+
+
 	// }
 }
 

@@ -31,7 +31,7 @@ bool Draw::execute() {
 *
 */
 bool Draw::undo() {
-	m_app->GetImage().setPixel(m_x, m_y, sf::Color::White);
+	m_app->GetImage().setPixel(m_x, m_y, m_originalColor);
 	return true;
 }
 /*! \brief 	Draw Constructor that takes in the x and y co-ordinates of the mouse
@@ -41,5 +41,6 @@ Draw::Draw(unsigned int x, unsigned int y, App* app) {
 	m_x = x;
 	m_y = y;
 	m_app = app;
+	m_originalColor = app->GetImage().getPixel(x, y);
 
 }

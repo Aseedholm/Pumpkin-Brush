@@ -20,6 +20,7 @@
 class Draw : public Command{
 	unsigned int m_x;
 	unsigned int m_y;
+	sf::Color m_originalColor;
 	App* m_app;
 	public:
 	bool execute();
