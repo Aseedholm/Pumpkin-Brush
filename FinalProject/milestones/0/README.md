@@ -22,17 +22,17 @@ The first stage we learned in the software development life cycle is planning.
 	- Milestone 1 to be completed (by meeting time)
 - Date: Nov/12 
 	- Milestone 2 to be completed (during meeting)
-- Date:
-	- Task/Milestone to be completed
-- Date:
-	- Task/Milestone to be completed
-- Date:
-	- Task/Milestone to be completed
-- Date:
-	- Task/Milestone to be completed
-- Date:
-	- Task/Milestone to be completed
-- Date:
-	- Task/Milestone to be completed
-- Date:
-	- Task/Milestone to be completed
+- Date: Nov/13
+	- Jugal's code refactoring
+- Date: Nov/22
+	- Networking feature done
+- Date: Nov/27
+	- All features done
+- Date: Nov/29
+	- Concurrency
+- Date: Dec/1
+	- GUI
+- Date: Dec/5
+	- Testing
+- Date: Dec/9 (or 6th)
+	- Final project completion
