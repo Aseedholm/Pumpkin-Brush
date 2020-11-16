@@ -42,7 +42,7 @@
 *
 */
 void App::AddCommand(Command* c) {
-	
+
 	while (!m_redo.empty()) {
 		m_redo.pop();
 	}
@@ -59,7 +59,7 @@ App::App(){
 	m_texture = new sf::Texture;
 }
 // void App::operator=(const App& app){
-	
+
 // }
 
 
@@ -133,7 +133,8 @@ void App::Destroy() {
 */
 void App::Init(void (*initFunction)(void)) {
 	// Create our window
-	m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
+//	m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
+    m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
 	m_window->setVerticalSyncEnabled(true);
 	// Create an image which stores the pixels we will update
 	m_image->create(600, 400, sf::Color::White);
@@ -173,7 +174,7 @@ void App::DrawCallback(void (*drawFunction)(App&)) {
 */
 void App::Loop(App& app) {
 	// Call the init function
-	
+
 	m_initFunc();
 
 	// Start the main rendering loop
@@ -186,7 +187,7 @@ void App::Loop(App& app) {
 		m_drawFunc(app);
 		// Update the texture
 		// Note: This can be done in the 'draw call'
-		// Draw to the canvas	
+		// Draw to the canvas
 		m_window->draw(*m_sprite);
 		// Display the canvas
 		m_window->display();

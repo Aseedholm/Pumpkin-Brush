@@ -7,9 +7,9 @@
 
  // g++ -std=c++17 *.cpp -o App -lsfml-graphics -lsfml-window -lsfml-system
  //
- // Note:	If your compiler does not support -std=c++17, 
+ // Note:	If your compiler does not support -std=c++17,
  //		then try -std=c++14 then -std=c++11.
- //		
+ //
  // HOW TO RUN
  //
  // ./App
@@ -48,48 +48,26 @@ void update(App& app) {
 	// Update our canvas
 	sf::Event event;
 	while (app.m_window->pollEvent(event)) {
-		// if(event.type == sf::Event::MouseLeft){				
-			// Modify the pixel
-			// App::mouseX = event.mouseMove.x; 
-			// App::mouseY = event.mouseMove.y; 
-			// App::GetImage().setPixel(App::mouseX,App::mouseY,sf::Color::Blue);
-
-		// }
-
-	// We can otherwise handle events normally
-	// sf::Mouse::isButtonPressed(sf::Mouse::Left)
-	//event.mouseButton.button == sf::Mouse::Left
-
-		
-//		if (event.type == sf::Event::KeyPressed) {
-//			if (event.key.code == sf::Keyboard::Z) {
-//				app.UndoCommand();
-//			}
-//		}
-//		if (event.type == sf::Event::KeyPressed) {
-//			if (event.key.code == sf::Keyboard::Y) {
-//				app.RedoCommand();
-//			}
-//		}
-//		// Capture any keys that are released
-//		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-//			exit(EXIT_SUCCESS);
-//		}
+        //andrew edit ****
 	}
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			sf::Vector2i coordinate = sf::Mouse::getPosition(app.GetWindow());
+
+			sf::Vector2f currentXYCoordinates = app.m_window->mapPixelToCoords(coordinate); //andrew edit ****
+
 			//relative positioning and resizing the window
-			//std::cout << "Hmm, lots of repeats here: " << coordinate.x << "," << coordinate.y << std::endl;
 			// store the mouse position of the current frame
-			app.mouseX = coordinate.x;
-			app.mouseY = coordinate.y;
+			app.mouseX = currentXYCoordinates.x;
+			app.mouseY = currentXYCoordinates.y;
+
+
 			if(app.mouseX == app.pmouseX && app.mouseY == app.pmouseY){
 			    std::cout << "Clicking the same pixel, do not execute commands" << std::endl;
 			}
-			else if (coordinate.x > 0 && coordinate.x <= app.GetWindow().getSize().x
-			&& coordinate.y > 0 && coordinate.y <= app.GetWindow().getSize().y) {
-				Command* command = new Draw(coordinate, &app);
+			else if (currentXYCoordinates.x > 0 && currentXYCoordinates.x <= app.GetWindow().getSize().x
+			&& currentXYCoordinates.y > 0 && currentXYCoordinates.y <= app.GetWindow().getSize().y) {
+				Command* command = new Draw(currentXYCoordinates, &app);
 				app.AddCommand(command);
 			}
 			// Modify the pixel
@@ -118,15 +96,15 @@ void update(App& app) {
 *
 */
 void draw(App& app) {
-	// Static variable 
+	// Static variable
 	static int refreshRate = 0;
-	++refreshRate;	// Increment 
+	++refreshRate;	// Increment
 
-	// We load into our texture the modified pixels	
+	// We load into our texture the modified pixels
 	// But we only do so every 10 draw calls to reduce latency of transfer
 	// between the GPU and CPU.
 	// Ask yourself: Could we do better with sf::Clock and refresh once
-	// 	 	 every 'x' frames? 
+	// 	 	 every 'x' frames?
 	if (refreshRate > 10) {
 		app.GetTexture().loadFromImage(app.GetImage());
 		refreshRate = 0;
@@ -138,7 +116,7 @@ void draw(App& app) {
 *
 */
 int main() {
-	
+
 	App app;
 	// Call any setup function
 	// Passing a function pointer into the 'init' function.
