@@ -35,6 +35,8 @@ private:
 	// Texture sent to the GPU for rendering
 	sf::Texture* m_texture;
 
+	sf::Color* m_backgroundColor;
+
 // Member functions
 	// Default constructor which is hidden in the Singleton
 	// Store the address of our funcion pointer
@@ -68,7 +70,8 @@ public:
 	void UpdateCallback(void (*updateFunction)(App& app));
 	void DrawCallback(void (*drawFunction)(App& app));
 	void Loop(App&);
-
+	void SetBackgroundColor(sf::Color *colorPassed);
+	sf::Color& GetBackgroundColor();
 };
 
 

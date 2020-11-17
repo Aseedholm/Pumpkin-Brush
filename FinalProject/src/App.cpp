@@ -57,6 +57,7 @@ App::App(){
 	m_image = new sf::Image;
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
+
 }
 // void App::operator=(const App& app){
 
@@ -119,6 +120,10 @@ sf::RenderWindow& App::GetWindow() {
 	return *m_window;
 }
 
+sf::Color& App::GetBackgroundColor() {
+	return *m_backgroundColor;
+}
+
 /*! \brief 	Destroy we manually call at end of our program.
 *
 */
@@ -126,6 +131,7 @@ void App::Destroy() {
 	delete m_image;
 	delete m_sprite;
 	delete m_texture;
+	delete m_backgroundColor; //Andrew edit.
 }
 
 /*! \brief 	Initializes the App and sets up the main
