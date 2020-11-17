@@ -123,6 +123,10 @@ sf::RenderWindow& App::GetWindow() {
 	return *m_window;
 }
 
+/*! \brief Return the current brush instance of the App
+ *
+ *
+ */
 GeneralBrush& App::GetBrush() {
     return *m_brush;
 }

@@ -11,14 +11,16 @@
 class Brush : public GeneralBrush {
 private:
     sf::Color m_color;
-    int m_size;
+    size m_size;
 
 public:
     Brush();
     sf::Color getColor() override;
     void setColor(sf::Color color) override;
+    void setSize(size size) override;
     void incSize() override;
     void decSize() override;
+    void getSize() override;
 };
 
 #endif

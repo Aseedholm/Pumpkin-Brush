@@ -85,6 +85,7 @@ void update(App& app) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         exit(EXIT_SUCCESS);
     }
+
     // Handling change color event
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
         app.GetBrush().setColor(sf::Color::Black);
@@ -110,6 +111,24 @@ void update(App& app) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num8)) {
         app.GetBrush().setColor(sf::Color::Cyan);
     }
+
+    // Handling change brush size
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt)) {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+        app.GetBrush().setSize(size::small);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
+            app.GetBrush().setSize(size::medium);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
+            app.GetBrush().setSize(size::large);
+    }
+
+    // only for debug and test
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        app.GetBrush().getSize();
+    }
+
+
+
 
 
     // Stores the previous mouse click position before going to next frame

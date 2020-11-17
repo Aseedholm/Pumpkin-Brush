@@ -7,6 +7,9 @@
 // Include our Third-Party SFML header
 #include <SFML/Graphics/Color.hpp>
 
+// enum of size of the brush
+enum size {small, medium, large};
+
 class GeneralBrush {
 private:
 
@@ -14,8 +17,10 @@ public:
     virtual ~GeneralBrush(){};
     virtual sf::Color getColor(){};
     virtual void setColor(sf::Color){};
+    virtual void setSize(size){};
     virtual void incSize(){};
     virtual void decSize(){};
+    virtual void getSize(){};
 };
 
 #endif
