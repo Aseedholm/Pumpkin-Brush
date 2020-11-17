@@ -16,6 +16,8 @@
 #include <queue>
 #include <stack>
 #include "Command.hpp"
+
+#include "BrushFactory.hpp"
 // Project header files
 // #include ...
 
@@ -34,6 +36,9 @@ private:
 	sf::Sprite* m_sprite;
 	// Texture sent to the GPU for rendering
 	sf::Texture* m_texture;
+
+	GeneralBrush* m_brush;
+    BrushFactory brushFactory;
 
 // Member functions
 	// Default constructor which is hidden in the Singleton
@@ -62,6 +67,7 @@ public:
 	sf::Image& GetImage();
 	sf::Texture& GetTexture();
 	sf::RenderWindow& GetWindow();
+	GeneralBrush& GetBrush();
 
 	void Destroy();
 	void Init(void (*initFunction)(void));

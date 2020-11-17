@@ -85,6 +85,32 @@ void update(App& app) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         exit(EXIT_SUCCESS);
     }
+    // Handling change color event
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
+        app.GetBrush().setColor(sf::Color::Black);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
+        app.GetBrush().setColor(sf::Color::White);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) {
+        app.GetBrush().setColor(sf::Color::Red);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) {
+        app.GetBrush().setColor(sf::Color::Green);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) {
+        app.GetBrush().setColor(sf::Color::Blue);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)) {
+        app.GetBrush().setColor(sf::Color::Yellow);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num7)) {
+        app.GetBrush().setColor(sf::Color::Magenta);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num8)) {
+        app.GetBrush().setColor(sf::Color::Cyan);
+    }
+
 
     // Stores the previous mouse click position before going to next frame
     app.pmouseX = app.mouseX;

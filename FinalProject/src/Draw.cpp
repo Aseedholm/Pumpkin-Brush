@@ -22,7 +22,7 @@
 bool Draw::execute() {
 	// App::mouseX = x;
 	// App::mouseY = y;
-	m_app->GetImage().setPixel(m_coordinate.x, m_coordinate.y, sf::Color::Blue);
+	m_app->GetImage().setPixel(m_coordinate.x, m_coordinate.y, m_app->GetBrush().getColor());
 	// std::cout<<x<<" "<<y;
 	return true;
 }

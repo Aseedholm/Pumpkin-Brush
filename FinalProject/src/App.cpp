@@ -14,6 +14,8 @@
 #include <cassert>
 // Project header files
 #include "App.hpp"
+
+
 #include<iostream>
 
 // All static members of a Singleton need to initialized to some value.
@@ -57,6 +59,8 @@ App::App(){
 	m_image = new sf::Image;
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
+	m_brush = brushFactory.createBrush(1);
+
 }
 // void App::operator=(const App& app){
 
@@ -117,6 +121,10 @@ sf::Texture& App::GetTexture() {
 */
 sf::RenderWindow& App::GetWindow() {
 	return *m_window;
+}
+
+GeneralBrush& App::GetBrush() {
+    return *m_brush;
 }
 
 /*! \brief 	Destroy we manually call at end of our program.
