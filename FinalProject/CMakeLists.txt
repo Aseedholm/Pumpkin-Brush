@@ -54,7 +54,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Where are the include directories
 include_directories("/usr/local/include/")
-include_directories("./include/")
+include_directories("include")
 
 # Where are the libraries
 # Hint: On linux you can grep for them: ldconfig -p | grep sfml
@@ -67,8 +67,8 @@ link_directories("/usr/local/lib/")
 # to generate.
 #
 # Here is an example below adding multiple files
-add_executable(App ./src/App.cpp ./src/Draw.cpp ./src/Command.cpp ./src/main.cpp) # example with more files
-add_executable(App_Test ./src/App.cpp ./src/Command.cpp ./src/Draw.cpp ./tests/main_test.cpp)
+add_executable(App src/App.cpp src/Draw.cpp src/Command.cpp src/main.cpp) # example with more files
+add_executable(App_Test src/App.cpp src/Command.cpp src/Draw.cpp tests/main_test.cpp)
 
 # Add any libraries
 # On linux, you can use the handy 'apt-file' tool to find

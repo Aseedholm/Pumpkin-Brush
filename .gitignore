@@ -1,0 +1,11 @@
+*.o
+*.out
+*.app
+*.exe
+*.so
+*.dylib
+*.dll
+.idea/*
+**/cmake-build-debug
+**/bin
+FinalProject/CMakeLists.txt
