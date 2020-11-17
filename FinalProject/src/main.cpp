@@ -86,6 +86,22 @@ void update(App& app) {
         exit(EXIT_SUCCESS);
     }
 
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+        app.SetBackgroundColor(new sf::Color(sf::Color::Red.toInteger()));
+    }
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        app.SetBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
+    }
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+        app.SetBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
+    }
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
+        app.SetBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
+    }
+
     // Stores the previous mouse click position before going to next frame
     app.pmouseX = app.mouseX;
     app.pmouseY = app.mouseY;
