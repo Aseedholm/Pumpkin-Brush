@@ -6,6 +6,7 @@
 #define GENERALBRUSH_HPP
 // Include our Third-Party SFML header
 #include <SFML/Graphics/Color.hpp>
+#include <vector>
 
 // enum of size of the brush
 enum size {small, medium, large};
@@ -21,6 +22,8 @@ public:
     virtual void incSize(){};
     virtual void decSize(){};
     virtual void getSize(){};
+    virtual std::vector<std::vector<int>> getShader(){};
+
 };
 
 #endif

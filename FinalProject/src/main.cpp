@@ -113,14 +113,16 @@ void update(App& app) {
     }
 
     // Handling change brush size
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt)) {
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
         app.GetBrush().setSize(size::small);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
-            app.GetBrush().setSize(size::medium);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
-            app.GetBrush().setSize(size::large);
     }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F2)) {
+        app.GetBrush().setSize(size::medium);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F3)) {
+        app.GetBrush().setSize(size::large);
+    }
+
 
     // only for debug and test
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {

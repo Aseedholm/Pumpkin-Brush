@@ -5,6 +5,8 @@
 
 #include "GeneralBrush.hpp"
 
+#include <vector>
+
 /**
  * One kind of Brush
  */
@@ -12,6 +14,7 @@ class Brush : public GeneralBrush {
 private:
     sf::Color m_color;
     size m_size;
+    std::vector<std::vector<std::vector<int>>> m_shaders;
 
 public:
     Brush();
@@ -21,6 +24,7 @@ public:
     void incSize() override;
     void decSize() override;
     void getSize() override;
+    std::vector<std::vector<int>> getShader() override;
 };
 
 #endif

@@ -131,6 +131,14 @@ GeneralBrush& App::GetBrush() {
     return *m_brush;
 }
 
+/*! \brief Return a copy of the current brush instance of the App
+ *
+ *
+ */
+GeneralBrush App::CopyBrush() {
+    return *m_brush;
+}
+
 /*! \brief 	Destroy we manually call at end of our program.
 *
 */

@@ -36,6 +36,7 @@ private:
 	sf::Sprite* m_sprite;
 	// Texture sent to the GPU for rendering
 	sf::Texture* m_texture;
+	// Render texture
     // The Brush instance which can draw pixels
 	GeneralBrush* m_brush;
 	// Brush factory which can create different types of brushes
@@ -69,6 +70,7 @@ public:
 	sf::Texture& GetTexture();
 	sf::RenderWindow& GetWindow();
 	GeneralBrush& GetBrush();
+	GeneralBrush CopyBrush();
 
 	void Destroy();
 	void Init(void (*initFunction)(void));

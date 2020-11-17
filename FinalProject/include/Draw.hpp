@@ -11,8 +11,11 @@
 // #include ...
 // Include standard library C++ libraries.
 #include <string>
+#include <vector>
 // Project header files
 #include "Command.hpp"
+#include "GeneralBrush.hpp"
+
 
 // Anytime we want to implement a new command in our paint tool,
 // we have to inherit from the command class.
@@ -24,6 +27,8 @@ private:
 
 	sf::Color m_originalColor;
 	App* m_app;
+	GeneralBrush m_brush;
+
 public:
 	bool execute();
 	bool undo();
