@@ -121,7 +121,11 @@ sf::RenderWindow& App::GetWindow() {
 	return *m_window;
 }
 
-sf::Color& App::GetBackgroundColor() {
+/*! \brief 	Return a reference to our m_backgroundColor so that we
+*		do not have to publicly expose it.
+*
+*/
+sf::Color& App::GetBackgroundColor() { //Andrew edit*****
 	return *m_backgroundColor;
 }
 
@@ -132,7 +136,7 @@ void App::Destroy() {
 	delete m_image;
 	delete m_sprite;
 	delete m_texture;
-	delete m_backgroundColor; //Andrew edit.
+	delete m_backgroundColor; //Andrew edit*****
 }
 
 /*! \brief 	Initializes the App and sets up the main
@@ -144,7 +148,7 @@ void App::Init(void (*initFunction)(void)) {
     m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
 	m_window->setVerticalSyncEnabled(true);
 	// Create an image which stores the pixels we will update
-	m_image->create(600, 400, sf::Color::White);
+	m_image->create(600, 400, *m_backgroundColor); //Andrew edit*****
 	assert(m_image != nullptr && "m_image != nullptr");
 	// Create a texture which lives in the GPU and will render our image
 	m_texture->loadFromImage(*m_image);
@@ -195,10 +199,23 @@ void App::Loop(App& app) {
 		// Update the texture
 		// Note: This can be done in the 'draw call'
 		// Draw to the canvas
+
+		
+		if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 
+			m_sprite->setColor(*m_backgroundColor);
+		}
+		
 		m_window->draw(*m_sprite);
 		// Display the canvas
 		m_window->display();
 	}
+}
+
+/*! \brief 	Set a reference to m_backgroundColor.
+*
+*/
+void App::SetBackgroundColor(sf::Color *colorPassed) { //Andrew edit*****
+	m_backgroundColor = colorPassed;
 }
 
 
