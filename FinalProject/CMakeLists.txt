@@ -67,8 +67,9 @@ link_directories("/usr/local/lib/")
 # to generate.
 #
 # Here is an example below adding multiple files
-add_executable(App src/App.cpp src/Draw.cpp src/Command.cpp src/main.cpp) # example with more files
-add_executable(App_Test src/App.cpp src/Command.cpp src/Draw.cpp tests/main_test.cpp)
+add_executable(App src/App.cpp src/Draw.cpp src/Command.cpp src/main.cpp
+                   src/BrushFactory.cpp src/Brush.cpp) # example with more files
+#add_executable(App_Test src/App.cpp src/Command.cpp src/Draw.cpp tests/main_test.cpp)
 
 # Add any libraries
 # On linux, you can use the handy 'apt-file' tool to find
@@ -77,4 +78,4 @@ add_executable(App_Test src/App.cpp src/Command.cpp src/Draw.cpp tests/main_test
 #   	sudo apt-file update
 # 	apt-file find Texture.hpp
 target_link_libraries(App sfml-graphics sfml-window sfml-system)
-target_link_libraries(App_Test sfml-graphics sfml-window sfml-system)
+#target_link_libraries(App_Test sfml-graphics sfml-window sfml-system)
