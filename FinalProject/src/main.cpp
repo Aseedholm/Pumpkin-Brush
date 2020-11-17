@@ -26,6 +26,7 @@
 #include "App.hpp"
 #include "Command.hpp"
 #include "Draw.hpp"
+#include "Erase.hpp"
 
 
 /*! \brief 	Call any initailization functions here.
@@ -49,10 +50,15 @@ void update(App& app) {
 	sf::Event event;
 	while (app.m_window->pollEvent(event)) {
         //andrew edit ****
+        //closing the window by clicking the x button (japher edit ***)
+        if (event.type == sf::Event::Closed) {
+            app.m_window->close();
+            exit(EXIT_SUCCESS);
+        }
 	}
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			sf::Vector2i coordinate = sf::Mouse::getPosition(app.GetWindow());
+			sf::Vector2i coordinate = sf::Mouse::getPosition(app.getWindow());
 
 			sf::Vector2f currentXYCoordinates = app.m_window->mapPixelToCoords(coordinate); //andrew edit ****
 
@@ -65,41 +71,49 @@ void update(App& app) {
 			if(app.mouseX == app.pmouseX && app.mouseY == app.pmouseY){
 			    std::cout << "Clicking the same pixel, do not execute commands" << std::endl;
 			}
-			else if (currentXYCoordinates.x > 0 && currentXYCoordinates.x <= app.GetWindow().getSize().x
-			&& currentXYCoordinates.y > 0 && currentXYCoordinates.y <= app.GetWindow().getSize().y) {
-				Command* command = new Draw(currentXYCoordinates, &app);
-				app.AddCommand(command);
+			else if (currentXYCoordinates.x > 0 && currentXYCoordinates.x <= app.getWindow().getSize().x
+			&& currentXYCoordinates.y > 0 && currentXYCoordinates.y <= app.getWindow().getSize().y) {
+			    // if mouse is left-clicked AND key E is pressed, execute the pixel
+			    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+			        Command* command = new Erase(currentXYCoordinates, &app);
+                    app.addCommand(command);
+			    }
+			    // else, simple mouse event for drawing
+			    else {
+                    Command* command = new Draw(currentXYCoordinates, &app);
+                    app.addCommand(command);
+			    }
 			}
 			// Modify the pixel
-			// App::GetImage().setPixel(coordinate.x,coordinate.y,sf::Color::Red);
+			// App::getImage().setPixel(coordinate.x,coordinate.y,sf::Color::Red);
 		}
 
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
-        app.UndoCommand();
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::U)) {
+        app.undoCommand();
     }
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
-        app.RedoCommand();
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+        app.redoCommand();
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         exit(EXIT_SUCCESS);
     }
 
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-        app.SetBackgroundColor(new sf::Color(sf::Color::Red.toInteger()));
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
+        app.setBackgroundColor(new sf::Color(sf::Color::Blue.toInteger()));
     }
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        app.SetBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
+        app.setBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
     }
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
-        app.SetBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
+        app.setBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
     }
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
-        app.SetBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
+        app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
     }
 
     // Stores the previous mouse click position before going to next frame
@@ -122,7 +136,7 @@ void draw(App& app) {
 	// Ask yourself: Could we do better with sf::Clock and refresh once
 	// 	 	 every 'x' frames?
 	if (refreshRate > 10) {
-		app.GetTexture().loadFromImage(app.GetImage());
+        app.getTexture().loadFromImage(app.getImage());
 		refreshRate = 0;
 	}
 }
@@ -137,15 +151,15 @@ int main() {
 	// Call any setup function
 	// Passing a function pointer into the 'init' function.
 	// of our application.
-	app.Init(&initialization);
+    app.init(&initialization);
 	// Setup your keyboard
-	app.UpdateCallback(&update);
+    app.updateCallback(&update);
 	// Setup the Draw Function
-	app.DrawCallback(&draw);
+    app.drawCallback(&draw);
 	// Call the main loop function
-	app.Loop(app);
-	// Destroy our app
-	app.Destroy();
+    app.loop(app);
+	// destroy our app
+    app.destroy();
 
 	return 0;
 }

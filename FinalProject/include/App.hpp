@@ -57,21 +57,21 @@ public:
 	App();
 	// void operator=(const App& app);
 // Member functions
-	void AddCommand(Command* c);
-	void ExecuteCommand(Command* c);
-	void UndoCommand(); 
-	void RedoCommand();
-	sf::Image& GetImage();
-	sf::Texture& GetTexture();
-	sf::RenderWindow& GetWindow();
+	void addCommand(Command* c);
+	void executeCommand(Command* c);
+	void undoCommand();
+	void redoCommand();
+	sf::Image& getImage();
+	sf::Texture& getTexture();
+	sf::RenderWindow& getWindow();
 
-	void Destroy();
-	void Init(void (*initFunction)(void));
-	void UpdateCallback(void (*updateFunction)(App& app));
-	void DrawCallback(void (*drawFunction)(App& app));
-	void Loop(App&);
-	void SetBackgroundColor(sf::Color *colorPassed);
-	sf::Color& GetBackgroundColor();
+	void destroy();
+	void init(void (*initFunction)(void));
+	void updateCallback(void (*updateFunction)(App& app));
+	void drawCallback(void (*drawFunction)(App& app));
+	void loop(App& app);
+	void setBackgroundColor(sf::Color *colorPassed);
+	sf::Color& getBackgroundColor();
 };
 
 

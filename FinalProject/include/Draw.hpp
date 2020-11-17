@@ -28,7 +28,7 @@ public:
 	bool execute();
 	bool undo();
 //	Draw(sf::Vector2i m_coordinate, App*);
-	Draw(sf::Vector2f m_coordinate, App*); //andrew edit ***
+	Draw(sf::Vector2f coordinate, App* app); //andrew edit ***
 };
 
 #endif
