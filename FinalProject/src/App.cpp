@@ -57,6 +57,7 @@ App::App(){
 	m_image = new sf::Image;
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
+	m_backgroundColor = new sf::Color(sf::Color::White.toInteger());
 
 }
 // void App::operator=(const App& app){
