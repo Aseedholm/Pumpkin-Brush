@@ -58,6 +58,9 @@ App::App(){
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
 	m_backgroundColor = new sf::Color(sf::Color::White.toInteger());
+	m_canvas = new sf::RenderTexture;
+	m_brush = new sf::CircleShape(20,20);
+	m_brush->setFillColor(sf::Color::Black);
 
 }
 // void App::operator=(const App& app){
@@ -137,6 +140,7 @@ void App::destroy() {
 	delete m_sprite;
 	delete m_texture;
 	delete m_backgroundColor; //Andrew edit*****
+	delete m_canvas;
 }
 
 /*! \brief 	Initializes the App and sets up the main
@@ -150,11 +154,14 @@ void App::init(void (*initFunction)(void)) {
 	// Create an image which stores the pixels we will update
 	m_image->create(600, 400, *m_backgroundColor); //Andrew edit*****
 	assert(m_image != nullptr && "m_image != nullptr");
+	// Create canvas
+	m_canvas->create(600, 400);
+	m_canvas->clear(*m_backgroundColor);
 	// Create a texture which lives in the GPU and will render our image
 	m_texture->loadFromImage(*m_image);
 	assert(m_texture != nullptr && "m_texture != nullptr");
 	// Create a sprite which is the entity that can be textured
-	m_sprite->setTexture(*m_texture);
+	m_sprite->setTexture(m_canvas->getTexture(), true);
 	assert(m_sprite != nullptr && "m_sprite != nullptr");
 	// Set our initialization function to perform any user
 	// initialization
@@ -199,6 +206,9 @@ void App::loop(App& app) {
 		// Update the texture
 		// Note: This can be done in the 'draw call'
 		// Draw to the canvas
+		m_canvas->clear(sf::Color::White);
+		m_canvas->draw(*m_brush);
+		m_canvas->display();
 
 		
 		if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 

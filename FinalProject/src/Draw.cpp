@@ -23,6 +23,7 @@ bool Draw::execute() {
 	// App::mouseX = x;
 	// App::mouseY = y;
     m_app->getImage().setPixel(m_coordinate.x, m_coordinate.y, sf::Color::Blue);
+    m_app->m_brush->setPosition(m_coordinate.x,m_coordinate.y);
 	// std::cout<<x<<" "<<y;
 	return true;
 }

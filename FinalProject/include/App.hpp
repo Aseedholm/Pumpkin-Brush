@@ -34,6 +34,7 @@ private:
 	sf::Sprite* m_sprite;
 	// Texture sent to the GPU for rendering
 	sf::Texture* m_texture;
+	// Rendered texture represents as canvas
 
 	sf::Color* m_backgroundColor;
 
@@ -54,7 +55,11 @@ public:
 	// 'mouse' records where the mouse currently is.
 	unsigned int pmouseX, pmouseY, mouseX, mouseY;
 	sf::RenderWindow* m_window;
-	App();
+    sf::RenderTexture* m_canvas;
+    sf::CircleShape* m_brush;
+
+
+    App();
 	// void operator=(const App& app);
 // Member functions
 	void addCommand(Command* c);
