@@ -21,8 +21,8 @@
 *
 */
 bool Draw::execute() {
-	for(int i = 0; i < m_sharder.size(); i++) {
-        m_app->GetImage().setPixel(m_coordinate.x + m_sharder[i][0], m_coordinate.y + m_sharder[i][1], m_color);
+	for(int i = 0; i < m_shader.size(); i++) {
+        m_app->GetImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_color);
     }
 
 	return true;
@@ -32,8 +32,8 @@ bool Draw::execute() {
 *
 */
 bool Draw::undo() {
-    for(int i = 0; i < m_sharder.size(); i++) {
-        m_app->GetImage().setPixel(m_coordinate.x + m_sharder[i][0], m_coordinate.y + m_sharder[i][1], m_originalColors[i]);
+    for(int i = 0; i < m_shader.size(); i++) {
+        m_app->GetImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_originalColors[i]);
     }
 	return true;
 }
@@ -42,8 +42,8 @@ bool Draw::undo() {
  *
  */
 void Draw::setOriginalColor() {
-    for(int i = 0; i <m_sharder.size(); i++) {
-        sf::Color pixelColor = m_app->GetImage().getPixel(m_coordinate.x + m_sharder[i][0], m_coordinate.y + m_sharder[i][1]);
+    for(int i = 0; i <m_shader.size(); i++) {
+        sf::Color pixelColor = m_app->GetImage().getPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1]);
         m_originalColors.push_back(pixelColor);
     }
 }
@@ -51,12 +51,10 @@ void Draw::setOriginalColor() {
 /*! \brief 	Draw Constructor that takes in the x and y co-ordinates of the mouse
 *
 */
-//Draw::Draw(sf::Vector2i coordinate, App* app) {
 Draw::Draw(sf::Vector2f coordinate, App* app) { //andrew edit **
 	m_coordinate = coordinate;
 	m_app = app;
-	//m_brush = m_app->GetBrush();
-	m_sharder = m_app->GetBrush().getShader();
+	m_shader = m_app->GetBrush().getShader();
 	m_color = m_app->GetBrush().getColor();
     setOriginalColor();
 }
