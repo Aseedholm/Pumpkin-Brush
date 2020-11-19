@@ -25,15 +25,19 @@ private:
 //	sf::Vector2i m_coordinate;
 	sf::Vector2f m_coordinate; //andrew edit ***
 
-	sf::Color m_originalColor;
+
 	App* m_app;
 	GeneralBrush m_brush;
+	std::vector<std::vector<int>> m_sharder;
+	std::vector<sf::Color> m_originalColors;
+    sf::Color m_color;
 
 public:
 	bool execute();
 	bool undo();
 //	Draw(sf::Vector2i m_coordinate, App*);
 	Draw(sf::Vector2f m_coordinate, App*); //andrew edit ***
+	void setOriginalColor();
 };
 
 #endif

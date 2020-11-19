@@ -21,18 +21,10 @@
 *
 */
 bool Draw::execute() {
-	// App::mouseX = x;
-	// App::mouseY = y;
-	std::vector<std::vector<int>> shader = m_app->GetBrush().getShader();
-	for(int i = 0; i < shader.size(); i++) {
-        m_app->GetImage().setPixel(m_coordinate.x + shader[i][0], m_coordinate.y + shader[i][1], m_app->GetBrush().getColor());
-        sf::Sprite sprite;
-        
-
+	for(int i = 0; i < m_sharder.size(); i++) {
+        m_app->GetImage().setPixel(m_coordinate.x + m_sharder[i][0], m_coordinate.y + m_sharder[i][1], m_color);
     }
 
-
-	// std::cout<<x<<" "<<y;
 	return true;
 }
 
@@ -40,12 +32,22 @@ bool Draw::execute() {
 *
 */
 bool Draw::undo() {
-    std::vector<std::vector<int>> shader = m_app->GetBrush().getShader();
-    for(int i = 0; i < shader.size(); i++) {
-        m_app->GetImage().setPixel(m_coordinate.x + shader[i][0], m_coordinate.y + shader[i][1], m_originalColor);
+    for(int i = 0; i < m_sharder.size(); i++) {
+        m_app->GetImage().setPixel(m_coordinate.x + m_sharder[i][0], m_coordinate.y + m_sharder[i][1], m_originalColors[i]);
     }
 	return true;
 }
+
+/*! \brief Get the original color of each pixels
+ *
+ */
+void Draw::setOriginalColor() {
+    for(int i = 0; i <m_sharder.size(); i++) {
+        sf::Color pixelColor = m_app->GetImage().getPixel(m_coordinate.x + m_sharder[i][0], m_coordinate.y + m_sharder[i][1]);
+        m_originalColors.push_back(pixelColor);
+    }
+}
+
 /*! \brief 	Draw Constructor that takes in the x and y co-ordinates of the mouse
 *
 */
@@ -53,7 +55,9 @@ bool Draw::undo() {
 Draw::Draw(sf::Vector2f coordinate, App* app) { //andrew edit **
 	m_coordinate = coordinate;
 	m_app = app;
-	m_brush = m_app->GetBrush();
-	m_originalColor = app->GetImage().getPixel(coordinate.x, coordinate.y);
-
+	//m_brush = m_app->GetBrush();
+	m_sharder = m_app->GetBrush().getShader();
+	m_color = m_app->GetBrush().getColor();
+    setOriginalColor();
 }
+
