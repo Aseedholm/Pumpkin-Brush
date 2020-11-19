@@ -63,7 +63,7 @@ void update(App& app) {
 
 
 			if(app.mouseX == app.pmouseX && app.mouseY == app.pmouseY){
-			    std::cout << "Clicking the same pixel, do not execute commands" << std::endl;
+			    //std::cout << "Clicking the same pixel, do not execute commands" << std::endl;
 			}
 			else if (currentXYCoordinates.x > 0 && currentXYCoordinates.x <= app.GetWindow().getSize().x
 			&& currentXYCoordinates.y > 0 && currentXYCoordinates.y <= app.GetWindow().getSize().y) {
@@ -112,7 +112,7 @@ void update(App& app) {
         app.GetBrush().setColor(sf::Color::Cyan);
     }
 
-    // Handling change brush size
+    // Handling change size of drawing tool
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
         app.GetBrush().setSize(size::small);
     }
@@ -121,6 +121,14 @@ void update(App& app) {
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::F3)) {
         app.GetBrush().setSize(size::large);
+    }
+
+    // Handling change drawing tools
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Divide)) {
+        app.SetBrush(app.getBrushFactory().createBrush(2));
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Multiply)) {
+        app.SetBrush(app.getBrushFactory().createBrush(1));
     }
 
 

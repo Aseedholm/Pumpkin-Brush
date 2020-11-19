@@ -38,7 +38,7 @@ bool Draw::undo() {
 	return true;
 }
 
-/*! \brief Get the original color of each pixels
+/*! \brief Get the original color of each pixel
  *
  */
 void Draw::setOriginalColor() {

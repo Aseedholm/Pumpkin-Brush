@@ -40,7 +40,7 @@ private:
     // The Brush instance which can draw pixels
 	GeneralBrush* m_brush;
 	// Brush factory which can create different types of brushes
-    BrushFactory brushFactory;
+    BrushFactory m_brushFactory;
 
 // Member functions
 	// Default constructor which is hidden in the Singleton
@@ -70,7 +70,8 @@ public:
 	sf::Texture& GetTexture();
 	sf::RenderWindow& GetWindow();
 	GeneralBrush& GetBrush();
-	GeneralBrush CopyBrush();
+    BrushFactory getBrushFactory();
+	void SetBrush(GeneralBrush* brush);
 
 	void Destroy();
 	void Init(void (*initFunction)(void));

@@ -59,7 +59,7 @@ App::App(){
 	m_image = new sf::Image;
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
-	m_brush = brushFactory.createBrush(1);
+	m_brush = m_brushFactory.createBrush(1);
 
 }
 // void App::operator=(const App& app){
@@ -123,6 +123,14 @@ sf::RenderWindow& App::GetWindow() {
 	return *m_window;
 }
 
+/*! \brief Return the brush factory of App
+ *
+ *
+ */
+BrushFactory App::getBrushFactory() {
+    return m_brushFactory;
+}
+
 /*! \brief Return the current brush instance of the App
  *
  *
@@ -131,13 +139,13 @@ GeneralBrush& App::GetBrush() {
     return *m_brush;
 }
 
-/*! \brief Return a copy of the current brush instance of the App
- *
+/*! \brief Set the current brush
  *
  */
-GeneralBrush App::CopyBrush() {
-    return *m_brush;
+void App::SetBrush(GeneralBrush* brush) {
+    m_brush = brush;
 }
+
 
 /*! \brief 	Destroy we manually call at end of our program.
 *

@@ -1,5 +1,5 @@
-#ifndef BRUSH_H
-#define BRUSH_H
+#ifndef PEN_H
+#define PEN_H
 
 
 
@@ -8,16 +8,16 @@
 #include <vector>
 
 /**
- * One kind of Brush which draws a square shape of pixels
+ * One kind of Brush which draws a circle shape of pixels
  */
-class Brush : public GeneralBrush {
+class Pen : public GeneralBrush {
 private:
     sf::Color m_color;
     size m_size;
     std::vector<std::vector<std::vector<int>>> m_shaders;
 
 public:
-    Brush();
+    Pen();
     sf::Color getColor() override;
     void setColor(sf::Color color) override;
     void setSize(size size) override;
