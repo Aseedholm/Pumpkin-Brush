@@ -23,7 +23,7 @@
 bool Draw::execute() {
 
 	for(int i = 0; i < m_shader.size(); i++) {
-        m_app->GetImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_color);
+        m_app->getImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_color);
     }
 	return true;
 }
@@ -34,7 +34,7 @@ bool Draw::execute() {
 bool Draw::undo() {
 
     for(int i = 0; i < m_shader.size(); i++) {
-        m_app->GetImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_originalColors[i]);
+        m_app->getImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_originalColors[i]);
     }
 	return true;
 }
@@ -44,7 +44,7 @@ bool Draw::undo() {
  */
 void Draw::setOriginalColor() {
     for(int i = 0; i <m_shader.size(); i++) {
-        sf::Color pixelColor = m_app->GetImage().getPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1]);
+        sf::Color pixelColor = m_app->getImage().getPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1]);
         m_originalColors.push_back(pixelColor);
     }
 }
