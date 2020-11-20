@@ -43,12 +43,12 @@
 /*! \brief Add command that adds the pixel position in stack
 *
 */
-void App::AddCommand(Command* c) {
+void App::addCommand(Command* c) {
 
 	while (!m_redo.empty()) {
 		m_redo.pop();
 	}
-	App::ExecuteCommand(c);
+    App::executeCommand(c);
 }
 /*! \brief Add command that adds the pixel position in stack
 *
@@ -60,6 +60,8 @@ App::App(){
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
 	m_brush = m_brushFactory.createBrush(1);
+	m_backgroundColor = new sf::Color(sf::Color::White.toInteger());
+
 
 }
 // void App::operator=(const App& app){
@@ -70,17 +72,17 @@ App::App(){
 /*! \brief 	Executing the command to generate pixel on left mouseclick
 *
 */
-void App::ExecuteCommand(Command* c) {
+void App::executeCommand(Command* c) {
 
 	m_undo.push(c);
 	m_undo.size();
 	c->execute();
 
 }
-/*! \brief The UndoCommand function unodoes the the pixel in reverse chronological order
+/*! \brief The undoCommand function unodoes the the pixel in reverse chronological order
 *
 */
-void App::UndoCommand() {
+void App::undoCommand() {
 	if (!m_undo.empty()) {
 		Command* t = m_undo.top();
 		m_redo.push(t);
@@ -92,9 +94,9 @@ void App::UndoCommand() {
 /*! \brief The redo commands redo an undo command until if there is an input in between.
 *
 */
-void App::RedoCommand() {
+void App::redoCommand() {
 	if (!m_redo.empty()) {
-		App::ExecuteCommand(m_redo.top());
+        App::executeCommand(m_redo.top());
 		m_redo.pop();
 	}
 }
@@ -103,7 +105,7 @@ void App::RedoCommand() {
 *		we do not have to publicly expose it.
 *
 */
-sf::Image& App::GetImage() {
+sf::Image& App::getImage() {
 	return *m_image;
 }
 
@@ -111,7 +113,7 @@ sf::Image& App::GetImage() {
 *		we do not have to publicly expose it.
 *
 */
-sf::Texture& App::GetTexture() {
+sf::Texture& App::getTexture() {
 	return *m_texture;
 }
 
@@ -119,9 +121,10 @@ sf::Texture& App::GetTexture() {
 *		do not have to publicly expose it.
 *
 */
-sf::RenderWindow& App::GetWindow() {
+sf::RenderWindow& App::getWindow() {
 	return *m_window;
 }
+
 
 /*! \brief Return the brush factory of App
  *
@@ -148,24 +151,36 @@ void App::SetBrush(GeneralBrush* brush) {
 
 
 /*! \brief 	Destroy we manually call at end of our program.
+
+/*! \brief 	Return a reference to our m_backgroundColor so that we
+*		do not have to publicly expose it.
 *
 */
-void App::Destroy() {
+sf::Color& App::getBackgroundColor() { //Andrew edit*****
+	return *m_backgroundColor;
+}
+
+/*! \brief 	destroy we manually call at end of our program.
+
+*
+*/
+void App::destroy() {
 	delete m_image;
 	delete m_sprite;
 	delete m_texture;
+	delete m_backgroundColor; //Andrew edit*****
 }
 
 /*! \brief 	Initializes the App and sets up the main
 *		rendering window(i.e. our canvas.)
 */
-void App::Init(void (*initFunction)(void)) {
+void App::init(void (*initFunction)(void)) {
 	// Create our window
 //	m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
     m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
 	m_window->setVerticalSyncEnabled(true);
 	// Create an image which stores the pixels we will update
-	m_image->create(600, 400, sf::Color::White);
+	m_image->create(600, 400, *m_backgroundColor); //Andrew edit*****
 	assert(m_image != nullptr && "m_image != nullptr");
 	// Create a texture which lives in the GPU and will render our image
 	m_texture->loadFromImage(*m_image);
@@ -182,7 +197,7 @@ void App::Init(void (*initFunction)(void)) {
 		each iteration of the main loop before drawing.
 *
 */
-void App::UpdateCallback(void (*updateFunction)(App&)) {
+void App::updateCallback(void (*updateFunction)(App&)) {
 	m_updateFunc = updateFunction;
 }
 
@@ -190,7 +205,7 @@ void App::UpdateCallback(void (*updateFunction)(App&)) {
 		each iteration of the main loop after update.
 *
 */
-void App::DrawCallback(void (*drawFunction)(App&)) {
+void App::drawCallback(void (*drawFunction)(App&)) {
 	m_drawFunc = drawFunction;
 }
 
@@ -200,7 +215,7 @@ void App::DrawCallback(void (*drawFunction)(App&)) {
 		functions will be called.
 *
 */
-void App::Loop(App& app) {
+void App::loop(App& app) {
 	// Call the init function
 
 	m_initFunc();
@@ -216,10 +231,23 @@ void App::Loop(App& app) {
 		// Update the texture
 		// Note: This can be done in the 'draw call'
 		// Draw to the canvas
+
+		
+		if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 
+			m_sprite->setColor(*m_backgroundColor);
+		}
+		
 		m_window->draw(*m_sprite);
 		// Display the canvas
 		m_window->display();
 	}
+}
+
+/*! \brief 	Set a reference to m_backgroundColor.
+*
+*/
+void App::setBackgroundColor(sf::Color *colorPassed) { //Andrew edit*****
+	m_backgroundColor = colorPassed;
 }
 
 

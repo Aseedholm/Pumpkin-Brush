@@ -21,10 +21,10 @@
 *
 */
 bool Draw::execute() {
+
 	for(int i = 0; i < m_shader.size(); i++) {
         m_app->GetImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_color);
     }
-
 	return true;
 }
 
@@ -32,6 +32,7 @@ bool Draw::execute() {
 *
 */
 bool Draw::undo() {
+
     for(int i = 0; i < m_shader.size(); i++) {
         m_app->GetImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_originalColors[i]);
     }
