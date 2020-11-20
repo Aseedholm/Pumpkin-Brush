@@ -67,7 +67,10 @@ link_directories("/usr/local/lib/")
 # to generate.
 #
 # Here is an example below adding multiple files
-add_executable(App src/App.cpp src/Draw.cpp src/Erase.cpp src/Command.cpp src/main.cpp) # example with more files
+
+add_executable(App src/App.cpp src/Draw.cpp src/Command.cpp src/main.cpp
+                   src/BrushFactory.cpp src/Brush.cpp src/Pen.cpp src/Erase.cpp) # example with more files
+
 #add_executable(App_Test src/App.cpp src/Command.cpp src/Draw.cpp tests/main_test.cpp)
 
 # Add any libraries

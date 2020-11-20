@@ -14,6 +14,8 @@
 #include <cassert>
 // Project header files
 #include "App.hpp"
+
+
 #include<iostream>
 
 // All static members of a Singleton need to initialized to some value.
@@ -57,7 +59,9 @@ App::App(){
 	m_image = new sf::Image;
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
+	m_brush = m_brushFactory.createBrush(1);
 	m_backgroundColor = new sf::Color(sf::Color::White.toInteger());
+
 
 }
 // void App::operator=(const App& app){
@@ -121,6 +125,33 @@ sf::RenderWindow& App::getWindow() {
 	return *m_window;
 }
 
+
+/*! \brief Return the brush factory of App
+ *
+ *
+ */
+BrushFactory App::getBrushFactory() {
+    return m_brushFactory;
+}
+
+/*! \brief Return the current brush instance of the App
+ *
+ *
+ */
+GeneralBrush& App::GetBrush() {
+    return *m_brush;
+}
+
+/*! \brief Set the current brush
+ *
+ */
+void App::SetBrush(GeneralBrush* brush) {
+    m_brush = brush;
+}
+
+
+/*! \brief 	Destroy we manually call at end of our program.
+
 /*! \brief 	Return a reference to our m_backgroundColor so that we
 *		do not have to publicly expose it.
 *
@@ -130,6 +161,7 @@ sf::Color& App::getBackgroundColor() { //Andrew edit*****
 }
 
 /*! \brief 	destroy we manually call at end of our program.
+
 *
 */
 void App::destroy() {

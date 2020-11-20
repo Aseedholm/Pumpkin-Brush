@@ -69,7 +69,7 @@ void update(App& app) {
 
 
 			if(app.mouseX == app.pmouseX && app.mouseY == app.pmouseY){
-			    std::cout << "Clicking the same pixel, do not execute commands" << std::endl;
+			    //std::cout << "Clicking the same pixel, do not execute commands" << std::endl;
 			}
 			else if (currentXYCoordinates.x > 0 && currentXYCoordinates.x <= app.getWindow().getSize().x
 			&& currentXYCoordinates.y > 0 && currentXYCoordinates.y <= app.getWindow().getSize().y) {
@@ -100,6 +100,63 @@ void update(App& app) {
         exit(EXIT_SUCCESS);
     }
 
+
+    // Handling change color event
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
+        app.GetBrush().setColor(sf::Color::Black);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
+        app.GetBrush().setColor(sf::Color::White);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) {
+        app.GetBrush().setColor(sf::Color::Red);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) {
+        app.GetBrush().setColor(sf::Color::Green);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) {
+        app.GetBrush().setColor(sf::Color::Blue);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)) {
+        app.GetBrush().setColor(sf::Color::Yellow);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num7)) {
+        app.GetBrush().setColor(sf::Color::Magenta);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num8)) {
+        app.GetBrush().setColor(sf::Color::Cyan);
+    }
+
+    // Handling change size of drawing tool
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
+        app.GetBrush().setSize(size::small);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F2)) {
+        app.GetBrush().setSize(size::medium);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F3)) {
+        app.GetBrush().setSize(size::large);
+    }
+
+    // Handling change drawing tools
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Divide)) {
+        app.SetBrush(app.getBrushFactory().createBrush(2));
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Multiply)) {
+        app.SetBrush(app.getBrushFactory().createBrush(1));
+    }
+
+
+    // only for debug and test
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        app.GetBrush().getSize();
+    }
+
+
+
+
+
+
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
         app.setBackgroundColor(new sf::Color(sf::Color::Blue.toInteger()));
     }
@@ -115,6 +172,7 @@ void update(App& app) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
         app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
     }
+
 
     // Stores the previous mouse click position before going to next frame
     app.pmouseX = app.mouseX;

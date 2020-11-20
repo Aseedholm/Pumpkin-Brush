@@ -16,6 +16,8 @@
 #include <queue>
 #include <stack>
 #include "Command.hpp"
+
+#include "BrushFactory.hpp"
 // Project header files
 // #include ...
 
@@ -34,6 +36,11 @@ private:
 	sf::Sprite* m_sprite;
 	// Texture sent to the GPU for rendering
 	sf::Texture* m_texture;
+	// Render texture
+    // The Brush instance which can draw pixels
+	GeneralBrush* m_brush;
+	// Brush factory which can create different types of brushes
+    BrushFactory m_brushFactory;
 
 	sf::Color* m_backgroundColor;
 
@@ -57,6 +64,11 @@ public:
 	App();
 	// void operator=(const App& app);
 // Member functions
+
+
+	GeneralBrush& GetBrush();
+  BrushFactory getBrushFactory();
+	void SetBrush(GeneralBrush* brush);
 	void addCommand(Command* c);
 	void executeCommand(Command* c);
 	void undoCommand();
@@ -64,6 +76,7 @@ public:
 	sf::Image& getImage();
 	sf::Texture& getTexture();
 	sf::RenderWindow& getWindow();
+
 
 	void destroy();
 	void init(void (*initFunction)(void));
