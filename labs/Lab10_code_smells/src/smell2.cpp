@@ -1,17 +1,19 @@
 #include <iostream>
 #include <string>
 
-void get_value(std::string &out_param){
-	 // mutate out_param in some way
-	 // and because it is passed by reference
-	 // we can re-use that value.
+std::string get_value(){
+	//Return the string value we are attempting to retrieve. 
+	//Placeholder value used. 
+	 return "Hello World";
 }
 
 int main(){
 	
-	std::string value;
+	// std::string value;
 	
-	get_value(value);
+	// get_value(value);
+
+	const auto value = get_value();
 	
 	return 0;
 }
