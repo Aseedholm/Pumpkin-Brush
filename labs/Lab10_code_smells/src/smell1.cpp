@@ -2,9 +2,9 @@
 
 int main(){
 	
-	std::string str;
+	const std::string str = "Hello World"; //Corrected. 
 	
-	str = "Hello World";
+	// str = "Hello World";
 	
 	return 0;
 }
