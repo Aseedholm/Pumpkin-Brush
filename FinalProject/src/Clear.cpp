@@ -1,6 +1,6 @@
 /**
  *  @file   Clear.hpp
- *  @brief  Implementation of Command.hpp
+ *  @brief  Implementation of Clear.hpp
  *  @author Mike and ????
  *  @date   yyyy-dd-mm
  ***********************************************/

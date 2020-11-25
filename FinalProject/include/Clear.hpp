@@ -1,6 +1,6 @@
 /**
  *  @file   Clear.cpp
- *  @brief  Draw implementation, all drawing actions are commands.
+ *  @brief  Clear implementation, all clear actions are commands.
  *  @author Mike and ????
  *  @date   yyyy-dd-mm
  ***********************************************/
