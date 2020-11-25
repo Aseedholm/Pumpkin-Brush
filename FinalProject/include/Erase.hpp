@@ -23,8 +23,7 @@ private:
 public:
     bool execute();
     bool undo();
-    Erase(sf::Vector2f coordinate, App* app);
+    Erase(sf::Vector2f coordinate, App* app); // class constructor
 };
-
 
 #endif //APP_ERASE_HPP
