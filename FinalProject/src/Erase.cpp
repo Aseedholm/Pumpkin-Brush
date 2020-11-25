@@ -4,7 +4,6 @@
  *  @author Mike and ????
  *  @date   yyyy-dd-mm
  ***********************************************/
-#include <iostream>
 #include "Erase.hpp"
 #include "App.hpp"
 

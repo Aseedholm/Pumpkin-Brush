@@ -74,8 +74,10 @@ public:
 	void undoCommand();
 	void redoCommand();
 	sf::Image& getImage();
+    void setImage(sf::Image* newImage);
 	sf::Texture& getTexture();
 	sf::RenderWindow& getWindow();
+
 
 
 	void destroy();
