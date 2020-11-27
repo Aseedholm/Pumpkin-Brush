@@ -16,7 +16,7 @@
 #include <queue>
 #include <stack>
 #include "Command.hpp"
-#include "Gui.hpp"
+
 
 #include "BrushFactory.hpp"
 // Project header files
@@ -45,12 +45,14 @@ private:
 
 	sf::Color* m_backgroundColor;
 
+    struct nk_context *ctx;
+
 // Member functions
 	// Default constructor which is hidden in the Singleton
 	// Store the address of our funcion pointer
 	// for each of the callback functions.	
 	void (*m_initFunc)(void);
-	void (*m_updateFunc)(App&, Gui&);
+	void (*m_updateFunc)(App&);
 	void (*m_drawFunc)(App&);
 
 public:
@@ -62,7 +64,7 @@ public:
 	// 'mouse' records where the mouse currently is.
 	unsigned int pmouseX, pmouseY, mouseX, mouseY;
 	sf::RenderWindow* m_window;
-	Gui* m_gui;
+	sf::RenderWindow* m_gui;
 	App();
 	// void operator=(const App& app);
 // Member functions
@@ -84,7 +86,7 @@ public:
 
 	void destroy();
 	void init(void (*initFunction)(void));
-	void updateCallback(void (*updateFunction)(App& app, Gui& gui));
+	void updateCallback(void (*updateFunction)(App& app));
 	void drawCallback(void (*drawFunction)(App& app));
 	void loop(App& app);
 	void setBackgroundColor(sf::Color *colorPassed);

@@ -10,6 +10,24 @@
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+
+ // Include Nuklear Library
+#define NK_INCLUDE_FIXED_TYPES
+#define NK_INCLUDE_STANDARD_IO
+#define NK_INCLUDE_STANDARD_VARARGS
+#define NK_INCLUDE_DEFAULT_ALLOCATOR
+#define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
+#define NK_INCLUDE_FONT_BAKING
+#define NK_INCLUDE_DEFAULT_FONT
+#define NK_IMPLEMENTATION
+#define NK_SFML_GL2_IMPLEMENTATION
+#include "nuklear.h"
+#include "nuklear_sfml_gl2.h"
+
+// Include OpenGL
+#include <SFML/OpenGL.hpp>
+#include "Window.hpp"
+#include <GL/gl.h>
 // Include standard library C++ libraries.
 #include <cassert>
 // Project header files
@@ -56,6 +74,7 @@ void App::addCommand(Command* c) {
 App::App(){
 	std::cout << "Constructor of App called" << std::endl;
 	m_window = nullptr;
+	m_gui = nullptr;
 	m_image = new sf::Image;
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
@@ -183,6 +202,18 @@ void App::init(void (*initFunction)(void)) {
 //	m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
     m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
 	m_window->setVerticalSyncEnabled(true);
+
+	// Create Gui window
+    sf::ContextSettings settings(24, 8, 4, 2, 2);
+    m_gui = new sf::RenderWindow(sf::VideoMode(600,400), "GUI Window",sf::Style::Default,settings);
+
+    m_gui->setVerticalSyncEnabled(true);
+    m_gui->setActive(true);
+
+    glViewport(0, 0, m_gui->getSize().x, m_gui->getSize().y);
+
+    ctx = nk_sfml_init(m_gui);
+
 	// Create an image which stores the pixels we will update
 	m_image->create(600, 400, *m_backgroundColor); //Andrew edit*****
 	assert(m_image != nullptr && "m_image != nullptr");
@@ -201,7 +232,7 @@ void App::init(void (*initFunction)(void)) {
 		each iteration of the main loop before drawing.
 *
 */
-void App::updateCallback(void (*updateFunction)(App&, Gui&)) {
+void App::updateCallback(void (*updateFunction)(App&)) {
 	m_updateFunc = updateFunction;
 }
 
