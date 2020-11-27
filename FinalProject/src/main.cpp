@@ -46,7 +46,7 @@ void initialization(void) {
 *		if for example we want to add in an event loop.
 *
 */
-void update(App& app) {
+void update(App& app, Gui& gui) {
 	// Update our canvas
 	sf::Event event;
 	while (app.m_window->pollEvent(event)) {

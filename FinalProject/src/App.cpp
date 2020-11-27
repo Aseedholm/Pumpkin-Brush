@@ -201,7 +201,7 @@ void App::init(void (*initFunction)(void)) {
 		each iteration of the main loop before drawing.
 *
 */
-void App::updateCallback(void (*updateFunction)(App&)) {
+void App::updateCallback(void (*updateFunction)(App&, Gui&)) {
 	m_updateFunc = updateFunction;
 }
 
