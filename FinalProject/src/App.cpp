@@ -14,7 +14,7 @@
 // Include OpenGL
 #include <SFML/OpenGL.hpp>
 
- // Include Nuklear Library
+// Include Nuklear Library
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_STANDARD_VARARGS
@@ -24,6 +24,7 @@
 #define NK_INCLUDE_DEFAULT_FONT
 #define NK_IMPLEMENTATION
 #define NK_SFML_GL2_IMPLEMENTATION
+
 #include "nuklear.h"
 #include "nuklear_sfml_gl2.h"
 
@@ -77,7 +78,7 @@ void App::addCommand(Command* c) {
 App::App(){
 	std::cout << "Constructor of App called" << std::endl;
 	m_window = nullptr;
-	m_gui = nullptr;
+    m_guiWindow = nullptr;
 	m_image = new sf::Image;
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
@@ -208,14 +209,14 @@ void App::init(void (*initFunction)(void)) {
 
 	// Create Gui window
     sf::ContextSettings settings(24, 8, 4, 2, 2);
-    m_gui = new sf::RenderWindow(sf::VideoMode(600,400), "GUI Window",sf::Style::Default,settings);
+    m_guiWindow = new sf::RenderWindow(sf::VideoMode(600, 400), "GUI Window", sf::Style::Default, settings);
 
-    m_gui->setVerticalSyncEnabled(true);
-    m_gui->setActive(true);
+    m_guiWindow->setVerticalSyncEnabled(true);
+    m_guiWindow->setActive(true);
 
-    glViewport(0, 0, m_gui->getSize().x, m_gui->getSize().y);
+    glViewport(0, 0, m_guiWindow->getSize().x, m_guiWindow->getSize().y);
 
-    ctx = nk_sfml_init(m_gui);
+    ctx = nk_sfml_init(m_guiWindow);
 
 
     // Load fonts of GUI
@@ -278,12 +279,12 @@ void App::loop(App& app) {
 		// Note: This can be done in the 'draw call'
 		// Draw to the canvas
 
-        m_gui->setActive(true);
-        m_gui->clear();
+        m_guiWindow->setActive(true);
+        m_guiWindow->clear();
 
         nk_sfml_render(NK_ANTI_ALIASING_ON);
 
-        m_gui->display();
+        m_guiWindow->display();
 
 		
 		if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 
@@ -322,6 +323,7 @@ void App::drawGUI(struct nk_context *ctx) {
         nk_layout_row_dynamic(ctx, 30, 2);
         if (nk_option_label(ctx, "red", op == RED)){
             op = RED;
+            this->GetBrush().setColor(sf::Color::Red);
         }
         if (nk_option_label(ctx, "black", op == BLACK)){
             op = BLACK;

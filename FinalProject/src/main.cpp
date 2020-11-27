@@ -20,6 +20,8 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 // Include standard library C++ libraries.
+
+
 #include <iostream>
 #include <string>
 // Project header files
@@ -61,6 +63,12 @@ void update(App& app) {
             app.addCommand(command);
         }
 	}
+
+    nk_input_begin(app.ctx);
+	while(app.m_guiWindow->pollEvent(event)) {
+
+	}
+    nk_input_end(app.ctx);
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			sf::Vector2i coordinate = sf::Mouse::getPosition(app.getWindow());
@@ -171,6 +179,8 @@ void update(App& app) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
         app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
     }
+
+
 
 
     // Stores the previous mouse click position before going to next frame

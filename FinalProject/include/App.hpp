@@ -7,15 +7,25 @@
 #ifndef APP_HPP 
 #define APP_HPP
 
+
+
 // Include our Third-Party SFML header
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+
+
+
+
+
+
 // Include standard library C++ libraries.
 #include <queue>
 #include <stack>
 #include "Command.hpp"
+
+
 
 
 #include "BrushFactory.hpp"
@@ -45,7 +55,7 @@ private:
 
 	sf::Color* m_backgroundColor;
 
-    struct nk_context *ctx;
+
 
 // Member functions
 	// Default constructor which is hidden in the Singleton
@@ -68,7 +78,7 @@ public:
 	// 'mouse' records where the mouse currently is.
 	unsigned int pmouseX, pmouseY, mouseX, mouseY;
 	sf::RenderWindow* m_window;
-	sf::RenderWindow* m_gui;
+	sf::RenderWindow* m_guiWindow;
 	App();
 	// void operator=(const App& app);
 // Member functions
@@ -96,6 +106,7 @@ public:
 	void setBackgroundColor(sf::Color *colorPassed);
 	sf::Color& getBackgroundColor();
     void drawGUI(struct nk_context* ctx);
+    struct nk_context *ctx;
 };
 
 
