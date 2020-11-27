@@ -15,17 +15,13 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-
-
-
+// Include OpenGL
 
 
 // Include standard library C++ libraries.
 #include <queue>
 #include <stack>
 #include "Command.hpp"
-
-
 
 
 #include "BrushFactory.hpp"
@@ -107,6 +103,10 @@ public:
 	sf::Color& getBackgroundColor();
     void drawGUI(struct nk_context* ctx);
     struct nk_context *ctx;
+   void nk_input_begin_wrapper();
+   void nk_input_end_wrapper();
+   void nk_shutdown_wrapper();
+    void nk_handle_event_wrapper(sf::Event event);
 };
 
 

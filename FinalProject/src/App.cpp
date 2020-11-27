@@ -11,10 +11,6 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-// Include OpenGL
-#include <SFML/OpenGL.hpp>
-
-// Include Nuklear Library
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_STANDARD_VARARGS
@@ -24,10 +20,9 @@
 #define NK_INCLUDE_DEFAULT_FONT
 #define NK_IMPLEMENTATION
 #define NK_SFML_GL2_IMPLEMENTATION
-
+#include <SFML/OpenGL.hpp>
 #include "nuklear.h"
 #include "nuklear_sfml_gl2.h"
-
 
 
 
@@ -336,5 +331,21 @@ void App::drawGUI(struct nk_context *ctx) {
         }
     }
     nk_end(ctx);
+}
+
+void App::nk_input_begin_wrapper(){
+    nk_input_begin(ctx);
+}
+
+void App::nk_input_end_wrapper() {
+    nk_input_end(ctx);
+}
+
+void App::nk_shutdown_wrapper() {
+    nk_sfml_shutdown();
+}
+
+void App::nk_handle_event_wrapper(sf::Event event) {
+    nk_sfml_handle_event(&event);
 }
 
