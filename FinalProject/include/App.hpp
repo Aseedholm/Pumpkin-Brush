@@ -55,6 +55,10 @@ private:
 	void (*m_updateFunc)(App&);
 	void (*m_drawFunc)(App&);
 
+	// Member variable of GUI
+    enum {RED, BLACK,GREEN, BLUE};
+    int op = RED;
+
 public:
 	
 	
@@ -91,6 +95,7 @@ public:
 	void loop(App& app);
 	void setBackgroundColor(sf::Color *colorPassed);
 	sf::Color& getBackgroundColor();
+    void drawGUI(struct nk_context* ctx);
 };
 
 

@@ -11,6 +11,9 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
+// Include OpenGL
+#include <SFML/OpenGL.hpp>
+
  // Include Nuklear Library
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
@@ -24,10 +27,10 @@
 #include "nuklear.h"
 #include "nuklear_sfml_gl2.h"
 
-// Include OpenGL
-#include <SFML/OpenGL.hpp>
-#include "Window.hpp"
-#include <GL/gl.h>
+
+
+
+
 // Include standard library C++ libraries.
 #include <cassert>
 // Project header files
@@ -214,6 +217,12 @@ void App::init(void (*initFunction)(void)) {
 
     ctx = nk_sfml_init(m_gui);
 
+
+    // Load fonts of GUI
+    struct nk_font_atlas *atlas;
+    nk_sfml_font_stash_begin(&atlas);
+    nk_sfml_font_stash_end();
+
 	// Create an image which stores the pixels we will update
 	m_image->create(600, 400, *m_backgroundColor); //Andrew edit*****
 	assert(m_image != nullptr && "m_image != nullptr");
@@ -263,9 +272,18 @@ void App::loop(App& app) {
 		m_updateFunc(app);
 		// Additional drawing specified by user
 		m_drawFunc(app);
+
+		drawGUI(ctx);
 		// Update the texture
 		// Note: This can be done in the 'draw call'
 		// Draw to the canvas
+
+        m_gui->setActive(true);
+        m_gui->clear();
+
+        nk_sfml_render(NK_ANTI_ALIASING_ON);
+
+        m_gui->display();
 
 		
 		if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 
@@ -275,6 +293,8 @@ void App::loop(App& app) {
 		m_window->draw(*m_sprite);
 		// Display the canvas
 		m_window->display();
+
+
 	}
 }
 
@@ -285,4 +305,34 @@ void App::setBackgroundColor(sf::Color *colorPassed) { //Andrew edit*****
 	m_backgroundColor = colorPassed;
 }
 
+
+
+/*! \brief Draw the layout of gui
+ *
+ */
+void App::drawGUI(struct nk_context *ctx) {
+    if (nk_begin(ctx, "Demo", nk_rect(50, 50, 230, 250),
+                 NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
+                 NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE)) {
+        static int property = 20;
+        //nk_layout_row_static(ctx, 30, 80, 1);
+        //if (nk_button_label(ctx, "button"))
+        //    fprintf(stdout, "button pressed\n");
+
+        nk_layout_row_dynamic(ctx, 30, 2);
+        if (nk_option_label(ctx, "red", op == RED)){
+            op = RED;
+        }
+        if (nk_option_label(ctx, "black", op == BLACK)){
+            op = BLACK;
+        }
+        if (nk_option_label(ctx, "green", op == GREEN)){
+            op = GREEN;
+        }
+        if (nk_option_label(ctx, "blue", op == BLUE)) {
+            op = BLUE;
+        }
+    }
+    nk_end(ctx);
+}
 
