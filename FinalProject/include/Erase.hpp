@@ -28,5 +28,4 @@ public:
     Erase(sf::Vector2f coordinate, App* app);
 };
 
-
 #endif //APP_ERASE_HPP
