@@ -124,14 +124,14 @@ BrushFactory App::getBrushFactory() {
  *
  *
  */
-GeneralBrush& App::GetBrush() {
+GeneralBrush& App::getBrush() {
     return *m_brush;
 }
 
 /*! \brief Set the current brush
  *
  */
-void App::SetBrush(GeneralBrush* brush) {
+void App::setBrush(GeneralBrush* brush) {
     m_brush = brush;
 }
 

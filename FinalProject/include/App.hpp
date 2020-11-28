@@ -30,6 +30,8 @@
 // #include ...
 
 // Singleton for our Application called 'App'.
+class Gui;
+
 class App{
 private:
 // Member variables

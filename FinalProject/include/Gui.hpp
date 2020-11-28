@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "App.hpp"
 
+class App;
 
 class Gui {
 private:
@@ -19,7 +20,7 @@ public:
     void initGui();
 
 
-    void drawGUI(App& app);
+    void drawGUI(App&);
     struct nk_context *ctx;
     void nk_input_begin_wrapper();
     void nk_input_end_wrapper();
