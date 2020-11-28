@@ -16,14 +16,16 @@
 class Erase : public Command {
 private:
     sf::Vector2f m_coordinate;
-    sf::Color m_originalColor;
     sf::Color m_backgroundColor;
+    std::vector<std::vector<int>> m_shader;
+    std::vector<sf::Color> m_originalColors;
     App* m_app;
 
 public:
     bool execute();
     bool undo();
-    Erase(sf::Vector2f coordinate, App* app); // class constructor
+    void setOriginalColor();
+    Erase(sf::Vector2f coordinate, App* app);
 };
 
 #endif //APP_ERASE_HPP
