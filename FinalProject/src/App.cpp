@@ -221,7 +221,7 @@ void App::loop(App& app) {
 		m_drawFunc(app);
 
 		// Update Gui window
-		m_gui->drawGUI(*m_brush);
+		m_gui->drawGUI(*this);
         m_gui->getWindow().setActive(true);
         m_gui->getWindow().clear();
         m_gui->nk_sfml_render_wrapper();

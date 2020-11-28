@@ -79,9 +79,9 @@ public:
 // Member functions
 
 
-	GeneralBrush& GetBrush();
+	GeneralBrush& getBrush();
   BrushFactory getBrushFactory();
-	void SetBrush(GeneralBrush* brush);
+	void setBrush(GeneralBrush* brush);
 	void addCommand(Command* c);
 	void executeCommand(Command* c);
 	void undoCommand();

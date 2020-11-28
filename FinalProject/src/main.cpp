@@ -141,53 +141,53 @@ void update(App& app) {
 
     // Handling change color event
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
-        app.GetBrush().setColor(sf::Color::Black);
+        app.getBrush().setColor(sf::Color::Black);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
-        app.GetBrush().setColor(sf::Color::White);
+        app.getBrush().setColor(sf::Color::White);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) {
-        app.GetBrush().setColor(sf::Color::Red);
+        app.getBrush().setColor(sf::Color::Red);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) {
-        app.GetBrush().setColor(sf::Color::Green);
+        app.getBrush().setColor(sf::Color::Green);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) {
-        app.GetBrush().setColor(sf::Color::Blue);
+        app.getBrush().setColor(sf::Color::Blue);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)) {
-        app.GetBrush().setColor(sf::Color::Yellow);
+        app.getBrush().setColor(sf::Color::Yellow);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num7)) {
-        app.GetBrush().setColor(sf::Color::Magenta);
+        app.getBrush().setColor(sf::Color::Magenta);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num8)) {
-        app.GetBrush().setColor(sf::Color::Cyan);
+        app.getBrush().setColor(sf::Color::Cyan);
     }
 
     // Handling change size of drawing tool
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
-        app.GetBrush().setSize(size::small);
+        app.getBrush().setSize(size::small);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::F2)) {
-        app.GetBrush().setSize(size::medium);
+        app.getBrush().setSize(size::medium);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::F3)) {
-        app.GetBrush().setSize(size::large);
+        app.getBrush().setSize(size::large);
     }
 
     // Handling change drawing tools
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Divide)) {
-        app.SetBrush(app.getBrushFactory().createBrush(2));
+        app.setBrush(app.getBrushFactory().createBrush(2));
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Multiply)) {
-        app.SetBrush(app.getBrushFactory().createBrush(1));
+        app.setBrush(app.getBrushFactory().createBrush(1));
     }
 
 
     // only for debug and test
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        app.GetBrush().getSize();
+        app.getBrush().getSize();
     }
 
 

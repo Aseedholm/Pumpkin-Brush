@@ -1,5 +1,6 @@
 #include "Gui.hpp"
 
+
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_STANDARD_VARARGS
@@ -27,7 +28,7 @@ Gui::~Gui() {
 /*! \brief
  *
  */
- void Gui::drawGUI(GeneralBrush& m_brush) {
+ void Gui::drawGUI(App& app) {
     if (nk_begin(ctx, "Gui", nk_rect(50, 50, 230, 250),
                  NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
                  NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE)) {
@@ -36,22 +37,40 @@ Gui::~Gui() {
         //if (nk_button_label(ctx, "button"))
         //    fprintf(stdout, "button pressed\n");
 
+
+
         nk_layout_row_dynamic(ctx, 30, 2);
         if (nk_option_label(ctx, "red", op == RED)){
             op = RED;
-            m_brush.setColor(sf::Color::Red);
+            app.getBrush().setColor(sf::Color::Red);
         }
         if (nk_option_label(ctx, "black", op == BLACK)){
             op = BLACK;
-            m_brush.setColor(sf::Color::Black);
+            app.getBrush().setColor(sf::Color::Black);
         }
         if (nk_option_label(ctx, "green", op == GREEN)){
             op = GREEN;
-            m_brush.setColor(sf::Color::Green);
+            app.getBrush().setColor(sf::Color::Green);
         }
         if (nk_option_label(ctx, "blue", op == BLUE)) {
             op = BLUE;
-            m_brush.setColor(sf::Color::Blue);
+            app.getBrush().setColor(sf::Color::Blue);
+        }
+        if (nk_option_label(ctx, "white", op == WHITE)) {
+            op = WHITE;
+            app.getBrush().setColor(sf::Color::White);
+        }
+        if (nk_option_label(ctx, "yellow", op == YELLOW)) {
+            op = YELLOW;
+            app.getBrush().setColor(sf::Color::Yellow);
+        }
+        if (nk_option_label(ctx, "magenta", op == MAGENTA)) {
+            op = MAGENTA;
+            app.getBrush().setColor(sf::Color::Magenta);
+        }
+        if (nk_option_label(ctx, "cyan", op == CYAN)) {
+            op = CYAN;
+            app.getBrush().setColor(sf::Color::Cyan);
         }
     }
     nk_end(ctx);

@@ -2,14 +2,13 @@
 #define GUI_HPP
 
 #include <SFML/Graphics.hpp>
-#include "GeneralBrush.hpp"
-
+#include "App.hpp"
 
 
 class Gui {
 private:
-    enum {RED, BLACK,GREEN, BLUE};
-    int op = RED;
+    enum {RED, BLACK, GREEN, BLUE, WHITE, YELLOW, MAGENTA, CYAN};
+    int op = BLACK;
     sf::RenderWindow* m_guiWindow;
 
 public:
@@ -20,7 +19,7 @@ public:
     void initGui();
 
 
-    void drawGUI(GeneralBrush& m_brush);
+    void drawGUI(App& app);
     struct nk_context *ctx;
     void nk_input_begin_wrapper();
     void nk_input_end_wrapper();
