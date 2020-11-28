@@ -19,14 +19,17 @@
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Network.hpp>
 // Include standard library C++ libraries.
 #include <iostream>
 #include <string>
 // Project header files
+#include "Data.hpp"
 #include "App.hpp"
 #include "Command.hpp"
 #include "Draw.hpp"
 #include "Erase.hpp"
+
 
 
 /*! \brief 	Call any initailization functions here.
@@ -204,6 +207,12 @@ void draw(App& app) {
 *
 */
 int main() {
+    //Testing data class. 
+    std::string stringToPass = "Erase";
+    // Data data1;
+    Data data1(1, 1, 5555555, stringToPass, 5, 5);
+    data1.printData();
+    //Testing data class. 
 
 	App app;
 	// Call any setup function

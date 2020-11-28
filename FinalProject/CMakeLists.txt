@@ -1,7 +1,7 @@
 ####################################################
 # CMake is a build file generator.
 # It does not compile your software, but
-# rather uses the CMake Language to 
+# rather uses the CMake Language to
 # figure out how to generate another file
 # for which you can then use to build projects.
 # CMake is a specification language for build tools.
@@ -32,7 +32,7 @@
 ####################################################
 
 ####################################################
-# Writing a CMake file involves writing one 
+# Writing a CMake file involves writing one
 # cmake command per line.
 
 # The minimum required version of CMake to use
@@ -69,7 +69,7 @@ link_directories("/usr/local/lib/")
 # Here is an example below adding multiple files
 
 add_executable(App src/App.cpp src/Draw.cpp src/Command.cpp src/main.cpp
-                   src/BrushFactory.cpp src/Brush.cpp src/Pen.cpp src/Erase.cpp) # example with more files
+                   src/BrushFactory.cpp src/Brush.cpp src/Pen.cpp src/Erase.cpp src/Data.cpp) # example with more files
 
 #add_executable(App_Test src/App.cpp src/Command.cpp src/Draw.cpp tests/main_test.cpp)
 
@@ -79,5 +79,5 @@ add_executable(App src/App.cpp src/Draw.cpp src/Command.cpp src/main.cpp
 # 	sudo apt install apt-file
 #   	sudo apt-file update
 # 	apt-file find Texture.hpp
-target_link_libraries(App sfml-graphics sfml-window sfml-system)
+target_link_libraries(App sfml-graphics sfml-window sfml-system sfml-network)
 #target_link_libraries(App_Test sfml-graphics sfml-window sfml-system)

@@ -1,16 +1,29 @@
-#include "include/Data.hpp"
+#include "Data.hpp"
 
+// Data::Data() {
+//     pixelX = -1;
+//     pixelY = -1;
+//     colorAsInteger = -1000;
+//     commandDescription = "Null";
+//     windowX = -1;
+//     windowY = -1; 
+// }
 
-Data::Data(int pixelXPassed, int pixelYPassed, unsigned long colorAsIntegerPassed, 
+// Data::Data(int pixelXPassed, int pixelYPassed, int colorAsIntegerPassed, int windowXPassed, int windowYPassed) 
+//     : pixelX(pixelXPassed), pixelY(pixelYPassed), colorAsInteger(colorAsIntegerPassed), windowX(windowXPassed), windowY(windowYPassed) {
+//         commandDescription = "seomething";
+//     }
+
+Data::Data(int pixelXPassed, int pixelYPassed, int colorAsIntegerPassed, 
     std::string commandDescriptionPassed, int windowXPassed, int windowYPassed) 
     : pixelX(pixelXPassed), pixelY(pixelYPassed), colorAsInteger(colorAsIntegerPassed), 
     commandDescription(commandDescriptionPassed), windowX(windowXPassed), windowY(windowYPassed) {
 
     }
 
-Data::~Data() {
+// Data::~Data() {
    
-}
+// }
 
 void Data::setPixelX(int pixelXPassed) {
     pixelX = pixelXPassed;
@@ -20,7 +33,7 @@ void Data::setPixelY(int pixelYPassed) {
     pixelY = pixelYPassed;
 }
 
-void Data::setColorAsInteger(unsigned long colorAsIntegerPassed) {
+void Data::setColorAsInteger(int colorAsIntegerPassed) {
     colorAsInteger = colorAsIntegerPassed;
 }
 
@@ -32,7 +45,7 @@ void Data::setWindowX(int windowXPassed) {
     windowX = windowXPassed;
 }
 
-void Data::setPixelX(int windowYPassed) {
+void Data::setWindowY(int windowYPassed) {
     windowY = windowYPassed;
 }
 
@@ -44,7 +57,7 @@ int Data::getPixelY() {
     return pixelY;
 }
 
-unsigned long Data::getColorAsInteger() {
+int Data::getColorAsInteger() {
     return colorAsInteger;
 }
 
@@ -58,4 +71,9 @@ int Data::getWindowX() {
 
 int Data::getWindowY() {
     return windowY;
+}
+
+void Data::printData() {
+    std::cout << "X pixel passed: " << pixelX << "\nY pixel passed: " << pixelY << "\nColor as integer: " << colorAsInteger <<
+                "\nCommand Description Passed: " << commandDescription << "\nWindow X Passed: " << windowX << "\nWindow Y Passed: " << windowY << std::endl;
 }
