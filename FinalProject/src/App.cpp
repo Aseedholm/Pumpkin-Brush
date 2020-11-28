@@ -11,20 +11,6 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-#define NK_INCLUDE_FIXED_TYPES
-#define NK_INCLUDE_STANDARD_IO
-#define NK_INCLUDE_STANDARD_VARARGS
-#define NK_INCLUDE_DEFAULT_ALLOCATOR
-#define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
-#define NK_INCLUDE_FONT_BAKING
-#define NK_INCLUDE_DEFAULT_FONT
-#define NK_IMPLEMENTATION
-#define NK_SFML_GL2_IMPLEMENTATION
-#include <SFML/OpenGL.hpp>
-#include "nuklear.h"
-#include "nuklear_sfml_gl2.h"
-
-
 
 
 // Include standard library C++ libraries.
@@ -34,27 +20,6 @@
 
 
 #include<iostream>
-
-// All static members of a Singleton need to initialized to some value.
-// This is so that when the program is compiled, memory is reserved
-// for each of these static values.
-// Potentially handy data structures for building an undo system.
-// std::stack<Command*> App::m_redo;
-// std::stack<Command*> App::m_undo;
-// // Function pointers
-// void (*App::m_initFunc)(void) = nullptr;
-// void (*App::m_updateFunc)(void) = nullptr;
-// void (*App::m_drawFunc)(void) = nullptr;
-// // Mouse variables
-// unsigned int App::pmouseX = 0;
-// unsigned int App::pmouseY = 0;
-// unsigned int App::mouseX = 0;
-// unsigned int App::mouseY = 0;
-// // Canvas variables
-// sf::RenderWindow* App::m_window = nullptr;
-// sf::Image* App::m_image = new sf::Image;
-// sf::Sprite* App::m_sprite = new sf::Sprite;
-// sf::Texture* App::m_texture = new sf::Texture;
 
 
 /*! \brief Add command that adds the pixel position in stack
@@ -73,7 +38,6 @@ void App::addCommand(Command* c) {
 App::App(){
 	std::cout << "Constructor of App called" << std::endl;
 	m_window = nullptr;
-    m_guiWindow = nullptr;
 	m_image = new sf::Image;
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
@@ -202,22 +166,9 @@ void App::init(void (*initFunction)(void)) {
     m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
 	m_window->setVerticalSyncEnabled(true);
 
-	// Create Gui window
-    sf::ContextSettings settings(24, 8, 4, 2, 2);
-    m_guiWindow = new sf::RenderWindow(sf::VideoMode(600, 400), "GUI Window", sf::Style::Default, settings);
+    // Create gui instance
+    m_gui = new Gui();
 
-    m_guiWindow->setVerticalSyncEnabled(true);
-    m_guiWindow->setActive(true);
-
-    glViewport(0, 0, m_guiWindow->getSize().x, m_guiWindow->getSize().y);
-
-    ctx = nk_sfml_init(m_guiWindow);
-
-
-    // Load fonts of GUI
-    struct nk_font_atlas *atlas;
-    nk_sfml_font_stash_begin(&atlas);
-    nk_sfml_font_stash_end();
 
 	// Create an image which stores the pixels we will update
 	m_image->create(600, 400, *m_backgroundColor); //Andrew edit*****
@@ -269,18 +220,16 @@ void App::loop(App& app) {
 		// Additional drawing specified by user
 		m_drawFunc(app);
 
-		drawGUI(ctx);
-		// Update the texture
-		// Note: This can be done in the 'draw call'
-		// Draw to the canvas
+		// Update Gui window
+		m_gui->drawGUI(*m_brush);
+        m_gui->getWindow().setActive(true);
+        m_gui->getWindow().clear();
+        m_gui->nk_sfml_render_wrapper();
+        m_gui->getWindow().display();
 
-        m_guiWindow->setActive(true);
-        m_guiWindow->clear();
-
-        nk_sfml_render(NK_ANTI_ALIASING_ON);
-
-        m_guiWindow->display();
-
+        // Update the texture
+        // Note: This can be done in the 'draw call'
+        // Draw to the canvas
 		
 		if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 
 			m_sprite->setColor(*m_backgroundColor);
@@ -306,46 +255,46 @@ void App::setBackgroundColor(sf::Color *colorPassed) { //Andrew edit*****
 /*! \brief Draw the layout of gui
  *
  */
-void App::drawGUI(struct nk_context *ctx) {
-    if (nk_begin(ctx, "Demo", nk_rect(50, 50, 230, 250),
-                 NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
-                 NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE)) {
-        static int property = 20;
-        //nk_layout_row_static(ctx, 30, 80, 1);
-        //if (nk_button_label(ctx, "button"))
-        //    fprintf(stdout, "button pressed\n");
+//void App::drawGUI(struct nk_context *ctx) {
+//    if (nk_begin(ctx, "Demo", nk_rect(50, 50, 230, 250),
+//                 NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
+//                 NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE)) {
+//        static int property = 20;
+//        //nk_layout_row_static(ctx, 30, 80, 1);
+//        //if (nk_button_label(ctx, "button"))
+//        //    fprintf(stdout, "button pressed\n");
+//
+//        nk_layout_row_dynamic(ctx, 30, 2);
+//        if (nk_option_label(ctx, "red", op == RED)){
+//            op = RED;
+//            this->GetBrush().setColor(sf::Color::Red);
+//        }
+//        if (nk_option_label(ctx, "black", op == BLACK)){
+//            op = BLACK;
+//        }
+//        if (nk_option_label(ctx, "green", op == GREEN)){
+//            op = GREEN;
+//        }
+//        if (nk_option_label(ctx, "blue", op == BLUE)) {
+//            op = BLUE;
+//        }
+//    }
+//    nk_end(ctx);
+//}
 
-        nk_layout_row_dynamic(ctx, 30, 2);
-        if (nk_option_label(ctx, "red", op == RED)){
-            op = RED;
-            this->GetBrush().setColor(sf::Color::Red);
-        }
-        if (nk_option_label(ctx, "black", op == BLACK)){
-            op = BLACK;
-        }
-        if (nk_option_label(ctx, "green", op == GREEN)){
-            op = GREEN;
-        }
-        if (nk_option_label(ctx, "blue", op == BLUE)) {
-            op = BLUE;
-        }
-    }
-    nk_end(ctx);
-}
-
-void App::nk_input_begin_wrapper(){
-    nk_input_begin(ctx);
-}
-
-void App::nk_input_end_wrapper() {
-    nk_input_end(ctx);
-}
-
-void App::nk_shutdown_wrapper() {
-    nk_sfml_shutdown();
-}
-
-void App::nk_handle_event_wrapper(sf::Event event) {
-    nk_sfml_handle_event(&event);
-}
+//void App::nk_input_begin_wrapper(){
+//    nk_input_begin(ctx);
+//}
+//
+//void App::nk_input_end_wrapper() {
+//    nk_input_end(ctx);
+//}
+//
+//void App::nk_shutdown_wrapper() {
+//    nk_sfml_shutdown();
+//}
+//
+//void App::nk_handle_event_wrapper(sf::Event event) {
+//    nk_sfml_handle_event(&event);
+//}
 

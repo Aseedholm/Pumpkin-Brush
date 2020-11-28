@@ -25,6 +25,7 @@
 
 
 #include "BrushFactory.hpp"
+#include "Gui.hpp"
 // Project header files
 // #include ...
 
@@ -61,9 +62,6 @@ private:
 	void (*m_updateFunc)(App&);
 	void (*m_drawFunc)(App&);
 
-	// Member variable of GUI
-    enum {RED, BLACK,GREEN, BLUE};
-    int op = RED;
 
 public:
 	
@@ -74,7 +72,8 @@ public:
 	// 'mouse' records where the mouse currently is.
 	unsigned int pmouseX, pmouseY, mouseX, mouseY;
 	sf::RenderWindow* m_window;
-	sf::RenderWindow* m_guiWindow;
+	Gui* m_gui;
+
 	App();
 	// void operator=(const App& app);
 // Member functions
@@ -101,12 +100,8 @@ public:
 	void loop(App& app);
 	void setBackgroundColor(sf::Color *colorPassed);
 	sf::Color& getBackgroundColor();
-    void drawGUI(struct nk_context* ctx);
-    struct nk_context *ctx;
-   void nk_input_begin_wrapper();
-   void nk_input_end_wrapper();
-   void nk_shutdown_wrapper();
-    void nk_handle_event_wrapper(sf::Event event);
+
+
 };
 
 

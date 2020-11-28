@@ -66,15 +66,16 @@ void update(App& app) {
         }
 	}
 
-    app.nk_input_begin_wrapper();
-	while(app.m_guiWindow->pollEvent(event)) {
+  
+    app.m_gui->nk_input_begin_wrapper();
+    while(app.m_gui->getWindow().pollEvent(event)) {
         // Our close event.
         // Note: We only have a 'minimize' button
         //       in our window right now, so this event is not
         //       going to fire.
         if(event.type == sf::Event::Closed){
-            app.nk_shutdown_wrapper();
-            app.m_guiWindow->close();
+            app.m_gui->nk_shutdown_wrapper();
+            app.m_gui->getWindow().close();
             exit(EXIT_SUCCESS);
         }
 
@@ -83,18 +84,18 @@ void update(App& app) {
             std::cout << "Key Pressed" << std::endl;
             // Check if the escape key is pressed.
             if(event.key.code == sf::Keyboard::Escape){
-                app.nk_shutdown_wrapper();
-                app.m_guiWindow->close();
+                app.m_gui->nk_shutdown_wrapper();
+                app.m_gui->getWindow().close();
                 exit(EXIT_SUCCESS);
             }
         }
         //else if(event.type == sf::Event::Resized){
         //    glViewport(0, 0, event.size.width, event.size.height);
         //}
-        app.nk_handle_event_wrapper(event);
+        app.m_gui->nk_handle_event_wrapper(event);
 
-	}
-    app.nk_input_end_wrapper();
+    }
+    app.m_gui->nk_input_end_wrapper();
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			sf::Vector2i coordinate = sf::Mouse::getPosition(app.getWindow());
