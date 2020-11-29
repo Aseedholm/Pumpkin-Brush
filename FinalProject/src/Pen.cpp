@@ -53,8 +53,14 @@ std::vector<std::vector<int>> Pen::getShader() {
     }
 }
 
-void Pen::getSize() {
+int Pen::getSize() {
+    switch(m_size) {
+        case small: return 0;
 
+        case medium: return 1;
+
+        case large: return 2;
+    }
 }
 
 void Pen::setSize(size size) {
@@ -63,4 +69,8 @@ void Pen::setSize(size size) {
 
 void Pen::setColor(sf::Color color) {
     m_color = color;
+}
+
+int Pen::getType() {
+    return 1;
 }

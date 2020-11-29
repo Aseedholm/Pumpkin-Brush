@@ -21,8 +21,9 @@ public:
     sf::Color getColor() override;
     void setColor(sf::Color color) override;
     void setSize(size size) override;
-    void getSize() override;
+    int getSize() override;
     std::vector<std::vector<int>> getShader() override;
+    int getType() override; 
 };
 
 #endif

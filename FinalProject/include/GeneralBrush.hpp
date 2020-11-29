@@ -19,8 +19,9 @@ public:
     virtual sf::Color getColor(){};
     virtual void setColor(sf::Color){};
     virtual void setSize(size){};
-    virtual void getSize(){};
+    virtual int getSize(){};
     virtual std::vector<std::vector<int>> getShader(){};
+    virtual int getType(){};
 
 };
 

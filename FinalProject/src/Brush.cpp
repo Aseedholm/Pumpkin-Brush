@@ -39,9 +39,16 @@ void Brush::setSize(size size) {
 }
 
 
-void Brush::getSize() {
-    std::cout<<m_size<<std::endl;
+int Brush::getSize() {
+    switch(m_size) {
+        case small: return 0;
+
+        case medium: return 1;
+
+        case large: return 2;
+    }
 }
+
 
 std::vector<std::vector<int>> Brush::getShader(){
     switch(m_size) {
@@ -52,5 +59,9 @@ std::vector<std::vector<int>> Brush::getShader(){
         case large: return m_shaders[2];
     }
 
+}
+
+int Brush::getType() {
+    return 0;
 }
 

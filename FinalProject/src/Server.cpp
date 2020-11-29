@@ -2,6 +2,10 @@
 #include <string.h> // memset
 #include "Data.hpp"
 
+struct dataStored {
+
+};
+
 int main() {
     sf::Packet packet;
     sf::TcpSocket serverSocket;
@@ -33,13 +37,26 @@ int main() {
     serverSocket.receive(buffer, sizeof(buffer), received);
     // double xToPass = 0;
     // double yToPass = 0;
-    sf::Uint32 xToPass = 0;
-    sf::Uint32 yToPass = 0;
-    std::string commandToPass;
+    // sf::Uint32 xToPass = 0;
+    // sf::Uint32 yToPass = 0;
+    // std::string commandToPass;
+
+
+    ///
+            sf::Uint32 xToPass = 0;
+            sf::Uint32 yToPass = 0;
+            std::string commandToPass;
+            sf::Uint32 colorOfModificationToPass = 0;
+            sf::Uint32 canvasColorToPass = 0;
+            sf::Uint32 sizeOfModification = 0; //flag to send to server that'll be sent to other clients to determine GeneralBrush enum size. 
+            sf::Uint32 brushTypeModification = 0; //flag to send to server that'll be sent to other clients to determine if it is a Pen or Brush being used to draw. 
+            sf::Uint32 windowXToPass = 0;
+            sf::Uint32 windowYToPass = 0;
+    ////
     while(true){
         serverSocket.receive(packet);
-        if (packet >> xToPass >> yToPass >> commandToPass ) {
-            std::cout << "Server> Received PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: " << commandToPass << std::endl;
+        if (packet >> xToPass >> yToPass >> commandToPass >> colorOfModificationToPass >> canvasColorToPass >> sizeOfModification >> brushTypeModification >> windowXToPass >> windowYToPass) {
+            std::cout << "Server> Received PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: " << commandToPass << "\nColor: " << colorOfModificationToPass << "\nCanvas Color: " << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: " << windowXToPass << "\nWindow Y: " << windowYToPass <<std::endl;
             packet.clear();
         }
         //buffer that will contain datat

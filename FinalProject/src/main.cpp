@@ -70,12 +70,28 @@ void update(App& app) {
 			sf::Vector2i coordinate = sf::Mouse::getPosition(app.getWindow());
 
 			sf::Vector2f currentXYCoordinates = app.m_window->mapPixelToCoords(coordinate); //andrew edit ****
-            // double xToPass = 0.0;
-            // double yToPass = 0.0;
+
+
+            //Need to send x, y location for pixel modification, 
+            //command being done, 
+            //brush color at time of modification, 
+            //canvas color at time of modifcation,
+            //brush size at time of mdofication, 
+            //brush type (pen or brush) at time of modification, 
+            //window x at time of modification, 
+            //window y at time of modification. 
+            
+
             sf::Uint32 xToPass = 0;
             sf::Uint32 yToPass = 0;
             std::string commandToPass;
-            std::string brushSize;
+            sf::Uint32 colorOfModificationToPass = 0;
+            sf::Uint32 canvasColorToPass = 0;
+            sf::Uint32 sizeOfModification = 0; //flag to send to server that'll be sent to other clients to determine GeneralBrush enum size. 
+            sf::Uint32 brushTypeModification = 0; //flag to send to server that'll be sent to other clients to determine if it is a Pen or Brush being used to draw. 
+            sf::Uint32 windowXToPass = 0;
+            sf::Uint32 windowYToPass = 0;
+
 			//relative positioning and resizing the window
 			// store the mouse position of the current frame
 			app.mouseX = currentXYCoordinates.x;
@@ -94,16 +110,24 @@ void update(App& app) {
 			    }
 			    // else, simple mouse event for drawing
 			    else {
-                    std::cout << currentXYCoordinates.x << " " << currentXYCoordinates.y << std::endl;
+                    // std::cout << currentXYCoordinates.x << " " << currentXYCoordinates.y << std::endl;
                     xToPass = currentXYCoordinates.x;
                     yToPass = currentXYCoordinates.y;
 
-                    commandToPass = "draw";
+                    commandToPass = "draw ";
                     commandToPass.append(std::to_string(counter));
                     counter++;
 
-                    brushSize = app.GetBrush().getSize();
-                    packet << xToPass << yToPass << commandToPass;
+                    colorOfModificationToPass = app.GetBrush().getColor().toInteger();
+                    canvasColorToPass = app.getBackgroundColor().toInteger();
+
+                    sizeOfModification = app.GetBrush().getSize(); //When implemented will reflect brush size relating to enum, flags can be 0 = small, 1 = medium, 2 = large. 
+                    brushTypeModification = app.GetBrush().getType(); //flag could be  0 = brush, 1 = pen. 
+                    windowXToPass = app.getWindow().getSize().x;
+                    windowYToPass = app.getWindow().getSize().y;
+                    std::cout << "Client Sent PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: " << commandToPass <<"\nColor: " << colorOfModificationToPass << "\nCanvas Color: " << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: " << windowXToPass << "\nWindow Y: " << windowYToPass <<std::endl;
+                    // brushSize = app.GetBrush().getSize();
+                    packet << xToPass << yToPass << commandToPass << colorOfModificationToPass << canvasColorToPass << sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
                     clientSocket.send(packet);
                     packet.clear();
 
@@ -231,13 +255,13 @@ void draw(App& app) {
 *
 */
 int main() {
-    // clientSocket.setBlocking(false);
-    //Testing data class. 
-    std::string stringToPass = "Erase";
-    // Data data1;
-    Data data1(1, 1, 5555555, stringToPass, 5, 5);
-    data1.printData();
-    //Testing data class. 
+    // // clientSocket.setBlocking(false);
+    // //Testing data class. 
+    // std::string stringToPass = "Erase";
+    // // Data data1;
+    // Data data1(1, 1, 5555555, stringToPass, 5, 5);
+    // data1.printData();
+    // //Testing data class. 
     
 
     char buffer[1000];
