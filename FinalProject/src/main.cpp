@@ -19,16 +19,25 @@
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Network.hpp>
 // Include standard library C++ libraries.
 #include <iostream>
 #include <string>
+#include <string.h> // memset
 // Project header files
+#include "Data.hpp"
 #include "App.hpp"
 #include "Command.hpp"
 #include "Draw.hpp"
 #include "Erase.hpp"
 #include "Clear.hpp"
 
+//Networking
+sf::TcpSocket clientSocket;
+sf::Socket::Status status;
+sf::Packet packet;
+
+int counter = 0;
 
 /*! \brief 	Call any initailization functions here.
 *		This might be for example setting up any
@@ -66,7 +75,12 @@ void update(App& app) {
 			sf::Vector2i coordinate = sf::Mouse::getPosition(app.getWindow());
 
 			sf::Vector2f currentXYCoordinates = app.m_window->mapPixelToCoords(coordinate); //andrew edit ****
-
+            // double xToPass = 0.0;
+            // double yToPass = 0.0;
+            sf::Uint32 xToPass = 0;
+            sf::Uint32 yToPass = 0;
+            std::string commandToPass;
+            std::string brushSize;
 			//relative positioning and resizing the window
 			// store the mouse position of the current frame
 			app.mouseX = currentXYCoordinates.x;
@@ -84,6 +98,19 @@ void update(App& app) {
 			    }
 			    // else, simple mouse event for drawing
 			    else {
+                    std::cout << currentXYCoordinates.x << " " << currentXYCoordinates.y << std::endl;
+                    xToPass = currentXYCoordinates.x;
+                    yToPass = currentXYCoordinates.y;
+
+                    commandToPass = "draw";
+                    commandToPass.append(std::to_string(counter));
+                    counter++;
+
+                    brushSize = app.GetBrush().getSize();
+                    packet << xToPass << yToPass << commandToPass;
+                    clientSocket.send(packet);
+                    packet.clear();
+
                     Command* command = new Draw(currentXYCoordinates, &app);
                     app.addCommand(command);
 			    }
@@ -203,6 +230,30 @@ void draw(App& app) {
 *
 */
 int main() {
+    // clientSocket.setBlocking(false);
+    //Testing data class. 
+    std::string stringToPass = "Erase";
+    // Data data1;
+    Data data1(1, 1, 5555555, stringToPass, 5, 5);
+    data1.printData();
+    //Testing data class. 
+    
+
+    char buffer[1000];
+    memset(buffer, 0, 1000);
+    std::size_t received;
+    sf::IpAddress ip = sf::IpAddress::getLocalAddress();
+    status = clientSocket.connect(ip, 8080);
+    if(status != sf::Socket::Done) {
+        std::cerr << "Error!" << status << std::endl;
+    }
+    std::string text = "Client connected to Server";
+    clientSocket.send(text.c_str(), text.length() +1);
+    clientSocket.receive(buffer, sizeof(buffer), received);
+    std::cout << "Client> " << buffer << std::endl;
+    // char mode = 's';
+    // bool done = false
+    //Networking
 
 	App app;
 	// Call any setup function
