@@ -29,8 +29,6 @@ Provided below are a list of curated resources to help you complete the tasks be
 
 **Remember** You are working with your team today in your team repository.
 
-1. Find your teammates here! https://docs.google.com/spreadsheets/d/1f7dGzR-mdv25OnGrV68xKeJw2TQrD-_dpHCnDjbKOus/edit#gid=0
-
 # Task 1 - Continuous Integration
 
 [Github actions](https://github.com/features/actions) are githubs built-in way of providing a continuous integration testing system for your project. Other technologies like Jenkins and Travis exist, though having all of the features located in one spot will make it easy for us to get started. Github actions are also very powerful in what you can do. Today you are going to setup in [finalproject/.github/workflows/MainWorkflow.yml](finalproject/.github/workflows/MainWorkflow.yml) your first workflow that will execute tests every time you push code. In this way, github actions will help ensure that code that you are submitting to your repository for example, is code that actually compiles and passes all of the tests. you have in the project.
@@ -45,7 +43,7 @@ name: C/C++ CI
 # in this case, the master branch, although you could add others.
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     
 # Every github action needs at least one job.
 # We could have multiple jobs, but for now I am only going to include one here.
@@ -54,7 +52,8 @@ jobs:
     # We can have our integration tests run on multiple operating systems in 'containers'
     # that are hosted on github. You can create your own as well, or setup a 'container'
     # using a tool like docker if you like. For now, I am going to show you the ubuntu setup.
-    runs-on: ubuntu-latest
+    # Available environments are here: https://github.com/actions/virtual-environments
+    runs-on: ubuntu-18.04
     # These are the steps that will be run every time that we run our script, one will follow
     # the other.
     # You can pretend you would be manually be typing these out in the terminal everytime you did
@@ -64,16 +63,18 @@ jobs:
       - name: Quick check to see where we are and who we are.
         run: pwd && whoami && ls -l
       # For us, we need to setup our linux box which only takes a few moments
+      - name: Update packages on linux
+        run: sudo apt-get update
       - name: Install sfml
         run: sudo apt-get install libsfml-dev
       - name: build main.cpp code
-        run: cd ./Lab9_CI && g++ main.cpp -o main
+        run: cd ./labs/Lab12_CI && g++ main.cpp -o main
       - name: run main
-        run: cd ./Lab9_CI && ./main
-      - name: Build lab9 makefile
-        run: cd ./Lab9_CI/bin && cmake ..
-      - name: Run lab9 makefile
-        run: cd ./Lab9_CI/bin && make
+        run: cd ./labs/Lab12_CI && ./main
+      - name: Build lab makefile
+        run: cd ./labs/Lab12_CI/bin && cmake ..
+      - name: Run lab12 makefile
+        run: cd ./labs/Lab12_CI/bin && make
       # These next two steps need a little bit more explaining, because as we are finding out
       # testing graphics applications is really hard!
       # You learned this when you wrote your GUI applications tests earlier.
@@ -85,7 +86,7 @@ jobs:
       - name: Setup headless x11 window
         run: sudo apt-get install xvfb xorg xauth openbox # xorg is needed to set DISPLAY variable later
       - name: Run graphical application tests in headless mode
-        run: cd ./Lab9_CI/bin && xvfb-run --server-args="-screen 0 1024x768x24" ./App_Test
+        run: cd ./labs/Lab12_CI/bin && xvfb-run --server-args="-screen 0 1024x768x24" ./App_Test
 ```
 
 ### Expanding on the workflow
