@@ -38,69 +38,91 @@ Gui::~Gui() {
                  NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
                  NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE)) {
         static int property = 20;
-        //nk_layout_row_static(ctx, 30, 80, 1);
-        //if (nk_button_label(ctx, "button"))
-        //    fprintf(stdout, "button pressed\n");
 
-        nk_layout_row_dynamic(ctx, 30, 1);
-        nk_label(ctx, "Brush Color", NK_TEXT_LEFT);
-        nk_layout_row_dynamic(ctx, 30, 8);
-        if (nk_button_label(ctx, "Red") ) {
-            app.getBrush().setColor(sf::Color::Red);
-        }
-        if (nk_button_label(ctx, "Black") ) {
-            app.getBrush().setColor(sf::Color::Black);
-        }
-        if (nk_button_label(ctx, "Green") ) {
-            app.getBrush().setColor(sf::Color::Green);
-        }
-        if (nk_button_label(ctx, "Blue") ) {
-            app.getBrush().setColor(sf::Color::Blue);
-        }
-        if (nk_button_label(ctx, "White") ) {
-            app.getBrush().setColor(sf::Color::White);
-        }
-        if (nk_button_label(ctx, "Yellow") ) {
-            app.getBrush().setColor(sf::Color::Yellow);
-        }
-        if (nk_button_label(ctx, "Magenta") ) {
-            app.getBrush().setColor(sf::Color::Magenta);
-        }
-        if (nk_button_label(ctx, "Cyan") ) {
-            app.getBrush().setColor(sf::Color::Cyan);
-        }
-
-        nk_layout_row_dynamic(ctx, 30, 3);
-        nk_label(ctx, "Brush Type", NK_TEXT_LEFT);
-        if (nk_button_label(ctx, "Brush") ) {
-            app.setBrush(app.getBrushFactory().createBrush(1));
-        }
-        if (nk_button_label(ctx, "Pen") ) {
-            app.setBrush(app.getBrushFactory().createBrush(2));
-        }
-
-
-
-        nk_layout_row_dynamic(ctx, 30, 4);
-        nk_label(ctx, "Brush Size", NK_TEXT_LEFT);
-        if (nk_button_label(ctx, "small") ) {
-            app.getBrush().setSize(size::small);
-        }
-        if (nk_button_label(ctx, "medium") ) {
-            app.getBrush().setSize(size::medium);
-        }
-        if (nk_button_label(ctx, "large") ) {
-            app.getBrush().setSize(size::large);
-        }
+        changeBrushColor(app);
+        changeBrushSize(app);
+        changeBrushType(app);
 
     }
     nk_end(ctx);
 
-//    if(nk_beign(ctx, "Brush")) {
-//
-//    }
-//    nk_end(ctx);
+
  }
+
+
+ void Gui::changeBrushColor(App& app) {
+     nk_layout_row_dynamic(ctx, 30, 1);
+     nk_label(ctx, "Brush Color", NK_TEXT_LEFT);
+
+     nk_layout_row_dynamic(ctx, 30, 4);
+     if (nk_option_label(ctx, "Black", m_brushColor == brushColorEnum::BLACK)) {
+         m_brushColor = brushColorEnum::BLACK;
+         app.getBrush().setColor(sf::Color::Black);
+     }
+     if (nk_option_label(ctx, "Red", m_brushColor == brushColorEnum::RED)) {
+         m_brushColor = brushColorEnum::RED;
+         app.getBrush().setColor(sf::Color::Red);
+     }
+     if (nk_option_label(ctx, "Green", m_brushColor == brushColorEnum::GREEN)) {
+         m_brushColor = brushColorEnum::GREEN;
+         app.getBrush().setColor(sf::Color::Green);
+     }
+     if (nk_option_label(ctx, "Blue", m_brushColor == brushColorEnum::BLUE)) {
+         m_brushColor = brushColorEnum::BLUE;
+         app.getBrush().setColor(sf::Color::Blue);
+     }
+     if (nk_option_label(ctx, "White", m_brushColor == brushColorEnum::WHITE)) {
+         m_brushColor = brushColorEnum::WHITE;
+         app.getBrush().setColor(sf::Color::White);
+     }
+     if (nk_option_label(ctx, "Yellow", m_brushColor == brushColorEnum::YELLOW)) {
+         m_brushColor = brushColorEnum::YELLOW;
+         app.getBrush().setColor(sf::Color::Yellow);
+     }
+     if (nk_option_label(ctx, "Magenta", m_brushColor == brushColorEnum::MAGENTA)) {
+         m_brushColor = brushColorEnum::MAGENTA;
+         app.getBrush().setColor(sf::Color::Magenta);
+     }
+     if (nk_option_label(ctx, "Cyan", m_brushColor == brushColorEnum::CYAN)) {
+         m_brushColor = brushColorEnum::CYAN;
+         app.getBrush().setColor(sf::Color::Cyan);
+     }
+ }
+
+ void Gui::changeBrushSize(App& app) {
+     nk_layout_row_dynamic(ctx, 30, 4);
+     nk_label(ctx, "Brush Size", NK_TEXT_LEFT);
+
+     nk_layout_row_dynamic(ctx, 30, 4);
+     if (nk_option_label(ctx, "Small", m_brushSize == brushSizeEnum::SMALL)) {
+         m_brushSize = brushSizeEnum::SMALL;
+         app.getBrush().setSize(size::small);
+     }
+     if (nk_option_label(ctx, "Medium", m_brushSize == brushSizeEnum::MEDIUM)) {
+         m_brushSize = brushSizeEnum::MEDIUM;
+         app.getBrush().setSize(size::medium);
+
+     }
+     if (nk_option_label(ctx, "Large", m_brushSize == brushSizeEnum::LARGE)) {
+         m_brushSize = brushSizeEnum::LARGE;
+         app.getBrush().setSize(size::large);
+     }
+ }
+
+void Gui::changeBrushType(App& app) {
+    nk_layout_row_dynamic(ctx, 30, 3);
+    nk_label(ctx, "Brush Type", NK_TEXT_LEFT);
+
+//    nk_layout_row_dynamic(ctx, 30, 3);
+    if (nk_button_label(ctx, "Brush")) {
+//        m_brushType = brushTypeEnum::BRUSH;
+        app.setBrush(app.getBrushFactory().createBrush(1));
+    }
+    if (nk_button_label(ctx, "Pen")) {
+//        m_brushType = brushTypeEnum::PEN;
+        app.setBrush(app.getBrushFactory().createBrush(2));
+    }
+}
 
 /*! \brief
  *

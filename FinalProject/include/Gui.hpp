@@ -8,11 +8,18 @@ class App;
 
 class Gui {
 private:
-    enum {RED, BLACK, GREEN, BLUE, WHITE, YELLOW, MAGENTA, CYAN};
-    int brushColor = BLACK;
+    enum brushColorEnum {RED, BLACK, GREEN, BLUE, WHITE, YELLOW, MAGENTA, CYAN};
+    enum brushSizeEnum {SMALL, MEDIUM, LARGE};
+    enum brushTypeEnum {BRUSH, PEN};
+    int m_brushColor = BLACK;
+    int m_brushSize = MEDIUM;
+    int m_brushType = BRUSH;
+
     sf::RenderWindow* m_guiWindow;
-    bool isPressed = false;
-    bool wasPressed = false;
+
+    void changeBrushColor(App& app);
+    void changeBrushSize(App& app);
+    void changeBrushType(App& app);
 
 public:
 
