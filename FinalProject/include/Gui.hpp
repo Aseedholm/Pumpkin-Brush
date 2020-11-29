@@ -9,8 +9,10 @@ class App;
 class Gui {
 private:
     enum {RED, BLACK, GREEN, BLUE, WHITE, YELLOW, MAGENTA, CYAN};
-    int op = BLACK;
+    int brushColor = BLACK;
     sf::RenderWindow* m_guiWindow;
+    bool isPressed = false;
+    bool wasPressed = false;
 
 public:
 
@@ -27,6 +29,7 @@ public:
     void nk_shutdown_wrapper();
     void nk_handle_event_wrapper(sf::Event event);
     void nk_sfml_render_wrapper();
+
 };
 
 

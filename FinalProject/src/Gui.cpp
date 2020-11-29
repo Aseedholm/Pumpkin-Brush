@@ -13,8 +13,11 @@
 #include <SFML/OpenGL.hpp>
 #include "nuklear.h"
 #include "nuklear_sfml_gl2.h"
+#include "iostream"
 
 
+
+nk_window *win;
 
 /*! \brief Constructor of Gui
  *
@@ -31,7 +34,7 @@ Gui::~Gui() {
  *
  */
  void Gui::drawGUI(App& app) {
-    if (nk_begin(ctx, "Gui", nk_rect(50, 50, 230, 250),
+    if (nk_begin(ctx, "Tools", nk_rect(50, 50, 500, 400),
                  NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
                  NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE)) {
         static int property = 20;
@@ -39,43 +42,64 @@ Gui::~Gui() {
         //if (nk_button_label(ctx, "button"))
         //    fprintf(stdout, "button pressed\n");
 
-
-
-        nk_layout_row_dynamic(ctx, 30, 2);
-        if (nk_option_label(ctx, "red", op == RED)){
-            op = RED;
+        nk_layout_row_dynamic(ctx, 30, 1);
+        nk_label(ctx, "Brush Color", NK_TEXT_LEFT);
+        nk_layout_row_dynamic(ctx, 30, 8);
+        if (nk_button_label(ctx, "Red") ) {
             app.getBrush().setColor(sf::Color::Red);
         }
-        if (nk_option_label(ctx, "black", op == BLACK)){
-            op = BLACK;
+        if (nk_button_label(ctx, "Black") ) {
             app.getBrush().setColor(sf::Color::Black);
         }
-        if (nk_option_label(ctx, "green", op == GREEN)){
-            op = GREEN;
+        if (nk_button_label(ctx, "Green") ) {
             app.getBrush().setColor(sf::Color::Green);
         }
-        if (nk_option_label(ctx, "blue", op == BLUE)) {
-            op = BLUE;
+        if (nk_button_label(ctx, "Blue") ) {
             app.getBrush().setColor(sf::Color::Blue);
         }
-        if (nk_option_label(ctx, "white", op == WHITE)) {
-            op = WHITE;
+        if (nk_button_label(ctx, "White") ) {
             app.getBrush().setColor(sf::Color::White);
         }
-        if (nk_option_label(ctx, "yellow", op == YELLOW)) {
-            op = YELLOW;
+        if (nk_button_label(ctx, "Yellow") ) {
             app.getBrush().setColor(sf::Color::Yellow);
         }
-        if (nk_option_label(ctx, "magenta", op == MAGENTA)) {
-            op = MAGENTA;
+        if (nk_button_label(ctx, "Magenta") ) {
             app.getBrush().setColor(sf::Color::Magenta);
         }
-        if (nk_option_label(ctx, "cyan", op == CYAN)) {
-            op = CYAN;
+        if (nk_button_label(ctx, "Cyan") ) {
             app.getBrush().setColor(sf::Color::Cyan);
         }
+
+        nk_layout_row_dynamic(ctx, 30, 3);
+        nk_label(ctx, "Brush Type", NK_TEXT_LEFT);
+        if (nk_button_label(ctx, "Brush") ) {
+            app.setBrush(app.getBrushFactory().createBrush(1));
+        }
+        if (nk_button_label(ctx, "Pen") ) {
+            app.setBrush(app.getBrushFactory().createBrush(2));
+        }
+
+
+
+        nk_layout_row_dynamic(ctx, 30, 4);
+        nk_label(ctx, "Brush Size", NK_TEXT_LEFT);
+        if (nk_button_label(ctx, "small") ) {
+            app.getBrush().setSize(size::small);
+        }
+        if (nk_button_label(ctx, "medium") ) {
+            app.getBrush().setSize(size::medium);
+        }
+        if (nk_button_label(ctx, "large") ) {
+            app.getBrush().setSize(size::large);
+        }
+
     }
     nk_end(ctx);
+
+//    if(nk_beign(ctx, "Brush")) {
+//
+//    }
+//    nk_end(ctx);
  }
 
 /*! \brief
