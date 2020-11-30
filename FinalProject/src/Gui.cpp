@@ -175,10 +175,10 @@ void Gui::undoRedoOption(App &app) {
      nk_layout_row_dynamic(ctx, 30, 3);
      nk_label(ctx, "Erasure", NK_TEXT_LEFT);
      if (nk_button_label(ctx, "Clear Canvas")) {
-         if (app.prevCommand != app.commandEnum::CLEAR) {
-             Command *command = new Clear(&app);
+         if (app.m_prevCommand != app.commandEnum::CLEAR) {
+             Command *command = new Clear(&app, app.commandFlag);
              app.addCommand(command);
-             app.prevCommand = app.commandEnum::CLEAR;
+             app.m_prevCommand = app.commandEnum::CLEAR;
          }
      }
  }

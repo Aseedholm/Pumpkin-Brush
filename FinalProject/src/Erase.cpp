@@ -11,7 +11,7 @@ Erase::Erase(sf::Vector2f coordinate, App* app, int flag) : Command(flag) {
     m_coordinate = coordinate;
     m_app = app;
     m_backgroundColor = app->getBackgroundColor();
-    m_shader = app->GetBrush().getShader();
+    m_shader = app->getBrush().getShader();
     setOriginalColor();
 
 }

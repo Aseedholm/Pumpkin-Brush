@@ -85,8 +85,7 @@ public:
 	// void operator=(const App& app);
 // Member functions
 
-    enum commandEnum {DRAW, ERASE, CLEAR};
-    commandEnum prevCommand;
+
 	GeneralBrush& getBrush();
   BrushFactory getBrushFactory();
 	void setBrush(GeneralBrush* brush);
