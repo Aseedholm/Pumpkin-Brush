@@ -42,6 +42,7 @@ Gui::~Gui() {
         changeBrushColor(app);
         changeBrushSize(app);
         changeBrushType(app);
+        undoRedoOption(app);
 
     }
     nk_end(ctx);
@@ -123,6 +124,18 @@ void Gui::changeBrushType(App& app) {
         app.setBrush(app.getBrushFactory().createBrush(2));
     }
 }
+
+void Gui::undoRedoOption(App &app) {
+    nk_layout_row_dynamic(ctx, 30, 3);
+    nk_label(ctx, "Option", NK_TEXT_LEFT);
+    if(nk_button_label(ctx, "Undo")) {
+        app.undoCommand();
+    }
+    if(nk_button_label(ctx, "Redo")) {
+        app.redoCommand();
+    }
+
+ }
 
 /*! \brief
  *

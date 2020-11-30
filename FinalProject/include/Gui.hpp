@@ -20,6 +20,7 @@ private:
     void changeBrushColor(App& app);
     void changeBrushSize(App& app);
     void changeBrushType(App& app);
+    void undoRedoOption(App& app);
 
 public:
 
