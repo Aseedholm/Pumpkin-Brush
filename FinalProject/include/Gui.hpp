@@ -9,12 +9,13 @@ class App;
 
 class Gui {
 private:
-    enum brushColorEnum {RED, BLACK, GREEN, BLUE, WHITE, YELLOW, MAGENTA, CYAN};
+    enum colorEnum {RED, BLACK, GREEN, BLUE, WHITE, YELLOW, MAGENTA, CYAN};
     enum brushSizeEnum {SMALL, MEDIUM, LARGE};
     enum brushTypeEnum {BRUSH, PEN};
     int m_brushColor = BLACK;
     int m_brushSize = MEDIUM;
     int m_brushType = BRUSH;
+    int m_backColor = WHITE;
 
     sf::RenderWindow* m_guiWindow;
 
@@ -23,6 +24,8 @@ private:
     void changeBrushType(App& app);
     void undoRedoOption(App& app);
     void clearCanvas(App &app);
+    void changeBackColor(App& app);
+
 
 public:
 

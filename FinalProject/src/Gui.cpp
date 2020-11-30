@@ -1,6 +1,5 @@
 #include "Gui.hpp"
 
-
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_STANDARD_VARARGS
@@ -17,7 +16,6 @@
 #include "Clear.hpp"
 
 
-
 nk_window *win;
 
 /*! \brief Constructor of Gui
@@ -27,6 +25,9 @@ Gui::Gui() {
     initGui();
 }
 
+/*! \brief
+ *
+ */
 Gui::~Gui() {
     delete m_guiWindow;
 }
@@ -45,53 +46,57 @@ Gui::~Gui() {
         changeBrushType(app);
         undoRedoOption(app);
         clearCanvas(app);
-
+        changeBackColor(app);
     }
     nk_end(ctx);
-
-
  }
 
-
+/*! \brief
+ *
+ */
  void Gui::changeBrushColor(App& app) {
      nk_layout_row_dynamic(ctx, 30, 1);
      nk_label(ctx, "Brush Color", NK_TEXT_LEFT);
 
      nk_layout_row_dynamic(ctx, 30, 4);
-     if (nk_option_label(ctx, "Black", m_brushColor == brushColorEnum::BLACK)) {
-         m_brushColor = brushColorEnum::BLACK;
+     if (nk_option_label(ctx, "Black", m_brushColor == colorEnum::BLACK)) {
+         m_brushColor = colorEnum::BLACK;
          app.getBrush().setColor(sf::Color::Black);
      }
-     if (nk_option_label(ctx, "Red", m_brushColor == brushColorEnum::RED)) {
-         m_brushColor = brushColorEnum::RED;
+     if (nk_option_label(ctx, "Red", m_brushColor == colorEnum::RED)) {
+         m_brushColor = colorEnum::RED;
          app.getBrush().setColor(sf::Color::Red);
      }
-     if (nk_option_label(ctx, "Green", m_brushColor == brushColorEnum::GREEN)) {
-         m_brushColor = brushColorEnum::GREEN;
+     if (nk_option_label(ctx, "Green", m_brushColor == colorEnum::GREEN)) {
+         m_brushColor = colorEnum::GREEN;
          app.getBrush().setColor(sf::Color::Green);
      }
-     if (nk_option_label(ctx, "Blue", m_brushColor == brushColorEnum::BLUE)) {
-         m_brushColor = brushColorEnum::BLUE;
+     if (nk_option_label(ctx, "Blue", m_brushColor == colorEnum::BLUE)) {
+         m_brushColor = colorEnum::BLUE;
          app.getBrush().setColor(sf::Color::Blue);
      }
-     if (nk_option_label(ctx, "White", m_brushColor == brushColorEnum::WHITE)) {
-         m_brushColor = brushColorEnum::WHITE;
+     if (nk_option_label(ctx, "White", m_brushColor == colorEnum::WHITE)) {
+         m_brushColor = colorEnum::WHITE;
          app.getBrush().setColor(sf::Color::White);
      }
-     if (nk_option_label(ctx, "Yellow", m_brushColor == brushColorEnum::YELLOW)) {
-         m_brushColor = brushColorEnum::YELLOW;
+     if (nk_option_label(ctx, "Yellow", m_brushColor == colorEnum::YELLOW)) {
+         m_brushColor = colorEnum::YELLOW;
          app.getBrush().setColor(sf::Color::Yellow);
      }
-     if (nk_option_label(ctx, "Magenta", m_brushColor == brushColorEnum::MAGENTA)) {
-         m_brushColor = brushColorEnum::MAGENTA;
+     if (nk_option_label(ctx, "Magenta", m_brushColor == colorEnum::MAGENTA)) {
+         m_brushColor = colorEnum::MAGENTA;
          app.getBrush().setColor(sf::Color::Magenta);
      }
-     if (nk_option_label(ctx, "Cyan", m_brushColor == brushColorEnum::CYAN)) {
-         m_brushColor = brushColorEnum::CYAN;
+     if (nk_option_label(ctx, "Cyan", m_brushColor == colorEnum::CYAN)) {
+         m_brushColor = colorEnum::CYAN;
          app.getBrush().setColor(sf::Color::Cyan);
      }
  }
 
+
+/*! \brief
+*
+*/
  void Gui::changeBrushSize(App& app) {
      nk_layout_row_dynamic(ctx, 30, 4);
      nk_label(ctx, "Brush Size", NK_TEXT_LEFT);
@@ -112,6 +117,9 @@ Gui::~Gui() {
      }
  }
 
+/*! \brief
+*
+*/
 void Gui::changeBrushType(App& app) {
     nk_layout_row_dynamic(ctx, 30, 3);
     nk_label(ctx, "Brush Type", NK_TEXT_LEFT);
@@ -127,6 +135,9 @@ void Gui::changeBrushType(App& app) {
     }
 }
 
+/*! \brief
+ *
+ */
 void Gui::undoRedoOption(App &app) {
     nk_layout_row_dynamic(ctx, 30, 3);
     nk_label(ctx, "Option", NK_TEXT_LEFT);
@@ -139,11 +150,43 @@ void Gui::undoRedoOption(App &app) {
 
  }
 
+
+/*! \brief
+*
+*/
  void Gui::clearCanvas(App &app) {
-     nk_layout_row_dynamic(ctx, 30, 1);
-     if(nk_button_label(ctx, "Clear Canvas")) {
-         Command* command = new Clear(&app);
+     nk_layout_row_dynamic(ctx, 30, 3);
+     nk_label(ctx, "Erasure", NK_TEXT_LEFT);
+     if (nk_button_label(ctx, "Clear Canvas")) {
+         Command *command = new Clear(&app);
          app.addCommand(command);
+     }
+ }
+
+
+/*! \brief
+*
+*/
+ void Gui::changeBackColor(App& app) {
+     nk_layout_row_dynamic(ctx, 30, 1);
+     nk_label(ctx, "Background Color", NK_TEXT_LEFT);
+
+     nk_layout_row_dynamic(ctx, 30, 4);
+     if (nk_option_label(ctx, "White", m_backColor == colorEnum::WHITE)) {
+         m_backColor = colorEnum::WHITE;
+         app.setBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
+     }
+     if (nk_option_label(ctx, "Black", m_backColor == colorEnum::BLACK)) {
+         m_backColor = colorEnum::BLACK;
+         app.setBackgroundColor(new sf::Color(sf::Color::Black.toInteger()));
+     }
+     if (nk_option_label(ctx, "Yellow", m_backColor == colorEnum::YELLOW)) {
+         m_backColor = colorEnum::YELLOW;
+         app.setBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
+     }
+     if (nk_option_label(ctx, "Green", m_backColor == colorEnum::GREEN)) {
+         m_backColor = colorEnum::GREEN;
+         app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
      }
  }
 
@@ -167,6 +210,10 @@ void Gui::undoRedoOption(App &app) {
     nk_sfml_font_stash_end();
  }
 
+
+/*! \brief
+*
+*/
  sf::RenderWindow & Gui::getWindow() {
      return *m_guiWindow;
  }
@@ -189,15 +236,23 @@ void Gui::nk_input_end_wrapper() {
     nk_input_end(ctx);
 }
 
-
+/*! \brief
+ *
+ */
 void Gui::nk_input_begin_wrapper() {
     nk_input_begin(ctx);
 }
 
+/*! \brief
+ *
+ */
 void Gui::nk_shutdown_wrapper() {
     nk_sfml_shutdown();
 }
 
+/*! \brief
+ *
+ */
 void Gui::nk_sfml_render_wrapper() {
     nk_sfml_render(NK_ANTI_ALIASING_ON);
 }
