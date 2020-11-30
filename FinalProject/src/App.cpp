@@ -10,6 +10,9 @@
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+
+
+
 // Include standard library C++ libraries.
 #include <cassert>
 // Project header files
@@ -17,27 +20,6 @@
 
 
 #include<iostream>
-
-// All static members of a Singleton need to initialized to some value.
-// This is so that when the program is compiled, memory is reserved
-// for each of these static values.
-// Potentially handy data structures for building an undo system.
-// std::stack<Command*> App::m_redo;
-// std::stack<Command*> App::m_undo;
-// // Function pointers
-// void (*App::m_initFunc)(void) = nullptr;
-// void (*App::m_updateFunc)(void) = nullptr;
-// void (*App::m_drawFunc)(void) = nullptr;
-// // Mouse variables
-// unsigned int App::pmouseX = 0;
-// unsigned int App::pmouseY = 0;
-// unsigned int App::mouseX = 0;
-// unsigned int App::mouseY = 0;
-// // Canvas variables
-// sf::RenderWindow* App::m_window = nullptr;
-// sf::Image* App::m_image = new sf::Image;
-// sf::Sprite* App::m_sprite = new sf::Sprite;
-// sf::Texture* App::m_texture = new sf::Texture;
 
 
 /*! \brief Add command that adds the pixel position in stack
@@ -150,14 +132,14 @@ BrushFactory App::getBrushFactory() {
  *
  *
  */
-GeneralBrush& App::GetBrush() {
+GeneralBrush& App::getBrush() {
     return *m_brush;
 }
 
 /*! \brief Set the current brush
  *
  */
-void App::SetBrush(GeneralBrush* brush) {
+void App::setBrush(GeneralBrush* brush) {
     m_brush = brush;
 }
 
@@ -191,6 +173,11 @@ void App::init(void (*initFunction)(void)) {
 //	m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
     m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
 	m_window->setVerticalSyncEnabled(true);
+
+    // Create gui instance
+    m_gui = new Gui();
+
+
 	// Create an image which stores the pixels we will update
 	m_image->create(600, 400, *m_backgroundColor); //Andrew edit*****
 	assert(m_image != nullptr && "m_image != nullptr");
@@ -240,10 +227,17 @@ void App::loop(App& app) {
 		m_updateFunc(app);
 		// Additional drawing specified by user
 		m_drawFunc(app);
-		// Update the texture
-		// Note: This can be done in the 'draw call'
-		// Draw to the canvas
 
+		// Update Gui window
+		m_gui->drawGUI(*this);
+        m_gui->getWindow().setActive(true);
+        m_gui->getWindow().clear();
+        m_gui->nk_sfml_render_wrapper();
+        m_gui->getWindow().display();
+
+        // Update the texture
+        // Note: This can be done in the 'draw call'
+        // Draw to the canvas
 		
 		if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 
 			m_sprite->setColor(*m_backgroundColor);
@@ -252,6 +246,8 @@ void App::loop(App& app) {
 		m_window->draw(*m_sprite);
 		// Display the canvas
 		m_window->display();
+
+
 	}
 }
 
@@ -261,5 +257,6 @@ void App::loop(App& app) {
 void App::setBackgroundColor(sf::Color *colorPassed) { //Andrew edit*****
 	m_backgroundColor = colorPassed;
 }
+
 
 

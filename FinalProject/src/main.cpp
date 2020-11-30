@@ -21,6 +21,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Network.hpp>
 // Include standard library C++ libraries.
+
+
 #include <iostream>
 #include <string>
 #include <string.h> // memset
@@ -32,6 +34,8 @@
 #include "Draw.hpp"
 #include "Erase.hpp"
 #include "Clear.hpp"
+#include <SFML/OpenGL.hpp>
+
 
 //Networking
 sf::TcpSocket clientSocket;
@@ -62,6 +66,7 @@ void update(App& app) {
 	while (app.m_window->pollEvent(event)) {
         //andrew edit ****
         //closing the window by clicking the x button (japher edit ***)
+
         switch(event.type) {
             case sf::Event::Closed :
                 app.m_window->close();
@@ -85,6 +90,7 @@ void update(App& app) {
                             break;
                         }
                 }
+
         }
 //         if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
 //            Command* command = new Clear(&app, app.commandFlag);
@@ -96,6 +102,37 @@ void update(App& app) {
 //            }
 //        }
 	}
+
+  
+    app.m_gui->nk_input_begin_wrapper();
+    while(app.m_gui->getWindow().pollEvent(event)) {
+        // Our close event.
+        // Note: We only have a 'minimize' button
+        //       in our window right now, so this event is not
+        //       going to fire.
+        if(event.type == sf::Event::Closed){
+            app.m_gui->nk_shutdown_wrapper();
+            app.m_gui->getWindow().close();
+            exit(EXIT_SUCCESS);
+        }
+
+            // Capture any keys that are released
+        else if(event.type == sf::Event::KeyReleased){
+            std::cout << "Key Pressed" << std::endl;
+            // Check if the escape key is pressed.
+            if(event.key.code == sf::Keyboard::Escape){
+                app.m_gui->nk_shutdown_wrapper();
+                app.m_gui->getWindow().close();
+                exit(EXIT_SUCCESS);
+            }
+        }
+        //else if(event.type == sf::Event::Resized){
+        //    glViewport(0, 0, event.size.width, event.size.height);
+        //}
+        app.m_gui->nk_handle_event_wrapper(event);
+
+    }
+    app.m_gui->nk_input_end_wrapper();
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			sf::Vector2i coordinate = sf::Mouse::getPosition(app.getWindow());
@@ -122,6 +159,7 @@ void update(App& app) {
 			        Command* command = new Erase(currentXYCoordinates, &app, app.commandFlag);
                     app.addCommand(command);
                     app.m_prevCommand = app.commandEnum::ERASE;
+
 			    }
 			    // else, simple mouse event for drawing
 			    else {
@@ -141,6 +179,7 @@ void update(App& app) {
                     Command* command = new Draw(currentXYCoordinates, &app, app.commandFlag);
                     app.addCommand(command);
                     app.m_prevCommand = app.commandEnum::DRAW;
+
 			    }
 			}
 			// Modify the pixel
@@ -162,47 +201,47 @@ void update(App& app) {
 
     // Handling change color event
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
-        app.GetBrush().setColor(sf::Color::Black);
+        app.getBrush().setColor(sf::Color::Black);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
-        app.GetBrush().setColor(sf::Color::White);
+        app.getBrush().setColor(sf::Color::White);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) {
-        app.GetBrush().setColor(sf::Color::Red);
+        app.getBrush().setColor(sf::Color::Red);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) {
-        app.GetBrush().setColor(sf::Color::Green);
+        app.getBrush().setColor(sf::Color::Green);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) {
-        app.GetBrush().setColor(sf::Color::Blue);
+        app.getBrush().setColor(sf::Color::Blue);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)) {
-        app.GetBrush().setColor(sf::Color::Yellow);
+        app.getBrush().setColor(sf::Color::Yellow);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num7)) {
-        app.GetBrush().setColor(sf::Color::Magenta);
+        app.getBrush().setColor(sf::Color::Magenta);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num8)) {
-        app.GetBrush().setColor(sf::Color::Cyan);
+        app.getBrush().setColor(sf::Color::Cyan);
     }
 
     // Handling change size of drawing tool
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
-        app.GetBrush().setSize(size::small);
+        app.getBrush().setSize(size::small);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::F2)) {
-        app.GetBrush().setSize(size::medium);
+        app.getBrush().setSize(size::medium);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::F3)) {
-        app.GetBrush().setSize(size::large);
+        app.getBrush().setSize(size::large);
     }
 
     // Handling change drawing tools
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Divide)) {
-        app.SetBrush(app.getBrushFactory().createBrush(2));
+        app.setBrush(app.getBrushFactory().createBrush(2));
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Multiply)) {
-        app.SetBrush(app.getBrushFactory().createBrush(1));
+        app.setBrush(app.getBrushFactory().createBrush(1));
     }
 
 
@@ -227,6 +266,8 @@ void update(App& app) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
         app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
     }
+
+
 
 
     // Stores the previous mouse click position before going to next frame
