@@ -36,7 +36,18 @@ Gui::~Gui() {
  *
  */
  void Gui::drawGUI(App& app) {
-    if (nk_begin(ctx, "Tools", nk_rect(50, 50, 500, 400),
+    if (nk_begin(ctx, "Erasure Tools", nk_rect(50, 50, 500, 150),
+                 NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
+                 NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE)) {
+        static int property = 20;
+
+        undoRedoOption(app);
+        clearCanvas(app);
+//        ctx.style.window.header
+    }
+    nk_end(ctx);
+
+    if (nk_begin(ctx, "Brush Tools", nk_rect(50, 250, 500, 250),
                  NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
                  NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE)) {
         static int property = 20;
@@ -44,8 +55,14 @@ Gui::~Gui() {
         changeBrushColor(app);
         changeBrushSize(app);
         changeBrushType(app);
-        undoRedoOption(app);
-        clearCanvas(app);
+    }
+    nk_end(ctx);
+
+    if (nk_begin(ctx, "Background Tools", nk_rect(50, 550, 500, 200),
+                 NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
+                 NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE)) {
+        static int property = 20;
+
         changeBackColor(app);
     }
     nk_end(ctx);
@@ -168,26 +185,40 @@ void Gui::undoRedoOption(App &app) {
 *
 */
  void Gui::changeBackColor(App& app) {
-     nk_layout_row_dynamic(ctx, 30, 1);
-     nk_label(ctx, "Background Color", NK_TEXT_LEFT);
+    if (nk_tree_push(ctx, NK_TREE_TAB, "Canvas Background Color", NK_MAXIMIZED)) {
+        nk_layout_row_dynamic(ctx, 30, 1);
+        if (nk_option_label(ctx, "White", m_backColor == colorEnum::WHITE)) {
+            m_backColor = colorEnum::WHITE;
+            app.setBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
+        }
+        if (nk_option_label(ctx, "Black", m_backColor == colorEnum::BLACK)) {
+            m_backColor = colorEnum::BLACK;
+            app.setBackgroundColor(new sf::Color(sf::Color::Black.toInteger()));
+        }
+        if (nk_option_label(ctx, "Yellow", m_backColor == colorEnum::YELLOW)) {
+            m_backColor = colorEnum::YELLOW;
+            app.setBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
+        }
+        if (nk_option_label(ctx, "Green", m_backColor == colorEnum::GREEN)) {
+            m_backColor = colorEnum::GREEN;
+            app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
+        }
+        nk_tree_pop(ctx);
+    }
 
-     nk_layout_row_dynamic(ctx, 30, 4);
-     if (nk_option_label(ctx, "White", m_backColor == colorEnum::WHITE)) {
-         m_backColor = colorEnum::WHITE;
-         app.setBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
-     }
-     if (nk_option_label(ctx, "Black", m_backColor == colorEnum::BLACK)) {
-         m_backColor = colorEnum::BLACK;
-         app.setBackgroundColor(new sf::Color(sf::Color::Black.toInteger()));
-     }
-     if (nk_option_label(ctx, "Yellow", m_backColor == colorEnum::YELLOW)) {
-         m_backColor = colorEnum::YELLOW;
-         app.setBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
-     }
-     if (nk_option_label(ctx, "Green", m_backColor == colorEnum::GREEN)) {
-         m_backColor = colorEnum::GREEN;
-         app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
-     }
+//    nk_layout_row_dynamic(ctx, 20, 1);
+//    nk_label(ctx, "Toolbox Background Color:", NK_TEXT_LEFT);
+//    nk_layout_row_dynamic(ctx, 25, 1);
+//    if (nk_combo_begin_color(ctx, nk_rgb_cf(m_bg), nk_vec2(nk_widget_width(ctx),400))) {
+//        nk_layout_row_dynamic(ctx, 120, 1);
+//        m_bg = nk_color_picker(ctx, m_bg, NK_RGBA);
+//        nk_layout_row_dynamic(ctx, 25, 1);
+//        m_bg.r = nk_propertyf(ctx, "#R:", 0, m_bg.r, 1.0f, 0.01f,0.005f);
+//        m_bg.g = nk_propertyf(ctx, "#G:", 0, m_bg.g, 1.0f, 0.01f,0.005f);
+//        m_bg.b = nk_propertyf(ctx, "#B:", 0, m_bg.b, 1.0f, 0.01f,0.005f);
+//        m_bg.a = nk_propertyf(ctx, "#A:", 0, m_bg.a, 1.0f, 0.01f,0.005f);
+//        nk_combo_end(ctx);
+//    }
  }
 
 /*! \brief
@@ -196,7 +227,7 @@ void Gui::undoRedoOption(App &app) {
  void Gui::initGui() {
     sf::ContextSettings settings(24, 8, 4, 2, 2);
 
-    m_guiWindow = new sf::RenderWindow(sf::VideoMode(600, 400), "GUI Window", sf::Style::Default, settings);
+    m_guiWindow = new sf::RenderWindow(sf::VideoMode(600, 800), "Mini Paint Toolbox", sf::Style::Default, settings);
 
     m_guiWindow->setVerticalSyncEnabled(true);
     m_guiWindow->setActive(true);
@@ -205,9 +236,18 @@ void Gui::undoRedoOption(App &app) {
 
     ctx = nk_sfml_init(m_guiWindow);
 
+//    struct nk_colorf m_bg;
+//    m_bg.r = 0.10f, m_bg.g = 0.18f, m_bg.b = 0.24f, m_bg.a = 1.0f;
+
     struct nk_font_atlas *atlas;
+
     nk_sfml_font_stash_begin(&atlas);
     nk_sfml_font_stash_end();
+
+    // change font
+//    nk_glfw3_font_stash_begin(&glfw, &atlas);
+//    struct nk_font *future = nk_font_atlas_add_from_file(atlas, "./nuklear/extra_font/kenvector_future_thin.ttf", 13, 0);
+//    nk_glfw3_font_stash_end(&glfw);
  }
 
 
