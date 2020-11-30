@@ -21,8 +21,8 @@ struct metaData {
 
 class Painter {
     public:
-        void PainterThreadFunction(sf::TcpSocket socketP, int socketIndex) {
-            
+        void PainterThreadFunction(std::unique_ptr<sf::TcpSocket> socketP, int socketIndex) {
+            std::cout <<"Painter Thread entered" << std::endl;
             sf::Packet packet;
             sf::Uint32 xToPass = 0;
             sf::Uint32 yToPass = 0;
@@ -34,7 +34,7 @@ class Painter {
             sf::Uint32 windowXToPass = 0;
             sf::Uint32 windowYToPass = 0;
             while(true) {
-                socketP.receive(packet);
+                socketP->receive(packet);
                 if (packet >> xToPass >> yToPass >> commandToPass >> colorOfModificationToPass >> canvasColorToPass >> sizeOfModification >> brushTypeModification >> windowXToPass >> windowYToPass)
                 {
                     std::cout << "Server> Received PACKET FROM CLIENT: " << socketIndex << "\nX: " << xToPass << "\nY: " << yToPass << "\nCommand: " << commandToPass << "\nColor: " << colorOfModificationToPass << "\nCanvas Color: " << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: " << windowXToPass << "\nWindow Y: " << windowYToPass << std::endl;
@@ -125,7 +125,7 @@ int main() {
 
     ///////////////////////////////////////////////////////////////////////////////////////////
     std::vector<std::thread> painterThreadVector;
-    std::vector<sf::TcpSocket> socketVector;
+    std::vector<std::unique_ptr<sf::TcpSocket>> socketVector;
     std::queue<metaData> commandQueue;
     // sf::Packet packet;
     
@@ -147,9 +147,11 @@ int main() {
     int index = 0;
     while(serverStatus == sf::Socket::Done){ //serverStatus != sf::Socket::Done 
         std::cout<<serverStatus<<std::endl;
-        sf::TcpSocket serverSocket;
-        listenerSocket.accept(serverSocket);
-        std::thread painterThread(&Painter::PainterThreadFunction, &painter,  serverSocket, index);
+        std::unique_ptr<sf::TcpSocket> socketToAdd = std::unique_ptr<sf::TcpSocket>(new sf::TcpSocket);
+        // sf::TcpSocket serverSocket;
+        listenerSocket.accept(*socketToAdd);
+        // socketVector.push_back(std::move(socketToAdd));
+        std::thread painterThread(&Painter::PainterThreadFunction, &painter,  std::move(socketToAdd), index);
         //  std::thread painterThread(&Painter::PainterThreadFunction, &painter, index);
         painterThreadVector.push_back(std::move(painterThread));
         index++;

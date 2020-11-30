@@ -273,8 +273,8 @@ int main() {
         std::cerr << "Error!" << status << std::endl;
     }
     std::string text = "Client connected to Server";
-    clientSocket.send(text.c_str(), text.length() +1);
-    clientSocket.receive(buffer, sizeof(buffer), received);
+    // clientSocket.send(text.c_str(), text.length() +1);
+    // clientSocket.receive(buffer, sizeof(buffer), received);
     std::cout << "Client> " << buffer << std::endl;
     // char mode = 's';
     // bool done = false
