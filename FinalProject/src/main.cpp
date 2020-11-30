@@ -72,7 +72,7 @@ void update(App& app) {
                 app.m_window->close();
                 exit(EXIT_SUCCESS);
             case sf::Event::MouseButtonPressed :
-                srand(time(0));
+                srand(time(nullptr));
                 app.commandFlag = rand();
             case sf::Event::KeyPressed:
                 switch (event.key.code) {

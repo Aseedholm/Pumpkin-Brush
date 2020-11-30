@@ -73,6 +73,7 @@ void App::undoCommand() {
 	    if(!m_undo.empty() && m_undo.top()->m_cmdFlag == t->m_cmdFlag) {
 	        undoCommand();
 	    }
+	    m_prevCommand = UNDO;
 
 	}
 
@@ -88,6 +89,7 @@ void App::redoCommand() {
 		if(!m_redo.empty() && m_redo.top()->m_cmdFlag == t->m_cmdFlag) {
 		    redoCommand();
 		}
+		m_prevCommand = REDO;
 	}
 }
 
