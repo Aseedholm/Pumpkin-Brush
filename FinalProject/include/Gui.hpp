@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "App.hpp"
 
+
 class App;
 
 class Gui {
@@ -21,6 +22,7 @@ private:
     void changeBrushSize(App& app);
     void changeBrushType(App& app);
     void undoRedoOption(App& app);
+    void clearCanvas(App &app);
 
 public:
 

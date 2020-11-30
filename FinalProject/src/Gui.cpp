@@ -14,6 +14,7 @@
 #include "nuklear.h"
 #include "nuklear_sfml_gl2.h"
 #include "iostream"
+#include "Clear.hpp"
 
 
 
@@ -43,6 +44,7 @@ Gui::~Gui() {
         changeBrushSize(app);
         changeBrushType(app);
         undoRedoOption(app);
+        clearCanvas(app);
 
     }
     nk_end(ctx);
@@ -135,6 +137,14 @@ void Gui::undoRedoOption(App &app) {
         app.redoCommand();
     }
 
+ }
+
+ void Gui::clearCanvas(App &app) {
+     nk_layout_row_dynamic(ctx, 30, 1);
+     if(nk_button_label(ctx, "Clear Canvas")) {
+         Command* command = new Clear(&app);
+         app.addCommand(command);
+     }
  }
 
 /*! \brief
