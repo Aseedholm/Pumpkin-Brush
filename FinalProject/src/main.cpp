@@ -24,6 +24,7 @@
 #include <iostream>
 #include <string>
 #include <string.h> // memset
+#include "time.h"
 // Project header files
 #include "Data.hpp"
 #include "App.hpp"
@@ -61,14 +62,32 @@ void update(App& app) {
 	while (app.m_window->pollEvent(event)) {
         //andrew edit ****
         //closing the window by clicking the x button (japher edit ***)
-        if (event.type == sf::Event::Closed) {
-            app.m_window->close();
-            exit(EXIT_SUCCESS);
+        switch(event.type) {
+            case sf::Event::Closed :
+                app.m_window->close();
+                exit(EXIT_SUCCESS);
+            case sf::Event::MouseButtonPressed :
+                srand(time(0));
+                app.commandFlag = rand();
+            case sf::Event::KeyPressed:
+                switch (event.key.code) {
+                    case sf::Keyboard::U:
+                        app.undoCommand();
+                        break;
+                    case sf::Keyboard::R:
+                        app.redoCommand();
+                        break;
+                }
         }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
-            Command* command = new Clear(&app);
+         if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+            Command* command = new Clear(&app, app.commandFlag);
             app.addCommand(command);
         }
+//        if(event.type == sf::Event::KeyPressed) {
+//            if(event.key.code = sf::Keyboard::U) {
+//                app.undoCommand();
+//            }
+//        }
 	}
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -93,7 +112,7 @@ void update(App& app) {
 			&& currentXYCoordinates.y > 0 && currentXYCoordinates.y <= app.getWindow().getSize().y) {
 			    // if mouse is left-clicked AND key E is pressed, execute the pixel
 			    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-			        Command* command = new Erase(currentXYCoordinates, &app);
+			        Command* command = new Erase(currentXYCoordinates, &app, app.commandFlag);
                     app.addCommand(command);
 			    }
 			    // else, simple mouse event for drawing
@@ -106,12 +125,12 @@ void update(App& app) {
                     commandToPass.append(std::to_string(counter));
                     counter++;
 
-                    brushSize = app.GetBrush().getSize();
+                    //brushSize = app.GetBrush().getSize();
                     packet << xToPass << yToPass << commandToPass;
                     clientSocket.send(packet);
                     packet.clear();
 
-                    Command* command = new Draw(currentXYCoordinates, &app);
+                    Command* command = new Draw(currentXYCoordinates, &app, app.commandFlag);
                     app.addCommand(command);
 			    }
 			}
@@ -119,13 +138,14 @@ void update(App& app) {
 			// App::getImage().setPixel(coordinate.x,coordinate.y,sf::Color::Red);
 		}
 
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::U)) {
-        app.undoCommand();
-    }
 
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-        app.redoCommand();
-    }
+//	if(sf::Keyboard::isKeyPressed(sf::Keyboard::U)) {
+//        app.undoCommand();
+//    }
+
+//	if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+//        app.redoCommand();
+//    }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         exit(EXIT_SUCCESS);
@@ -179,7 +199,7 @@ void update(App& app) {
 
     // only for debug and test
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        app.GetBrush().getSize();
+        std::cout << app.commandFlag << std::endl;
     }
 
 

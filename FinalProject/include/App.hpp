@@ -60,6 +60,9 @@ public:
 	// 'pmouse' is where the mouse previously was.
 	// 'mouse' records where the mouse currently is.
 	unsigned int pmouseX, pmouseY, mouseX, mouseY;
+
+    // Command flag which will flip once the mouse button was released
+    int commandFlag = 1;
 	sf::RenderWindow* m_window;
 	App();
 	// void operator=(const App& app);

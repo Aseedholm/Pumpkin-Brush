@@ -7,7 +7,7 @@
 #include "Erase.hpp"
 #include "App.hpp"
 
-Erase::Erase(sf::Vector2f coordinate, App* app) {
+Erase::Erase(sf::Vector2f coordinate, App* app, int flag) : Command(flag) {
     m_coordinate = coordinate;
     m_app = app;
     m_backgroundColor = app->getBackgroundColor();

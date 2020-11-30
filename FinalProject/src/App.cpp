@@ -84,10 +84,14 @@ void App::executeCommand(Command* c) {
 */
 void App::undoCommand() {
 	if (!m_undo.empty()) {
-		Command* t = m_undo.top();
-		m_redo.push(t);
-		t->undo();
-		m_undo.pop();
+	    Command* t = m_undo.top();
+	    m_redo.push(t);
+	    t->undo();
+	    m_undo.pop();
+	    if(!m_undo.empty() && m_undo.top()->m_cmdFlag == t->m_cmdFlag) {
+	        undoCommand();
+	    }
+
 	}
 
 }
@@ -96,8 +100,12 @@ void App::undoCommand() {
 */
 void App::redoCommand() {
 	if (!m_redo.empty()) {
-        App::executeCommand(m_redo.top());
+	    Command* t = m_redo.top();
+        App::executeCommand(t);
 		m_redo.pop();
+		if(!m_redo.empty() && m_redo.top()->m_cmdFlag == t->m_cmdFlag) {
+		    redoCommand();
+		}
 	}
 }
 
