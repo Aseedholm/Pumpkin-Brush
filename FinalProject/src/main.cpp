@@ -60,9 +60,10 @@ void update(App& app) {
             app.m_window->close();
             exit(EXIT_SUCCESS);
         }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C) && app.prevCommand != app.commandEnum::CLEAR) {
             Command* command = new Clear(&app);
             app.addCommand(command);
+            app.prevCommand = app.commandEnum::CLEAR;
         }
 	}
 
@@ -116,11 +117,13 @@ void update(App& app) {
 			    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
 			        Command* command = new Erase(currentXYCoordinates, &app);
                     app.addCommand(command);
+                    app.prevCommand = app.commandEnum::ERASE;
 			    }
 			    // else, simple mouse event for drawing
 			    else {
                     Command* command = new Draw(currentXYCoordinates, &app);
                     app.addCommand(command);
+                    app.prevCommand = app.commandEnum::DRAW;
 			    }
 			}
 			// Modify the pixel
