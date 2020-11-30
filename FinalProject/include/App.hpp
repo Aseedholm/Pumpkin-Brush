@@ -78,6 +78,7 @@ public:
     int commandFlag = 1;
     enum commandEnum {DRAW, CLEAR, ERASE, UNDO, REDO};
     commandEnum m_prevCommand;
+    bool onErase = false;
 	sf::RenderWindow* m_window;
 	Gui* m_gui;
 

@@ -138,17 +138,24 @@ Gui::~Gui() {
 *
 */
 void Gui::changeBrushType(App& app) {
-    nk_layout_row_dynamic(ctx, 30, 3);
+    nk_layout_row_dynamic(ctx, 30, 4);
     nk_label(ctx, "Brush Type", NK_TEXT_LEFT);
 
 //    nk_layout_row_dynamic(ctx, 30, 3);
     if (nk_button_label(ctx, "Brush")) {
 //        m_brushType = brushTypeEnum::BRUSH;
         app.setBrush(app.getBrushFactory().createBrush(1));
+        app.onErase = false;
     }
     if (nk_button_label(ctx, "Pen")) {
 //        m_brushType = brushTypeEnum::PEN;
         app.setBrush(app.getBrushFactory().createBrush(2));
+        app.onErase = false;
+    }
+    if (nk_button_label(ctx, "Eraser")) {
+        if(app.m_prevCommand != app.commandEnum::ERASE) {
+            app.onErase = !app.onErase;
+        }
     }
 }
 

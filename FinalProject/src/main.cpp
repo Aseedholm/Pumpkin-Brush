@@ -155,7 +155,7 @@ void update(App& app) {
 			else if (currentXYCoordinates.x > 0 && currentXYCoordinates.x <= app.getWindow().getSize().x
 			&& currentXYCoordinates.y > 0 && currentXYCoordinates.y <= app.getWindow().getSize().y) {
 			    // if mouse is left-clicked AND key E is pressed, execute the pixel
-			    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+			    if (app.onErase) {
 			        Command* command = new Erase(currentXYCoordinates, &app, app.commandFlag);
                     app.addCommand(command);
                     app.m_prevCommand = app.commandEnum::ERASE;
