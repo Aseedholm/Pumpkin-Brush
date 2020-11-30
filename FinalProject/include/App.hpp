@@ -63,6 +63,8 @@ public:
 
     // Command flag which will flip once the mouse button was released
     int commandFlag = 1;
+    enum commandEnum {DRAW, CLEAR, ERASE};
+    commandEnum m_prevCommand;
 	sf::RenderWindow* m_window;
 	App();
 	// void operator=(const App& app);

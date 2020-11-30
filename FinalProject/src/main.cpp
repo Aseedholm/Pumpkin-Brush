@@ -77,12 +77,19 @@ void update(App& app) {
                     case sf::Keyboard::R:
                         app.redoCommand();
                         break;
+                    case sf::Keyboard::C:
+                        if(app.m_prevCommand != app.commandEnum::CLEAR) {
+                            Command* command = new Clear(&app, app.commandFlag);
+                            app.addCommand(command);
+                            app.m_prevCommand = app.commandEnum::CLEAR;
+                            break;
+                        }
                 }
         }
-         if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
-            Command* command = new Clear(&app, app.commandFlag);
-            app.addCommand(command);
-        }
+//         if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+//            Command* command = new Clear(&app, app.commandFlag);
+//            app.addCommand(command);
+//        }
 //        if(event.type == sf::Event::KeyPressed) {
 //            if(event.key.code = sf::Keyboard::U) {
 //                app.undoCommand();
@@ -114,6 +121,7 @@ void update(App& app) {
 			    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
 			        Command* command = new Erase(currentXYCoordinates, &app, app.commandFlag);
                     app.addCommand(command);
+                    app.m_prevCommand = app.commandEnum::ERASE;
 			    }
 			    // else, simple mouse event for drawing
 			    else {
@@ -132,6 +140,7 @@ void update(App& app) {
 
                     Command* command = new Draw(currentXYCoordinates, &app, app.commandFlag);
                     app.addCommand(command);
+                    app.m_prevCommand = app.commandEnum::DRAW;
 			    }
 			}
 			// Modify the pixel
