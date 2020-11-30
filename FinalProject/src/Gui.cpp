@@ -43,11 +43,9 @@ Gui::~Gui() {
         changeBrushSize(app);
         changeBrushType(app);
         undoRedoOption(app);
-
+        changeBackColor(app);
     }
     nk_end(ctx);
-
-
  }
 
 
@@ -56,36 +54,36 @@ Gui::~Gui() {
      nk_label(ctx, "Brush Color", NK_TEXT_LEFT);
 
      nk_layout_row_dynamic(ctx, 30, 4);
-     if (nk_option_label(ctx, "Black", m_brushColor == brushColorEnum::BLACK)) {
-         m_brushColor = brushColorEnum::BLACK;
+     if (nk_option_label(ctx, "Black", m_brushColor == colorEnum::BLACK)) {
+         m_brushColor = colorEnum::BLACK;
          app.getBrush().setColor(sf::Color::Black);
      }
-     if (nk_option_label(ctx, "Red", m_brushColor == brushColorEnum::RED)) {
-         m_brushColor = brushColorEnum::RED;
+     if (nk_option_label(ctx, "Red", m_brushColor == colorEnum::RED)) {
+         m_brushColor = colorEnum::RED;
          app.getBrush().setColor(sf::Color::Red);
      }
-     if (nk_option_label(ctx, "Green", m_brushColor == brushColorEnum::GREEN)) {
-         m_brushColor = brushColorEnum::GREEN;
+     if (nk_option_label(ctx, "Green", m_brushColor == colorEnum::GREEN)) {
+         m_brushColor = colorEnum::GREEN;
          app.getBrush().setColor(sf::Color::Green);
      }
-     if (nk_option_label(ctx, "Blue", m_brushColor == brushColorEnum::BLUE)) {
-         m_brushColor = brushColorEnum::BLUE;
+     if (nk_option_label(ctx, "Blue", m_brushColor == colorEnum::BLUE)) {
+         m_brushColor = colorEnum::BLUE;
          app.getBrush().setColor(sf::Color::Blue);
      }
-     if (nk_option_label(ctx, "White", m_brushColor == brushColorEnum::WHITE)) {
-         m_brushColor = brushColorEnum::WHITE;
+     if (nk_option_label(ctx, "White", m_brushColor == colorEnum::WHITE)) {
+         m_brushColor = colorEnum::WHITE;
          app.getBrush().setColor(sf::Color::White);
      }
-     if (nk_option_label(ctx, "Yellow", m_brushColor == brushColorEnum::YELLOW)) {
-         m_brushColor = brushColorEnum::YELLOW;
+     if (nk_option_label(ctx, "Yellow", m_brushColor == colorEnum::YELLOW)) {
+         m_brushColor = colorEnum::YELLOW;
          app.getBrush().setColor(sf::Color::Yellow);
      }
-     if (nk_option_label(ctx, "Magenta", m_brushColor == brushColorEnum::MAGENTA)) {
-         m_brushColor = brushColorEnum::MAGENTA;
+     if (nk_option_label(ctx, "Magenta", m_brushColor == colorEnum::MAGENTA)) {
+         m_brushColor = colorEnum::MAGENTA;
          app.getBrush().setColor(sf::Color::Magenta);
      }
-     if (nk_option_label(ctx, "Cyan", m_brushColor == brushColorEnum::CYAN)) {
-         m_brushColor = brushColorEnum::CYAN;
+     if (nk_option_label(ctx, "Cyan", m_brushColor == colorEnum::CYAN)) {
+         m_brushColor = colorEnum::CYAN;
          app.getBrush().setColor(sf::Color::Cyan);
      }
  }
@@ -135,6 +133,29 @@ void Gui::undoRedoOption(App &app) {
         app.redoCommand();
     }
 
+ }
+
+ void Gui::changeBackColor(App& app) {
+     nk_layout_row_dynamic(ctx, 30, 1);
+     nk_label(ctx, "Background Color", NK_TEXT_LEFT);
+
+     nk_layout_row_dynamic(ctx, 30, 4);
+     if (nk_option_label(ctx, "White", m_backColor == colorEnum::WHITE)) {
+         m_backColor = colorEnum::WHITE;
+         app.setBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
+     }
+     if (nk_option_label(ctx, "Black", m_backColor == colorEnum::BLACK)) {
+         m_backColor = colorEnum::BLACK;
+         app.setBackgroundColor(new sf::Color(sf::Color::Black.toInteger()));
+     }
+     if (nk_option_label(ctx, "Yellow", m_backColor == colorEnum::YELLOW)) {
+         m_backColor = colorEnum::YELLOW;
+         app.setBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
+     }
+     if (nk_option_label(ctx, "Green", m_backColor == colorEnum::GREEN)) {
+         m_backColor = colorEnum::GREEN;
+         app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
+     }
  }
 
 /*! \brief
