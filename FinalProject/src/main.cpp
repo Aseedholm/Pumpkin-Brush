@@ -36,6 +36,19 @@ sf::TcpSocket clientSocket;
 sf::Socket::Status status;
 sf::Packet packet;
 
+struct metaData {
+    int socketIndex;
+    sf::Uint32 xToPass;
+    sf::Uint32 yToPass;
+    std::string commandToPass;
+    sf::Uint32 colorOfModificationToPass;
+    sf::Uint32 canvasColorToPass;
+    sf::Uint32 sizeOfModification; //flag to send to server that'll be sent to other clients to determine GeneralBrush enum size. 
+    sf::Uint32 brushTypeModification; //flag to send to server that'll be sent to other clients to determine if it is a Pen or Brush being used to draw. 
+    sf::Uint32 windowXToPass;
+    sf::Uint32 windowYToPass;
+};
+
 int counter = 0;
 
 /*! \brief 	Call any initailization functions here.
@@ -55,6 +68,24 @@ void initialization(void) {
 *
 */
 void update(App& app) {
+    //networking receive logic
+    metaData dataToWrite;
+    clientSocket.receive(packet);
+    if(packet >> dataToWrite.xToPass >> dataToWrite.yToPass >> dataToWrite.commandToPass 
+    >> dataToWrite.colorOfModificationToPass >> dataToWrite.canvasColorToPass >> dataToWrite.sizeOfModification 
+    >> dataToWrite.brushTypeModification >> dataToWrite.windowXToPass >> dataToWrite.windowYToPass) {
+        sf::Vector2f passedXY{dataToWrite.xToPass, dataToWrite.yToPass};
+        Command* command = new Draw(passedXY, &app);
+        app.addCommand(command);
+        packet.clear();
+    }
+    
+
+
+    //networking receive logic
+
+
+
 	// Update our canvas
 	sf::Event event;
 	while (app.m_window->pollEvent(event)) {
@@ -141,6 +172,7 @@ void update(App& app) {
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::U)) {
         app.undoCommand();
+        ///
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
@@ -224,6 +256,18 @@ void update(App& app) {
         app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
     }
 
+    // if(sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
+    //     // sf::Vector2u vector{1500, 500};
+    //     // app.getWindow().setSize(vector);
+    //     app.getImage().saveToFile("testimage.jpg");
+    // }
+
+    //     if(sf::Keyboard::isKeyPressed(sf::Keyboard::O)) {
+    //     // sf::Vector2u vector{1500, 500};
+    //     // app.getWindow().setSize(vector);
+    //     app.getImage().loadFromFile("testimage.jpg");
+    // }
+
 
     // Stores the previous mouse click position before going to next frame
     app.pmouseX = app.mouseX;
@@ -255,7 +299,7 @@ void draw(App& app) {
 *
 */
 int main() {
-    // // clientSocket.setBlocking(false);
+    clientSocket.setBlocking(false);
     // //Testing data class. 
     // std::string stringToPass = "Erase";
     // // Data data1;
