@@ -211,7 +211,7 @@ int main() {
 
     sf::TcpListener listenerSocket;
 
-    serverStatus = listenerSocket.listen(8080);
+    serverStatus = listenerSocket.listen(8081);
 
     if(serverStatus != sf::Socket::Done) {
         std::cerr << "Error!" << serverStatus << std::endl;

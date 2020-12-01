@@ -30,6 +30,8 @@
 #include "Command.hpp"
 #include "Draw.hpp"
 #include "Erase.hpp"
+#include "Brush.hpp"
+#include "Pen.hpp"
 
 //Networking
 sf::TcpSocket clientSocket;
@@ -50,6 +52,100 @@ struct metaData {
 };
 
 int counter = 0;
+//newly added
+//original,remote,temp
+void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 colorOfModification, sf::Uint32 sizeOfModification, sf::Uint32 brushTypeOfModification){
+    GeneralBrush originalBrush;
+
+    GeneralBrush& temp = app.GetBrush();
+
+    int brushType; //0 = brush 1 = pen
+    brushType = app.GetBrush().getType();
+
+    if(brushTypeOfModification == 0) { //brush
+        Brush* networkBrush;
+        networkBrush->setColor(sf::Color(colorOfModification));
+        
+        if(sizeOfModification == 0) {
+            size small = small;
+            networkBrush->setSize(small);
+        } else if(sizeOfModification == 1) {
+            size medium = medium;
+            networkBrush->setSize(medium);
+        } else if(sizeOfModification == 2) {
+            size large = large;
+            networkBrush->setSize(large);
+        }
+
+        app.SetBrush(networkBrush);
+
+    } else if(brushTypeOfModification == 1) { //pen
+        Pen* networkPen;
+        networkPen->setColor(sf::Color(colorOfModification));
+
+        if(sizeOfModification == 0) {
+            size small = small;
+            networkPen->setSize(small);
+        } else if(sizeOfModification == 1) {
+            size medium = medium;
+            networkPen->setSize(medium);
+        } else if(sizeOfModification == 2) {
+            size large = large;
+            networkPen->setSize(large);
+        }
+        app.SetBrush(networkPen);
+    }
+
+    
+
+    sf::Vector2f passedXY{xToPass, yToPass};
+    Command* command = new Draw(passedXY, &app);
+    app.addCommand(command);
+
+    app.SetBrush(&temp);
+
+    //make local brush variable. call getter for app so we can retain old brush.
+    //set app's brush to remoteDraw's value. 
+    //get APp's brushType
+    //set app's brush type
+    //get app's color
+    //set app's color to remoteDraw's value
+
+    //do draw command
+
+    //set app's brush to old value
+    //set app's brush size to old value
+    //set app's color to old value. 
+
+    //app.SetBrush(small, medium, or large);
+
+
+}
+
+void packetReceiver(App& app) {
+    metaData dataToWrite;
+    clientSocket.receive(packet);
+    if(packet >> dataToWrite.xToPass >> dataToWrite.yToPass >> dataToWrite.commandToPass 
+    >> dataToWrite.colorOfModificationToPass >> dataToWrite.canvasColorToPass >> dataToWrite.sizeOfModification 
+    >> dataToWrite.brushTypeModification >> dataToWrite.windowXToPass >> dataToWrite.windowYToPass) {
+        packet.clear();
+        if(dataToWrite.commandToPass.compare("draw")){
+            remoteDraw(app, dataToWrite.xToPass, dataToWrite.yToPass, dataToWrite.colorOfModificationToPass, dataToWrite.sizeOfModification, dataToWrite.brushTypeModification);
+        }
+    }
+    //draw
+
+    //erase
+
+    //clear
+
+    //background change - color
+
+
+}
+
+
+//newly added
 
 /*! \brief 	Call any initailization functions here.
 *		This might be for example setting up any
@@ -69,17 +165,17 @@ void initialization(void) {
 */
 void update(App& app) {
     //networking receive logic
-    metaData dataToWrite;
-    clientSocket.receive(packet);
-    if(packet >> dataToWrite.xToPass >> dataToWrite.yToPass >> dataToWrite.commandToPass 
-    >> dataToWrite.colorOfModificationToPass >> dataToWrite.canvasColorToPass >> dataToWrite.sizeOfModification 
-    >> dataToWrite.brushTypeModification >> dataToWrite.windowXToPass >> dataToWrite.windowYToPass) {
-        sf::Vector2f passedXY{dataToWrite.xToPass, dataToWrite.yToPass};
-        Command* command = new Draw(passedXY, &app);
-        app.addCommand(command);
-        packet.clear();
-    }
-    
+    // metaData dataToWrite;
+    // clientSocket.receive(packet);
+    // if(packet >> dataToWrite.xToPass >> dataToWrite.yToPass >> dataToWrite.commandToPass 
+    // >> dataToWrite.colorOfModificationToPass >> dataToWrite.canvasColorToPass >> dataToWrite.sizeOfModification 
+    // >> dataToWrite.brushTypeModification >> dataToWrite.windowXToPass >> dataToWrite.windowYToPass) {
+    //     sf::Vector2f passedXY{dataToWrite.xToPass, dataToWrite.yToPass};
+    //     Command* command = new Draw(passedXY, &app);
+    //     app.addCommand(command);
+    //     packet.clear();
+    // }
+    packetReceiver(app);
 
 
     //networking receive logic
@@ -146,8 +242,6 @@ void update(App& app) {
                     yToPass = currentXYCoordinates.y;
 
                     commandToPass = "draw ";
-                    commandToPass.append(std::to_string(counter));
-                    counter++;
 
                     colorOfModificationToPass = app.GetBrush().getColor().toInteger();
                     canvasColorToPass = app.getBackgroundColor().toInteger();
@@ -242,18 +336,55 @@ void update(App& app) {
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
         app.setBackgroundColor(new sf::Color(sf::Color::Blue.toInteger()));
+        //test
+        // sf::Color oldColor = app.getBackgroundColor();
+        // for(int i =0; i < app.getWindow().getSize().x; i++) {
+        //     for (int j = 0; j < app.getWindow().getSize().y; j++) {
+        //         if(app.getImage().getPixel(i, j) == oldColor) {
+        //             app.getImage().setPixel(i,j, sf::Color::Blue);
+        //         }
+        //     }
+        // }
+
+        //test
+
     }
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         app.setBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
+        // sf::Color oldColor = app.getBackgroundColor();
+        // for(int i =0; i < app.getWindow().getSize().x; i++) {
+        //     for (int j = 0; j < app.getWindow().getSize().y; j++) {
+        //         if(app.getImage().getPixel(i, j) == oldColor) {
+        //             app.getImage().setPixel(i,j, sf::Color::White);
+        //         }
+        //     }
+        // }
     }
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
         app.setBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
+
+        // sf::Color oldColor = app.getBackgroundColor();
+        // for(int i =0; i < app.getWindow().getSize().x; i++) {
+        //     for (int j = 0; j < app.getWindow().getSize().y; j++) {
+        //         if(app.getImage().getPixel(i, j) == oldColor) {
+        //             app.getImage().setPixel(i,j, sf::Color::Yellow);
+        //         }
+        //     }
+        // }
     }
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
         app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
+        // sf::Color oldColor = app.getBackgroundColor();
+        // for(int i =0; i < app.getWindow().getSize().x; i++) {
+        //     for (int j = 0; j < app.getWindow().getSize().y; j++) {
+        //         if(app.getImage().getPixel(i, j) == oldColor) {
+        //             app.getImage().setPixel(i,j, sf::Color::Green);
+        //         }
+        //     }
+        // }
     }
 
     // if(sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
@@ -295,6 +426,7 @@ void draw(App& app) {
 }
 
 
+
 /*! \brief 	The entry point into our program.
 *
 */
@@ -312,7 +444,7 @@ int main() {
     memset(buffer, 0, 1000);
     std::size_t received;
     sf::IpAddress ip = sf::IpAddress::getLocalAddress();
-    status = clientSocket.connect(ip, 8080);
+    status = clientSocket.connect(ip, 8081);
     if(status != sf::Socket::Done) {
         std::cerr << "Error!" << status << std::endl;
     }
