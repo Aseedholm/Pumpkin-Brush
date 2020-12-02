@@ -22,6 +22,7 @@
 #include <SFML/Network.hpp>
 // Include standard library C++ libraries.
 #include <iostream>
+#include <ostream>
 #include <string>
 #include <string.h> // memset
 // Project header files
@@ -55,54 +56,64 @@ int counter = 0;
 //newly added
 //original,remote,temp
 void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 colorOfModification, sf::Uint32 sizeOfModification, sf::Uint32 brushTypeOfModification){
-    GeneralBrush originalBrush;
 
     GeneralBrush& temp = app.GetBrush();
-
-    int brushType; //0 = brush 1 = pen
-    brushType = app.GetBrush().getType();
+    
 
     if(brushTypeOfModification == 0) { //brush
-        Brush* networkBrush;
+        Brush* networkBrush = new Brush();
+
         networkBrush->setColor(sf::Color(colorOfModification));
-        
+
         if(sizeOfModification == 0) {
-            size small = small;
+            size small = size::small;
             networkBrush->setSize(small);
         } else if(sizeOfModification == 1) {
-            size medium = medium;
+            size medium = size::medium;
             networkBrush->setSize(medium);
         } else if(sizeOfModification == 2) {
-            size large = large;
+            size large = size::large;
             networkBrush->setSize(large);
         }
-
         app.SetBrush(networkBrush);
 
-    } else if(brushTypeOfModification == 1) { //pen
-        Pen* networkPen;
-        networkPen->setColor(sf::Color(colorOfModification));
+        sf::Vector2f passedXY{xToPass, yToPass};
 
-        if(sizeOfModification == 0) {
-            size small = small;
-            networkPen->setSize(small);
-        } else if(sizeOfModification == 1) {
-            size medium = medium;
-            networkPen->setSize(medium);
-        } else if(sizeOfModification == 2) {
-            size large = large;
-            networkPen->setSize(large);
-        }
-        app.SetBrush(networkPen);
-    }
+        Command* command = new Draw(passedXY, &app);
+
+        app.addCommand(command);
+
+        delete networkBrush;
+
+        app.SetBrush(&temp);
+    } 
+
+
+
+    // else if(brushTypeOfModification == 1) { //pen
+    //     Pen* networkPen;
+    //     networkPen->setColor(sf::Color(colorOfModification));
+
+    //     if(sizeOfModification == 0) {
+    //         size small = small;
+    //         networkPen->setSize(small);
+    //     } else if(sizeOfModification == 1) {
+    //         size medium = medium;
+    //         networkPen->setSize(medium);
+    //     } else if(sizeOfModification == 2) {
+    //         size large = large;
+    //         networkPen->setSize(large);
+    //     }
+    //     app.SetBrush(networkPen);
+    // }
 
     
 
-    sf::Vector2f passedXY{xToPass, yToPass};
-    Command* command = new Draw(passedXY, &app);
-    app.addCommand(command);
+    // sf::Vector2f passedXY{xToPass, yToPass};
+    // Command* command = new Draw(passedXY, &app);
+    // app.addCommand(command);
 
-    app.SetBrush(&temp);
+    // app.SetBrush(&temp);
 
     //make local brush variable. call getter for app so we can retain old brush.
     //set app's brush to remoteDraw's value. 
@@ -118,12 +129,12 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
     //set app's color to old value. 
 
     //app.SetBrush(small, medium, or large);
-
-
+    
 }
 
 void packetReceiver(App& app) {
     metaData dataToWrite;
+    std::cout << "Packet Receiver" << std::endl;
     clientSocket.receive(packet);
     if(packet >> dataToWrite.xToPass >> dataToWrite.yToPass >> dataToWrite.commandToPass 
     >> dataToWrite.colorOfModificationToPass >> dataToWrite.canvasColorToPass >> dataToWrite.sizeOfModification 
@@ -141,7 +152,7 @@ void packetReceiver(App& app) {
 
     //background change - color
 
-
+std::cout << "Exit packet receiver" << std::endl;
 }
 
 
@@ -164,21 +175,6 @@ void initialization(void) {
 *
 */
 void update(App& app) {
-    //networking receive logic
-    // metaData dataToWrite;
-    // clientSocket.receive(packet);
-    // if(packet >> dataToWrite.xToPass >> dataToWrite.yToPass >> dataToWrite.commandToPass 
-    // >> dataToWrite.colorOfModificationToPass >> dataToWrite.canvasColorToPass >> dataToWrite.sizeOfModification 
-    // >> dataToWrite.brushTypeModification >> dataToWrite.windowXToPass >> dataToWrite.windowYToPass) {
-    //     sf::Vector2f passedXY{dataToWrite.xToPass, dataToWrite.yToPass};
-    //     Command* command = new Draw(passedXY, &app);
-    //     app.addCommand(command);
-    //     packet.clear();
-    // }
-    packetReceiver(app);
-
-
-    //networking receive logic
 
 
 
@@ -237,6 +233,7 @@ void update(App& app) {
 			    }
 			    // else, simple mouse event for drawing
 			    else {
+                    if(app.getWindow().hasFocus()) {
                     // std::cout << currentXYCoordinates.x << " " << currentXYCoordinates.y << std::endl;
                     xToPass = currentXYCoordinates.x;
                     yToPass = currentXYCoordinates.y;
@@ -259,6 +256,29 @@ void update(App& app) {
                     Command* command = new Draw(currentXYCoordinates, &app);
                     app.addCommand(command);
 			    }
+                    }
+                //     // std::cout << currentXYCoordinates.x << " " << currentXYCoordinates.y << std::endl;
+                //     xToPass = currentXYCoordinates.x;
+                //     yToPass = currentXYCoordinates.y;
+
+                //     commandToPass = "draw ";
+
+                //     colorOfModificationToPass = app.GetBrush().getColor().toInteger();
+                //     canvasColorToPass = app.getBackgroundColor().toInteger();
+
+                //     sizeOfModification = app.GetBrush().getSize(); //When implemented will reflect brush size relating to enum, flags can be 0 = small, 1 = medium, 2 = large. 
+                //     brushTypeModification = app.GetBrush().getType(); //flag could be  0 = brush, 1 = pen. 
+                //     windowXToPass = app.getWindow().getSize().x;
+                //     windowYToPass = app.getWindow().getSize().y;
+                //     std::cout << "Client Sent PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: " << commandToPass <<"\nColor: " << colorOfModificationToPass << "\nCanvas Color: " << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: " << windowXToPass << "\nWindow Y: " << windowYToPass <<std::endl;
+                //     // brushSize = app.GetBrush().getSize();
+                //     packet << xToPass << yToPass << commandToPass << colorOfModificationToPass << canvasColorToPass << sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
+                //     clientSocket.send(packet);
+                //     packet.clear();
+
+                //     Command* command = new Draw(currentXYCoordinates, &app);
+                //     app.addCommand(command);
+			    // }
 			}
 			// Modify the pixel
 			// App::getImage().setPixel(coordinate.x,coordinate.y,sf::Color::Red);
@@ -305,13 +325,13 @@ void update(App& app) {
     }
 
     // Handling change size of drawing tool
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1)&& app.getWindow().hasFocus()) {
         app.GetBrush().setSize(size::small);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F2)) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F2)&& app.getWindow().hasFocus()) {
         app.GetBrush().setSize(size::medium);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F3)) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F3) && app.getWindow().hasFocus()) {
         app.GetBrush().setSize(size::large);
     }
 
@@ -375,7 +395,7 @@ void update(App& app) {
         // }
     }
 
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::G) && app.getWindow().hasFocus()) {
         app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
         // sf::Color oldColor = app.getBackgroundColor();
         // for(int i =0; i < app.getWindow().getSize().x; i++) {
@@ -403,6 +423,7 @@ void update(App& app) {
     // Stores the previous mouse click position before going to next frame
     app.pmouseX = app.mouseX;
     app.pmouseY = app.mouseY;
+    packetReceiver(app);
 }
 
 
