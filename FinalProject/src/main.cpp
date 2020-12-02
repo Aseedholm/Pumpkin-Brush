@@ -33,6 +33,7 @@
 #include "Erase.hpp"
 #include "Brush.hpp"
 #include "Pen.hpp"
+#include "Clear.hpp"
 
 //Networking
 sf::TcpSocket clientSocket;
@@ -177,6 +178,10 @@ void update(App& app) {
             app.m_window->close();
             exit(EXIT_SUCCESS);
         }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+            Command* command = new Clear(&app);
+            app.addCommand(command);
+        }
 	}
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -209,7 +214,6 @@ void update(App& app) {
 			// store the mouse position of the current frame
 			app.mouseX = currentXYCoordinates.x;
 			app.mouseY = currentXYCoordinates.y;
-
 
 			if(app.mouseX == app.pmouseX && app.mouseY == app.pmouseY){
 			    //std::cout << "Clicking the same pixel, do not execute commands" << std::endl;
@@ -301,14 +305,13 @@ void update(App& app) {
         ///
     }
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
         app.redoCommand();
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         exit(EXIT_SUCCESS);
     }
-
 
     // Handling change color event
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
@@ -360,10 +363,6 @@ void update(App& app) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         app.GetBrush().getSize();
     }
-
-
-
-
 
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {

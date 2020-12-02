@@ -109,6 +109,10 @@ sf::Image& App::getImage() {
 	return *m_image;
 }
 
+void App::setImage(sf::Image* newImage) {
+    m_image = newImage;
+}
+
 /*! \brief 	Return a reference to our m_Texture so that
 *		we do not have to publicly expose it.
 *
