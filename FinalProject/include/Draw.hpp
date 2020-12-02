@@ -28,12 +28,14 @@ private:
 	std::vector<sf::Color> m_originalColors;
     sf::Color m_color;
 
+
 public:
+
 	bool execute();
 	bool undo();
 	void setOriginalColor();
 //	Draw(sf::Vector2i m_coordinate, App*);
-	Draw(sf::Vector2f coordinate, App* app); //andrew edit ***
+	Draw(sf::Vector2f coordinate, App* app, int flag); //andrew edit ***
 
 };
 

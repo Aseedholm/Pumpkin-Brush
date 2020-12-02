@@ -52,11 +52,11 @@ void Draw::setOriginalColor() {
 /*! \brief 	Draw Constructor that takes in the x and y co-ordinates of the mouse
 *
 */
-Draw::Draw(sf::Vector2f coordinate, App* app) { //andrew edit **
+Draw::Draw(sf::Vector2f coordinate, App* app, int cmdFlag) :Command(cmdFlag) { //andrew edit **
 	m_coordinate = coordinate;
 	m_app = app;
-	m_shader = m_app->GetBrush().getShader();
-	m_color = m_app->GetBrush().getColor();
+	m_shader = m_app->getBrush().getShader();
+	m_color = m_app->getBrush().getColor();
     setOriginalColor();
 }
 
