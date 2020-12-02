@@ -221,6 +221,8 @@ void App::loop(App& app) {
 
 	m_initFunc();
 
+
+
 	// Start the main rendering loop
 	while (m_window->isOpen()) {
 		// Clear the window

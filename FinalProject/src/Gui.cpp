@@ -36,7 +36,7 @@ Gui::~Gui() {
  *
  */
  void Gui::drawGUI(App& app) {
-    if (nk_begin(ctx, "Erasure Tools", nk_rect(50, 50, 500, 150),
+    if (nk_begin(ctx, "Basic Tools", nk_rect(50, 50, 500, 150),
                  NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
                  NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE)) {
         static int property = 20;
@@ -163,8 +163,7 @@ void Gui::changeBrushType(App& app) {
  *
  */
 void Gui::undoRedoOption(App &app) {
-    nk_layout_row_dynamic(ctx, 30, 3);
-    nk_label(ctx, "Option", NK_TEXT_LEFT);
+    nk_layout_row_dynamic(ctx, 30, 2);
     if(nk_button_label(ctx, "Undo")) {
         app.undoCommand();
     }
@@ -179,8 +178,7 @@ void Gui::undoRedoOption(App &app) {
 *
 */
  void Gui::clearCanvas(App &app) {
-     nk_layout_row_dynamic(ctx, 30, 3);
-     nk_label(ctx, "Erasure", NK_TEXT_LEFT);
+     nk_layout_row_dynamic(ctx, 30, 1);
      if (nk_button_label(ctx, "Clear Canvas")) {
          if (app.m_prevCommand != app.commandEnum::CLEAR) {
              srand(time(nullptr));
@@ -248,18 +246,36 @@ void Gui::undoRedoOption(App &app) {
 
     ctx = nk_sfml_init(m_guiWindow);
 
-//    struct nk_colorf m_bg;
-//    m_bg.r = 0.10f, m_bg.g = 0.18f, m_bg.b = 0.24f, m_bg.a = 1.0f;
+    // Init style
+    //NkColor blue = NkColor.create().set((byte)0x00, (byte)0x00, (byte)0xFF, (byte)0xFF);
+    ctx->style.text.color.g = 255;
+    ctx->style.text.color.r = 0;
+    ctx->style.text.color.b = 0;
+    // Window color header
+    ctx->style.window.header.normal.data.color.r = 255;
+    ctx->style.window.header.normal.data.color.g = 220;
+    ctx->style.window.header.normal.data.color.b = 0;
+    ctx->style.window.header.active.data.color.r = 255;
+    ctx->style.window.header.active.data.color.g = 220;
+    ctx->style.window.header.active.data.color.b = 0;
+    // Button color
+    ctx->style.button.hover.data.color.r = 0;
+    ctx->style.button.hover.data.color.g = 204;
+    ctx->style.button.hover.data.color.b = 255;
 
+    ctx->style.button.active.data.color.r = 0;
+    ctx->style.button.active.data.color.g = 128;
+    ctx->style.button.active.data.color.b = 255;
+    // Init font
     struct nk_font_atlas *atlas;
-
     nk_sfml_font_stash_begin(&atlas);
+    const char *font_path = "../nuklear/extra_font/kenvector_future_thin.ttf";
+    struct nk_font *future = nk_font_atlas_add_from_file(atlas, font_path, 16, 0);
     nk_sfml_font_stash_end();
+    //nk_style_load_all_cursors(ctx, atlas->cursors);
+    nk_style_set_font(ctx, &future->handle);
 
-    // change font
-//    nk_glfw3_font_stash_begin(&glfw, &atlas);
-//    struct nk_font *future = nk_font_atlas_add_from_file(atlas, "./nuklear/extra_font/kenvector_future_thin.ttf", 13, 0);
-//    nk_glfw3_font_stash_end(&glfw);
+
  }
 
 
