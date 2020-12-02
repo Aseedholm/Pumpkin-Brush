@@ -286,8 +286,6 @@ void update(App& app) {
             // if mouse is left-clicked AND key E is pressed, execute the pixel
 
             if (app.onErase) {
-                Command *command = new Erase(currentXYCoordinates, &app, app.commandFlag);
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
                     //networking
                     xToPass = currentXYCoordinates.x;
                     yToPass = currentXYCoordinates.y;
@@ -320,7 +318,7 @@ void update(App& app) {
                     app.addCommand(command);
                     app.m_prevCommand = app.commandEnum::ERASE;
 
-                }
+
                 // else, simple mouse event for drawing
             }
                 else {
