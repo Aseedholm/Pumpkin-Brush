@@ -90,46 +90,32 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
 
 
 
-    // else if(brushTypeOfModification == 1) { //pen
-    //     Pen* networkPen;
-    //     networkPen->setColor(sf::Color(colorOfModification));
+    else if(brushTypeOfModification == 1) { //pen
+        Pen* networkPen = new Pen();
+        networkPen->setColor(sf::Color(colorOfModification));
 
-    //     if(sizeOfModification == 0) {
-    //         size small = small;
-    //         networkPen->setSize(small);
-    //     } else if(sizeOfModification == 1) {
-    //         size medium = medium;
-    //         networkPen->setSize(medium);
-    //     } else if(sizeOfModification == 2) {
-    //         size large = large;
-    //         networkPen->setSize(large);
-    //     }
-    //     app.SetBrush(networkPen);
-    // }
+        if(sizeOfModification == 0) {
+            size small = size::small;
+            networkPen->setSize(small);
+        } else if(sizeOfModification == 1) {
+            size medium = size::medium;
+            networkPen->setSize(medium);
+        } else if(sizeOfModification == 2) {
+            size large = size::large;
+            networkPen->setSize(large);
+        }
+        app.SetBrush(networkPen);
 
-    
+        sf::Vector2f passedXY{xToPass, yToPass};
 
-    // sf::Vector2f passedXY{xToPass, yToPass};
-    // Command* command = new Draw(passedXY, &app);
-    // app.addCommand(command);
+        Command* command = new Draw(passedXY, &app);
 
-    // app.SetBrush(&temp);
+        app.addCommand(command);
 
-    //make local brush variable. call getter for app so we can retain old brush.
-    //set app's brush to remoteDraw's value. 
-    //get APp's brushType
-    //set app's brush type
-    //get app's color
-    //set app's color to remoteDraw's value
+        delete networkPen;
 
-    //do draw command
-
-    //set app's brush to old value
-    //set app's brush size to old value
-    //set app's color to old value. 
-
-    //app.SetBrush(small, medium, or large);
-    
+        app.SetBrush(&temp);
+    }
 }
 
 void packetReceiver(App& app) {
