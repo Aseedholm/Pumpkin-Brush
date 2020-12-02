@@ -25,7 +25,7 @@ public:
     bool execute();
     bool undo();
     void setOriginalColor();
-    Erase(sf::Vector2f coordinate, App* app);
+    Erase(sf::Vector2f coordinate, App* app, int flag);
 };
 
 #endif //APP_ERASE_HPP

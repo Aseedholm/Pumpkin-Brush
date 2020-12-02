@@ -7,12 +7,11 @@
 
 #include "Clear.hpp"
 
-Clear::Clear(App *app) {
+Clear::Clear(App *app, int flag) : Command(flag) {
     m_app = app;
     m_originalImage = app->getImage();
     m_backgroundColor = app->getBackgroundColor();
     m_imageSize = app->getImage().getSize();
-
     m_newImage = new sf::Image;
     m_newImage->create(m_imageSize.x, m_imageSize.y, m_backgroundColor);
 }
@@ -35,6 +34,6 @@ bool Clear::undo() {
     m_app->setImage(&m_originalImage);
     // reload the original image back onto the app texture
     m_app->getTexture().loadFromImage(m_app->getImage());
-
+    //m_app->getTexture().loadFromImage(m_originalImage);
     return true;
 }

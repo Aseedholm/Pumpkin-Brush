@@ -7,21 +7,31 @@
 #ifndef APP_HPP 
 #define APP_HPP
 
+
+
 // Include our Third-Party SFML header
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+
+// Include OpenGL
+
+
 // Include standard library C++ libraries.
 #include <queue>
 #include <stack>
 #include "Command.hpp"
 
+
 #include "BrushFactory.hpp"
+#include "Gui.hpp"
 // Project header files
 // #include ...
 
 // Singleton for our Application called 'App'.
+class Gui;
+
 class App{
 private:
 // Member variables
@@ -44,6 +54,8 @@ private:
 
 	sf::Color* m_backgroundColor;
 
+
+
 // Member functions
 	// Default constructor which is hidden in the Singleton
 	// Store the address of our funcion pointer
@@ -51,6 +63,7 @@ private:
 	void (*m_initFunc)(void);
 	void (*m_updateFunc)(App&);
 	void (*m_drawFunc)(App&);
+
 
 public:
 	
@@ -60,15 +73,23 @@ public:
 	// 'pmouse' is where the mouse previously was.
 	// 'mouse' records where the mouse currently is.
 	unsigned int pmouseX, pmouseY, mouseX, mouseY;
+
+    // Command flag which will flip once the mouse button was released
+    int commandFlag = 1;
+    enum commandEnum {DRAW, CLEAR, ERASE, UNDO, REDO};
+    commandEnum m_prevCommand;
+    bool onErase = false;
 	sf::RenderWindow* m_window;
+	Gui* m_gui;
+
 	App();
 	// void operator=(const App& app);
 // Member functions
 
 
-	GeneralBrush& GetBrush();
+	GeneralBrush& getBrush();
   BrushFactory getBrushFactory();
-	void SetBrush(GeneralBrush* brush);
+	void setBrush(GeneralBrush* brush);
 	void addCommand(Command* c);
 	void executeCommand(Command* c);
 	void undoCommand();
@@ -87,6 +108,8 @@ public:
 	void loop(App& app);
 	void setBackgroundColor(sf::Color *colorPassed);
 	sf::Color& getBackgroundColor();
+
+
 };
 
 

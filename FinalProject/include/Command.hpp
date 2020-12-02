@@ -18,7 +18,11 @@
 class Command{
 private:
 	std::string m_commandDescription;
+
 public:
+    int m_cmdFlag;
+    // Constructor of a command
+    Command(int cmdFlag): m_cmdFlag(cmdFlag){};
 	// Destructor for a command
 	virtual ~Command();
 
