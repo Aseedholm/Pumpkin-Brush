@@ -120,7 +120,7 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
 
 void packetReceiver(App& app) {
     metaData dataToWrite;
-    std::cout << "Packet Receiver" << std::endl;
+    // std::cout << "Packet Receiver" << std::endl;
     clientSocket.receive(packet);
     if(packet >> dataToWrite.xToPass >> dataToWrite.yToPass >> dataToWrite.commandToPass 
     >> dataToWrite.colorOfModificationToPass >> dataToWrite.canvasColorToPass >> dataToWrite.sizeOfModification 
@@ -128,6 +128,10 @@ void packetReceiver(App& app) {
         packet.clear();
         if(dataToWrite.commandToPass.compare("draw")){
             remoteDraw(app, dataToWrite.xToPass, dataToWrite.yToPass, dataToWrite.colorOfModificationToPass, dataToWrite.sizeOfModification, dataToWrite.brushTypeModification);
+        } else if (dataToWrite.commandToPass.compare("erase")) {
+            sf::Vector2f passedXY{dataToWrite.xToPass, dataToWrite.yToPass};
+            Command* command = new Erase(passedXY, &app);
+            app.addCommand(command);
         }
     }
     //draw
@@ -138,7 +142,7 @@ void packetReceiver(App& app) {
 
     //background change - color
 
-std::cout << "Exit packet receiver" << std::endl;
+// std::cout << "Exit packet receiver" << std::endl;
 }
 
 
@@ -214,6 +218,28 @@ void update(App& app) {
 			&& currentXYCoordinates.y > 0 && currentXYCoordinates.y <= app.getWindow().getSize().y) {
 			    // if mouse is left-clicked AND key E is pressed, execute the pixel
 			    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+                    //networking
+                    xToPass = currentXYCoordinates.x;
+                    yToPass = currentXYCoordinates.y;
+
+                    commandToPass = "erase";
+
+                    // colorOfModificationToPass = app.GetBrush().getColor().toInteger();
+                    colorOfModificationToPass = app.getBackgroundColor().toInteger();
+                    canvasColorToPass = app.getBackgroundColor().toInteger();
+
+                    sizeOfModification = app.GetBrush().getSize(); //When implemented will reflect brush size relating to enum, flags can be 0 = small, 1 = medium, 2 = large. 
+                    brushTypeModification = app.GetBrush().getType(); //flag could be  0 = brush, 1 = pen. 
+                    windowXToPass = app.getWindow().getSize().x;
+                    windowYToPass = app.getWindow().getSize().y;
+                    std::cout << "Client Sent PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: " << commandToPass <<"\nColor: " << colorOfModificationToPass << "\nCanvas Color: " << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: " << windowXToPass << "\nWindow Y: " << windowYToPass <<std::endl;
+                    // brushSize = app.GetBrush().getSize();
+                    packet << xToPass << yToPass << commandToPass << colorOfModificationToPass << canvasColorToPass << sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
+                    clientSocket.send(packet);
+                    packet.clear();
+                    //networking
+
+
 			        Command* command = new Erase(currentXYCoordinates, &app);
                     app.addCommand(command);
 			    }

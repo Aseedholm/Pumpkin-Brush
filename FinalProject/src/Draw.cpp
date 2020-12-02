@@ -44,12 +44,8 @@ bool Draw::undo() {
  */
 void Draw::setOriginalColor() {
     for(int i = 0; i <m_shader.size(); i++) {
-        std::cout << m_coordinate.x << " " << m_coordinate.y << std::endl;
-        std::cout << m_shader[i][0] << " " << m_shader[i][1] <<std::endl;
         sf::Color pixelColor = m_app->getImage().getPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1]);
-        std::cout << i << std::endl;
         m_originalColors.push_back(pixelColor);
-        std::cout << i << std::endl;
     }
 }
 
@@ -57,16 +53,10 @@ void Draw::setOriginalColor() {
 *
 */
 Draw::Draw(sf::Vector2f coordinate, App* app) { //andrew edit **
-std::cout << "PRINT 1" << std::endl;
 	m_coordinate = coordinate;
-    std::cout << "PRINT 2" << std::endl;
 	m_app = app;
-    std::cout << "PRINT 3" << std::endl;
 	m_shader = m_app->GetBrush().getShader();
-    std::cout << "PRINT 4" << std::endl;
 	m_color = m_app->GetBrush().getColor();
-    std::cout << "PRINT 5" << std::endl;
     setOriginalColor();
-    std::cout << "PRINT 6" << std::endl;
 }
 
