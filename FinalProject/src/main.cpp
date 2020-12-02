@@ -119,6 +119,7 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
     }
 }
 
+//this method receives packets.
 void packetReceiver(App& app) {
     metaData dataToWrite;
     // std::cout << "Packet Receiver" << std::endl;
