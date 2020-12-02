@@ -245,7 +245,7 @@ void App::loop(App& app) {
 		
 		if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 
 			m_sprite->setColor(*m_backgroundColor);
-		}
+		} //Andrew background update. 
 		
 		m_window->draw(*m_sprite);
 		// Display the canvas
