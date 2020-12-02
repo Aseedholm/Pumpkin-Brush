@@ -321,7 +321,8 @@ void update(App& app) {
                     app.m_prevCommand = app.commandEnum::ERASE;
 
                 }
-                    // else, simple mouse event for drawing
+                // else, simple mouse event for drawing
+            }
                 else {
                     if (app.getWindow().hasFocus()) {
                         // std::cout << currentXYCoordinates.x << " " << currentXYCoordinates.y << std::endl;
@@ -351,34 +352,8 @@ void update(App& app) {
                         Command *command = new Draw(currentXYCoordinates, &app, app.commandFlag);
                         app.addCommand(command);
                         app.m_prevCommand = app.commandEnum::DRAW;
-
                     }
                 }
-                //     // std::cout << currentXYCoordinates.x << " " << currentXYCoordinates.y << std::endl;
-                //     xToPass = currentXYCoordinates.x;
-                //     yToPass = currentXYCoordinates.y;
-
-                //     commandToPass = "draw ";
-
-                //     colorOfModificationToPass = app.GetBrush().getColor().toInteger();
-                //     canvasColorToPass = app.getBackgroundColor().toInteger();
-
-                //     sizeOfModification = app.GetBrush().getSize(); //When implemented will reflect brush size relating to enum, flags can be 0 = small, 1 = medium, 2 = large. 
-                //     brushTypeModification = app.GetBrush().getType(); //flag could be  0 = brush, 1 = pen. 
-                //     windowXToPass = app.getWindow().getSize().x;
-                //     windowYToPass = app.getWindow().getSize().y;
-                //     std::cout << "Client Sent PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: " << commandToPass <<"\nColor: " << colorOfModificationToPass << "\nCanvas Color: " << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: " << windowXToPass << "\nWindow Y: " << windowYToPass <<std::endl;
-                //     // brushSize = app.GetBrush().getSize();
-                //     packet << xToPass << yToPass << commandToPass << colorOfModificationToPass << canvasColorToPass << sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
-                //     clientSocket.send(packet);
-                //     packet.clear();
-
-                //     Command* command = new Draw(currentXYCoordinates, &app);
-                //     app.addCommand(command);
-                // }
-            }
-            // Modify the pixel
-            // App::getImage().setPixel(coordinate.x,coordinate.y,sf::Color::Red);
         }
 
 
