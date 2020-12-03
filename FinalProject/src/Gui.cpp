@@ -15,7 +15,6 @@
 #include "iostream"
 #include "Clear.hpp"
 
-
 nk_window *win;
 
 /*! \brief Constructor of Gui
@@ -183,7 +182,7 @@ void Gui::undoRedoOption(App &app) {
          if (app.m_prevCommand != app.commandEnum::CLEAR) {
              srand(time(nullptr));
              app.commandFlag = rand();
-             Command *command = new Clear(&app, app.commandFlag);
+             Command *command = new Clear(&app, app.commandFlag, "clear");
              app.addCommand(command);
              app.m_prevCommand = app.commandEnum::CLEAR;
          }

@@ -43,9 +43,27 @@ App::App(){
 	m_texture = new sf::Texture;
 	m_brush = m_brushFactory.createBrush(1);
 	m_backgroundColor = new sf::Color(sf::Color::White.toInteger());
-
-
 }
+
+/*! \brief Add command that adds the pixel position in stack
+*
+*/
+App::App(sf::IpAddress ipAddress, int port){
+	std::cout << "Constructor of App called" << std::endl;
+	m_window = nullptr;
+	m_image = new sf::Image;
+	m_sprite = new sf::Sprite;
+	m_texture = new sf::Texture;
+	m_brush = m_brushFactory.createBrush(1);
+	m_backgroundColor = new sf::Color(sf::Color::White.toInteger());
+	//Networking
+	clientSocketInApp.setBlocking(false);
+    statusInApp = clientSocketInApp.connect(ipAddress, port);
+    if(statusInApp != sf::Socket::Done) {
+        std::cerr << "Error!" << statusInApp << std::endl;
+    }
+}
+
 // void App::operator=(const App& app){
 
 // }
@@ -64,9 +82,14 @@ void App::executeCommand(Command* c) {
 /*! \brief The undoCommand function unodoes the the pixel in reverse chronological order
 *
 */
-void App::undoCommand() {
+Command* App::undoCommand() {
 	if (!m_undo.empty()) {
 	    Command* t = m_undo.top();
+		// packetInApp << xToPass << yToPass << t->getCommand() <<  << canvasColorToPass
+		// 	<< sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
+
+		// clientSocketInApp.send(packetInApp);
+
 	    m_redo.push(t);
 	    t->undo();
 	    m_undo.pop();
@@ -74,7 +97,7 @@ void App::undoCommand() {
 	        undoCommand();
 	    }
 	    m_prevCommand = UNDO;
-
+		return t;
 	}
 
 }
@@ -145,6 +168,15 @@ void App::setBrush(GeneralBrush* brush) {
     m_brush = brush;
 }
 
+std::stack<Command *> App::getUndoStack(){
+	return m_undo;
+
+}
+
+std::stack<Command *> App::getRedoStack(){
+
+	return m_redo;
+}
 
 /*! \brief 	Destroy we manually call at end of our program.
 
@@ -152,7 +184,8 @@ void App::setBrush(GeneralBrush* brush) {
 *		do not have to publicly expose it.
 *
 */
-sf::Color& App::getBackgroundColor() { //Andrew edit*****
+sf::Color &App::getBackgroundColor()
+{ //Andrew edit*****
 	return *m_backgroundColor;
 }
 

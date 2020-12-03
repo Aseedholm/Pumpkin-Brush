@@ -15,6 +15,8 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
+#include <SFML/Network.hpp>
+
 // Include OpenGL
 
 
@@ -66,7 +68,10 @@ private:
 
 
 public:
-	
+		//Networking
+	sf::TcpSocket clientSocketInApp;
+	sf::Socket::Status statusInApp;
+	sf::Packet packetInApp;
 	
 // Member Variables	
 	// Keeps track of the previous mouse and current mouse positions
@@ -83,6 +88,7 @@ public:
 	Gui* m_gui;
 
 	App();
+	App(sf::IpAddress ipAddress, int port);
 	// void operator=(const App& app);
 // Member functions
 
@@ -92,12 +98,14 @@ public:
 	void setBrush(GeneralBrush* brush);
 	void addCommand(Command* c);
 	void executeCommand(Command* c);
-	void undoCommand();
+	Command* undoCommand();
 	void redoCommand();
 	sf::Image& getImage();
     void setImage(sf::Image* newImage);
 	sf::Texture& getTexture();
 	sf::RenderWindow& getWindow();
+	std::stack<Command *> getUndoStack();
+	std::stack<Command *> getRedoStack();
 
 
 

@@ -85,7 +85,7 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
 
         sf::Vector2f passedXY{static_cast<float>(xToPass), static_cast<float>(yToPass)};
 
-        Command* command = new Draw(passedXY, &app, app.commandFlag);
+        Command* command = new Draw(passedXY, &app, app.commandFlag, "draw");
 
         app.addCommand(command);
 
@@ -114,7 +114,7 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
 
         sf::Vector2f passedXY{static_cast<float>(xToPass), static_cast<float>(yToPass)};
 
-        Command* command = new Draw(passedXY, &app, app.commandFlag);
+        Command* command = new Draw(passedXY, &app, app.commandFlag, "draw");
 
         app.addCommand(command);
 
@@ -124,20 +124,35 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
     }
 }
 
+void remoteUndo(App& app){
+    std::stack<Command *> undoStack = app.getUndoStack();
+
+    //iterate from top of the stack to the bottom.
+    //Find all commands that share a timestamp (app.flag)
+    //Send those commands to the server 
+}
 //this method receives packets.
 void packetReceiver(App& app) {
     metaData dataToWrite;
     // std::cout << "Packet Receiver" << std::endl;
-    clientSocket.receive(packet);
+    // clientSocket.receive(packet);
+
+    app.clientSocketInApp.receive(packet);
+
     if(packet >> dataToWrite.xToPass >> dataToWrite.yToPass >> dataToWrite.commandToPass 
     >> dataToWrite.colorOfModificationToPass >> dataToWrite.canvasColorToPass >> dataToWrite.sizeOfModification 
     >> dataToWrite.brushTypeModification >> dataToWrite.windowXToPass >> dataToWrite.windowYToPass) {
+                          std::cout << "RECEIVED PACKET: \nX: " << dataToWrite.xToPass << "\nY: " << dataToWrite.yToPass << "\nCommand: "
+                              << dataToWrite.commandToPass << "\nColor: " << dataToWrite.colorOfModificationToPass << "\nCanvas Color: "
+                              << dataToWrite.canvasColorToPass << "\nSize of Modifcation: " << dataToWrite.sizeOfModification
+                              << "\nBrush TYpe of Modification: " << dataToWrite.brushTypeModification << "\nWindow X: "
+                              << dataToWrite.windowXToPass << "\nWindow Y: " << dataToWrite.windowYToPass << std::endl;
         packet.clear();
         if(dataToWrite.commandToPass.compare("draw")){
             remoteDraw(app, dataToWrite.xToPass, dataToWrite.yToPass, dataToWrite.colorOfModificationToPass, dataToWrite.sizeOfModification, dataToWrite.brushTypeModification);
         } else if (dataToWrite.commandToPass.compare("erase")) {
             sf::Vector2f passedXY{static_cast<float>(dataToWrite.xToPass), static_cast<float>(dataToWrite.yToPass)};
-            Command* command = new Erase(passedXY, &app, app.commandFlag);
+            Command* command = new Erase(passedXY, &app, app.commandFlag, "erase");
             app.addCommand(command);
         }
     }
@@ -180,6 +195,7 @@ void update(App& app) {
     while (app.m_window->pollEvent(event)) {
         //andrew edit ****
         //closing the window by clicking the x button (japher edit ***)
+        Command* test;
 
         switch (event.type) {
             case sf::Event::Closed :
@@ -191,14 +207,16 @@ void update(App& app) {
             case sf::Event::KeyPressed:
                 switch (event.key.code) {
                     case sf::Keyboard::U:
+                        // remoteUndo(app);
                         app.undoCommand();
+                        
                         break;
                     case sf::Keyboard::R:
                         app.redoCommand();
                         break;
                     case sf::Keyboard::C:
                         if (app.m_prevCommand != app.commandEnum::CLEAR) {
-                            Command *command = new Clear(&app, app.commandFlag);
+                            Command *command = new Clear(&app, app.commandFlag, "clear");
                             app.addCommand(command);
                             app.m_prevCommand = app.commandEnum::CLEAR;
                             break;
@@ -285,7 +303,7 @@ void update(App& app) {
                    && currentXYCoordinates.y > 0 && currentXYCoordinates.y <= app.getWindow().getSize().y) {
             // if mouse is left-clicked AND key E is pressed, execute the pixel
 
-            if (app.onErase) {
+            if (app.onErase && app.getWindow().hasFocus()) {
                     //networking
                     xToPass = currentXYCoordinates.x;
                     yToPass = currentXYCoordinates.y;
@@ -308,12 +326,18 @@ void update(App& app) {
                     // brushSize = app.GetBrush().getSize();
                     packet << xToPass << yToPass << commandToPass << colorOfModificationToPass << canvasColorToPass
                            << sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
-                    clientSocket.send(packet);
+
+
+
+                    // clientSocket.send(packet);
+                    app.clientSocketInApp.send(packet);
+
+
                     packet.clear();
                     //networking
 
 
-                    Command *command = new Erase(currentXYCoordinates, &app, app.commandFlag);
+                    Command *command = new Erase(currentXYCoordinates, &app, app.commandFlag, "erase");
 
                     app.addCommand(command);
                     app.m_prevCommand = app.commandEnum::ERASE;
@@ -344,10 +368,17 @@ void update(App& app) {
                         // brushSize = app.GetBrush().getSize();
                         packet << xToPass << yToPass << commandToPass << colorOfModificationToPass << canvasColorToPass
                                << sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
-                        clientSocket.send(packet);
+
+
+
+                        // clientSocket.send(packet);
+                        app.clientSocketInApp.send(packet);
+
+
+
                         packet.clear();
 
-                        Command *command = new Draw(currentXYCoordinates, &app, app.commandFlag);
+                        Command *command = new Draw(currentXYCoordinates, &app, app.commandFlag, "draw");
                         app.addCommand(command);
                         app.m_prevCommand = app.commandEnum::DRAW;
                     }
@@ -522,32 +553,35 @@ void draw(App& app) {
 *
 */
 int main() {
-    clientSocket.setBlocking(false);
-    // //Testing data class. 
-    // std::string stringToPass = "Erase";
-    // // Data data1;
-    // Data data1(1, 1, 5555555, stringToPass, 5, 5);
-    // data1.printData();
-    // //Testing data class. 
+    // clientSocket.setBlocking(false);
+    // // //Testing data class. 
+    // // std::string stringToPass = "Erase";
+    // // // Data data1;
+    // // Data data1(1, 1, 5555555, stringToPass, 5, 5);
+    // // data1.printData();
+    // // //Testing data class. 
     
 
-    char buffer[1000];
-    memset(buffer, 0, 1000);
-    std::size_t received;
+    // char buffer[1000];
+    // memset(buffer, 0, 1000);
+    // std::size_t received;
     sf::IpAddress ip = sf::IpAddress::getLocalAddress();
-    status = clientSocket.connect(ip, 8081);
-    if(status != sf::Socket::Done) {
-        std::cerr << "Error!" << status << std::endl;
-    }
-    std::string text = "Client connected to Server";
-    // clientSocket.send(text.c_str(), text.length() +1);
-    // clientSocket.receive(buffer, sizeof(buffer), received);
-    std::cout << "Client> " << buffer << std::endl;
+    // status = clientSocket.connect(ip, 8081);
+    // if(status != sf::Socket::Done) {
+    //     std::cerr << "Error!" << status << std::endl;
+    // }
+    // std::string text = "Client connected to Server";
+    // // clientSocket.send(text.c_str(), text.length() +1);
+    // // clientSocket.receive(buffer, sizeof(buffer), received);
+    // std::cout << "Client> " << buffer << std::endl;
     // char mode = 's';
     // bool done = false
     //Networking
 
-	App app;
+	// App app;
+
+    App app(ip, 8081);
+
 	// Call any setup function
 	// Passing a function pointer into the 'init' function.
 	// of our application.
@@ -564,3 +598,15 @@ int main() {
 	return 0;
 }
 
+
+//Networking TODO
+// Undo 
+// Redo
+// Erase //Add focus for erasing
+// Clear
+//Background Change
+// Master Canvas
+
+
+//Seg Fault
+    //Erasing out of bounds

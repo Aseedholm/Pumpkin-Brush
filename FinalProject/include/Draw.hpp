@@ -35,7 +35,7 @@ public:
 	bool undo();
 	void setOriginalColor();
 //	Draw(sf::Vector2i m_coordinate, App*);
-	Draw(sf::Vector2f coordinate, App* app, int flag); //andrew edit ***
+	Draw(sf::Vector2f coordinate, App* app, int flag, std::string command); //andrew edit ***
 
 };
 

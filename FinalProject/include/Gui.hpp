@@ -2,6 +2,7 @@
 #define GUI_HPP
 
 #include <SFML/Graphics.hpp>
+
 #include "App.hpp"
 
 

@@ -22,7 +22,7 @@ private:
 public:
     bool execute();
     bool undo();
-    Clear(App* app, int flag); // class constructor
+    Clear(App* app, int flag, std::string command); // class constructor
     ~Clear();
 };
 
