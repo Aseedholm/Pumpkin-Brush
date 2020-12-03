@@ -98,7 +98,7 @@ public:
 	void setBrush(GeneralBrush* brush);
 	void addCommand(Command* c);
 	void executeCommand(Command* c);
-	Command* undoCommand();
+	void undoCommand();
 	void redoCommand();
 	sf::Image& getImage();
     void setImage(sf::Image* newImage);

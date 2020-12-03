@@ -2,6 +2,7 @@
 #define GUI_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
 
 #include "App.hpp"
 
@@ -26,7 +27,7 @@ private:
     void undoRedoOption(App& app);
     void clearCanvas(App &app);
     void changeBackColor(App& app);
-
+    sf::Packet packetInGUI;
 
 public:
 
@@ -43,6 +44,8 @@ public:
     void nk_shutdown_wrapper();
     void nk_handle_event_wrapper(sf::Event event);
     void nk_sfml_render_wrapper();
+
+    void networkBackground(sf::Uint32 color, App& app);
 
 };
 

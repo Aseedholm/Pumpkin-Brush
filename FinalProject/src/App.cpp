@@ -82,29 +82,18 @@ void App::executeCommand(Command* c) {
 /*! \brief The undoCommand function unodoes the the pixel in reverse chronological order
 *
 */
-Command* App::undoCommand() {
+void App::undoCommand() {
 	if (!m_undo.empty()) {
 	    Command* t = m_undo.top();
-		packetInApp << t->getX() << t->getY()<< t->getCommand() <<  t->getCanvasColor() << t->getCanvasColor()
-			<< t->getBrushSize() << t->getBrushType() << t->getWindowX() << t->getWindowY();
-	
-
-
-	    m_redo.push(t);
-	    t->undo();
+		t->getCommand();
+		m_redo.push(t);
+		t->undo();
 	    m_undo.pop();
 	    if(!m_undo.empty() && m_undo.top()->m_cmdFlag == t->m_cmdFlag) {
+
 	        undoCommand();
-	    }
-		clientSocketInApp.send(packetInApp);
-		std::cout << "Client Sent PACKET: \nX: " << t->getX() << "\nY: " << t->getY() << "\nCommand: "
-					<< t->getCommand() << "\nColor: " << t->getBrushColor() << "\nCanvas Color: "
-					<< t->getCanvasColor() << "\nSize of Modifcation: " << t->getBrushSize()
-					<< "\nBrush TYpe of Modification: " << t->getBrushType() << "\nWindow X: "
-					<< t->getWindowX() << "\nWindow Y: " << t->getWindowY() << std::endl;
-		packetInApp.clear();
+		}
 	    m_prevCommand = UNDO;
-		return t;
 	}
 
 }
@@ -114,11 +103,6 @@ Command* App::undoCommand() {
 void App::redoCommand() {
 	if (!m_redo.empty()) {
 	    Command* t = m_redo.top();
-		packetInApp << t->getX() << t->getY()<< t->getCommand() << t->getBrushColor() << t->getCanvasColor()
-			<< t->getBrushSize() << t->getBrushType() << t->getWindowX() << t->getWindowY();
-
-		clientSocketInApp.send(packetInApp);
-		packetInApp.clear();
         App::executeCommand(t);
 		m_redo.pop();
 		if(!m_redo.empty() && m_redo.top()->m_cmdFlag == t->m_cmdFlag) {

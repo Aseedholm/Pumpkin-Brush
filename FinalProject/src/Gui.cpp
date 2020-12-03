@@ -183,35 +183,61 @@ void Gui::undoRedoOption(App &app) {
              srand(time(nullptr));
              app.commandFlag = rand();
              Command *command = new Clear(&app, app.commandFlag, "clear");
+             //networking
+             std::string clear = "clear";
+             sf::Uint32 send = 1;
+            packetInGUI << send << send << clear << send << send
+                    << send << send << send << send;
+            app.clientSocketInApp.send(packetInGUI);
+            packetInGUI.clear();
+             //networking
              app.addCommand(command);
              app.m_prevCommand = app.commandEnum::CLEAR;
          }
      }
  }
-
-
+void Gui::networkBackground(sf::Uint32 color, App& app){
+    std::cout << "In NETWORK BACKGROUND XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" << std::endl; 
+    std::string background = "backgroundChange";
+    sf::Uint32 send = 1;
+    packetInGUI << send << send << background << send << color
+                << send << send << send << send;
+    app.clientSocketInApp.send(packetInGUI);
+    packetInGUI.clear();
+           
+}
 /*! \brief
 *
 */
  void Gui::changeBackColor(App& app) {
     if (nk_tree_push(ctx, NK_TREE_TAB, "Canvas Background Color", NK_MAXIMIZED)) {
+        sf::Uint32 localColor = 0;
         nk_layout_row_dynamic(ctx, 30, 1);
-        if (nk_option_label(ctx, "White", m_backColor == colorEnum::WHITE)) {
+        if (nk_option_label(ctx, "White", m_backColor == colorEnum::WHITE) ) {
             m_backColor = colorEnum::WHITE;
+            localColor = sf::Color::White.toInteger();
             app.setBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
+            // networkBackground(sf::Color::White.toInteger(), app);
         }
         if (nk_option_label(ctx, "Black", m_backColor == colorEnum::BLACK)) {
+            localColor = sf::Color::Black.toInteger();
             m_backColor = colorEnum::BLACK;
             app.setBackgroundColor(new sf::Color(sf::Color::Black.toInteger()));
+            //  networkBackground(sf::Color::Black.toInteger(), app);
         }
         if (nk_option_label(ctx, "Yellow", m_backColor == colorEnum::YELLOW)) {
             m_backColor = colorEnum::YELLOW;
             app.setBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
+            //  networkBackground(sf::Color::Yellow.toInteger(), app);
+            localColor = sf::Color::Yellow.toInteger();
         }
         if (nk_option_label(ctx, "Green", m_backColor == colorEnum::GREEN)) {
             m_backColor = colorEnum::GREEN;
             app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
+            //  networkBackground(sf::Color::Green.toInteger(), app);
+            localColor = sf::Color::Green.toInteger();
         }
+        // networkBackground(localColor, app);
         nk_tree_pop(ctx);
     }
 
