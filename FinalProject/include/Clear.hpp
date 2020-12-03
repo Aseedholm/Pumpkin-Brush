@@ -24,6 +24,8 @@ public:
     bool undo();
     Clear(App* app, int flag, std::string command); // class constructor
     ~Clear();
+    // std::string getCommand();
+	App* getOldApp();
 };
 
 #endif //APP_CLEAR_H

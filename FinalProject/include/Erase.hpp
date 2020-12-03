@@ -26,6 +26,8 @@ public:
     bool undo();
     void setOriginalColor();
     Erase(sf::Vector2f coordinate, App* app, int flag, std::string command);
+    // std::string getCommand();
+	App* getOldApp();
 };
 
 #endif //APP_ERASE_HPP

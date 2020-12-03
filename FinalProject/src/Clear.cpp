@@ -7,7 +7,9 @@
 
 #include "Clear.hpp"
 
-Clear::Clear(App *app, int flag, std::string command) :Command(flag, command) {
+Clear::Clear(App* app, int flag, std::string command) :
+Command(flag, command, app->getBackgroundColor().toInteger(), app->getBrush().getColor().toInteger(),
+ app->getBrush().getType(), app->getBrush().getSize(), 0, 0, app->getWindow().getSize().x, app->getWindow().getSize().y)  {
     m_app = app;
     m_originalImage = app->getImage();
     m_backgroundColor = app->getBackgroundColor();
@@ -36,4 +38,13 @@ bool Clear::undo() {
     m_app->getTexture().loadFromImage(m_app->getImage());
     //m_app->getTexture().loadFromImage(m_originalImage);
     return true;
+}
+
+
+// std::string Clear::getCommand() {
+//     return m_commandDescription;
+// }
+
+App* Clear::getOldApp() {
+    return m_app;
 }

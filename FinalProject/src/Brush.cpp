@@ -18,7 +18,7 @@ std::vector<std::vector<int>> dir_largeBrush = {{-2, -2}, {-2, -1}, {-2, 0}, {-2
  * Constructor of brush
  */
 Brush::Brush() {
-    std::cout << "brush created\n";
+    // std::cout << "brush created\n";
     m_color = sf::Color::Black;
     m_size = size::small;
     m_shaders.push_back(dir_smallBrush);

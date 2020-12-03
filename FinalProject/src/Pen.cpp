@@ -30,7 +30,7 @@ std::vector<std::vector<int>> dir_largePen = { {-2, -2}, {-2, -1}, {-2, 0}, {-2,
  * Constructor of Pen
  */
 Pen::Pen() {
-    std::cout<<"Pen created"<<std::endl;
+    // std::cout<<"Pen created"<<std::endl;
     m_color = sf::Color::Black;
     m_size = size::small;
     m_shaders.push_back(dir_smallPen);

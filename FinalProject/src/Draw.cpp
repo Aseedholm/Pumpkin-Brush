@@ -52,7 +52,7 @@ void Draw::setOriginalColor() {
 /*! \brief 	Draw Constructor that takes in the x and y co-ordinates of the mouse
 *
 */
-Draw::Draw(sf::Vector2f coordinate, App* app, int cmdFlag, std::string command) :Command(cmdFlag, command) { //andrew edit **
+Draw::Draw(sf::Vector2f coordinate, App* app, int cmdFlag, std::string command) :Command(cmdFlag, command, app->getBackgroundColor().toInteger(), app->getBrush().getColor().toInteger(), app->getBrush().getType(), app->getBrush().getSize(), coordinate.x, coordinate.y, app->getWindow().getSize().x, app->getWindow().getSize().y) { //andrew edit **
 	m_coordinate = coordinate;
 	m_app = app;
 	m_shader = m_app->getBrush().getShader();
@@ -60,3 +60,11 @@ Draw::Draw(sf::Vector2f coordinate, App* app, int cmdFlag, std::string command) 
     setOriginalColor();
 }
 
+
+// std::string Draw::getCommand() {
+//     return m_commandDescription;
+// }
+
+App* Draw::getOldApp() {
+    return m_app;
+}

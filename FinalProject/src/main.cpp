@@ -85,7 +85,7 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
 
         sf::Vector2f passedXY{static_cast<float>(xToPass), static_cast<float>(yToPass)};
 
-        Command* command = new Draw(passedXY, &app, app.commandFlag, "draw");
+        Command* command = new Draw(passedXY, &app, app.commandFlag, "draw ");
 
         app.addCommand(command);
 
@@ -114,7 +114,7 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
 
         sf::Vector2f passedXY{static_cast<float>(xToPass), static_cast<float>(yToPass)};
 
-        Command* command = new Draw(passedXY, &app, app.commandFlag, "draw");
+        Command* command = new Draw(passedXY, &app, app.commandFlag, "draw ");
 
         app.addCommand(command);
 
@@ -149,6 +149,7 @@ void packetReceiver(App& app) {
                               << dataToWrite.windowXToPass << "\nWindow Y: " << dataToWrite.windowYToPass << std::endl;
         packet.clear();
         if(dataToWrite.commandToPass.compare("draw")){
+            std::cout << "DO WE ENTER DRAW: *********************************************" <<std::endl;
             remoteDraw(app, dataToWrite.xToPass, dataToWrite.yToPass, dataToWrite.colorOfModificationToPass, dataToWrite.sizeOfModification, dataToWrite.brushTypeModification);
         } else if (dataToWrite.commandToPass.compare("erase")) {
             sf::Vector2f passedXY{static_cast<float>(dataToWrite.xToPass), static_cast<float>(dataToWrite.yToPass)};
@@ -318,11 +319,11 @@ void update(App& app) {
                     brushTypeModification = app.getBrush().getType(); //flag could be  0 = brush, 1 = pen.
                     windowXToPass = app.getWindow().getSize().x;
                     windowYToPass = app.getWindow().getSize().y;
-                    std::cout << "Client Sent PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: "
-                              << commandToPass << "\nColor: " << colorOfModificationToPass << "\nCanvas Color: "
-                              << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification
-                              << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: "
-                              << windowXToPass << "\nWindow Y: " << windowYToPass << std::endl;
+                    // std::cout << "Client Sent PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: "
+                    //           << commandToPass << "\nColor: " << colorOfModificationToPass << "\nCanvas Color: "
+                    //           << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification
+                    //           << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: "
+                    //           << windowXToPass << "\nWindow Y: " << windowYToPass << std::endl;
                     // brushSize = app.GetBrush().getSize();
                     packet << xToPass << yToPass << commandToPass << colorOfModificationToPass << canvasColorToPass
                            << sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
@@ -360,11 +361,11 @@ void update(App& app) {
                         brushTypeModification = app.getBrush().getType(); //flag could be  0 = brush, 1 = pen.
                         windowXToPass = app.getWindow().getSize().x;
                         windowYToPass = app.getWindow().getSize().y;
-                        std::cout << "Client Sent PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: "
-                                  << commandToPass << "\nColor: " << colorOfModificationToPass << "\nCanvas Color: "
-                                  << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification
-                                  << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: "
-                                  << windowXToPass << "\nWindow Y: " << windowYToPass << std::endl;
+                        // std::cout << "Client Sent PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: "
+                        //           << commandToPass << "\nColor: " << colorOfModificationToPass << "\nCanvas Color: "
+                        //           << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification
+                        //           << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: "
+                        //           << windowXToPass << "\nWindow Y: " << windowYToPass << std::endl;
                         // brushSize = app.GetBrush().getSize();
                         packet << xToPass << yToPass << commandToPass << colorOfModificationToPass << canvasColorToPass
                                << sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
@@ -378,7 +379,7 @@ void update(App& app) {
 
                         packet.clear();
 
-                        Command *command = new Draw(currentXYCoordinates, &app, app.commandFlag, "draw");
+                        Command *command = new Draw(currentXYCoordinates, &app, app.commandFlag, "draw ");
                         app.addCommand(command);
                         app.m_prevCommand = app.commandEnum::DRAW;
                     }
