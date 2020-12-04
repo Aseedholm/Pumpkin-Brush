@@ -75,35 +75,35 @@ Gui::~Gui() {
      nk_label(ctx, "Brush Color", NK_TEXT_LEFT);
 
      nk_layout_row_dynamic(ctx, 30, 4);
-     if (nk_option_label(ctx, "Black", m_brushColor == colorEnum::BLACK)) {
+     if (nk_option_label(ctx, "Black", m_brushColor == colorEnum::BLACK) && m_brushColor != colorEnum::BLACK) {
          m_brushColor = colorEnum::BLACK;
          app.getBrush().setColor(sf::Color::Black);
      }
-     if (nk_option_label(ctx, "Red", m_brushColor == colorEnum::RED)) {
+     if (nk_option_label(ctx, "Red", m_brushColor == colorEnum::RED) && m_brushColor != colorEnum::RED) {
          m_brushColor = colorEnum::RED;
          app.getBrush().setColor(sf::Color::Red);
      }
-     if (nk_option_label(ctx, "Green", m_brushColor == colorEnum::GREEN)) {
+     if (nk_option_label(ctx, "Green", m_brushColor == colorEnum::GREEN) && m_brushColor != colorEnum::GREEN) {
          m_brushColor = colorEnum::GREEN;
          app.getBrush().setColor(sf::Color::Green);
      }
-     if (nk_option_label(ctx, "Blue", m_brushColor == colorEnum::BLUE)) {
+     if (nk_option_label(ctx, "Blue", m_brushColor == colorEnum::BLUE) && m_brushColor != colorEnum::BLUE) {
          m_brushColor = colorEnum::BLUE;
          app.getBrush().setColor(sf::Color::Blue);
      }
-     if (nk_option_label(ctx, "White", m_brushColor == colorEnum::WHITE)) {
+     if (nk_option_label(ctx, "White", m_brushColor == colorEnum::WHITE) && m_brushColor != colorEnum::WHITE) {
          m_brushColor = colorEnum::WHITE;
          app.getBrush().setColor(sf::Color::White);
      }
-     if (nk_option_label(ctx, "Yellow", m_brushColor == colorEnum::YELLOW)) {
+     if (nk_option_label(ctx, "Yellow", m_brushColor == colorEnum::YELLOW) && m_brushColor != colorEnum::YELLOW) {
          m_brushColor = colorEnum::YELLOW;
          app.getBrush().setColor(sf::Color::Yellow);
      }
-     if (nk_option_label(ctx, "Magenta", m_brushColor == colorEnum::MAGENTA)) {
+     if (nk_option_label(ctx, "Magenta", m_brushColor == colorEnum::MAGENTA) && m_brushColor != colorEnum::MAGENTA) {
          m_brushColor = colorEnum::MAGENTA;
          app.getBrush().setColor(sf::Color::Magenta);
      }
-     if (nk_option_label(ctx, "Cyan", m_brushColor == colorEnum::CYAN)) {
+     if (nk_option_label(ctx, "Cyan", m_brushColor == colorEnum::CYAN) && m_brushColor != colorEnum::CYAN) {
          m_brushColor = colorEnum::CYAN;
          app.getBrush().setColor(sf::Color::Cyan);
      }
@@ -118,16 +118,16 @@ Gui::~Gui() {
      nk_label(ctx, "Brush Size", NK_TEXT_LEFT);
 
      nk_layout_row_dynamic(ctx, 30, 4);
-     if (nk_option_label(ctx, "Small", m_brushSize == brushSizeEnum::SMALL)) {
+     if (nk_option_label(ctx, "Small", m_brushSize == brushSizeEnum::SMALL) && m_brushSize != brushSizeEnum::SMALL) {
          m_brushSize = brushSizeEnum::SMALL;
          app.getBrush().setSize(size::small);
      }
-     if (nk_option_label(ctx, "Medium", m_brushSize == brushSizeEnum::MEDIUM)) {
+     if (nk_option_label(ctx, "Medium", m_brushSize == brushSizeEnum::MEDIUM) && m_brushSize != brushSizeEnum::MEDIUM) {
          m_brushSize = brushSizeEnum::MEDIUM;
          app.getBrush().setSize(size::medium);
 
      }
-     if (nk_option_label(ctx, "Large", m_brushSize == brushSizeEnum::LARGE)) {
+     if (nk_option_label(ctx, "Large", m_brushSize == brushSizeEnum::LARGE) && m_brushSize != brushSizeEnum::LARGE) {
          m_brushSize = brushSizeEnum::LARGE;
          app.getBrush().setSize(size::large);
      }
@@ -196,19 +196,20 @@ void Gui::undoRedoOption(App &app) {
  void Gui::changeBackColor(App& app) {
     if (nk_tree_push(ctx, NK_TREE_TAB, "Canvas Background Color", NK_MAXIMIZED)) {
         nk_layout_row_dynamic(ctx, 30, 1);
-        if (nk_option_label(ctx, "White", m_backColor == colorEnum::WHITE)) {
+        if (nk_option_label(ctx, "White", m_backColor == colorEnum::WHITE) && m_backColor != colorEnum::WHITE) {
             m_backColor = colorEnum::WHITE;
             app.setBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
+            std::cout<<"Black back";
         }
-        if (nk_option_label(ctx, "Black", m_backColor == colorEnum::BLACK)) {
+        if (nk_option_label(ctx, "Black", m_backColor == colorEnum::BLACK) && m_backColor != colorEnum::BLACK) {
             m_backColor = colorEnum::BLACK;
             app.setBackgroundColor(new sf::Color(sf::Color::Black.toInteger()));
         }
-        if (nk_option_label(ctx, "Yellow", m_backColor == colorEnum::YELLOW)) {
+        if (nk_option_label(ctx, "Yellow", m_backColor == colorEnum::YELLOW) && m_backColor != colorEnum::YELLOW) {
             m_backColor = colorEnum::YELLOW;
             app.setBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
         }
-        if (nk_option_label(ctx, "Green", m_backColor == colorEnum::GREEN)) {
+        if (nk_option_label(ctx, "Green", m_backColor == colorEnum::GREEN) && m_backColor != colorEnum::GREEN) {
             m_backColor = colorEnum::GREEN;
             app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
         }
