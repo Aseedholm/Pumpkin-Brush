@@ -301,7 +301,7 @@ void App::setBackgroundColor(sf::Color *colorPassed) { //Andrew edit*****
 			}
 		}
 	}
-	setBackgroundColor(&newBackground);
+	m_backgroundColor = new sf::Color(newBackground.toInteger());
 }
 
 
