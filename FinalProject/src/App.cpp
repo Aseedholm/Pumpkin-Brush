@@ -205,8 +205,8 @@ void App::destroy() {
 */
 void App::init(void (*initFunction)(void)) {
 	// Create our window
-//	m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
-    m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
+	m_window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
+    // m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
 	m_window->setVerticalSyncEnabled(true);
 
     // Create gui instance
@@ -214,7 +214,7 @@ void App::init(void (*initFunction)(void)) {
 
 
 	// Create an image which stores the pixels we will update
-	m_image->create(600, 400, *m_backgroundColor); //Andrew edit*****
+	m_image->create(1280, 720, *m_backgroundColor); //Andrew edit*****
 	assert(m_image != nullptr && "m_image != nullptr");
 	// Create a texture which lives in the GPU and will render our image
 	m_texture->loadFromImage(*m_image);
@@ -276,9 +276,9 @@ void App::loop(App& app) {
         // Note: This can be done in the 'draw call'
         // Draw to the canvas
 		
-		if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 
-			m_sprite->setColor(*m_backgroundColor);
-		} //Andrew background update. 
+		// if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 
+		// 	m_sprite->setColor(*m_backgroundColor);
+		// } //Andrew background update. 
 		
 		m_window->draw(*m_sprite);
 		// Display the canvas
@@ -292,7 +292,16 @@ void App::loop(App& app) {
 *
 */
 void App::setBackgroundColor(sf::Color *colorPassed) { //Andrew edit*****
-	m_backgroundColor = colorPassed;
+	sf::Color newBackground = *colorPassed;
+	sf::Color oldColor = *m_backgroundColor;
+	for(int i =0; i < m_window->getSize().x; i++) {
+		for (int j = 0; j < m_window->getSize().y; j++) {
+			if(m_image->getPixel(i, j) == oldColor) {
+				m_image->setPixel(i,j, newBackground);
+			}
+		}
+	}
+	setBackgroundColor(&newBackground);
 }
 
 

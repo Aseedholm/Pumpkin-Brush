@@ -142,18 +142,26 @@ void packetReceiver(App& app) {
     if(packet >> dataToWrite.xToPass >> dataToWrite.yToPass >> dataToWrite.commandToPass 
     >> dataToWrite.colorOfModificationToPass >> dataToWrite.canvasColorToPass >> dataToWrite.sizeOfModification 
     >> dataToWrite.brushTypeModification >> dataToWrite.windowXToPass >> dataToWrite.windowYToPass) {
-                          std::cout << "RECEIVED PACKET: \nX: " << dataToWrite.xToPass << "\nY: " << dataToWrite.yToPass << "\nCommand: "
-                              << dataToWrite.commandToPass << "\nColor: " << dataToWrite.colorOfModificationToPass << "\nCanvas Color: "
-                              << dataToWrite.canvasColorToPass << "\nSize of Modifcation: " << dataToWrite.sizeOfModification
-                              << "\nBrush TYpe of Modification: " << dataToWrite.brushTypeModification << "\nWindow X: "
-                              << dataToWrite.windowXToPass << "\nWindow Y: " << dataToWrite.windowYToPass << std::endl;
+
+std::cout << "RECEIVED PACKET: \nX: " << dataToWrite.xToPass << "\nY: " << dataToWrite.yToPass << "\nCommand: "
+<< dataToWrite.commandToPass << "\nColor: " << dataToWrite.colorOfModificationToPass << "\nCanvas Color: "
+<< dataToWrite.canvasColorToPass << "\nSize of Modifcation: " << dataToWrite.sizeOfModification
+<< "\nBrush TYpe of Modification: " << dataToWrite.brushTypeModification << "\nWindow X: "
+<< dataToWrite.windowXToPass << "\nWindow Y: " << dataToWrite.windowYToPass << std::endl;
+
         packet.clear();
-        if(dataToWrite.commandToPass.compare("draw")){
+        if(dataToWrite.commandToPass.compare("draw") == 0){
             remoteDraw(app, dataToWrite.xToPass, dataToWrite.yToPass, dataToWrite.colorOfModificationToPass, dataToWrite.sizeOfModification, dataToWrite.brushTypeModification);
-        } else if (dataToWrite.commandToPass.compare("erase")) {
+        } else if (dataToWrite.commandToPass.compare("erase") == 0) {
             sf::Vector2f passedXY{static_cast<float>(dataToWrite.xToPass), static_cast<float>(dataToWrite.yToPass)};
             Command* command = new Erase(passedXY, &app, app.commandFlag, "erase");
             app.addCommand(command);
+        } else if(dataToWrite.commandToPass.compare("clear") == 0) {
+            Command *command = new Clear(&app, app.commandFlag, "clear");
+            app.addCommand(command);
+            app.m_prevCommand = app.commandEnum::CLEAR;
+        } else if(dataToWrite.commandToPass.compare("backgroundChange") == 0) {
+            app.setBackgroundColor(new sf::Color(dataToWrite.canvasColorToPass));
         }
     }
     //draw
@@ -351,7 +359,7 @@ void update(App& app) {
                         xToPass = currentXYCoordinates.x;
                         yToPass = currentXYCoordinates.y;
 
-                        commandToPass = "draw ";
+                        commandToPass = "draw";
 
                         colorOfModificationToPass = app.getBrush().getColor().toInteger();
                         canvasColorToPass = app.getBackgroundColor().toInteger();

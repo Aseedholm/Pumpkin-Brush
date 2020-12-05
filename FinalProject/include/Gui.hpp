@@ -2,7 +2,7 @@
 #define GUI_HPP
 
 #include <SFML/Graphics.hpp>
-
+#include <SFML/Network.hpp>
 #include "App.hpp"
 
 
@@ -26,7 +26,8 @@ private:
     void undoRedoOption(App& app);
     void clearCanvas(App &app);
     void changeBackColor(App& app);
-
+    void networkBackground(sf::Uint32 color, App& app);
+    sf::Packet packetInGui;
 
 public:
 
