@@ -166,10 +166,10 @@ void Gui::changeBrushType(App& app) {
 void Gui::undoRedoOption(App& app) {
     nk_layout_row_dynamic(ctx, 30, 2);
     if (nk_button_label(ctx, "Undo")) {
-        app.undoCommand();
+        app.undoCommand(true);
     }
     if (nk_button_label(ctx, "Redo")) {
-        app.redoCommand();
+        app.redoCommand(true);
     }
 
 }

@@ -220,11 +220,11 @@ void update(App& app) {
                 switch (event.key.code) {
                     case sf::Keyboard::U:
                         // remoteUndo(app);
-                        app.undoCommand();
+                        app.undoCommand(true);
                         
                         break;
                     case sf::Keyboard::R:
-                        app.redoCommand();
+                        app.redoCommand(true);
                         break;
                     case sf::Keyboard::C:
                         if (app.m_prevCommand != app.commandEnum::CLEAR) {

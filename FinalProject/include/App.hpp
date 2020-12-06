@@ -98,8 +98,8 @@ public:
 	void setBrush(GeneralBrush* brush);
 	void addCommand(Command* c);
 	void executeCommand(Command* c);
-	void undoCommand();
-	void redoCommand();
+	void undoCommand(bool sendMessage);
+	void redoCommand(bool sendMessage);
 	void undoCommandNetwork();
 	void redoCommandNetwork();
 	sf::Image& getImage();
