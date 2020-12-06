@@ -212,21 +212,31 @@ void Gui::networkBackground(sf::Uint32 color, App& app) {
 void Gui::changeBackColor(App& app) {
     if (nk_tree_push(ctx, NK_TREE_TAB, "Canvas Background Color", NK_MAXIMIZED)) {
         sf::Uint32 localColor = 0;
+            sf::Uint8 c1 = 0;
+            sf::Uint8 c2 = 0;
+            sf::Uint8 c3 = 0;
+            sf::Uint8 c4 = 0;
         nk_layout_row_dynamic(ctx, 30, 1);
         if (nk_option_label(ctx, "White", m_backColor == colorEnum::WHITE) && m_backColor != colorEnum::WHITE) {
             m_backColor = colorEnum::WHITE;
-            localColor = sf::Color::White.toInteger();
+            // localColor = sf::Color::White.toInteger();
+            c1 = 254;
+            c2 = 254;
+            c3 = 254;
+            c4 = 255;
+            sf::Color l_color(c1, c2, c3, c4);
+            localColor = l_color.toInteger();
             networkBackground(localColor, app);
-            app.setBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
+            app.setBackgroundColor(new sf::Color(localColor));
             std::cout << "Black back";
         }
         if (nk_option_label(ctx, "Black", m_backColor == colorEnum::BLACK) && m_backColor != colorEnum::BLACK) {
             m_backColor = colorEnum::BLACK;
             // localColor = sf::Color::Black.toInteger();
-            sf::Uint8 c1 = 1;
-            sf::Uint8 c2 = 0;
-            sf::Uint8 c3 = 0;
-            sf::Uint8 c4 = 255;
+            c1 = 1;
+            c2 = 0;
+            c3 = 0;
+            c4 = 255;
             sf::Color l_color(c1, c2, c3, c4);
             localColor = l_color.toInteger();
             networkBackground(localColor, app);
@@ -234,15 +244,27 @@ void Gui::changeBackColor(App& app) {
         }
         if (nk_option_label(ctx, "Yellow", m_backColor == colorEnum::YELLOW) && m_backColor != colorEnum::YELLOW) {
             m_backColor = colorEnum::YELLOW;
-            localColor = sf::Color::Yellow.toInteger();
+            // localColor = sf::Color::Yellow.toInteger();
+            c1 = 255;
+            c2 = 254;
+            c3 = 0;
+            c4 = 255;
+            sf::Color l_color(c1, c2, c3, c4);
+            localColor = l_color.toInteger();
             networkBackground(localColor, app);
-            app.setBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
+            app.setBackgroundColor(new sf::Color(localColor));
         }
         if (nk_option_label(ctx, "Green", m_backColor == colorEnum::GREEN) && m_backColor != colorEnum::GREEN) {
             m_backColor = colorEnum::GREEN;
-            localColor = sf::Color::Green.toInteger();
+            // localColor = sf::Color::Green.toInteger();
+            c1 = 0;
+            c2 = 128;
+            c3 = 1;
+            c4 = 255;
+            sf::Color l_color(c1, c2, c3, c4);
+            localColor = l_color.toInteger();
             networkBackground(localColor, app);
-            app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
+            app.setBackgroundColor(new sf::Color(localColor));
         }
 
         nk_tree_pop(ctx);

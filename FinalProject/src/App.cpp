@@ -42,7 +42,13 @@ App::App(){
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
 	m_brush = m_brushFactory.createBrush(1);
-	m_backgroundColor = new sf::Color(sf::Color::White.toInteger());
+	sf::Uint32 c1 = 254;
+	sf::Uint32 c2 = 254;
+	sf::Uint32 c3 = 254;
+	sf::Uint32 c4 = 255;
+	sf::Color l_color(c1, c2, c3, c4);
+	sf::Uint32 l_color_int = l_color.toInteger();
+	m_backgroundColor = new sf::Color(l_color_int);
 }
 
 /*! \brief Add command that adds the pixel position in stack
@@ -55,7 +61,13 @@ App::App(sf::IpAddress ipAddress, int port){
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
 	m_brush = m_brushFactory.createBrush(1);
-	m_backgroundColor = new sf::Color(sf::Color::White.toInteger());
+	sf::Uint32 c1 = 254;
+	sf::Uint32 c2 = 254;
+	sf::Uint32 c3 = 254;
+	sf::Uint32 c4 = 255;
+	sf::Color l_color(c1, c2, c3, c4);
+	sf::Uint32 l_color_int = l_color.toInteger();
+	m_backgroundColor = new sf::Color(l_color_int);
 	//Networking
 	clientSocketInApp.setBlocking(false);
     statusInApp = clientSocketInApp.connect(ipAddress, port);
