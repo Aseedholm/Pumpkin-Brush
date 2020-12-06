@@ -18,7 +18,6 @@ std::vector<std::vector<int>> dir_largeBrush = {{-2, -2}, {-2, -1}, {-2, 0}, {-2
  * Constructor of brush
  */
 Brush::Brush() {
-    std::cout << "brush created\n";
     m_color = sf::Color::Black;
     m_size = size::small;
     m_shaders.push_back(dir_smallBrush);
@@ -46,6 +45,8 @@ int Brush::getSize() {
         case medium: return 1;
 
         case large: return 2;
+
+        default: return 0;
     }
 }
 
@@ -57,6 +58,8 @@ std::vector<std::vector<int>> Brush::getShader(){
         case medium: return m_shaders[1];
 
         case large: return m_shaders[2];
+
+        default: return m_shaders[0];
     }
 
 }
