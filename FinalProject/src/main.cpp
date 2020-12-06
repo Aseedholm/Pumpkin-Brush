@@ -85,7 +85,10 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
 
         sf::Vector2f passedXY{static_cast<float>(xToPass), static_cast<float>(yToPass)};
 
-        Command* command = new Draw(passedXY, &app, app.commandFlag, "draw");
+
+        srand(time(nullptr));
+
+        Command* command = new Draw(passedXY, &app, rand(), "draw");
 
         app.addCommand(command);
 
@@ -390,7 +393,9 @@ void update(App& app) {
 
                         packet.clear();
 
-                        Command *command = new Draw(currentXYCoordinates, &app, app.commandFlag, "draw");
+                        srand(time(nullptr));
+
+                        Command *command = new Draw(currentXYCoordinates, &app, rand(), "draw");
                         app.addCommand(command);
                         app.m_prevCommand = app.commandEnum::DRAW;
                     }

@@ -95,7 +95,7 @@ void App::executeCommand(Command* c) {
 *
 */
 void App::undoCommand(bool sendMessage) {
-	std::cout << "Size of Undo: **************************************************   " << m_undo.size() << std::endl; 
+	//std::cout << "Size of Undo: **************************************************   " << m_undo.size() << std::endl;
 	if (!m_undo.empty()) {
 	    Command* t = m_undo.top();
 		// packetInApp << xToPass << yToPass << t->getCommand() <<  << canvasColorToPass
@@ -127,6 +127,7 @@ void App::undoCommand(bool sendMessage) {
 void App::undoCommandNetwork() {
 	if (!m_undo.empty()) {
 	    Command* t = m_undo.top();
+	    std::cout<<"undo cmd from network flag ------>"<<t->m_cmdFlag<<std::endl;
 	    m_redo.push(t);
 	    t->undo();
 	    m_undo.pop();
@@ -264,7 +265,7 @@ void App::destroy() {
 */
 void App::init(void (*initFunction)(void)) {
 	// Create our window
-	m_window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
+	m_window = new sf::RenderWindow(sf::VideoMode(300, 300), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
     // m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
 	m_window->setVerticalSyncEnabled(true);
 
@@ -273,7 +274,7 @@ void App::init(void (*initFunction)(void)) {
 
 
 	// Create an image which stores the pixels we will update
-	m_image->create(1280, 720, *m_backgroundColor); //Andrew edit*****
+	m_image->create(300, 300, *m_backgroundColor); //Andrew edit*****
 	assert(m_image != nullptr && "m_image != nullptr");
 	// Create a texture which lives in the GPU and will render our image
 	m_texture->loadFromImage(*m_image);
