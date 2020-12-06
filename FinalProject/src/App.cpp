@@ -94,7 +94,8 @@ void App::executeCommand(Command* c) {
 /*! \brief The undoCommand function unodoes the the pixel in reverse chronological order
 *
 */
-Command* App::undoCommand() {
+void App::undoCommand() {
+	std::cout << "Size of Undo: **************************************************   " << m_undo.size() << std::endl; 
 	if (!m_undo.empty()) {
 	    Command* t = m_undo.top();
 		// packetInApp << xToPass << yToPass << t->getCommand() <<  << canvasColorToPass
@@ -103,27 +104,64 @@ Command* App::undoCommand() {
 		// clientSocketInApp.send(packetInApp);
 
 	    m_redo.push(t);
+		sf::Uint32 notImportant = 1;
+		packetInApp << notImportant << notImportant << "undo" << notImportant << notImportant<< notImportant<< notImportant<< notImportant<< notImportant<< notImportant;
+		clientSocketInApp.send(packetInApp);
+		packetInApp.clear();
 	    t->undo();
 	    m_undo.pop();
-	    if(!m_undo.empty() && m_undo.top()->m_cmdFlag == t->m_cmdFlag) {
-	        undoCommand();
-	    }
+	    // if(!m_undo.empty() && m_undo.top()->m_cmdFlag == t->m_cmdFlag) {
+	    //     undoCommand();
+	    // }
 	    m_prevCommand = UNDO;
-		return t;
 	}
 
 }
+
+/*! \brief The undoCommand function unodoes the the pixel in reverse chronological order
+*
+*/
+void App::undoCommandNetwork() {
+	if (!m_undo.empty()) {
+	    Command* t = m_undo.top();
+	    m_redo.push(t);
+	    t->undo();
+	    m_undo.pop();
+	    m_prevCommand = UNDO;
+	}
+
+}
+
 /*! \brief The redo commands redo an undo command until if there is an input in between.
 *
 */
 void App::redoCommand() {
 	if (!m_redo.empty()) {
 	    Command* t = m_redo.top();
+		sf::Uint32 notImportant = 1;
+		packetInApp << notImportant << notImportant << "redo" << notImportant << notImportant<< notImportant<< notImportant<< notImportant<< notImportant<< notImportant;
+		clientSocketInApp.send(packetInApp);
+		packetInApp.clear();
         App::executeCommand(t);
 		m_redo.pop();
-		if(!m_redo.empty() && m_redo.top()->m_cmdFlag == t->m_cmdFlag) {
-		    redoCommand();
-		}
+		// if(!m_redo.empty() && m_redo.top()->m_cmdFlag == t->m_cmdFlag) {
+		//     redoCommand();
+		// }
+		m_prevCommand = REDO;
+	}
+}
+
+/*! \brief The redo commands redo an undo command until if there is an input in between.
+*
+*/
+void App::redoCommandNetwork() {
+	if (!m_redo.empty()) {
+	    Command* t = m_redo.top();
+	App::executeCommand(t);
+		m_redo.pop();
+		// if(!m_redo.empty() && m_redo.top()->m_cmdFlag == t->m_cmdFlag) {
+		//     redoCommand();
+		// }
 		m_prevCommand = REDO;
 	}
 }

@@ -28,12 +28,31 @@ bool Draw::execute() {
 	return true;
 }
 
-/*! \brief 	Undo command to undo the pixel creation
-*
-*/
+// /*! \brief 	Undo command to undo the pixel creation
+// *
+// */
+// bool Draw::undo() {
+
+//     for(int i = 0; i < m_shader.size(); i++) {
+//         m_app->getImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_originalColors[i]);
+//     }
+// 	return true;
+// }
+
 bool Draw::undo() {
+    sf::Packet packetInDraw;
 
     for(int i = 0; i < m_shader.size(); i++) {
+        //Networking
+        // std::cout << sf::Uint32(m_coordinate.x + m_shader[i][0]) << " " <<  sf::Uint32(m_coordinate.y + m_shader[i][1]) << std::endl;
+        // packetInDraw <<sf::Uint32(m_coordinate.x + m_shader[i][0]) << sf::Uint32(m_coordinate.y + m_shader[i][1]) <<  "draw" 
+        // << m_originalColors[i].toInteger() << m_app->getBackgroundColor().toInteger()
+		// << m_app->getBrush().getSize() << m_app->getBrush().getType() << m_app->getWindow().getSize().x 
+        // << m_app->getWindow().getSize().y;
+		// m_app->clientSocketInApp.send(packetInDraw);
+		// packetInDraw.clear();
+
+        //networking
         m_app->getImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_originalColors[i]);
     }
 	return true;

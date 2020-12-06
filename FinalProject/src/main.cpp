@@ -162,7 +162,11 @@ std::cout << "RECEIVED PACKET: \nX: " << dataToWrite.xToPass << "\nY: " << dataT
             app.m_prevCommand = app.commandEnum::CLEAR;
         } else if(dataToWrite.commandToPass.compare("backgroundChange") == 0) {
             app.setBackgroundColor(new sf::Color(dataToWrite.canvasColorToPass));
-        }
+        } else if(dataToWrite.commandToPass.compare("undo") == 0) {
+            app.undoCommandNetwork();
+        } else if(dataToWrite.commandToPass.compare("redo") == 0) {
+            app.redoCommandNetwork();
+        } 
     }
     //draw
 
