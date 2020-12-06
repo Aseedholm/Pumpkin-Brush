@@ -49,6 +49,8 @@ std::vector<std::vector<int>> Pen::getShader() {
         case medium: return m_shaders[1];
 
         case large: return m_shaders[2];
+
+        default: return m_shaders[0];
     }
 }
 
@@ -59,6 +61,8 @@ int Pen::getSize() {
         case medium: return 1;
 
         case large: return 2;
+
+        default: return 0;
     }
 }
 
