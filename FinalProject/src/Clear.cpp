@@ -7,7 +7,7 @@
 
 #include "Clear.hpp"
 
-Clear::Clear(App *app, int flag) : Command(flag) {
+Clear::Clear(App *app, int flag, std::string command) :Command(flag, command) {
     m_app = app;
     m_originalImage = app->getImage();
     m_backgroundColor = app->getBackgroundColor();

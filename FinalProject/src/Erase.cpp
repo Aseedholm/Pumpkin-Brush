@@ -7,11 +7,17 @@
 #include "Erase.hpp"
 #include "App.hpp"
 
-Erase::Erase(sf::Vector2f coordinate, App* app, int flag) : Command(flag) {
+
+Erase::Erase(sf::Vector2f coordinate, App* app, int flag, std::string command) : Command(flag, command) {
     m_coordinate = coordinate;
     m_app = app;
     m_backgroundColor = app->getBackgroundColor();
-    m_shader = app->getBrush().getShader();
+    dir_largeEraser = {{-2, -2}, {-2, -1}, {-2, 0}, {-2, 1}, {-2, 2},
+        {-1, -2}, { -1, -1}, {-1, 0}, {-1, 1}, {-1, 2},
+        {0, -2}, {0, -1}, {0, 0}, {0, 1}, {0, 2},
+        {1, -2}, {1, -1}, {1, 0}, {1, 1}, {1, 2},
+        {2, -2}, {2, -1}, {2, 0}, {2, 1}, {2, 2}};
+    m_shader = dir_largeEraser;
     setOriginalColor();
 
 }

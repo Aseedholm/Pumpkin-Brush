@@ -2,6 +2,7 @@
 #define GUI_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
 #include "App.hpp"
 
 
@@ -13,7 +14,7 @@ private:
     enum brushSizeEnum {SMALL, MEDIUM, LARGE};
     enum brushTypeEnum {BRUSH, PEN};
     int m_brushColor = BLACK;
-    int m_brushSize = MEDIUM;
+    int m_brushSize = SMALL;
     int m_brushType = BRUSH;
     int m_backColor = WHITE;
 
@@ -25,7 +26,8 @@ private:
     void undoRedoOption(App& app);
     void clearCanvas(App &app);
     void changeBackColor(App& app);
-
+    void networkBackground(sf::Uint32 color, App& app);
+    sf::Packet packetInGui;
 
 public:
 

@@ -14,7 +14,7 @@
 #define NK_SFML_GL2_H_
 
 #include <SFML/Window.hpp>
-
+#include <cstring>
 NK_API struct nk_context*   nk_sfml_init(sf::Window* window);
 NK_API void                 nk_sfml_font_stash_begin(struct nk_font_atlas** atlas);
 NK_API void                 nk_sfml_font_stash_end(void);

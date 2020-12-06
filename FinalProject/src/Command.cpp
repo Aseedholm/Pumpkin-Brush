@@ -17,3 +17,8 @@
 */
 Command::~Command(){
 }
+
+
+std::string Command::getCommand() {
+    return m_commandDescription;
+}

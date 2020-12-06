@@ -20,12 +20,13 @@ private:
     std::vector<std::vector<int>> m_shader;
     std::vector<sf::Color> m_originalColors;
     App* m_app;
+    std::vector<std::vector<int>> dir_largeEraser;
 
 public:
     bool execute();
     bool undo();
     void setOriginalColor();
-    Erase(sf::Vector2f coordinate, App* app, int flag);
+    Erase(sf::Vector2f coordinate, App* app, int flag, std::string command);
 };
 
 #endif //APP_ERASE_HPP

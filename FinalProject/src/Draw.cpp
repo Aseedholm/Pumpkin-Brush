@@ -31,8 +31,9 @@ bool Draw::execute() {
 /*! \brief 	Undo command to undo the pixel creation
 *
 */
-bool Draw::undo() {
 
+bool Draw::undo() {
+    sf::Packet packetInDraw;
     for(int i = 0; i < m_shader.size(); i++) {
         m_app->getImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_originalColors[i]);
     }
@@ -52,7 +53,7 @@ void Draw::setOriginalColor() {
 /*! \brief 	Draw Constructor that takes in the x and y co-ordinates of the mouse
 *
 */
-Draw::Draw(sf::Vector2f coordinate, App* app, int cmdFlag) :Command(cmdFlag) { //andrew edit **
+Draw::Draw(sf::Vector2f coordinate, App* app, int cmdFlag, std::string command) :Command(cmdFlag, command) { //andrew edit **
 	m_coordinate = coordinate;
 	m_app = app;
 	m_shader = m_app->getBrush().getShader();

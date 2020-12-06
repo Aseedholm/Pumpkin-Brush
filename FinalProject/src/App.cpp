@@ -17,6 +17,7 @@
 #include <cassert>
 // Project header files
 #include "App.hpp"
+#include "Clear.hpp"
 
 
 #include<iostream>
@@ -42,10 +43,40 @@ App::App(){
 	m_sprite = new sf::Sprite;
 	m_texture = new sf::Texture;
 	m_brush = m_brushFactory.createBrush(1);
-	m_backgroundColor = new sf::Color(sf::Color::White.toInteger());
-
-
+	sf::Uint32 c1 = 254;
+	sf::Uint32 c2 = 254;
+	sf::Uint32 c3 = 254;
+	sf::Uint32 c4 = 255;
+	sf::Color l_color(c1, c2, c3, c4);
+	sf::Uint32 l_color_int = l_color.toInteger();
+	m_backgroundColor = new sf::Color(l_color_int);
 }
+
+/*! \brief Add command that adds the pixel position in stack
+*
+*/
+App::App(sf::IpAddress ipAddress, int port){
+	std::cout << "Constructor of App called" << std::endl;
+	m_window = nullptr;
+	m_image = new sf::Image;
+	m_sprite = new sf::Sprite;
+	m_texture = new sf::Texture;
+	m_brush = m_brushFactory.createBrush(1);
+	sf::Uint32 c1 = 254;
+	sf::Uint32 c2 = 254;
+	sf::Uint32 c3 = 254;
+	sf::Uint32 c4 = 255;
+	sf::Color l_color(c1, c2, c3, c4);
+	sf::Uint32 l_color_int = l_color.toInteger();
+	m_backgroundColor = new sf::Color(l_color_int);
+	//Networking
+	clientSocketInApp.setBlocking(false);
+    statusInApp = clientSocketInApp.connect(ipAddress, port);
+    if(statusInApp != sf::Socket::Done) {
+        std::cerr << "Error!" << statusInApp << std::endl;
+    }
+}
+
 // void App::operator=(const App& app){
 
 // }
@@ -64,30 +95,83 @@ void App::executeCommand(Command* c) {
 /*! \brief The undoCommand function unodoes the the pixel in reverse chronological order
 *
 */
-void App::undoCommand() {
+void App::undoCommand(bool sendMessage) {
+	//std::cout << "Size of Undo: **************************************************   " << m_undo.size() << std::endl;
 	if (!m_undo.empty()) {
 	    Command* t = m_undo.top();
+		// packetInApp << xToPass << yToPass << t->getCommand() <<  << canvasColorToPass
+		// 	<< sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
+
+		// clientSocketInApp.send(packetInApp);
+
+	    m_redo.push(t);
+		if(sendMessage) {
+			sf::Uint32 notImportant = 1;
+			packetInApp << notImportant << notImportant << "undo" << notImportant << notImportant<< notImportant<< notImportant<< notImportant<< notImportant<< notImportant;
+			clientSocketInApp.send(packetInApp);
+			packetInApp.clear();
+		}
+
+	    t->undo();
+	    m_undo.pop();
+	    if(!m_undo.empty() && m_undo.top()->m_cmdFlag == t->m_cmdFlag) {
+	        undoCommand(false);
+	    }
+	    m_prevCommand = UNDO;
+	}
+
+}
+
+/*! \brief The undoCommand function unodoes the the pixel in reverse chronological order
+*
+*/
+void App::undoCommandNetwork() {
+	if (!m_undo.empty()) {
+	    Command* t = m_undo.top();
+	    //std::cout<<"undo cmd from network flag ------>"<<t->m_cmdFlag<<std::endl;
 	    m_redo.push(t);
 	    t->undo();
 	    m_undo.pop();
 	    if(!m_undo.empty() && m_undo.top()->m_cmdFlag == t->m_cmdFlag) {
-	        undoCommand();
+	        undoCommandNetwork();
 	    }
 	    m_prevCommand = UNDO;
-
 	}
 
 }
+
 /*! \brief The redo commands redo an undo command until if there is an input in between.
 *
 */
-void App::redoCommand() {
+void App::redoCommand(bool sendMessage) {
 	if (!m_redo.empty()) {
 	    Command* t = m_redo.top();
+		if(sendMessage) {
+			sf::Uint32 notImportant = 1;
+			packetInApp << notImportant << notImportant << "redo" << notImportant << notImportant<< notImportant<< notImportant<< notImportant<< notImportant<< notImportant;
+			clientSocketInApp.send(packetInApp);
+			packetInApp.clear();
+		}
+
         App::executeCommand(t);
 		m_redo.pop();
 		if(!m_redo.empty() && m_redo.top()->m_cmdFlag == t->m_cmdFlag) {
-		    redoCommand();
+		    redoCommand(false);
+		}
+		m_prevCommand = REDO;
+	}
+}
+
+/*! \brief The redo commands redo an undo command until if there is an input in between.
+*
+*/
+void App::redoCommandNetwork() {
+	if (!m_redo.empty()) {
+	    Command* t = m_redo.top();
+	App::executeCommand(t);
+		m_redo.pop();
+		if(!m_redo.empty() && m_redo.top()->m_cmdFlag == t->m_cmdFlag) {
+		    redoCommandNetwork();
 		}
 		m_prevCommand = REDO;
 	}
@@ -145,6 +229,15 @@ void App::setBrush(GeneralBrush* brush) {
     m_brush = brush;
 }
 
+std::stack<Command *> App::getUndoStack(){
+	return m_undo;
+
+}
+
+std::stack<Command *> App::getRedoStack(){
+
+	return m_redo;
+}
 
 /*! \brief 	Destroy we manually call at end of our program.
 
@@ -152,7 +245,8 @@ void App::setBrush(GeneralBrush* brush) {
 *		do not have to publicly expose it.
 *
 */
-sf::Color& App::getBackgroundColor() { //Andrew edit*****
+sf::Color &App::getBackgroundColor()
+{ //Andrew edit*****
 	return *m_backgroundColor;
 }
 
@@ -172,8 +266,8 @@ void App::destroy() {
 */
 void App::init(void (*initFunction)(void)) {
 	// Create our window
-//	m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
-    m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
+	m_window = new sf::RenderWindow(sf::VideoMode(300, 300), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
+    // m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
 	m_window->setVerticalSyncEnabled(true);
 
     // Create gui instance
@@ -181,7 +275,7 @@ void App::init(void (*initFunction)(void)) {
 
 
 	// Create an image which stores the pixels we will update
-	m_image->create(600, 400, *m_backgroundColor); //Andrew edit*****
+	m_image->create(300, 300, *m_backgroundColor); //Andrew edit*****
 	assert(m_image != nullptr && "m_image != nullptr");
 	// Create a texture which lives in the GPU and will render our image
 	m_texture->loadFromImage(*m_image);
@@ -243,9 +337,9 @@ void App::loop(App& app) {
         // Note: This can be done in the 'draw call'
         // Draw to the canvas
 		
-		if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 
-			m_sprite->setColor(*m_backgroundColor);
-		} //Andrew background update. 
+		// if(m_sprite->getColor() != (*m_backgroundColor)) { //Only change color if colors don't match. 
+		// 	m_sprite->setColor(*m_backgroundColor);
+		// } //Andrew background update. 
 		
 		m_window->draw(*m_sprite);
 		// Display the canvas
@@ -259,7 +353,25 @@ void App::loop(App& app) {
 *
 */
 void App::setBackgroundColor(sf::Color *colorPassed) { //Andrew edit*****
-	m_backgroundColor = colorPassed;
+	sf::Color newBackground = *colorPassed;
+	sf::Color* oldColor = m_backgroundColor;
+	// for(int i =0; i < m_window->getSize().x; i++) {
+	// 	for (int j = 0; j < m_window->getSize().y; j++) {
+	// 		if(m_image->getPixel(i, j) == oldColor) {
+	// 			m_image->setPixel(i,j, newBackground);
+	// 		}
+	// 	}
+	// }
+	m_backgroundColor = new sf::Color(newBackground.toInteger());
+	Command *command = new Clear(this, rand(), "clear");
+	addCommand(command);
+	// m_image->create(300, 300, *m_backgroundColor);
+	// m_texture->loadFromImage(*m_image);
+	// Create a sprite which is the entity that can be textured
+	//m_sprite->setTexture(*m_texture);
+    // load the new image onto the app texture
+    
+	//m_app->getTexture().loadFromImage(m_app->getImage());
 }
 
 

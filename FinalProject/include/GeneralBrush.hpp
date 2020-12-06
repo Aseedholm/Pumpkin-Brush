@@ -16,12 +16,12 @@ private:
 
 public:
     virtual ~GeneralBrush(){};
-    virtual sf::Color getColor(){};
-    virtual void setColor(sf::Color){};
-    virtual void setSize(size){};
-    virtual int getSize(){};
-    virtual std::vector<std::vector<int>> getShader(){};
-    virtual int getType(){};
+    virtual sf::Color getColor() = 0;
+    virtual void setColor(sf::Color) = 0;
+    virtual void setSize(size) = 0;
+    virtual int getSize() = 0;
+    virtual std::vector<std::vector<int>> getShader() = 0;
+    virtual int getType() = 0;
 
 };
 

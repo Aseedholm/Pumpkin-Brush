@@ -22,7 +22,7 @@ private:
 public:
     int m_cmdFlag;
     // Constructor of a command
-    Command(int cmdFlag): m_cmdFlag(cmdFlag){};
+    Command(int cmdFlag, std::string m_commandDescriptionP): m_cmdFlag(cmdFlag), m_commandDescription(m_commandDescriptionP){};
 	// Destructor for a command
 	virtual ~Command();
 
@@ -34,6 +34,7 @@ public:
 	// it allows us to easily debug what each command is doing in a textual form.
 	virtual bool execute() = 0;
 	virtual bool undo() = 0;
+	std::string getCommand();
 };
 
 

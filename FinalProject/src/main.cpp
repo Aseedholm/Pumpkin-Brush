@@ -85,7 +85,10 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
 
         sf::Vector2f passedXY{static_cast<float>(xToPass), static_cast<float>(yToPass)};
 
-        Command* command = new Draw(passedXY, &app, app.commandFlag);
+
+        srand(time(nullptr));
+
+        Command* command = new Draw(passedXY, &app, rand(), "draw");
 
         app.addCommand(command);
 
@@ -114,7 +117,9 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
 
         sf::Vector2f passedXY{static_cast<float>(xToPass), static_cast<float>(yToPass)};
 
-        Command* command = new Draw(passedXY, &app, app.commandFlag);
+        srand(time(nullptr));
+
+        Command* command = new Draw(passedXY, &app, rand(), "draw");
 
         app.addCommand(command);
 
@@ -124,32 +129,44 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
     }
 }
 
+void remoteUndo(App& app){
+    std::stack<Command *> undoStack = app.getUndoStack();
+
+    //iterate from top of the stack to the bottom.
+    //Find all commands that share a timestamp (app.flag)
+    //Send those commands to the server 
+}
 //this method receives packets.
 void packetReceiver(App& app) {
     metaData dataToWrite;
-    // std::cout << "Packet Receiver" << std::endl;
-    clientSocket.receive(packet);
+
+    app.clientSocketInApp.receive(packet);
+
     if(packet >> dataToWrite.xToPass >> dataToWrite.yToPass >> dataToWrite.commandToPass 
     >> dataToWrite.colorOfModificationToPass >> dataToWrite.canvasColorToPass >> dataToWrite.sizeOfModification 
     >> dataToWrite.brushTypeModification >> dataToWrite.windowXToPass >> dataToWrite.windowYToPass) {
+
         packet.clear();
-        if(dataToWrite.commandToPass.compare("draw")){
+        if(dataToWrite.commandToPass.compare("draw") == 0){
             remoteDraw(app, dataToWrite.xToPass, dataToWrite.yToPass, dataToWrite.colorOfModificationToPass, dataToWrite.sizeOfModification, dataToWrite.brushTypeModification);
-        } else if (dataToWrite.commandToPass.compare("erase")) {
+        } else if (dataToWrite.commandToPass.compare("erase") == 0) {
             sf::Vector2f passedXY{static_cast<float>(dataToWrite.xToPass), static_cast<float>(dataToWrite.yToPass)};
-            Command* command = new Erase(passedXY, &app, app.commandFlag);
+            srand(time(nullptr));
+            Command* command = new Erase(passedXY, &app, rand(), "erase");
             app.addCommand(command);
-        }
+        } else if(dataToWrite.commandToPass.compare("clear") == 0) {
+            srand(time(nullptr));
+            Command *command = new Clear(&app, rand(), "clear");
+            app.addCommand(command);
+            app.m_prevCommand = app.commandEnum::CLEAR;
+        } else if(dataToWrite.commandToPass.compare("backgroundChange") == 0) {
+            app.setBackgroundColor(new sf::Color(dataToWrite.canvasColorToPass));
+        } else if(dataToWrite.commandToPass.compare("undo") == 0) {
+            app.undoCommandNetwork();
+        } else if(dataToWrite.commandToPass.compare("redo") == 0) {
+            app.redoCommandNetwork();
+        } 
     }
-    //draw
-
-    //erase
-
-    //clear
-
-    //background change - color
-
-// std::cout << "Exit packet receiver" << std::endl;
 }
 
 
@@ -180,6 +197,7 @@ void update(App& app) {
     while (app.m_window->pollEvent(event)) {
         //andrew edit ****
         //closing the window by clicking the x button (japher edit ***)
+        Command* test;
 
         switch (event.type) {
             case sf::Event::Closed :
@@ -191,14 +209,16 @@ void update(App& app) {
             case sf::Event::KeyPressed:
                 switch (event.key.code) {
                     case sf::Keyboard::U:
-                        app.undoCommand();
+                        // remoteUndo(app);
+                        app.undoCommand(true);
+                        
                         break;
                     case sf::Keyboard::R:
-                        app.redoCommand();
+                        app.redoCommand(true);
                         break;
                     case sf::Keyboard::C:
                         if (app.m_prevCommand != app.commandEnum::CLEAR) {
-                            Command *command = new Clear(&app, app.commandFlag);
+                            Command *command = new Clear(&app, app.commandFlag, "clear");
                             app.addCommand(command);
                             app.m_prevCommand = app.commandEnum::CLEAR;
                             break;
@@ -254,16 +274,6 @@ void update(App& app) {
         sf::Vector2f currentXYCoordinates = app.m_window->mapPixelToCoords(coordinate); //andrew edit ****
 
 
-        //Need to send x, y location for pixel modification,
-        //command being done,
-        //brush color at time of modification,
-        //canvas color at time of modifcation,
-        //brush size at time of mdofication,
-        //brush type (pen or brush) at time of modification,
-        //window x at time of modification,
-        //window y at time of modification.
-
-
         sf::Uint32 xToPass = 0;
         sf::Uint32 yToPass = 0;
         std::string commandToPass;
@@ -285,7 +295,7 @@ void update(App& app) {
                    && currentXYCoordinates.y > 0 && currentXYCoordinates.y <= app.getWindow().getSize().y) {
             // if mouse is left-clicked AND key E is pressed, execute the pixel
 
-            if (app.onErase) {
+            if (app.onErase && app.getWindow().hasFocus()) {
                     //networking
                     xToPass = currentXYCoordinates.x;
                     yToPass = currentXYCoordinates.y;
@@ -300,20 +310,20 @@ void update(App& app) {
                     brushTypeModification = app.getBrush().getType(); //flag could be  0 = brush, 1 = pen.
                     windowXToPass = app.getWindow().getSize().x;
                     windowYToPass = app.getWindow().getSize().y;
-                    std::cout << "Client Sent PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: "
-                              << commandToPass << "\nColor: " << colorOfModificationToPass << "\nCanvas Color: "
-                              << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification
-                              << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: "
-                              << windowXToPass << "\nWindow Y: " << windowYToPass << std::endl;
-                    // brushSize = app.GetBrush().getSize();
                     packet << xToPass << yToPass << commandToPass << colorOfModificationToPass << canvasColorToPass
                            << sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
-                    clientSocket.send(packet);
+
+
+
+                    // clientSocket.send(packet);
+                    app.clientSocketInApp.send(packet);
+
+
                     packet.clear();
                     //networking
+                    srand(time(nullptr));
 
-
-                    Command *command = new Erase(currentXYCoordinates, &app, app.commandFlag);
+                    Command *command = new Erase(currentXYCoordinates, &app, rand(), "erase");
 
                     app.addCommand(command);
                     app.m_prevCommand = app.commandEnum::ERASE;
@@ -327,7 +337,7 @@ void update(App& app) {
                         xToPass = currentXYCoordinates.x;
                         yToPass = currentXYCoordinates.y;
 
-                        commandToPass = "draw ";
+                        commandToPass = "draw";
 
                         colorOfModificationToPass = app.getBrush().getColor().toInteger();
                         canvasColorToPass = app.getBackgroundColor().toInteger();
@@ -336,18 +346,19 @@ void update(App& app) {
                         brushTypeModification = app.getBrush().getType(); //flag could be  0 = brush, 1 = pen.
                         windowXToPass = app.getWindow().getSize().x;
                         windowYToPass = app.getWindow().getSize().y;
-                        std::cout << "Client Sent PACKET: \nX: " << xToPass << "\nY: " << yToPass << "\nCommand: "
-                                  << commandToPass << "\nColor: " << colorOfModificationToPass << "\nCanvas Color: "
-                                  << canvasColorToPass << "\nSize of Modifcation: " << sizeOfModification
-                                  << "\nBrush TYpe of Modification: " << brushTypeModification << "\nWindow X: "
-                                  << windowXToPass << "\nWindow Y: " << windowYToPass << std::endl;
-                        // brushSize = app.GetBrush().getSize();
                         packet << xToPass << yToPass << commandToPass << colorOfModificationToPass << canvasColorToPass
                                << sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
-                        clientSocket.send(packet);
+
+
+                        app.clientSocketInApp.send(packet);
+
+
+
                         packet.clear();
 
-                        Command *command = new Draw(currentXYCoordinates, &app, app.commandFlag);
+                        srand(time(nullptr));
+
+                        Command *command = new Draw(currentXYCoordinates, &app, rand(), "draw");
                         app.addCommand(command);
                         app.m_prevCommand = app.commandEnum::DRAW;
                     }
@@ -355,13 +366,6 @@ void update(App& app) {
         }
 
 
-//	if(sf::Keyboard::isKeyPressed(sf::Keyboard::U)) {
-//        app.undoCommand();
-//    }
-
-//	if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-//        app.redoCommand();
-//    }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
             exit(EXIT_SUCCESS);
@@ -423,71 +427,20 @@ void update(App& app) {
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
             app.setBackgroundColor(new sf::Color(sf::Color::Blue.toInteger()));
-            //test
-            // sf::Color oldColor = app.getBackgroundColor();
-            // for(int i =0; i < app.getWindow().getSize().x; i++) {
-            //     for (int j = 0; j < app.getWindow().getSize().y; j++) {
-            //         if(app.getImage().getPixel(i, j) == oldColor) {
-            //             app.getImage().setPixel(i,j, sf::Color::Blue);
-            //         }
-            //     }
-            // }
-
-            //test
 
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             app.setBackgroundColor(new sf::Color(sf::Color::White.toInteger()));
-            // sf::Color oldColor = app.getBackgroundColor();
-            // for(int i =0; i < app.getWindow().getSize().x; i++) {
-            //     for (int j = 0; j < app.getWindow().getSize().y; j++) {
-            //         if(app.getImage().getPixel(i, j) == oldColor) {
-            //             app.getImage().setPixel(i,j, sf::Color::White);
-            //         }
-            //     }
-            // }
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
             app.setBackgroundColor(new sf::Color(sf::Color::Yellow.toInteger()));
-
-            // sf::Color oldColor = app.getBackgroundColor();
-            // for(int i =0; i < app.getWindow().getSize().x; i++) {
-            //     for (int j = 0; j < app.getWindow().getSize().y; j++) {
-            //         if(app.getImage().getPixel(i, j) == oldColor) {
-            //             app.getImage().setPixel(i,j, sf::Color::Yellow);
-            //         }
-            //     }
-            // }
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::G) && app.getWindow().hasFocus()) {
             app.setBackgroundColor(new sf::Color(sf::Color::Green.toInteger()));
-            // sf::Color oldColor = app.getBackgroundColor();
-            // for(int i =0; i < app.getWindow().getSize().x; i++) {
-            //     for (int j = 0; j < app.getWindow().getSize().y; j++) {
-            //         if(app.getImage().getPixel(i, j) == oldColor) {
-            //             app.getImage().setPixel(i,j, sf::Color::Green);
-            //         }
-            //     }
-            // }
         }
-
-        // if(sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
-        //     // sf::Vector2u vector{1500, 500};
-        //     // app.getWindow().setSize(vector);
-        //     app.getImage().saveToFile("testimage.jpg");
-        // }
-
-        //     if(sf::Keyboard::isKeyPressed(sf::Keyboard::O)) {
-        //     // sf::Vector2u vector{1500, 500};
-        //     // app.getWindow().setSize(vector);
-        //     app.getImage().loadFromFile("testimage.jpg");
-        // }
-
-
-
 
         // Stores the previous mouse click position before going to next frame
         app.pmouseX = app.mouseX;
@@ -522,32 +475,12 @@ void draw(App& app) {
 *
 */
 int main() {
-    clientSocket.setBlocking(false);
-    // //Testing data class. 
-    // std::string stringToPass = "Erase";
-    // // Data data1;
-    // Data data1(1, 1, 5555555, stringToPass, 5, 5);
-    // data1.printData();
-    // //Testing data class. 
-    
 
-    char buffer[1000];
-    memset(buffer, 0, 1000);
-    std::size_t received;
     sf::IpAddress ip = sf::IpAddress::getLocalAddress();
-    status = clientSocket.connect(ip, 8081);
-    if(status != sf::Socket::Done) {
-        std::cerr << "Error!" << status << std::endl;
-    }
-    std::string text = "Client connected to Server";
-    // clientSocket.send(text.c_str(), text.length() +1);
-    // clientSocket.receive(buffer, sizeof(buffer), received);
-    std::cout << "Client> " << buffer << std::endl;
-    // char mode = 's';
-    // bool done = false
-    //Networking
 
-	App app;
+
+    App app(ip, 8081);
+
 	// Call any setup function
 	// Passing a function pointer into the 'init' function.
 	// of our application.
@@ -563,4 +496,3 @@ int main() {
 
 	return 0;
 }
-
