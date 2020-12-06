@@ -145,12 +145,14 @@ void Gui::changeBrushType(App& app) {
         //        m_brushType = brushTypeEnum::BRUSH;
         app.setBrush(app.getBrushFactory().createBrush(1));
         m_brushColor = colorEnum::BLACK;
+        m_brushSize = brushSizeEnum::SMALL;
         app.onErase = false;
     }
     if (nk_button_label(ctx, "Pen")) {
         //        m_brushType = brushTypeEnum::PEN;
         app.setBrush(app.getBrushFactory().createBrush(2));
         m_brushColor = colorEnum::BLACK;
+        m_brushSize = brushSizeEnum::SMALL;
         app.onErase = false;
     }
     if (nk_button_label(ctx, "Eraser")) {

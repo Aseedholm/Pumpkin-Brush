@@ -14,7 +14,7 @@ private:
     enum brushSizeEnum {SMALL, MEDIUM, LARGE};
     enum brushTypeEnum {BRUSH, PEN};
     int m_brushColor = BLACK;
-    int m_brushSize = MEDIUM;
+    int m_brushSize = SMALL;
     int m_brushType = BRUSH;
     int m_backColor = WHITE;
 

@@ -127,7 +127,7 @@ void App::undoCommand(bool sendMessage) {
 void App::undoCommandNetwork() {
 	if (!m_undo.empty()) {
 	    Command* t = m_undo.top();
-	    std::cout<<"undo cmd from network flag ------>"<<t->m_cmdFlag<<std::endl;
+	    //std::cout<<"undo cmd from network flag ------>"<<t->m_cmdFlag<<std::endl;
 	    m_redo.push(t);
 	    t->undo();
 	    m_undo.pop();

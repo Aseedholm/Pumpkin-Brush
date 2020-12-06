@@ -20,6 +20,7 @@ private:
     std::vector<std::vector<int>> m_shader;
     std::vector<sf::Color> m_originalColors;
     App* m_app;
+    std::vector<std::vector<int>> dir_largeEraser;
 
 public:
     bool execute();

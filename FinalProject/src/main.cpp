@@ -117,7 +117,9 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
 
         sf::Vector2f passedXY{static_cast<float>(xToPass), static_cast<float>(yToPass)};
 
-        Command* command = new Draw(passedXY, &app, app.commandFlag, "draw");
+        srand(time(nullptr));
+
+        Command* command = new Draw(passedXY, &app, rand(), "draw");
 
         app.addCommand(command);
 
@@ -157,10 +159,12 @@ std::cout << "RECEIVED PACKET: \nX: " << dataToWrite.xToPass << "\nY: " << dataT
             remoteDraw(app, dataToWrite.xToPass, dataToWrite.yToPass, dataToWrite.colorOfModificationToPass, dataToWrite.sizeOfModification, dataToWrite.brushTypeModification);
         } else if (dataToWrite.commandToPass.compare("erase") == 0) {
             sf::Vector2f passedXY{static_cast<float>(dataToWrite.xToPass), static_cast<float>(dataToWrite.yToPass)};
-            Command* command = new Erase(passedXY, &app, app.commandFlag, "erase");
+            srand(time(nullptr));
+            Command* command = new Erase(passedXY, &app, rand(), "erase");
             app.addCommand(command);
         } else if(dataToWrite.commandToPass.compare("clear") == 0) {
-            Command *command = new Clear(&app, app.commandFlag, "clear");
+            srand(time(nullptr));
+            Command *command = new Clear(&app, rand(), "clear");
             app.addCommand(command);
             app.m_prevCommand = app.commandEnum::CLEAR;
         } else if(dataToWrite.commandToPass.compare("backgroundChange") == 0) {
@@ -350,9 +354,9 @@ void update(App& app) {
 
                     packet.clear();
                     //networking
+                    srand(time(nullptr));
 
-
-                    Command *command = new Erase(currentXYCoordinates, &app, app.commandFlag, "erase");
+                    Command *command = new Erase(currentXYCoordinates, &app, rand(), "erase");
 
                     app.addCommand(command);
                     app.m_prevCommand = app.commandEnum::ERASE;
