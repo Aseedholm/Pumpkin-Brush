@@ -1,5 +1,5 @@
 #include "Brush.hpp"
-#include "iostream"
+
 
 
 
@@ -14,8 +14,8 @@ std::vector<std::vector<int>> dir_largeBrush = {{-2, -2}, {-2, -1}, {-2, 0}, {-2
                                        {1, -2}, {1, -1}, {1, 0}, {1, 1}, {1, 2},
                                        {2, -2}, {2, -1}, {2, 0}, {2, 1}, {2, 2}};
 
-/**
- * Constructor of brush
+/*! \brief Constructor of Brush
+ *
  */
 Brush::Brush() {
     m_color = sf::Color::Black;
@@ -25,19 +25,30 @@ Brush::Brush() {
     m_shaders.push_back(dir_largeBrush);
 }
 
+/*! \brief Get color of brush
+ *
+ */
 sf::Color Brush::getColor() {
     return m_color;
 }
 
+/*! \brief Set color of brush
+ *
+ */
 void Brush::setColor(sf::Color color) {
     m_color = color;
 }
 
+/*! \brief Set size of brush
+ *
+ */
 void Brush::setSize(size size) {
     m_size = size;
 }
 
-
+/*! \brief Get size of brush
+ *
+ */
 int Brush::getSize() {
     switch(m_size) {
         case small: return 0;
@@ -50,7 +61,9 @@ int Brush::getSize() {
     }
 }
 
-
+/*! \brief Get shader of brush
+ *
+ */
 std::vector<std::vector<int>> Brush::getShader(){
     switch(m_size) {
         case small: return m_shaders[0];
@@ -64,6 +77,9 @@ std::vector<std::vector<int>> Brush::getShader(){
 
 }
 
+/*! \brief Get type of brush
+ *
+ */
 int Brush::getType() {
     return 0;
 }

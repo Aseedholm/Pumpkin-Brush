@@ -13,6 +13,9 @@
 #include "Command.hpp"
 #include "App.hpp"
 
+/*! \brief Erase command
+ *
+ */
 class Erase : public Command {
 private:
     sf::Vector2f m_coordinate;

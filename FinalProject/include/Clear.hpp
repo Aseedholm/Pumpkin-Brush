@@ -11,6 +11,9 @@
 #include "Command.hpp"
 #include "App.hpp"
 
+/*! \brief Clear command
+ *
+ */
 class Clear: public Command {
 private:
     sf::Image* m_newImage;
