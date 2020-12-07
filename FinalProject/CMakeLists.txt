@@ -79,7 +79,12 @@ add_executable(App src/App.cpp src/Draw.cpp src/Command.cpp src/main.cpp src/Bru
 
 src/Brush.cpp src/Pen.cpp src/Erase.cpp src/Clear.cpp src/Data.cpp src/Gui.cpp) # example with more files
 add_executable(Server src/Server.cpp src/Data.cpp)
-
+add_executable(App_test ./src/App.cpp ./src/Draw.cpp ./src/Command.cpp
+        ./src/Brush.cpp ./src/BrushFactory.cpp ./src/Erase.cpp ./src/Pen.cpp ./src/Clear.cpp ./src/Data.cpp ./src/Gui.cpp
+        ./tests/src/main_test.cpp)
+add_executable(Server_test ./src/App.cpp ./src/Draw.cpp ./src/Command.cpp
+        ./src/Brush.cpp ./src/BrushFactory.cpp ./src/Erase.cpp ./src/Pen.cpp ./src/Clear.cpp ./src/Data.cpp ./src/Gui.cpp
+        tests/src/server_test.cpp)
 
 #add_executable(App_Test src/App.cpp src/Command.cpp src/Draw.cpp tests/main_test.cpp)
 
@@ -91,4 +96,5 @@ add_executable(Server src/Server.cpp src/Data.cpp)
 # 	apt-file find Texture.hpp
 target_link_libraries(App sfml-graphics sfml-window sfml-system sfml-network GL)
 target_link_libraries(Server sfml-graphics sfml-window sfml-system sfml-network pthread)
-#target_link_libraries(App_Test sfml-graphics sfml-window sfml-system)
+target_link_libraries(App_test sfml-graphics sfml-window sfml-system sfml-network GL)
+target_link_libraries(Server_test sfml-graphics sfml-window sfml-system sfml-network pthread GL)
