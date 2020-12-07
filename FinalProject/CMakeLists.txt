@@ -97,4 +97,4 @@ add_executable(Server_test ./src/App.cpp ./src/Draw.cpp ./src/Command.cpp
 target_link_libraries(App sfml-graphics sfml-window sfml-system sfml-network GL)
 target_link_libraries(Server sfml-graphics sfml-window sfml-system sfml-network pthread)
 target_link_libraries(App_test sfml-graphics sfml-window sfml-system sfml-network GL)
-target_link_libraries(Server_test sfml-graphics sfml-window sfml-system sfml-network pthread)
+target_link_libraries(Server_test sfml-graphics sfml-window sfml-system sfml-network pthread GL)
