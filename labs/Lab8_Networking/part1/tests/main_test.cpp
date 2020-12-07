@@ -6,7 +6,7 @@
  ***********************************************/
 
 #define CATCH_CONFIG_MAIN
-#include "catch.hpp"
+#include "../../../../FinalProject/tests/include/catch.hpp"
 
 // Include our Third-Party SFML header
 #include <SFML/Graphics.hpp>
