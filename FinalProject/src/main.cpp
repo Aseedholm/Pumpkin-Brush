@@ -1,18 +1,9 @@
 /**
  *  @file   main.cpp
  *  @brief  Entry point into the program.
- *  @author Mike and ????
- *  @date   yyyy-dd-mm
+ *  @author Mike, Japher Su, Jugal Joshi, Hao Zheng, and Andrew Seedholm
+ *  @date   2020-07-12
  ***********************************************/
-
- // g++ -std=c++17 *.cpp -o App -lsfml-graphics -lsfml-window -lsfml-system
- //
- // Note:	If your compiler does not support -std=c++17,
- //		then try -std=c++14 then -std=c++11.
- //
- // HOW TO RUN
- //
- // ./App
 
  // Include our Third-Party SFML header
 #include <SFML/Graphics.hpp>
@@ -45,6 +36,9 @@ sf::TcpSocket clientSocket;
 sf::Socket::Status status;
 sf::Packet packet;
 
+/*! \brief 	This struct represents meta data that will be sent to and from the server. It will be used to pack into
+* the SFML API's Packet class and also to unpack that same data. 
+*/
 struct metaData {
     int socketIndex;
     sf::Uint32 xToPass;
@@ -58,9 +52,15 @@ struct metaData {
     sf::Uint32 windowYToPass;
 };
 
-int counter = 0;
-//newly added
-//original,remote,temp
+/*! \brief 	The remoteDraw function allows a Client to draw locally the received draw 
+* commands from the Server representing draw commands sent from a different client. 
+* @param app an App object that allows us to execute draw commands outside of the update loop.
+* @param xToPass a sf::Uint32 variable representing the x coordinate for where the remote draw command took place. 
+* @param yToPass a sf::Uint32 variable representing the y coordinate for where the remote draw command took place. 
+* @param colorOfModification a sf::Uint32 variable representing the color drawn where the remote draw command took place.
+* @param sizeOfModification a sf::Uint32 variable representing the size of the brush(or pen) where the remote draw command took place (small, medium, or large).
+* @param brushTypeOfModification a sf::Uint32 variable representing the brush type (brush or pen) for where the remote draw command took place.
+*/
 void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 colorOfModification, sf::Uint32 sizeOfModification, sf::Uint32 brushTypeOfModification){
 
     GeneralBrush& temp = app.getBrush();
@@ -129,14 +129,11 @@ void remoteDraw(App& app, sf::Uint32 xToPass, sf::Uint32 yToPass, sf::Uint32 col
     }
 }
 
-void remoteUndo(App& app){
-    std::stack<Command *> undoStack = app.getUndoStack();
-
-    //iterate from top of the stack to the bottom.
-    //Find all commands that share a timestamp (app.flag)
-    //Send those commands to the server 
-}
-//this method receives packets.
+/*! \brief 	The packetReceiver function uses the socket with in App close to receive information from the server
+* then controls the work flow based on the unpacked command received from the server. 
+* @param app an App object that allows us to receive packets from the Server as well as execute various commands based on 
+*            the received information. 
+*/
 void packetReceiver(App& app) {
     metaData dataToWrite;
 
@@ -169,24 +166,18 @@ void packetReceiver(App& app) {
     }
 }
 
-
-//newly added
-
-/*! \brief 	Call any initailization functions here.
-*		This might be for example setting up any
-*		global variables, allocating memory,
-*		dynamically loading any libraries, or
-*		doing nothing at all.
+/*! \brief 	The initialization function simply verifies the Application has started
+* by printing out a statement to the command line.
 *
 */
 void initialization(void) {
 	std::cout << "Starting the App" << std::endl;
 }
 
-/*! \brief 	The update function presented can be simplified.
-*		I have demonstrated two ways you can handle events,
-*		if for example we want to add in an event loop.
-*
+/*! \brief 	The update function controls key and mouse events on the painting canvas of the application.
+* Then updates the canvas accordingly. This function also is where the packetReceiver function is called
+* allowing inputs from the Server to be handled. 
+* @param app an App object that allows us to access and manipulate the canvas. 
 */
 void update(App& app) {
 
@@ -195,8 +186,6 @@ void update(App& app) {
     // Update our canvas
     sf::Event event;
     while (app.m_window->pollEvent(event)) {
-        //andrew edit ****
-        //closing the window by clicking the x button (japher edit ***)
         Command* test;
 
         switch (event.type) {
@@ -209,7 +198,6 @@ void update(App& app) {
             case sf::Event::KeyPressed:
                 switch (event.key.code) {
                     case sf::Keyboard::U:
-                        // remoteUndo(app);
                         app.undoCommand(true);
                         
                         break;
@@ -290,7 +278,6 @@ void update(App& app) {
         app.mouseY = currentXYCoordinates.y;
 
         if (app.mouseX == app.pmouseX && app.mouseY == app.pmouseY) {
-            //std::cout << "Clicking the same pixel, do not execute commands" << std::endl;
         } else if (currentXYCoordinates.x > 0 && currentXYCoordinates.x <= app.getWindow().getSize().x
                    && currentXYCoordinates.y > 0 && currentXYCoordinates.y <= app.getWindow().getSize().y) {
             // if mouse is left-clicked AND key E is pressed, execute the pixel
@@ -301,8 +288,6 @@ void update(App& app) {
                     yToPass = currentXYCoordinates.y;
 
                     commandToPass = "erase";
-
-                    // colorOfModificationToPass = app.GetBrush().getColor().toInteger();
                     colorOfModificationToPass = app.getBackgroundColor().toInteger();
                     canvasColorToPass = app.getBackgroundColor().toInteger();
 
@@ -314,8 +299,6 @@ void update(App& app) {
                            << sizeOfModification << brushTypeModification << windowXToPass << windowYToPass;
 
 
-
-                    // clientSocket.send(packet);
                     app.clientSocketInApp.send(packet);
 
 
@@ -333,7 +316,6 @@ void update(App& app) {
             }
                 else {
                     if (app.getWindow().hasFocus()) {
-                        // std::cout << currentXYCoordinates.x << " " << currentXYCoordinates.y << std::endl;
                         xToPass = currentXYCoordinates.x;
                         yToPass = currentXYCoordinates.y;
 
@@ -450,19 +432,13 @@ void update(App& app) {
 }
 
 
-/*! \brief 	The draw call
+/*! \brief 	The draw call, this is how the canvas refreshes.
 *
 */
 void draw(App& app) {
 	// Static variable
 	static int refreshRate = 0;
 	++refreshRate;	// Increment
-
-	// We load into our texture the modified pixels
-	// But we only do so every 10 draw calls to reduce latency of transfer
-	// between the GPU and CPU.
-	// Ask yourself: Could we do better with sf::Clock and refresh once
-	// 	 	 every 'x' frames?
 	if (refreshRate > 10) {
         app.getTexture().loadFromImage(app.getImage());
 		refreshRate = 0;

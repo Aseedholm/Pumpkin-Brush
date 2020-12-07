@@ -1,3 +1,9 @@
+/**
+ *  @file   Server.cpp
+ *  @brief  Server that will receive commands from Clients and send commands to Clients allowing concurrently operations on multiple canvases.
+ *  @author Jugal Joshi and Andrew Seedholm
+ *  @date   2020-07-12
+ ***********************************************/
 #include <SFML/Network.hpp>
 #include <string.h> // memset
 #include <queue>
@@ -9,7 +15,9 @@
 #include "Data.hpp"
 
 
-
+/*! \brief 	This struct represents meta data that will be sent to and from the server. It will be used to pack into
+* the SFML API's Packet class and also to unpack that same data. 
+*/
 struct metaData {
     int socketIndex;
     sf::Uint32 xToPass;
@@ -23,6 +31,8 @@ struct metaData {
     sf::Uint32 windowYToPass;
 };
 
+/*! \brief 	This class represents the operations the threads in the main function of Server.cpp will execute.
+*/
 class Painter {
     private:
         std::mutex mtx;
@@ -32,30 +42,21 @@ class Painter {
         std::map<int, std::unique_ptr<sf::TcpSocket>> mapOfSocket;
         std::condition_variable m_cv;
 
-            //list of unqiue pointers to the socket
             public : 
+            /*! \brief 	The PainterThreadFunction represents the function the painterThread will execute. It will allow a painterThread to 
+            * enqueue command information into a queue and then notify the picassoThread that it needs to send that command to the relevant 
+            * clients. 
+            * 
+            * @param socketP a unique-pointer representing a TcpSocket from the SFML library, this is the socket the thread will use to receive information, it will be stored in a map with the socketIndex as the key. 
+            * @param socketIndex the key within the map that will have the socketP as the value. 
+            */
             void PainterThreadFunction(std::unique_ptr<sf::TcpSocket> socketP, int socketIndex)
         {
-            //move socket to vector at the provided index 
-            //
-            // vector_mtx.lock();
-            // //socketP.getHandle(); 
-            // vectorOfSockets.push_back(std::move(socketP));
-            // vector_mtx.unlock();
+
             map_mtx.lock();
             mapOfSocket.insert({socketIndex, std::move(socketP)});
             map_mtx.unlock();
             sf::Packet packet;
-            // sf::Uint32 xToPass = 0;
-            // sf::Uint32 yToPass = 0;
-            // std::string commandToPass;
-            // sf::Uint32 colorOfModificationToPass = 0;
-            // sf::Uint32 canvasColorToPass = 0;
-            // sf::Uint32 sizeOfModification = 0; //flag to send to server that'll be sent to other clients to determine GeneralBrush enum size. 
-            // sf::Uint32 brushTypeModification = 0; //flag to send to server that'll be sent to other clients to determine if it is a Pen or Brush being used to draw. 
-            // sf::Uint32 windowXToPass = 0;
-            // sf::Uint32 windowYToPass = 0;
-
           
             while (true)
             {
@@ -63,10 +64,6 @@ class Painter {
                
                 struct metaData dataToStore;
 
-                // socketP->receive(packet);
-                
-
-                // vectorOfSockets[socketIndex]->receive(packet);
                 if (packet >> dataToStore.xToPass >> dataToStore.yToPass >> dataToStore.commandToPass >> dataToStore.colorOfModificationToPass 
                 >> dataToStore.canvasColorToPass >> dataToStore.sizeOfModification >> dataToStore.brushTypeModification >> dataToStore.windowXToPass >> 
                 dataToStore.windowYToPass)
@@ -76,18 +73,13 @@ class Painter {
                     commandQueue.push(dataToStore);
                     m_cv.notify_one();
                     mtx.unlock();
-
-                    // std::cout << "Server> Received PACKET FROM CLIENT: " << dataToStore.socketIndex << "\nX: "
-                    //     << dataToStore.xToPass << "\nY: " << dataToStore.yToPass << "\nCommand: " << dataToStore.commandToPass << "\nColor: "
-                    //     << dataToStore.colorOfModificationToPass << "\nCanvas Color: " << dataToStore.canvasColorToPass << "\nSize of Modifcation: "
-                    //     << dataToStore.sizeOfModification << "\nBrush TYpe of Modification: " << dataToStore.brushTypeModification << "\nWindow X: "
-                    //     << dataToStore.windowXToPass << "\nWindow Y: " << dataToStore.windowYToPass << "\nSize of Queue: " << commandQueue.size() << std::endl;
-                    //callback funtion that would execute the commands and broadcast it
                     packet.clear();
                 }
             }
         }
-
+        /*! \brief 	The PicassoThreadFunction represents the function that the picassoThread will execute. This function will be notified
+        * by the PainterThreadFunction that it needs to execute. It dequeues information from the shared queue and sends it to the relevant clients. 
+        */
         void PicassoThreadFunction() {
             std::unique_lock<std::mutex> ul(mtx, std::defer_lock);
             while (true) {
@@ -115,7 +107,9 @@ class Painter {
         }
 };
 
-
+/*! \brief 	The entry point into our program.
+*
+*/
 int main() {
     std::vector<std::thread> painterThreadVector;
     std::vector<std::unique_ptr<sf::TcpSocket>> socketVector;
@@ -130,12 +124,6 @@ int main() {
 
     serverStatus = listenerSocket.listen(8081);
 
-    // if(serverStatus != sf::Socket::Done) {
-    //     std::cerr << "Error!" << serverStatus << std::endl;
-    // }
-
-    
-
 
     Painter painter;
 
@@ -143,14 +131,10 @@ int main() {
     painterThreadVector.push_back(std::move(picassoThread));
 
     int index = 0;
-    while(serverStatus == sf::Socket::Done){ //serverStatus != sf::Socket::Done 
-        std::cout<<serverStatus<<std::endl;
+    while(serverStatus == sf::Socket::Done){
         std::unique_ptr<sf::TcpSocket> socketToAdd = std::unique_ptr<sf::TcpSocket>(new sf::TcpSocket);
-        // sf::TcpSocket serverSocket;
         listenerSocket.accept(*socketToAdd);
-        // socketVector.push_back(std::move(socketToAdd));
         std::thread painterThread(&Painter::PainterThreadFunction, &painter,  std::move(socketToAdd), index);
-        //  std::thread painterThread(&Painter::PainterThreadFunction, &painter, index);
         painterThreadVector.push_back(std::move(painterThread));
         index++;
     }

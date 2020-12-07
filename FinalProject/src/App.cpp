@@ -72,9 +72,6 @@ App::App(sf::IpAddress ipAddress, int port){
 	//Networking
 	clientSocketInApp.setBlocking(false);
     statusInApp = clientSocketInApp.connect(ipAddress, port);
-    if(statusInApp != sf::Socket::Done) {
-        std::cerr << "Error!" << statusInApp << std::endl;
-    }
 }
 
 // void App::operator=(const App& app){
