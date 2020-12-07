@@ -36,7 +36,7 @@ jobs:
       - name: run main
         run: cd ./labs/Lab12_CI && ./main
       - name: run cppcheck on all cpp files
-        run: cppcheck --enable=all ./src/*.cpp
+        run: cd ./labs/Lab12_CI/src/*.cpp && cppcheck --enable=all
       - name: Build lab makefile
         run: cd ./labs/Lab12_CI/bin && cmake ..
       - name: Run lab12 makefile
