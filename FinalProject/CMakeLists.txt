@@ -59,7 +59,7 @@ include_directories("/usr/include/")
 include_directories("./include/")
 
 
-find_package(SFML REQUIRED COMPONENTS audio network graphics window system)
+#find_package(SFML REQUIRED COMPONENTS audio network graphics window system)
 
 
 # Where are the libraries
