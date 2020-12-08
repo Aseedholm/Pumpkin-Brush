@@ -1,3 +1,9 @@
+/**
+ *  @file   Gui.hpp
+ *  @brief  A GUI class that renders a gui window and operation widgets for the mini paint app.
+ *  @author Japher Su and Hao Zheng
+ *  @date   2020-07-12
+ ***********************************************/
 #ifndef GUI_HPP
 #define GUI_HPP
 
@@ -5,18 +11,14 @@
 #include <SFML/Network.hpp>
 #include "App.hpp"
 
-
 class App;
 
 class Gui {
 private:
-    enum colorEnum {RED, BLACK, GREEN, BLUE, WHITE, YELLOW, MAGENTA, CYAN};
-    enum brushSizeEnum {SMALL, MEDIUM, LARGE};
-    enum brushTypeEnum {BRUSH, PEN};
-    int m_brushColor = BLACK;
-    int m_brushSize = SMALL;
-    int m_brushType = BRUSH;
-    int m_backColor = WHITE;
+    int m_brushColor;
+    int m_brushSize;
+    int m_brushType;
+    int m_backColor;
 
     sf::RenderWindow* m_guiWindow;
 
@@ -30,12 +32,19 @@ private:
     sf::Packet packetInGui;
 
 public:
+    enum colorEnum {RED, BLACK, GREEN, BLUE, WHITE, YELLOW, MAGENTA, CYAN};
+    enum brushSizeEnum {SMALL, MEDIUM, LARGE};
+    enum brushTypeEnum {BRUSH, PEN};
 
     Gui();
     ~Gui();
-    sf::RenderWindow& getWindow();
     void initGui();
 
+    sf::RenderWindow& getWindow();
+    int getBrushColor();
+    int getBrushSize();
+    int getBrushType();
+    int getBackColor();
 
     void drawGUI(App&);
     struct nk_context *ctx;
@@ -44,8 +53,6 @@ public:
     void nk_shutdown_wrapper();
     void nk_handle_event_wrapper(sf::Event event);
     void nk_sfml_render_wrapper();
-
 };
-
 
 #endif

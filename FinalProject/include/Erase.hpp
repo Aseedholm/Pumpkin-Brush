@@ -1,8 +1,8 @@
 /**
- *  @file   Erase.cpp
- *  @brief  Implementation of Command.hpp
- *  @author Mike and ????
- *  @date   yyyy-dd-mm
+ *  @file   Erase.hpp
+ *  @brief  This class represents a pixel erasing command in the mini paint app.
+ *  @author Japher Su and Hao Zheng
+ *  @date   2020-07-12
  ***********************************************/
 
 #ifndef APP_ERASE_HPP
@@ -13,6 +13,9 @@
 #include "Command.hpp"
 #include "App.hpp"
 
+/*! \brief Erase command
+ *
+ */
 class Erase : public Command {
 private:
     sf::Vector2f m_coordinate;

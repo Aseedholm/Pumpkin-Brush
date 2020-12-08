@@ -17,7 +17,7 @@
 
 
 
-/*! \brief 	Execute the command to draw a pixel
+/*! \brief 	Execute the command to draw pixels
 *
 */
 bool Draw::execute() {
@@ -50,7 +50,7 @@ void Draw::setOriginalColor() {
     }
 }
 
-/*! \brief 	Draw Constructor that takes in the x and y co-ordinates of the mouse
+/*! \brief 	Constructor of draw command
 *
 */
 Draw::Draw(sf::Vector2f coordinate, App* app, int cmdFlag, std::string command) :Command(cmdFlag, command) { //andrew edit **
