@@ -64,8 +64,8 @@ find_package(SFML REQUIRED COMPONENTS audio network graphics window system)
 
 # Where are the libraries
 # Hint: On linux you can grep for them: ldconfig -p | grep sfml
-link_directories("/usr/local/lib/")
-#link_directories("/usr/lib/x86_64-linux-gnu/")
+#link_directories("/usr/local/lib/")
+link_directories("/usr/lib/x86_64-linux-gnu/")
 
 # Add the source code files to a specific project
 # We can indeed have multiple executables generated from
@@ -75,14 +75,17 @@ link_directories("/usr/local/lib/")
 #
 # Here is an example below adding multiple files
 
-add_executable(App src/App.cpp src/Draw.cpp src/Command.cpp src/main.cpp src/BrushFactory.cpp src/Brush.cpp src/Pen.cpp src/Erase.cpp src/Clear.cpp src/Data.cpp src/Gui.cpp) # example with more files
-add_executable(Server src/Server.cpp src/Data.cpp)
+add_executable(App src/App.cpp src/Draw.cpp src/Command.cpp src/main.cpp src/BrushFactory.cpp
 
+src/Brush.cpp src/Pen.cpp src/Erase.cpp src/Clear.cpp src/Data.cpp src/Gui.cpp) # example with more files
+add_executable(Server src/Server.cpp src/Data.cpp)
 add_executable(App_test ./src/App.cpp ./src/Draw.cpp ./src/Command.cpp
-        ./src/Brush.cpp ./src/BrushFactory.cpp ./src/Erase.cpp ./src/Pen.cpp ./src/Clear.cpp ./src/Data.cpp ./src/Gui.cpp ./tests/src/main_test.cpp)
+     ./src/Brush.cpp ./src/BrushFactory.cpp ./src/Erase.cpp ./src/Pen.cpp ./src/Clear.cpp ./src/Data.cpp ./src/Gui.cpp
+      ./tests/src/main_test.cpp)
 add_executable(Server_test ./src/App.cpp ./src/Draw.cpp ./src/Command.cpp
-        ./src/Brush.cpp ./src/BrushFactory.cpp ./src/Erase.cpp ./src/Pen.cpp ./src/Clear.cpp ./src/Data.cpp ./src/Gui.cpp
-        ./tests/src/server_test.cpp)
+      ./src/Brush.cpp ./src/BrushFactory.cpp ./src/Erase.cpp ./src/Pen.cpp ./src/Clear.cpp ./src/Data.cpp ./src/Gui.cpp
+       tests/src/server_test.cpp)
+
 
 # Add any libraries
 # On linux, you can use the handy 'apt-file' tool to find
@@ -90,8 +93,7 @@ add_executable(Server_test ./src/App.cpp ./src/Draw.cpp ./src/Command.cpp
 # 	sudo apt install apt-file
 #   	sudo apt-file update
 # 	apt-file find Texture.hpp
-find_library(OPENGL OpenGL)
-target_link_libraries(App sfml-graphics sfml-window sfml-system sfml-network  ${OPENGL})
+target_link_libraries(App sfml-graphics sfml-window sfml-system sfml-network GL)
 target_link_libraries(Server sfml-graphics sfml-window sfml-system sfml-network pthread)
-target_link_libraries(App_test sfml-graphics sfml-window sfml-system sfml-network ${OPENGL})
-target_link_libraries(Server_test sfml-graphics sfml-window sfml-system sfml-network pthread ${OPENGL})
+target_link_libraries(App_test sfml-graphics sfml-window sfml-system sfml-network GL)
+target_link_libraries(Server_test sfml-graphics sfml-window sfml-system sfml-network pthread GL)
