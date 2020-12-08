@@ -48,4 +48,4 @@ jobs:
       - name: Setup headless x11 window
         run: sudo apt-get install xvfb xorg xauth openbox # xorg is needed to set DISPLAY variable later
       - name: Run graphical application tests in headless mode
-        run: cd ./FinalProject && xvfb-run --server-args="-screen 0 1024x768x24" ./App_test ./Server_test
+        run: cd ./FinalProject/bin && xvfb-run --server-args="-screen 0 1024x768x24" ./App_test ./Server_test
