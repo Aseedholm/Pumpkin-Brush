@@ -1,5 +1,5 @@
 #include "Pen.hpp"
-#include <iostream>
+
 
 
 // define direction matrix for 3 size of pens
@@ -26,8 +26,8 @@ std::vector<std::vector<int>> dir_largePen = { {-2, -2}, {-2, -1}, {-2, 0}, {-2,
 
 };
 
-/**
- * Constructor of Pen
+/*! \brief Constructor of pen
+ *
  */
 Pen::Pen() {
     m_color = sf::Color::Black;
@@ -38,10 +38,16 @@ Pen::Pen() {
 
 }
 
+/*! \brief Get the color of the pen
+ *
+ */
 sf::Color Pen::getColor() {
     return m_color;
 }
 
+/*! \brief Get the shader of the pen
+ *
+ */
 std::vector<std::vector<int>> Pen::getShader() {
     switch(m_size) {
         case small: return m_shaders[0];
@@ -54,6 +60,9 @@ std::vector<std::vector<int>> Pen::getShader() {
     }
 }
 
+/*! \brief Get the size of the pen
+ *
+ */
 int Pen::getSize() {
     switch(m_size) {
         case small: return 0;
@@ -66,14 +75,23 @@ int Pen::getSize() {
     }
 }
 
+/*! \brief Set the size of the pen
+ *
+ */
 void Pen::setSize(size size) {
     m_size = size;
 }
 
+/*! \brief Set the color of the pen
+ *
+ */
 void Pen::setColor(sf::Color color) {
     m_color = color;
 }
 
+/*! \brief Get type of the pen
+ *
+ */
 int Pen::getType() {
     return 1;
 }

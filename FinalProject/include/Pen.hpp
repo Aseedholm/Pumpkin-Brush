@@ -7,8 +7,8 @@
 
 #include <vector>
 
-/**
- * One kind of Brush which draws a circle shape of pixels
+/*! \brief One kind of Brush which draws a circle shape of pixels
+ *
  */
 class Pen : public GeneralBrush {
 private:

@@ -23,15 +23,18 @@ Erase::Erase(sf::Vector2f coordinate, App* app, int flag, std::string command) :
     setOriginalColor();
 }
 
+
 /*! \brief The destructor of the Erase class.
  *
  */
+
 bool Erase::execute() {
     for(int i = 0; i < m_shader.size(); i++) {
         m_app->getImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_backgroundColor);
     }
     return true;
 }
+
 
 
 /*! \brief Execute the erase pixel command.

@@ -2,14 +2,9 @@
 #include "Brush.hpp"
 #include "Pen.hpp"
 
-/**
+/*! \brief Create function which takes in an argument and return a brush instance
  *
- * @param type type of drawing tools user wants to create
- *        1.Brush
- *        2.Pen
- * @return different drawing instance
  */
-
 GeneralBrush * BrushFactory::createBrush(int type) {
     switch (type) {
         case 1:
