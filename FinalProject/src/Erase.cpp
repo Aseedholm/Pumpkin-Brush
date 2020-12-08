@@ -7,9 +7,7 @@
 #include "Erase.hpp"
 #include "App.hpp"
 
-/*! \brief Constructor of erase command
- *
- */
+
 Erase::Erase(sf::Vector2f coordinate, App* app, int flag, std::string command) : Command(flag, command) {
     m_coordinate = coordinate;
     m_app = app;
@@ -24,9 +22,7 @@ Erase::Erase(sf::Vector2f coordinate, App* app, int flag, std::string command) :
 
 }
 
-/*! \brief Execute erase command
- *
- */
+
 bool Erase::execute() {
     for(int i = 0; i < m_shader.size(); i++) {
         m_app->getImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_backgroundColor);
@@ -34,9 +30,7 @@ bool Erase::execute() {
     return true;
 }
 
-/*! \brief Undo erase command
- *
- */
+
 bool Erase::undo() {
     for(int i = 0; i < m_shader.size(); i++) {
         m_app->getImage().setPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1], m_originalColors[i]);
@@ -44,9 +38,7 @@ bool Erase::undo() {
     return true;
 }
 
-/*! \brief Get the original color when the erase command is constructed
- *
- */
+
 void Erase::setOriginalColor() {
     for(int i = 0; i <m_shader.size(); i++) {
         sf::Color pixelColor = m_app->getImage().getPixel(m_coordinate.x + m_shader[i][0], m_coordinate.y + m_shader[i][1]);
