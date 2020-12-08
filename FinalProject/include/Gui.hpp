@@ -1,3 +1,9 @@
+/**
+ *  @file   Gui.hpp
+ *  @brief  A GUI class that renders a gui window and operation widgets for the mini paint app.
+ *  @author Japher Su and Hao Zheng
+ *  @date   2020-07-12
+ ***********************************************/
 #ifndef GUI_HPP
 #define GUI_HPP
 
@@ -48,6 +54,5 @@ public:
     void nk_handle_event_wrapper(sf::Event event);
     void nk_sfml_render_wrapper();
 };
-
 
 #endif

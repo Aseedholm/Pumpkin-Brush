@@ -1,8 +1,8 @@
 /**
- *  @file   Clear.cpp
- *  @brief  Clear implementation, all clear actions are commands.
- *  @author Mike and ????
- *  @date   yyyy-dd-mm
+ *  @file   Clear.hpp
+ *  @brief  This class represents a clear canvas command in the mini paint app.
+ *  @author Japher Su and Hao Zheng
+ *  @date   2020-07-12
  ***********************************************/
 
 #ifndef APP_CLEAR_H

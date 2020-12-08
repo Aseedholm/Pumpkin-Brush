@@ -1,3 +1,9 @@
+/**
+ *  @file   Gui.cpp
+ *  @brief  A GUI class that renders a gui window and operation widgets for the mini paint app.
+ *  @author Japher Su and Hao Zheng
+ *  @date   2020-07-12
+ ***********************************************/
 #include "Gui.hpp"
 
 #define NK_INCLUDE_FIXED_TYPES
