@@ -1,10 +1,7 @@
 #include "GeneralBrush.hpp"
 
-/**
- * Brush factory which can create different types of brushes based on given type number
- *   type - 1 :
- *   type - 2 :
- *   type - 3 :
+/*! \brief Brush factory class which initialize brush instance.
+ *
  */
 class BrushFactory {
 private:

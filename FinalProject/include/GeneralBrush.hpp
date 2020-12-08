@@ -1,7 +1,3 @@
-/**
- * GeneralBrush class which represent the brush instance when drawing on the canvas
- */
-
 #ifndef GENERALBRUSH_HPP
 #define GENERALBRUSH_HPP
 // Include our Third-Party SFML header
@@ -11,6 +7,9 @@
 // enum of size of the brush
 enum size {small, medium, large};
 
+/*! \brief GeneralBrush class which represent the brush instance when drawing on the canvas
+ *
+ */
 class GeneralBrush {
 private:
 
