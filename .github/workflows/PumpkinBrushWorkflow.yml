@@ -36,7 +36,7 @@ jobs:
       - name: Build Final Project makefile
         run: cd ./FinalProject && cmake
       - name: Run Final Project makefile
-        run: cd ./FinalProjec && make
+        run: cd ./FinalProject && make
       # These next two steps need a little bit more explaining, because as we are finding out
       # testing graphics applications is really hard!
       # You learned this when you wrote your GUI applications tests earlier.
