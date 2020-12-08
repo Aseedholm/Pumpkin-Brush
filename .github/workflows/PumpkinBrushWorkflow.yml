@@ -34,9 +34,9 @@ jobs:
       - name: run cppcheck on all cpp files
         run: cd ./FinalProject && cppcheck -I ./include/ ./src/*.cpp --enable=all -i./include/nuklearHeader.hpp -i./include/nuklear_sfml_gl2.h
       - name: Build Final Project makefile
-        run: cd ./FinalProject && cmake
+        run: cd ./FinalProject/bin && cmake ..
       - name: Run Final Project makefile
-        run: cd ./FinalProject && make
+        run: cd ./FinalProject/bin && make
       # These next two steps need a little bit more explaining, because as we are finding out
       # testing graphics applications is really hard!
       # You learned this when you wrote your GUI applications tests earlier.
