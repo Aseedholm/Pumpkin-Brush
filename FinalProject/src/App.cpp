@@ -23,7 +23,9 @@
 #include<iostream>
 
 
-/*! \brief Add command that adds the pixel position in stack
+/*! \brief The addCommand function servers two purpose, first is adding the command to the redo stack and the second is executing 
+* the command so it can be reflected on the canvas. 
+* @param  c a command object that is being passed, it can be draw, erase or clear
 *
 */
 void App::addCommand(Command* c) {
@@ -33,7 +35,7 @@ void App::addCommand(Command* c) {
 	}
     App::executeCommand(c);
 }
-/*! \brief Add command that adds the pixel position in stack
+/*! \brief The constructor of the App class that initializes certain crucial values for the application
 *
 */
 App::App(){
@@ -52,8 +54,9 @@ App::App(){
 	m_backgroundColor = new sf::Color(l_color_int);
 }
 
-/*! \brief Add command that adds the pixel position in stack
-*
+/*! \brief The second constructor of the App class that initializes certain crucial values for the application but here it takes in two arguments for networking purposes
+* @param ipAddress the IP Address of the server to be passed for the client to connect with the server
+* @param port number of the server running 
 */
 App::App(sf::IpAddress ipAddress, int port){
 	std::cout << "Constructor of App called" << std::endl;
@@ -79,8 +82,9 @@ App::App(sf::IpAddress ipAddress, int port){
 // }
 
 
-/*! \brief 	Executing the command to generate pixel on left mouseclick
-*
+/*! \brief 	The execute Command function helps execute the command to generate pixel upon input from the user,
+* the method is being called from AddCommand() function
+* @param  c a command object that is being passed, it can be draw, erase or clear
 */
 void App::executeCommand(Command* c) {
 
@@ -89,8 +93,8 @@ void App::executeCommand(Command* c) {
 	c->execute();
 
 }
-/*! \brief The undoCommand function unodoes the the pixel in reverse chronological order
-*
+/*! \brief The undoCommand function unodoes the the pixel in reverse chronological order from a stack recursively
+* @param  sendMessage a bool value to check if the message has been sent over the network for conditional logic
 */
 void App::undoCommand(bool sendMessage) {
 	//std::cout << "Size of Undo: **************************************************   " << m_undo.size() << std::endl;
@@ -119,8 +123,8 @@ void App::undoCommand(bool sendMessage) {
 
 }
 
-/*! \brief The undoCommand function unodoes the the pixel in reverse chronological order
-*
+/*! \brief The undoCommand function unodoes the the pixel in reverse chronological order for the network i.e
+* so the clients connected get the pixels created and erased on canvas
 */
 void App::undoCommandNetwork() {
 	if (!m_undo.empty()) {
@@ -138,7 +142,7 @@ void App::undoCommandNetwork() {
 }
 
 /*! \brief The redo commands redo an undo command until if there is an input in between.
-*
+ * @param  sendMessage a bool value to check if the message has been sent over the network for conditional logic
 */
 void App::redoCommand(bool sendMessage) {
 	if (!m_redo.empty()) {
@@ -159,7 +163,8 @@ void App::redoCommand(bool sendMessage) {
 	}
 }
 
-/*! \brief The redo commands redo an undo command until if there is an input in between.
+/*! \brief The redo commands redo an undo command until if there is an input in between for the network i.e
+* so the clients connected get the pixels created and erased on canvas
 *
 */
 void App::redoCommandNetwork() {
@@ -176,19 +181,21 @@ void App::redoCommandNetwork() {
 
 /*! \brief 	Return a reference to our m_image, so that
 *		we do not have to publicly expose it.
-*
+* @return m_image a poiner to m_image of the App class
 */
 sf::Image& App::getImage() {
 	return *m_image;
 }
-
+/*! \brief 	Sets the image passed in from the parameter for the App class
+*  @param newImage the image to be set for the App class
+*/
 void App::setImage(sf::Image* newImage) {
     m_image = newImage;
 }
 
 /*! \brief 	Return a reference to our m_Texture so that
 *		we do not have to publicly expose it.
-*
+* @return m_texture a poiner to m_texture of the App class
 */
 sf::Texture& App::getTexture() {
 	return *m_texture;
@@ -196,7 +203,7 @@ sf::Texture& App::getTexture() {
 
 /*! \brief 	Return a reference to our m_window so that we
 *		do not have to publicly expose it.
-*
+* @return m_window a poiner to m_window of the App class
 */
 sf::RenderWindow& App::getWindow() {
 	return *m_window;
@@ -205,7 +212,7 @@ sf::RenderWindow& App::getWindow() {
 
 /*! \brief Return the brush factory of App
  *
- *
+ * @return m_brushFactory a poiner to m_brushFactory of the App class
  */
 BrushFactory App::getBrushFactory() {
     return m_brushFactory;
@@ -213,31 +220,33 @@ BrushFactory App::getBrushFactory() {
 
 /*! \brief Return the current brush instance of the App
  *
- *
+ * @return m_brush a poiner to m_brush of the App class
  */
 GeneralBrush& App::getBrush() {
     return *m_brush;
 }
 
 /*! \brief Set the current brush
- *
+ @param brush the brush to be set is passed as an argument for the App class
  */
 void App::setBrush(GeneralBrush* brush) {
     m_brush = brush;
 }
-
+/*! \brief returns the current undo stack where all the commands to be undone are stored
+ * @return m_undo 
+ */
 std::stack<Command *> App::getUndoStack(){
 	return m_undo;
 
 }
-
+/*! \brief returns the current redo stack where all the commands to be redone are stored
+ * @return m_redo,
+ */
+std::
 std::stack<Command *> App::getRedoStack(){
 
 	return m_redo;
 }
-
-/*! \brief 	Destroy we manually call at end of our program.
-
 /*! \brief 	Return a reference to our m_backgroundColor so that we
 *		do not have to publicly expose it.
 *
@@ -260,10 +269,11 @@ void App::destroy() {
 
 /*! \brief 	Initializes the App and sets up the main
 *		rendering window(i.e. our canvas.)
+* @param initFunction a pointer to a function that is executed later when the program is initiated 
 */
 void App::init(void (*initFunction)(void)) {
 	// Create our window
-	m_window = new sf::RenderWindow(sf::VideoMode(300, 300), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
+	m_window = new sf::RenderWindow(sf::VideoMode(800, 800), "Pumpkin Brush", sf::Style::Titlebar);
     // m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
 	m_window->setVerticalSyncEnabled(true);
 
@@ -272,7 +282,7 @@ void App::init(void (*initFunction)(void)) {
 
 
 	// Create an image which stores the pixels we will update
-	m_image->create(300, 300, *m_backgroundColor); //Andrew edit*****
+	m_image->create(800, 800, *m_backgroundColor); //Andrew edit*****
 	assert(m_image != nullptr && "m_image != nullptr");
 	// Create a texture which lives in the GPU and will render our image
 	m_texture->loadFromImage(*m_image);
@@ -287,7 +297,7 @@ void App::init(void (*initFunction)(void)) {
 
 /*! \brief 	Set a callback function which will be called
 		each iteration of the main loop before drawing.
-*
+* @param updateFuntion is a function that takes in App object as an argument so it can be executed later in the application
 */
 void App::updateCallback(void (*updateFunction)(App&)) {
 	m_updateFunc = updateFunction;
@@ -295,7 +305,7 @@ void App::updateCallback(void (*updateFunction)(App&)) {
 
 /*! \brief 	Set a callback function which will be called
 		each iteration of the main loop after update.
-*
+* @param drawFunction is a function that takes in App object as an argument so it can be executed later in the application
 */
 void App::drawCallback(void (*drawFunction)(App&)) {
 	m_drawFunc = drawFunction;
@@ -305,7 +315,7 @@ void App::drawCallback(void (*drawFunction)(App&)) {
 		and will be executed until the main window is closed.
 		Within the loop function the update and draw callback
 		functions will be called.
-*
+* @param app the instance of app class passed so the it can be used to execute various functions
 */
 void App::loop(App& app) {
 	// Call the init function
@@ -347,7 +357,7 @@ void App::loop(App& app) {
 }
 
 /*! \brief 	Set a reference to m_backgroundColor.
-*
+*@param colorPassed the color of the background 
 */
 void App::setBackgroundColor(sf::Color *colorPassed) { //Andrew edit*****
 	sf::Color newBackground = *colorPassed;
