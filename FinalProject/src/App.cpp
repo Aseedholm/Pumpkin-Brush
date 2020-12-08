@@ -35,7 +35,7 @@ void App::addCommand(Command* c) {
 	}
     App::executeCommand(c);
 }
-/*! \brief Thw constructor of the App class that initializes certain crucial values for the application
+/*! \brief The constructor of the App class that initializes certain crucial values for the application
 *
 */
 App::App(){
@@ -273,7 +273,7 @@ void App::destroy() {
 */
 void App::init(void (*initFunction)(void)) {
 	// Create our window
-	m_window = new sf::RenderWindow(sf::VideoMode(800, 800), "Mini-Paint alpha 0.0.2", sf::Style::Titlebar);
+	m_window = new sf::RenderWindow(sf::VideoMode(800, 800), "Pumpkin Brush", sf::Style::Titlebar);
     // m_window = new sf::RenderWindow(sf::VideoMode(600, 400), "Mini-Paint alpha 0.0.2"); //andrew edit *********
 	m_window->setVerticalSyncEnabled(true);
 
