@@ -290,6 +290,7 @@ TEST_CASE("Check on different brush type") {
     REQUIRE(app.getImage().getPixel(12, 11) == sf::Color::Black);
     REQUIRE(app.getImage().getPixel(10, 12) == sf::Color::Black);
     REQUIRE(app.getImage().getPixel(11, 12) == sf::Color::Black);
+}
 
  /*! \brief Test initialing GUI window
   *

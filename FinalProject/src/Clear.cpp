@@ -9,7 +9,7 @@
 
 /*! \brief The constructor of the Clear class.
  *
-
+*/
 Clear::Clear(App *app, int flag, std::string command) :Command(flag, command) {
     m_app = app;
     m_originalImage = app->getImage();

@@ -351,24 +351,9 @@ void App::loop(App& app) {
 */
 void App::setBackgroundColor(sf::Color *colorPassed) { //Andrew edit*****
 	sf::Color newBackground = *colorPassed;
-	sf::Color* oldColor = m_backgroundColor;
-	// for(int i =0; i < m_window->getSize().x; i++) {
-	// 	for (int j = 0; j < m_window->getSize().y; j++) {
-	// 		if(m_image->getPixel(i, j) == oldColor) {
-	// 			m_image->setPixel(i,j, newBackground);
-	// 		}
-	// 	}
-	// }
 	m_backgroundColor = new sf::Color(newBackground.toInteger());
 	Command *command = new Clear(this, rand(), "clear");
 	addCommand(command);
-	// m_image->create(300, 300, *m_backgroundColor);
-	// m_texture->loadFromImage(*m_image);
-	// Create a sprite which is the entity that can be textured
-	//m_sprite->setTexture(*m_texture);
-    // load the new image onto the app texture
-    
-	//m_app->getTexture().loadFromImage(m_app->getImage());
 }
 
 

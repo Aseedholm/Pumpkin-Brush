@@ -254,8 +254,8 @@ void Gui::clearCanvas(App& app) {
 }
 
 
-/*! \brief
-*
+/*! \brief This function is a helper function for changeBackColor that will send the 
+* background color information over the network to the Server. 
 */
 void Gui::networkBackground(sf::Uint32 color, App& app) {
     std::string background = "backgroundChange";

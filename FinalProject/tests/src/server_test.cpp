@@ -11,7 +11,15 @@
 #include <string>
 // Project header files
 #include "App.hpp"
+#include "Brush.hpp"
+#include "Pen.hpp"
 
+#include "Command.hpp"
+#include "Draw.hpp"
+#include "Erase.hpp"
+#include "Clear.hpp"
+#include "Data.hpp"
+#include "Gui.hpp"
 
 /*! \brief 	Init function argument
 *
