@@ -165,7 +165,7 @@ TEST_CASE("Check if App's undo/redo functions works as expected.") {
     REQUIRE(sf::Color::Black == app.getImage().getPixel(xAndY3.x, xAndY3.y)); //this pixel should still be there. 
 
     //undo erase command
-    app.undoCommand(true); //all three pixels draw should disappear because of our smooth undo. 
+    app.undoCommandNetwork(); //all three pixels draw should disappear because of our smooth undo. 
 
     //verify pixel is there
     REQUIRE(sf::Color::Black == app.getImage().getPixel(xAndY1.x, xAndY1.y));
@@ -173,29 +173,10 @@ TEST_CASE("Check if App's undo/redo functions works as expected.") {
     REQUIRE(sf::Color::Black == app.getImage().getPixel(xAndY3.x, xAndY3.y));
     
     //redo erase command
-    app.redoCommand(true);
+    app.redoCommandNetwork();
 
     REQUIRE(sf::Color::Black != app.getImage().getPixel(xAndY1.x, xAndY1.y));
     REQUIRE(sf::Color::Black != app.getImage().getPixel(xAndY2.x, xAndY2.y));
     REQUIRE(sf::Color::Black == app.getImage().getPixel(xAndY3.x, xAndY3.y)); //this pixel should still be there. 
-
-    // Command* clearCommand = new Clear(&app, 3, "clear");
-    // app.addCommand(clearCommand);
-    // //Verify canvas has been cleared. 
-    // REQUIRE(sf::Color::Black != app.getImage().getPixel(xAndY1.x, xAndY1.y));
-    // REQUIRE(sf::Color::Black != app.getImage().getPixel(xAndY2.x, xAndY2.y));
-    // REQUIRE(sf::Color::Black != app.getImage().getPixel(xAndY3.x, xAndY3.y));
-
-    // app.undoCommandNetwork();
-    // //verify canvas has been reset to having just the 1 pixel drawn. 
-    // REQUIRE(sf::Color::Black != app.getImage().getPixel(xAndY1.x, xAndY1.y));
-    // REQUIRE(sf::Color::Black != app.getImage().getPixel(xAndY2.x, xAndY2.y));
-    // REQUIRE(sf::Color::Black == app.getImage().getPixel(xAndY3.x, xAndY3.y));
-
-    // app.redoCommandNetwork();
-    // //Verify canvas has been cleared. 
-    // REQUIRE(sf::Color::Black != app.getImage().getPixel(xAndY1.x, xAndY1.y));
-    // REQUIRE(sf::Color::Black != app.getImage().getPixel(xAndY2.x, xAndY2.y));
-    // REQUIRE(sf::Color::Black != app.getImage().getPixel(xAndY3.x, xAndY3.y));
     app.destroy();
 }
