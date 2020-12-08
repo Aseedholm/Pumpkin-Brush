@@ -19,7 +19,7 @@
 #include "Erase.hpp"
 #include "Clear.hpp"
 #include "Data.hpp"
-
+#include "Gui.hpp"
 
 /*! \brief 	Init function argument
 *
@@ -36,6 +36,7 @@ TEST_CASE("Check if app can be initialized") {
     app.init(&initialization);
     app.destroy();
 }
+
 
 /*! \brief 	Test on different brush size
  *
@@ -147,4 +148,27 @@ TEST_CASE("Check on different brush type") {
     REQUIRE(app.getImage().getPixel(12, 11) == sf::Color::Black);
     REQUIRE(app.getImage().getPixel(10, 12) == sf::Color::Black);
     REQUIRE(app.getImage().getPixel(11, 12) == sf::Color::Black);
+
+ /*! \brief Test initialing GUI window
+  *
+  */
+  TEST_CASE("initialing GUI window test") {
+    Gui* gui = new Gui();
+    REQUIRE(gui->getWindow().isOpen() == true);
+    REQUIRE(gui->getWindow().getSize().x == 600);
+    REQUIRE(gui->getWindow().getSize().y == 800);
+    gui->~Gui();
+  }
+
+/*! \brief Test initialing GUI parameters
+*
+*/
+TEST_CASE("Initialing GUI parameters test") {
+    Gui* gui = new Gui();
+    REQUIRE(gui->getBrushColor() == Gui::BLACK);
+    REQUIRE(gui->getBrushSize() == Gui::SMALL);
+    REQUIRE(gui->getBrushType() == Gui::BRUSH);
+    REQUIRE(gui->getBackColor() == Gui::WHITE);
+    gui->~Gui();
+
 }
