@@ -17,21 +17,70 @@
 
 nk_window* win;
 
-/*! \brief Constructor of Gui
+/*! \brief Constructor of Gui.
  *
  */
 Gui::Gui() {
     initGui();
 }
 
-/*! \brief
+/*! \brief Destructor of Gui.
  *
  */
 Gui::~Gui() {
     delete m_guiWindow;
 }
 
-/*! \brief
+/*! \brief Initialise the gui window.
+ *
+ */
+void Gui::initGui() {
+    m_brushColor = BLACK;
+    m_brushSize = SMALL;
+    m_brushType = BRUSH;
+    m_backColor = WHITE;
+
+    sf::ContextSettings settings(24, 8, 4, 2, 2);
+
+    m_guiWindow = new sf::RenderWindow(sf::VideoMode(600, 800), "Mini Paint Toolbox", sf::Style::Default, settings);
+
+    m_guiWindow->setVerticalSyncEnabled(true);
+    m_guiWindow->setActive(true);
+
+    glViewport(0, 0, m_guiWindow->getSize().x, m_guiWindow->getSize().y);
+
+    ctx = nk_sfml_init(m_guiWindow);
+
+    // Init style
+    ctx->style.text.color.g = 255;
+    ctx->style.text.color.r = 0;
+    ctx->style.text.color.b = 0;
+    // Window color header
+    ctx->style.window.header.normal.data.color.r = 255;
+    ctx->style.window.header.normal.data.color.g = 220;
+    ctx->style.window.header.normal.data.color.b = 0;
+    ctx->style.window.header.active.data.color.r = 255;
+    ctx->style.window.header.active.data.color.g = 220;
+    ctx->style.window.header.active.data.color.b = 0;
+    // Button color
+    ctx->style.button.hover.data.color.r = 0;
+    ctx->style.button.hover.data.color.g = 204;
+    ctx->style.button.hover.data.color.b = 255;
+
+    ctx->style.button.active.data.color.r = 0;
+    ctx->style.button.active.data.color.g = 128;
+    ctx->style.button.active.data.color.b = 255;
+    // Init font
+    struct nk_font_atlas* atlas;
+    nk_sfml_font_stash_begin(&atlas);
+    const char* font_path = "../nuklear/extra_font/kenvector_future_thin.ttf";
+    struct nk_font* future = nk_font_atlas_add_from_file(atlas, font_path, 16, 0);
+    nk_sfml_font_stash_end();
+    nk_style_set_font(ctx, &future->handle);
+}
+
+
+/*! \brief Draw the gui window.
  *
  */
 void Gui::drawGUI(App& app) {
@@ -42,7 +91,6 @@ void Gui::drawGUI(App& app) {
 
         undoRedoOption(app);
         clearCanvas(app);
-        //        ctx.style.window.header
     }
     nk_end(ctx);
 
@@ -67,7 +115,7 @@ void Gui::drawGUI(App& app) {
     nk_end(ctx);
 }
 
-/*! \brief
+/*! \brief Set up the widgets for brush color.
  *
  */
 void Gui::changeBrushColor(App& app) {
@@ -110,7 +158,7 @@ void Gui::changeBrushColor(App& app) {
 }
 
 
-/*! \brief
+/*! \brief Set up the widgets for brush size.
 *
 */
 void Gui::changeBrushSize(App& app) {
@@ -133,7 +181,7 @@ void Gui::changeBrushSize(App& app) {
     }
 }
 
-/*! \brief
+/*! \brief Set up the widgets for brush type.
 *
 */
 void Gui::changeBrushType(App& app) {
@@ -162,7 +210,7 @@ void Gui::changeBrushType(App& app) {
     }
 }
 
-/*! \brief
+/*! \brief Set up the widgets for undo and redo operations.
  *
  */
 void Gui::undoRedoOption(App& app) {
@@ -173,11 +221,10 @@ void Gui::undoRedoOption(App& app) {
     if (nk_button_label(ctx, "Redo")) {
         app.redoCommand(true);
     }
-
 }
 
 
-/*! \brief
+/*! \brief Set up the widget for clear canvas operation.
 *
 */
 void Gui::clearCanvas(App& app) {
@@ -200,15 +247,19 @@ void Gui::clearCanvas(App& app) {
     }
 }
 
+
+/*! \brief
+*
+*/
 void Gui::networkBackground(sf::Uint32 color, App& app) {
     std::string background = "backgroundChange";
     sf::Uint32 send = 1;
     packetInGui << send << send << background << send << color << send << send << send << send;
     app.clientSocketInApp.send(packetInGui);
     packetInGui.clear();
-    //networking
 }
-/*! \brief
+
+/*! \brief Set up the widgets for changing background color.
 *
 */
 void Gui::changeBackColor(App& app) {
@@ -268,113 +319,74 @@ void Gui::changeBackColor(App& app) {
             networkBackground(localColor, app);
             app.setBackgroundColor(new sf::Color(localColor));
         }
-
         nk_tree_pop(ctx);
     }
-
-    //    nk_layout_row_dynamic(ctx, 20, 1);
-    //    nk_label(ctx, "Toolbox Background Color:", NK_TEXT_LEFT);
-    //    nk_layout_row_dynamic(ctx, 25, 1);
-    //    if (nk_combo_begin_color(ctx, nk_rgb_cf(m_bg), nk_vec2(nk_widget_width(ctx),400))) {
-    //        nk_layout_row_dynamic(ctx, 120, 1);
-    //        m_bg = nk_color_picker(ctx, m_bg, NK_RGBA);
-    //        nk_layout_row_dynamic(ctx, 25, 1);
-    //        m_bg.r = nk_propertyf(ctx, "#R:", 0, m_bg.r, 1.0f, 0.01f,0.005f);
-    //        m_bg.g = nk_propertyf(ctx, "#G:", 0, m_bg.g, 1.0f, 0.01f,0.005f);
-    //        m_bg.b = nk_propertyf(ctx, "#B:", 0, m_bg.b, 1.0f, 0.01f,0.005f);
-    //        m_bg.a = nk_propertyf(ctx, "#A:", 0, m_bg.a, 1.0f, 0.01f,0.005f);
-    //        nk_combo_end(ctx);
-    //    }
 }
 
-/*! \brief
- *
- */
-void Gui::initGui() {
-    sf::ContextSettings settings(24, 8, 4, 2, 2);
-
-    m_guiWindow = new sf::RenderWindow(sf::VideoMode(600, 800), "Mini Paint Toolbox", sf::Style::Default, settings);
-
-    m_guiWindow->setVerticalSyncEnabled(true);
-    m_guiWindow->setActive(true);
-
-    glViewport(0, 0, m_guiWindow->getSize().x, m_guiWindow->getSize().y);
-
-    ctx = nk_sfml_init(m_guiWindow);
-
-    // Init style
-    //NkColor blue = NkColor.create().set((byte)0x00, (byte)0x00, (byte)0xFF, (byte)0xFF);
-    ctx->style.text.color.g = 255;
-    ctx->style.text.color.r = 0;
-    ctx->style.text.color.b = 0;
-    // Window color header
-    ctx->style.window.header.normal.data.color.r = 255;
-    ctx->style.window.header.normal.data.color.g = 220;
-    ctx->style.window.header.normal.data.color.b = 0;
-    ctx->style.window.header.active.data.color.r = 255;
-    ctx->style.window.header.active.data.color.g = 220;
-    ctx->style.window.header.active.data.color.b = 0;
-    // Button color
-    ctx->style.button.hover.data.color.r = 0;
-    ctx->style.button.hover.data.color.g = 204;
-    ctx->style.button.hover.data.color.b = 255;
-
-    ctx->style.button.active.data.color.r = 0;
-    ctx->style.button.active.data.color.g = 128;
-    ctx->style.button.active.data.color.b = 255;
-    // Init font
-    struct nk_font_atlas* atlas;
-    nk_sfml_font_stash_begin(&atlas);
-    const char* font_path = "../nuklear/extra_font/kenvector_future_thin.ttf";
-    struct nk_font* future = nk_font_atlas_add_from_file(atlas, font_path, 16, 0);
-    nk_sfml_font_stash_end();
-    //nk_style_load_all_cursors(ctx, atlas->cursors);
-    nk_style_set_font(ctx, &future->handle);
-
-
-}
-
-
-/*! \brief
+/*! \brief Get the gui window.
 *
 */
 sf::RenderWindow& Gui::getWindow() {
     return *m_guiWindow;
 }
 
-
-/*! \brief
+/*! \brief Get the brush color.
  *
  */
+int Gui::getBrushColor () {
+    return m_brushColor;
+}
 
+/*! \brief Get the brush size.
+ *
+ */
+int Gui::getBrushSize() {
+    return m_brushSize;
+}
+/*! \brief Get the brush type.
+ *
+ */
+int Gui::getBrushType() {
+    return m_brushType;
+}
+
+/*! \brief Get the background color.
+ *
+ */
+int Gui::getBackColor() {
+    return m_backColor;
+}
+
+/*! \brief Wrapper function for nk_sfml_handle_event.
+ *
+ */
 void Gui::nk_handle_event_wrapper(sf::Event event) {
     nk_sfml_handle_event(&event);
 }
 
 
-/*! \brief
+/*! \brief Wrapper function for nk_input_end.
  *
  */
-
 void Gui::nk_input_end_wrapper() {
     nk_input_end(ctx);
 }
 
-/*! \brief
+/*! \brief Wrapper function for nk_input_begin.
  *
  */
 void Gui::nk_input_begin_wrapper() {
     nk_input_begin(ctx);
 }
 
-/*! \brief
+/*! \brief Wrapper function for nk_sfml_shutdown.
  *
  */
 void Gui::nk_shutdown_wrapper() {
     nk_sfml_shutdown();
 }
 
-/*! \brief
+/*! \brief Wrapper function for nk_sfml_render.
  *
  */
 void Gui::nk_sfml_render_wrapper() {

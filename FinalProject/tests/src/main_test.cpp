@@ -19,7 +19,7 @@
 #include "Erase.hpp"
 #include "Clear.hpp"
 #include "Data.hpp"
-
+#include "Gui.hpp"
 
 /*! \brief 	Init function argument
 *
@@ -35,4 +35,27 @@ TEST_CASE("Check if app can be initialized") {
     App app;
     app.init(&initialization);
     app.destroy();
+}
+
+ /*! \brief Test initialing GUI window
+  *
+  */
+  TEST_CASE("initialing GUI window test") {
+    Gui* gui = new Gui();
+    REQUIRE(gui->getWindow().isOpen() == true);
+    REQUIRE(gui->getWindow().getSize().x == 600);
+    REQUIRE(gui->getWindow().getSize().y == 800);
+    gui->~Gui();
+  }
+
+/*! \brief Test initialing GUI parameters
+*
+*/
+TEST_CASE("Initialing GUI parameters test") {
+    Gui* gui = new Gui();
+    REQUIRE(gui->getBrushColor() == Gui::BLACK);
+    REQUIRE(gui->getBrushSize() == Gui::SMALL);
+    REQUIRE(gui->getBrushType() == Gui::BRUSH);
+    REQUIRE(gui->getBackColor() == Gui::WHITE);
+    gui->~Gui();
 }
