@@ -6,6 +6,7 @@
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Network.hpp>
 // Include standard library C++ libraries.
 #include <iostream>
 #include <string>
@@ -18,7 +19,6 @@
 #include "Draw.hpp"
 #include "Erase.hpp"
 #include "Clear.hpp"
-#include "Data.hpp"
 #include "Gui.hpp"
 
 /*! \brief 	Init function argument
@@ -37,7 +37,7 @@ TEST_CASE("Check if app can be initialized") {
     app.destroy();
 }
 
-/*! \brief 	Check if we can properly change the background color of the canvas. 
+/*! \brief 	Check if we can properly change the background color of the canvas.
 *
 */
 TEST_CASE("Check if App's setBackground function works as expected.") {
@@ -50,7 +50,7 @@ TEST_CASE("Check if App's setBackground function works as expected.") {
             c2 = 254;
             c3 = 254;
             c4 = 255;
-            
+
             Black
             c1 = 1;
             c2 = 0;
@@ -80,53 +80,53 @@ TEST_CASE("Check if App's setBackground function works as expected.") {
     app.init(&initialization);
 
     //Test we start with a white background. 
-    for(int x = 0; x < app.getImage().getSize().x; x++) {
+    for (int x = 0; x < app.getImage().getSize().x; x++) {
         for (int y = 0; y < app.getImage().getSize().y; y++) {
-            REQUIRE(white == app.getImage().getPixel(x,y));
+            REQUIRE(white == app.getImage().getPixel(x, y));
         }
     }
 
     //set the background to black and verify every pixel is black. 
     app.setBackgroundColor(new sf::Color(black.toInteger()));
-    for(int x = 0; x < app.getImage().getSize().x; x++) {
+    for (int x = 0; x < app.getImage().getSize().x; x++) {
         for (int y = 0; y < app.getImage().getSize().y; y++) {
-            REQUIRE(black == app.getImage().getPixel(x,y));
+            REQUIRE(black == app.getImage().getPixel(x, y));
         }
     }
 
     //set the background to yellow and verify every pixel is yellow. 
     app.setBackgroundColor(new sf::Color(yellow.toInteger()));
-    for(int x = 0; x < app.getImage().getSize().x; x++) {
+    for (int x = 0; x < app.getImage().getSize().x; x++) {
         for (int y = 0; y < app.getImage().getSize().y; y++) {
-            REQUIRE(yellow == app.getImage().getPixel(x,y));
+            REQUIRE(yellow == app.getImage().getPixel(x, y));
         }
     }
 
     //set the background to green and verify every pixel is green. 
     app.setBackgroundColor(new sf::Color(green.toInteger()));
-    for(int x = 0; x < app.getImage().getSize().x; x++) {
+    for (int x = 0; x < app.getImage().getSize().x; x++) {
         for (int y = 0; y < app.getImage().getSize().y; y++) {
-            REQUIRE(green == app.getImage().getPixel(x,y));
+            REQUIRE(green == app.getImage().getPixel(x, y));
         }
     }
 
     //set the background to white and verify every pixel is white. 
     app.setBackgroundColor(new sf::Color(white.toInteger()));
-    for(int x = 0; x < app.getImage().getSize().x; x++) {
+    for (int x = 0; x < app.getImage().getSize().x; x++) {
         for (int y = 0; y < app.getImage().getSize().y; y++) {
-            REQUIRE(white == app.getImage().getPixel(x,y));
+            REQUIRE(white == app.getImage().getPixel(x, y));
         }
     }
     app.destroy();
 }
 
-/*! \brief 	Check if the undo and redo function in App work as expected. 
+/*! \brief 	Check if the undo and redo function in App work as expected.
 *
 */
 TEST_CASE("Check if App's undo/redo functions works as expected.") {
-    sf::Vector2f xAndY1 = {100.0, 100.0};
-    sf::Vector2f xAndY2 = {200.0, 200.0};
-    sf::Vector2f xAndY3 = {300.0, 300.0};
+    sf::Vector2f xAndY1 = { 100.0, 100.0 };
+    sf::Vector2f xAndY2 = { 200.0, 200.0 };
+    sf::Vector2f xAndY3 = { 300.0, 300.0 };
     App app;
     app.init(&initialization);
     //do a draw command
@@ -170,7 +170,7 @@ TEST_CASE("Check if App's undo/redo functions works as expected.") {
     REQUIRE(sf::Color::Black == app.getImage().getPixel(xAndY1.x, xAndY1.y));
     REQUIRE(sf::Color::Black == app.getImage().getPixel(xAndY2.x, xAndY2.y));
     REQUIRE(sf::Color::Black == app.getImage().getPixel(xAndY3.x, xAndY3.y));
-    
+
     //redo erase command
     app.redoCommandNetwork();
 
@@ -189,7 +189,7 @@ TEST_CASE("Check on different brush size") {
     app.setBrush(app.getBrushFactory().createBrush(1));
     app.getBrush().setSize(size::small);
     app.getBrush().setColor(sf::Color::Black);
-    sf::Vector2f position(10,10);
+    sf::Vector2f position(10, 10);
     app.addCommand(new Draw(position, &app, 1, "draw"));
 
     sf::Uint32 c1 = 254;
@@ -233,7 +233,7 @@ TEST_CASE("Check on different brush color") {
     app.setBrush(app.getBrushFactory().createBrush(1));
     app.getBrush().setSize(size::small);
     app.getBrush().setColor(sf::Color::Black);
-    sf::Vector2f position(10,10);
+    sf::Vector2f position(10, 10);
     app.addCommand(new Draw(position, &app, 1, "draw"));
     REQUIRE(app.getImage().getPixel(10, 10) == sf::Color::Black);
     app.getBrush().setColor(sf::Color::Red);
@@ -253,7 +253,7 @@ TEST_CASE("Check on different brush type") {
     app.setBrush(app.getBrushFactory().createBrush(1));
     app.getBrush().setSize(size::small);
     app.getBrush().setColor(sf::Color::Black);
-    sf::Vector2f position(10,10);
+    sf::Vector2f position(10, 10);
     app.addCommand(new Draw(position, &app, 1, "draw"));
 
     sf::Uint32 c1 = 254;
@@ -292,16 +292,16 @@ TEST_CASE("Check on different brush type") {
     REQUIRE(app.getImage().getPixel(11, 12) == sf::Color::Black);
 }
 
- /*! \brief Test initialing GUI window
-  *
-  */
-  TEST_CASE("initialing GUI window test") {
+/*! \brief Test initialing GUI window
+ *
+ */
+TEST_CASE("initialing GUI window test") {
     Gui* gui = new Gui();
     REQUIRE(gui->getWindow().isOpen() == true);
     REQUIRE(gui->getWindow().getSize().x == 600);
     REQUIRE(gui->getWindow().getSize().y == 800);
     gui->~Gui();
-  }
+}
 
 /*! \brief Test initialing GUI parameters
 *
@@ -313,5 +313,29 @@ TEST_CASE("Initialing GUI parameters test") {
     REQUIRE(gui->getBrushType() == Gui::BRUSH);
     REQUIRE(gui->getBackColor() == Gui::WHITE);
     gui->~Gui();
+
+}
+
+TEST_CASE("Testing the network") {
+    sf::IpAddress ip = sf::IpAddress::getLocalAddress();
+    // App app(ip, 8081);
+    App app;
+    app.clientSocketInApp.connect(ip, 8081);
+    // app.clientSocketInApp.setBlocking(true);
+    
+    sf::Packet packet;
+    packet.clear();
+    packet << "This is from the Client";
+
+    app.clientSocketInApp.send(packet);
+    packet.clear();
+    app.clientSocketInApp.receive(packet);
+    std::string str;
+    packet >> str;
+    std::cout << str << std::endl;
+    REQUIRE(str.compare("This is from the Server") == 0);
+
+
+
 
 }
