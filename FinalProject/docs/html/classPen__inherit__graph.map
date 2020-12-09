@@ -1,0 +1,4 @@
+<map id="Pen" name="Pen">
+<area shape="rect" id="node1" title="One kind of Brush which draws a circle shape of pixels." alt="" coords="37,80,84,107"/>
+<area shape="rect" id="node2" href="$classGeneralBrush.html" title="GeneralBrush class which represent the brush instance when drawing on the canvas." alt="" coords="5,5,116,32"/>
+</map>

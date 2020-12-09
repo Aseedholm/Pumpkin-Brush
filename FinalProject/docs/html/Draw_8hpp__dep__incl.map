@@ -1,0 +1,5 @@
+<map id="include/Draw.hpp" name="include/Draw.hpp">
+<area shape="rect" id="node1" title="Drawing actions interface." alt="" coords="55,5,189,32"/>
+<area shape="rect" id="node2" href="$Draw_8cpp.html" title="Draw implementation, all drawing actions are commands." alt="" coords="5,80,111,107"/>
+<area shape="rect" id="node3" href="$main_8cpp.html" title="Entry point into the program." alt="" coords="135,80,240,107"/>
+</map>

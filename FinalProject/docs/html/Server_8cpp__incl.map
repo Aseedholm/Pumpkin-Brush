@@ -1,0 +1,12 @@
+<map id="src/Server.cpp" name="src/Server.cpp">
+<area shape="rect" id="node1" title="Server that will receive commands from Clients and send commands to Clients allowing concurrently ope..." alt="" coords="435,5,549,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,80,149,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="174,80,245,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="269,80,349,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="374,80,437,107"/>
+<area shape="rect" id="node6" title=" " alt="" coords="461,80,523,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="548,80,612,107"/>
+<area shape="rect" id="node8" title=" " alt="" coords="636,80,700,107"/>
+<area shape="rect" id="node9" title=" " alt="" coords="724,80,775,107"/>
+<area shape="rect" id="node10" title=" " alt="" coords="799,80,942,107"/>
+</map>

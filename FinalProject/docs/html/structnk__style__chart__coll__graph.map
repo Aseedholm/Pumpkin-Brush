@@ -1,0 +1,9 @@
+<map id="nk_style_chart" name="nk_style_chart">
+<area shape="rect" id="node1" title=" " alt="" coords="85,392,203,419"/>
+<area shape="rect" id="node2" href="$structnk__style__item.html" title=" " alt="" coords="87,303,201,329"/>
+<area shape="rect" id="node3" href="$unionnk__style__item__data.html" title=" " alt="" coords="78,184,229,211"/>
+<area shape="rect" id="node4" href="$structnk__color.html" title=" " alt="" coords="5,95,83,121"/>
+<area shape="rect" id="node5" href="$structnk__image.html" title=" " alt="" coords="110,95,197,121"/>
+<area shape="rect" id="node6" href="$unionnk__handle.html" title=" " alt="" coords="109,5,198,32"/>
+<area shape="rect" id="node7" href="$structnk__vec2.html" title=" " alt="" coords="226,303,302,329"/>
+</map>

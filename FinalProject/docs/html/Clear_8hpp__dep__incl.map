@@ -1,0 +1,7 @@
+<map id="include/Clear.hpp" name="include/Clear.hpp">
+<area shape="rect" id="node1" title="This class represents a clear canvas command in the mini paint app." alt="" coords="173,5,308,32"/>
+<area shape="rect" id="node2" href="$App_8cpp.html" title="Main class for program." alt="" coords="5,80,103,107"/>
+<area shape="rect" id="node3" href="$Clear_8cpp.html" title="This class represents a clear canvas command in the mini paint app." alt="" coords="127,80,232,107"/>
+<area shape="rect" id="node4" href="$Gui_8cpp.html" title="A GUI class that renders a gui window and operation widgets for the mini paint app." alt="" coords="256,80,351,107"/>
+<area shape="rect" id="node5" href="$main_8cpp.html" title="Entry point into the program." alt="" coords="375,80,480,107"/>
+</map>
