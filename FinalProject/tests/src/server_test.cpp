@@ -6,6 +6,7 @@
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Network.hpp>
 // Include standard library C++ libraries.
 #include <iostream>
 #include <string>
@@ -18,21 +19,23 @@
 #include "Draw.hpp"
 #include "Erase.hpp"
 #include "Clear.hpp"
-#include "Data.hpp"
 #include "Gui.hpp"
 
-/*! \brief 	Init function argument
-*
-*/
-void initialization(void) {
-    std::cout << "Starting the App!!" << std::endl;
-}
-
-/*! \brief 	Check if the canvas' size is 600x400
-*
-*/
 TEST_CASE("Check if app can be initialized") {
-    App app;
-    app.init(&initialization);
-    app.destroy();
+    sf::TcpListener listenerSocket;
+    sf::Socket::Status serverStatus;
+    sf::Packet packet;
+    serverStatus = listenerSocket.listen(8081);
+    sf::TcpSocket clientTest;
+    listenerSocket.accept(clientTest);
+    clientTest.receive(packet);
+    std::string str;
+    packet >> str;
+    std::cout << str << std::endl;
+    REQUIRE(str.compare("This is from the Client") == 0);
+    packet.clear();
+    packet << "This is from the Server";
+    clientTest.send(packet);
+    
+    
 }
