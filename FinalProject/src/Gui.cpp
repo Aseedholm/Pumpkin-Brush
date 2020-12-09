@@ -48,7 +48,7 @@ void Gui::initGui() {
 
     sf::ContextSettings settings(24, 8, 4, 2, 2);
 
-    m_guiWindow = new sf::RenderWindow(sf::VideoMode(600, 800), "Mini Paint Toolbox", sf::Style::Default, settings);
+    m_guiWindow = new sf::RenderWindow(sf::VideoMode(600, 800), "Pumpkin Brush Toolbox", sf::Style::Default, settings);
 
     m_guiWindow->setVerticalSyncEnabled(true);
     m_guiWindow->setActive(true);

@@ -1,0 +1,12 @@
+<map id="include/App.hpp" name="include/App.hpp">
+<area shape="rect" id="node1" title="App class interface." alt="" coords="311,5,437,32"/>
+<area shape="rect" id="node2" href="$App_8cpp.html" title="Main class for program." alt="" coords="5,155,103,181"/>
+<area shape="rect" id="node3" href="$Draw_8cpp.html" title="Draw implementation, all drawing actions are commands." alt="" coords="675,80,780,107"/>
+<area shape="rect" id="node4" href="$Erase_8cpp.html" title="This class represents a pixel erasing command in the mini paint app." alt="" coords="543,155,651,181"/>
+<area shape="rect" id="node5" href="$main_8cpp.html" title="Entry point into the program." alt="" coords="375,155,480,181"/>
+<area shape="rect" id="node6" href="$Gui_8hpp.html" title="A GUI class that renders a gui window and operation widgets for the mini paint app." alt="" coords="263,80,386,107"/>
+<area shape="rect" id="node8" href="$Clear_8hpp.html" title="This class represents a clear canvas command in the mini paint app." alt="" coords="104,80,239,107"/>
+<area shape="rect" id="node10" href="$Erase_8hpp.html" title="This class represents a pixel erasing command in the mini paint app." alt="" coords="461,80,599,107"/>
+<area shape="rect" id="node7" href="$Gui_8cpp.html" title="A GUI class that renders a gui window and operation widgets for the mini paint app." alt="" coords="256,155,351,181"/>
+<area shape="rect" id="node9" href="$Clear_8cpp.html" title="This class represents a clear canvas command in the mini paint app." alt="" coords="127,155,232,181"/>
+</map>

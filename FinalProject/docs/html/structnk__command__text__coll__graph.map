@@ -1,0 +1,7 @@
+<map id="nk_command_text" name="nk_command_text">
+<area shape="rect" id="node1" title=" " alt="" coords="103,213,246,240"/>
+<area shape="rect" id="node2" href="$structnk__user__font.html" title=" " alt="" coords="5,109,112,136"/>
+<area shape="rect" id="node3" href="$unionnk__handle.html" title=" " alt="" coords="14,5,103,32"/>
+<area shape="rect" id="node4" href="$structnk__color.html" title=" " alt="" coords="136,109,213,136"/>
+<area shape="rect" id="node5" href="$structnk__command.html" title=" " alt="" coords="238,109,349,136"/>
+</map>

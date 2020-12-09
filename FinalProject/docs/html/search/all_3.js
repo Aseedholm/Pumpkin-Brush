@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['data_115',['data',['../structnk__style__item.html#ad96b1cf96a4ec74e9229e8986a03cc4f',1,'nk_style_item::data()'],['../structnk__page__element.html#a073b1fa427f3f6ca81ea5bb95783199f',1,'nk_page_element::data()']]],
+  ['dec_5fbutton_116',['dec_button',['../structnk__style__slider.html#a2af42be5c477ddda05dde36d45fbebe4',1,'nk_style_slider::dec_button()'],['../structnk__style__scrollbar.html#a2f691b18296736c36da1e52295c87909',1,'nk_style_scrollbar::dec_button()'],['../structnk__style__property.html#a22c87851305dcc0a9d512125c0788cb6',1,'nk_style_property::dec_button()']]],
+  ['dec_5fsymbol_117',['dec_symbol',['../structnk__style__slider.html#a4974ffb84ecb0c34afc3b608e34bc339',1,'nk_style_slider::dec_symbol()'],['../structnk__style__scrollbar.html#ab6cfc79e1425a8eb0ec7839dac348e44',1,'nk_style_scrollbar::dec_symbol()']]],
+  ['delete_5flength_118',['delete_length',['../structnk__text__undo__record.html#a449376b54622b187e084cc30b7f0f150',1,'nk_text_undo_record']]],
+  ['delta_119',['delta',['../structnk__mouse.html#ad51017f1b2ab199b892e454ec8f6e970',1,'nk_mouse']]],
+  ['delta_5ftime_5fseconds_120',['delta_time_seconds',['../structnk__context.html#a400eeefb70eab5d544831b856300ac06',1,'nk_context']]],
+  ['destroy_121',['destroy',['../classApp.html#a94b685be79fca20c2dbde22a3469e09b',1,'App']]],
+  ['dir_5flargebrush_122',['dir_largeBrush',['../Brush_8cpp.html#a0320f6f2e1b3c615f6fc3c942270eca6',1,'Brush.cpp']]],
+  ['dir_5flargepen_123',['dir_largePen',['../Pen_8cpp.html#a44528d9ec1ecb1561310871cdc1a1251',1,'Pen.cpp']]],
+  ['dir_5fmediumbrush_124',['dir_mediumBrush',['../Brush_8cpp.html#a64abb70c624e4f8cf69c1e78f379e22e',1,'Brush.cpp']]],
+  ['dir_5fmediumpen_125',['dir_mediumPen',['../Pen_8cpp.html#a56e2410a6eea47e194a2ff8f12c50958',1,'Pen.cpp']]],
+  ['dir_5fsmallbrush_126',['dir_smallBrush',['../Brush_8cpp.html#a9337d0aa4b0f88351ad3f1a31cb10873',1,'Brush.cpp']]],
+  ['dir_5fsmallpen_127',['dir_smallPen',['../Pen_8cpp.html#a28f833810b53d113d625a4b4d01c3681',1,'Pen.cpp']]],
+  ['down_128',['down',['../structnk__mouse__button.html#a917be25314608b6c56e648ed14fe29b7',1,'nk_mouse_button::down()'],['../structnk__key.html#ad31180f5548bfca7a9998de792ef96b2',1,'nk_key::down()']]],
+  ['draw_129',['Draw',['../classDraw.html',1,'Draw'],['../classApp.html#a25c15d6c137c987827e0eb826afbe06aa49b5fce314110b7dac01e016928d40f0',1,'App::DRAW()'],['../classDraw.html#a0531947611ef11b7a3ba406cae27a08a',1,'Draw::Draw()'],['../main_8cpp.html#aee6406a833a9fbc779c8443dbf315d4a',1,'draw():&#160;main.cpp']]],
+  ['draw_2ecpp_130',['Draw.cpp',['../Draw_8cpp.html',1,'']]],
+  ['draw_2ehpp_131',['Draw.hpp',['../Draw_8hpp.html',1,'']]],
+  ['draw_5fbegin_132',['draw_begin',['../structnk__style__button.html#a802641ef81a16f9d78c4a6758a3109b6',1,'nk_style_button::draw_begin()'],['../structnk__style__toggle.html#aabff3e571b5bfd25c2b6d2d10a90c218',1,'nk_style_toggle::draw_begin()'],['../structnk__style__selectable.html#a5f8962de9e8498f98ca3a1d7b2d5e07c',1,'nk_style_selectable::draw_begin()'],['../structnk__style__slider.html#a32d89881002446f40c03ff457a400bc5',1,'nk_style_slider::draw_begin()'],['../structnk__style__progress.html#a8ad1b31c585c9146d1cdb5956edae910',1,'nk_style_progress::draw_begin()'],['../structnk__style__scrollbar.html#a71b634a194cacf873ba06c5010b7d154',1,'nk_style_scrollbar::draw_begin()'],['../structnk__style__property.html#a2aef0170ff75d320823a03b6d86b002a',1,'nk_style_property::draw_begin()']]],
+  ['draw_5fend_133',['draw_end',['../structnk__style__button.html#a10cbc466ee1819b82fa19867095141a1',1,'nk_style_button::draw_end()'],['../structnk__style__toggle.html#a499f50c32b35717f5022272b95764599',1,'nk_style_toggle::draw_end()'],['../structnk__style__selectable.html#aeee4d32977d1afe0c1980d5fae22fa31',1,'nk_style_selectable::draw_end()'],['../structnk__style__slider.html#a821c8a395eb26c6bd6089d75fc197881',1,'nk_style_slider::draw_end()'],['../structnk__style__progress.html#a81cf48d7ef586bbe7ec6144e9e78541c',1,'nk_style_progress::draw_end()'],['../structnk__style__scrollbar.html#aa89c7f391ccb04c1d2c1e6a1fc5434c9',1,'nk_style_scrollbar::draw_end()'],['../structnk__style__property.html#a58a86e4d8e78c917022bf2755d1bffa0',1,'nk_style_property::draw_end()']]],
+  ['drawcallback_134',['drawCallback',['../classApp.html#a3c0445b4fd7b25975c4c3a61917c560d',1,'App']]],
+  ['drawgui_135',['drawGUI',['../classGui.html#ab7b2de432a9cc653e11e4285d87a3110',1,'Gui']]]
+];

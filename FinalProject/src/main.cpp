@@ -20,7 +20,6 @@
 #include <string.h> // memset
 #include "time.h"
 // Project header files
-#include "Data.hpp"
 #include "App.hpp"
 #include "Command.hpp"
 #include "Draw.hpp"
@@ -214,15 +213,6 @@ void update(App& app) {
                 }
 
         }
-//         if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
-//            Command* command = new Clear(&app, app.commandFlag);
-//            app.addCommand(command);
-//        }
-//        if(event.type == sf::Event::KeyPressed) {
-//            if(event.key.code = sf::Keyboard::U) {
-//                app.undoCommand();
-//            }
-//        }
     }
 
 
@@ -248,9 +238,6 @@ void update(App& app) {
                 exit(EXIT_SUCCESS);
             }
         }
-        //else if(event.type == sf::Event::Resized){
-        //    glViewport(0, 0, event.size.width, event.size.height);
-        //}
         app.m_gui->nk_handle_event_wrapper(event);
 
     }

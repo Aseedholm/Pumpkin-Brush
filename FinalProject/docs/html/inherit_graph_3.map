@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classGeneralBrush.html" title="GeneralBrush class which represent the brush instance when drawing on the canvas." alt="" coords="5,31,116,57"/>
+<area shape="rect" id="node2" href="$classBrush.html" title="One kind of Brush which draws a square shape of pixels." alt="" coords="164,5,223,32"/>
+<area shape="rect" id="node3" href="$classPen.html" title="One kind of Brush which draws a circle shape of pixels." alt="" coords="170,56,217,83"/>
+</map>

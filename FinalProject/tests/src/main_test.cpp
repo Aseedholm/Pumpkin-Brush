@@ -316,26 +316,57 @@ TEST_CASE("Initialing GUI parameters test") {
 
 }
 
-TEST_CASE("Testing the network") {
-    sf::IpAddress ip = sf::IpAddress::getLocalAddress();
-    // App app(ip, 8081);
-    App app;
-    app.clientSocketInApp.connect(ip, 8081);
-    // app.clientSocketInApp.setBlocking(true);
-    
-    sf::Packet packet;
-    packet.clear();
-    packet << "This is from the Client";
 
-    app.clientSocketInApp.send(packet);
+sf::Packet packet;
+App app1;
+sf::TcpSocket clientTest;
+sf::TcpListener listenerSocket;
+/*! \brief Set up client and server for testing. 
+*
+*/
+void setUpServerAndClient() {
+    sf::Socket::Status serverStatus;
+    serverStatus = listenerSocket.listen(8081);
+    sf::IpAddress ip = sf::IpAddress::getLocalAddress();
+    // App app;
+    app1.clientSocketInApp.connect(ip, 8081);
+    app1.clientSocketInApp.setBlocking(true);
+    // sf::TcpSocket clientTest;
+    // listenerSocket.setBlocking(false); //to not stall program.
+    listenerSocket.accept(clientTest);
+}
+/*! \brief Helper function to send a message to the server. 
+*
+*/
+void sendMessageFromClientToServer() {
+    packet << "This is from the Client";
+    app1.clientSocketInApp.send(packet);
     packet.clear();
-    app.clientSocketInApp.receive(packet);
+}
+/*! \brief Test sever receiving information from client and sending a message to the client. .
+*
+*/
+TEST_CASE("Sever receives message from client and sends a reply..") {
+    setUpServerAndClient();
+    sendMessageFromClientToServer();
+
+    clientTest.receive(packet);
+    std::string str;
+    packet >> str;
+    std::cout << "FROM CLIENT " << str << std::endl;
+    REQUIRE(str.compare("This is from the Client") == 0);
+    packet.clear();
+    packet << "This is from the Server";
+    clientTest.send(packet);
+}
+
+/*! \brief Test client receiving information from server. 
+*
+*/
+TEST_CASE("Testing the network") {
+    app1.clientSocketInApp.receive(packet);
     std::string str;
     packet >> str;
     std::cout << str << std::endl;
     REQUIRE(str.compare("This is from the Server") == 0);
-
-
-
-
 }

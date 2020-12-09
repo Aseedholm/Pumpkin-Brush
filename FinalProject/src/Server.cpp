@@ -6,13 +6,13 @@
  ***********************************************/
 #include <SFML/Network.hpp>
 #include <string.h> // memset
+#include <iostream>
 #include <queue>
 #include <vector>
 #include <thread>
 #include <mutex>
 #include <map>
 #include <condition_variable>
-#include "Data.hpp"
 
 
 /*! \brief 	This struct represents meta data that will be sent to and from the server. It will be used to pack into
