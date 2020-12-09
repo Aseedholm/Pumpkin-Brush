@@ -20,7 +20,6 @@
 #include <string.h> // memset
 #include "time.h"
 // Project header files
-#include "Data.hpp"
 #include "App.hpp"
 #include "Command.hpp"
 #include "Draw.hpp"

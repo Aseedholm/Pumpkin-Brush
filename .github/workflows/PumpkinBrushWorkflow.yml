@@ -49,5 +49,3 @@ jobs:
         run: sudo apt-get install xvfb xorg xauth openbox # xorg is needed to set DISPLAY variable later
       - name: Run graphical application tests in headless mode App_test
         run: cd ./FinalProject/bin && xvfb-run --server-args="-screen 0 1024x768x24" ./App_test
-      - name: Run graphical application tests in headless mode Server_test
-        run: cd ./FinalProject/bin && xvfb-run --server-args="-screen 0 1024x768x24" ./Server_test
