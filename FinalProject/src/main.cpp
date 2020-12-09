@@ -450,12 +450,16 @@ void draw(App& app) {
 /*! \brief 	The entry point into our program.
 *
 */
-int main() {
+int main(int argc, char* argv[]) {
+    if (argc < 2) {
+        std::cout << "Please enter the port number. For example: ./App 8080" << std::endl;
+        return 0;
+    }
 
     sf::IpAddress ip = sf::IpAddress::getLocalAddress();
 
-
-    App app(ip, 8081);
+    int port = atoi(argv[1]);
+    App app(ip, port);
 
 	// Call any setup function
 	// Passing a function pointer into the 'init' function.

@@ -110,7 +110,7 @@ class Painter {
 /*! \brief 	The entry point into our program.
 *
 */
-int main() {
+int main(int argc, char* argv[]) {
     std::vector<std::thread> painterThreadVector;
     std::vector<std::unique_ptr<sf::TcpSocket>> socketVector;
     std::queue<metaData> commandQueue;
@@ -121,8 +121,12 @@ int main() {
     std::size_t received;
 
     sf::TcpListener listenerSocket;
-
-    serverStatus = listenerSocket.listen(8081);
+    if(argc<2){
+        std::cout << "Please enter the port number. For example: ./Server 8080" << std::endl;
+        return 0;
+    }
+    int port = atoi(argv[1]);
+    serverStatus = listenerSocket.listen(port);
 
 
     Painter painter;
