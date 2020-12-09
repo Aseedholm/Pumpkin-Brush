@@ -242,7 +242,6 @@ std::stack<Command *> App::getUndoStack(){
 /*! \brief returns the current redo stack where all the commands to be redone are stored
  * @return m_redo,
  */
-std::
 std::stack<Command *> App::getRedoStack(){
 
 	return m_redo;
