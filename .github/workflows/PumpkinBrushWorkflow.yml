@@ -33,6 +33,8 @@ jobs:
         run: sudo apt-get install cppcheck
       - name: run cppcheck on all cpp files
         run: cd ./FinalProject && cppcheck -I ./include/ ./src/*.cpp --enable=all -i./include/nuklearHeader.hpp -i./include/nuklear_sfml_gl2.h
+      - name: make bin
+        run: cd ./FinalProject && mkdir bin
       - name: Build Final Project makefile
         run: cd ./FinalProject/bin && cmake ..
       - name: Run Final Project makefile
